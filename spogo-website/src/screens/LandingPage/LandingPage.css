@@ -53,7 +53,7 @@
    color: black;
 }
 
-.form_button > button {
+.form_button > input {
     background-color: #3EB489;
     width: 72%;
     height: 50px;

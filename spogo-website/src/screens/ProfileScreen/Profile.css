@@ -1,0 +1,20 @@
+.ProfileScreen {
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.ProfileImage {
+    border-radius: 1000px;
+}
+
+.ListHeader {
+    align-self: flex-end;
+    font-size: 20px;
+}
+
+.ProfileList {
+    border-style: solid none none none;
+    margin-bottom: 50px;
+}
