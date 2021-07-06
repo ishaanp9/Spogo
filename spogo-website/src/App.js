@@ -2,10 +2,7 @@ import React, {useEffect} from 'react';
 
 import './App.css';
 import LandingPage from './screens/LandingPage/LandingPage';
-import Profile from './screens/ProfileScreen/Profile'
-
-//npm install mdi-react
-//npm install react-player
+import Profile from './screens/ProfileScreen/Profile';
 
 
 function App() {
