@@ -45,7 +45,8 @@ const Profile = (props) => {
   }, []);
 
   const getDBUserInfo = async () => {
-    let dbPath = firebase
+    try {
+      let dbPath = firebase
       .firestore()
       .collection("Users")
       //.doc(user.uid)
@@ -123,6 +124,11 @@ const Profile = (props) => {
       .catch((error) => {
         console.log("Error getting media array document:", error);
       });
+    } catch (e) {
+      console.log(e)
+      setUserExists(false);
+    }
+    
     // setArrayID();
     setThisUserInfoDict(getUserDict());
     setThisTrophyArray(getTrophyArray());
