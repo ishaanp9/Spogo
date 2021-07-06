@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import './LandingPage.css';
 import Header from '../../components/Header/Header';
@@ -5,7 +6,8 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import MainImage from './main_image.png';
 import ExampleImage from './top.PNG';
 import SpogoBottom from './bottom.png';
-import firebase from "../../firebase";
+import firebase from '../../firebase';
+
 
 const LandingPage = () => {
   const [name, setName] = useState('');
@@ -13,31 +15,31 @@ const LandingPage = () => {
   const [waitlistInputValid, setWaitlistInputValid] = useState(false);
 
   async function addUserToWaitlist() {
-      await firebase
+    await firebase
       .firestore()
-      .collection("Waitlist")
+      .collection('Waitlist')
       .add({
         name: name,
         email: email,
       })
       .then(() => {
-        console.log("Worked");
+        console.log('Worked');
       })
       .catch((error) => {
-        console.log("Error:", error);
+        console.log('Error:', error);
       });
   }
 
-  let handleOnChangeEmail = ( email ) => {
-    setEmail(email.target.value)
-    let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if (re.test(email) ) {
-      setWaitlistInputValid(true)
+  let handleOnChangeEmail = (email) => {
+    setEmail(email.target.value);
+    let re =
+      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (re.test(email)) {
+      setWaitlistInputValid(true);
+    } else {
+      setWaitlistInputValid(false);
     }
-    else {
-      setWaitlistInputValid(false)    
-    }
-}
+  };
 
   return (
     <Router>
@@ -66,9 +68,7 @@ const LandingPage = () => {
                   type="text"
                   placeholder="Full Name"
                   value={name}
-                  onChange={text => 
-                    setName(text.target.value)
-                  }
+                  onChange={(text) => setName(text.target.value)}
                 />
                 <input
                   maxLength={100}
@@ -80,10 +80,17 @@ const LandingPage = () => {
                 />
               </div>
               <div className="form_button">
-                {/* <button onClick={() => waitlistInputValid ? addUserToWaitlist() : null}>
+                <button onClick={() => waitlistInputValid ? addUserToWaitlist() : null}>
                   Join the Waitlist
-                </button> */}
-                <input className="form_button" type="submit" value="Join the Waitlist" onSubmit={() => waitlistInputValid ? addUserToWaitlist() : null}/>
+                </button>
+                {/* <input
+                  className="form_button"
+                  type="submit"
+                  value="Join the Waitlist"
+                  onSubmit={() =>
+                    waitlistInputValid ? addUserToWaitlist() : null
+                  }
+                /> */}
               </div>
             </form>
           </div>
@@ -123,7 +130,6 @@ const LandingPage = () => {
                 </p>
               </div>
               <img src={ExampleImage} alt="" />
-              
             </div>
             <div className="right_text">
               <img src={ExampleImage} alt="" />
@@ -140,7 +146,6 @@ const LandingPage = () => {
                   dolor sit amet, consectetur, adipisci
                 </p>
               </div>
-             
             </div>
             <div className="left_text">
               <div className="left_side_text">
@@ -157,7 +162,6 @@ const LandingPage = () => {
                 </p>
               </div>
               <img src={ExampleImage} alt="" />
-              
             </div>
             <div className="right_text">
               <img src={ExampleImage} alt="" />
