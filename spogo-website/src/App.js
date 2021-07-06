@@ -14,7 +14,8 @@ function App() {
 
   return (
     <div className="app">
-       {path === 'spogo.us' || path === 'https://spogo.us/' || path === 'https://spogo.us' ? <LandingPage /> : <Profile url={path}/>}
+       {/* {path === 'spogo.us' || path === 'https://spogo.us/' || path === 'https://spogo.us' ? <LandingPage /> : <Profile url={path}/>} */}
+       <LandingPage/>
     </div>
   );
 }
