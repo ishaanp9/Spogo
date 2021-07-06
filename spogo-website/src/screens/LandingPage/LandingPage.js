@@ -6,7 +6,43 @@ import MainImage from './main_image.png';
 import ExampleImage from './top.PNG';
 import SpogoBottom from './bottom.png';
 
-function LandingPage() {
+import React, { useState } from "react";
+import "./LandingPage.css";
+import Header from "../../components/Header/Header";
+import firebase from "../../firebase";
+
+const LandingPage = () => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [waitlistInputValid, setWaitlistInputValid] = useState(false);
+
+  async function addUserToWaitlist() {
+      await firebase
+      .firestore()
+      .collection("Waitlist")
+      .add({
+        name: name,
+        email: email,
+      })
+      .then(() => {
+        console.log("Worked");
+      })
+      .catch((error) => {
+        console.log("Error:", error);
+      });
+  }
+
+  let handleOnChangeEmail = ( email ) => {
+    setEmail(email.target.value)
+    let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (re.test(email) ) {
+      setWaitlistInputValid(true)
+    }
+    else {
+      setWaitlistInputValid(false)    
+    }
+}
+
   return (
     <Router>
       <Header />
@@ -29,15 +65,29 @@ function LandingPage() {
             {/* Join Waitlist */}
             <form className="form">
               <div className="form_inputs">
-                <input maxLength={100} type="text" placeholder="Full Name" />
+                <input
+                  maxLength={100}
+                  type="text"
+                  placeholder="Full Name"
+                  value={name}
+                  onChange={text => 
+                    setName(text.target.value)
+                  }
+                />
                 <input
                   maxLength={100}
                   type="email"
                   placeholder="Email Address"
+                  value={email}
+                  onChange={handleOnChangeEmail}
+                  required={true}
                 />
               </div>
               <div className="form_button">
-                <button>Join the Waitlist</button>
+                {/* <button onClick={() => waitlistInputValid ? addUserToWaitlist() : null}>
+                  Join the Waitlist
+                </button> */}
+                <input className="form_button" type="submit" value="Join the Waitlist" onSubmit={() => waitlistInputValid ? addUserToWaitlist() : null}/>
               </div>
             </form>
           </div>
@@ -182,6 +232,6 @@ function LandingPage() {
       </div>
     </Router>
   );
-}
+};
 
 export default LandingPage;

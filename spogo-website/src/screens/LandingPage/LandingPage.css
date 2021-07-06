@@ -291,9 +291,11 @@
     color: black;
   }
 
+
   .form_button > button {
     background-color: #3eb489;
     width: 95%;
+
     height: 50px;
     border-radius: 12px;
     border: none;
