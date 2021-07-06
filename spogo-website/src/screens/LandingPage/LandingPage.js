@@ -1,14 +1,10 @@
-import React from 'react';
+import React, { useState } from "react";
 import './LandingPage.css';
 import Header from '../../components/Header/Header';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import MainImage from './main_image.png';
 import ExampleImage from './top.PNG';
 import SpogoBottom from './bottom.png';
-
-import React, { useState } from "react";
-import "./LandingPage.css";
-import Header from "../../components/Header/Header";
 import firebase from "../../firebase";
 
 const LandingPage = () => {
