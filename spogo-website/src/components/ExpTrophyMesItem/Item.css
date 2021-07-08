@@ -1,12 +1,89 @@
-.Container {
-    width: '100%';
-    /* display: flex; */
+@media screen and (max-width: 600px) {
+  .Container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
     align-self: center;
-    border-style: none none solid none;
+    margin-left: 5%;
+    align-items: center;
+    overflow-x: hidden;
+    /* border-style: none none solid none;
     border-bottom-width: 1;
-    border-color: lightgrey;
+    border-color: lightgrey; */
+  }
+
+  .Link {
+      text-decoration: none;
+  }
+
+  .TextContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    justify-content: flex-start;
+    margin-left: 5%;
+  }
+
+  .TextContainer > h1 {
+    font-size: 16px;
+    font-weight: bold;
+    color: black;
+  }
+
+  .TextContainer > h2 {
+    font-size: 14px;
+    font-weight: 400;
+    color: grey;
+  }
+
+  .Divider {
+    margin-left: 15%;
+  }
 }
 
-.Text {
-    font-size: small;
-}
+@media screen and (max-width: 1200px) and (min-width: 600px) {
+    .Container {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      align-self: center;
+      margin-left: 5%;
+      align-items: center;
+      overflow-x: hidden;
+      /* border-style: none none solid none;
+      border-bottom-width: 1;
+      border-color: lightgrey; */
+    }
+
+    .Link {
+        text-decoration: none;
+    }
+  
+    .TextContainer {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-self: center;
+      justify-content: flex-start;
+      margin-left: 5%;
+    }
+  
+    .TextContainer > h1 {
+      font-size: 20px;
+      font-weight: bold;
+      color: black;
+
+    }
+  
+    .TextContainer > h2 {
+      font-size: 18px;
+      font-weight: 400;
+      color: grey;
+    }
+  
+    .Divider {
+      margin-left: 13%;
+    }
+  }
+  

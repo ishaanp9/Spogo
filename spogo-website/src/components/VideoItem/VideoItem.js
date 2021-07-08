@@ -5,28 +5,12 @@ import firebase from "../../firebase";
 
 export const VideoItem = (props) => {
   const [paused, setPaused] = useState(true);
-  const [mediaURL, setMediaURL] = useState();
+  const [mediaURL, setMediaURL] = useState("");
 
   useEffect(async () => {
     try {
-      const profileImageUri = await firebase.storage().ref(
-        props.url
-      );
-      setMediaURL(await profileImageUri.getDownloadURL())
-      // await firebase
-      //   .storage()
-      //   .ref(props.url)
-      //   .getDownloadURL()
-      //   .then(function (url) {
-      //     var xhr = new XMLHttpRequest();
-      //     xhr.responseType = "blob";
-      //     xhr.onload = function (event) {
-      //       var blob = xhr.response;
-      //     };
-      //     xhr.open("GET", url);
-      //     xhr.send();
-      //     setMediaURL(url);
-      //   });
+      const profileImageUri = await firebase.storage().ref(props.url);
+      setMediaURL(await profileImageUri.getDownloadURL());
     } catch (e) {
       console.error(e);
     }
@@ -36,10 +20,19 @@ export const VideoItem = (props) => {
     // <button>
     //   <ReactPlayer url={mediaURL}/>
     // </button>
-    <div>
+    <div className="mediaContainer">
       {/* <ReactPlayer url={mediaURL} playing={true}/> */}
-      <video>
-        <source src={mediaURL} />
+      <video
+        src={mediaURL}
+        controls
+        style={{
+          height: (window.innerWidth < 600) ? window.innerHeight / 6 : window.innerHeight / 6,
+          width: (window.innerWidth < 600) ? window.innerWidth / 2 : window.innerWidth / 3,
+          marginRight: window.innerWidth / 150,
+          marginTop: window.innerHeight / 80,
+        }}
+      >
+        {/* <source src={mediaURL} type="video/mp4"/> */}
       </video>
     </div>
   );
@@ -59,8 +52,16 @@ export const ImageItem = (props) => {
   }, []);
 
   return (
-    <div>
-      <img src={mediaURL} />
+    <div className="mediaContainer">
+      <img
+        src={mediaURL}
+        style={{
+          height: (window.innerWidth < 600) ? window.innerHeight / 6 : window.innerHeight / 6,
+          width: (window.innerWidth < 600) ? window.innerWidth / 2 : window.innerWidth / 3,
+          marginRight: window.innerWidth / 150,
+          marginTop: window.innerHeight / 80,
+        }}
+      />
     </div>
   );
 };
