@@ -5,6 +5,7 @@
   bottom: 0;
   right: 0;
   left: 0;
+  
 }
 
 .top_banner {
@@ -32,7 +33,6 @@
 .form_inputs {
   justify-content: space-evenly;
   padding-bottom: 2%;
-  width: 100%;
 }
 
 .form_inputs > input {
@@ -63,7 +63,7 @@
   font-weight: bold;
   font-size: 16px;
   font-family: 'DM Sans', sans-serif;
-  width: 66%;
+  width: 50%;
 }
 
 .form_button > button:hover {
