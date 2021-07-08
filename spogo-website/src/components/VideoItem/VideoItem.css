@@ -1,0 +1,14 @@
+@media screen and (max-width: 800px) {
+    .mediaContainer {
+        display: flex;
+        align-self: flex-start;
+    }
+
+    .mediaContainer > img {
+        object-fit: cover;
+    }
+
+    .mediaContainer > video {
+        object-fit: cover;
+    }
+}
