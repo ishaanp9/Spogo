@@ -1,32 +1,35 @@
-
 import React, { useState } from "react";
-import './LandingPage.css';
-import Header from '../../components/Header/Header';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import MainImage from './main_image.png';
-import ExampleImage from './top.PNG';
-import SpogoBottom from './bottom.png';
-import firebase from '../../firebase';
-
+import "./LandingPage.css";
+import Header from "../../components/Header/Header";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import MainImage from "./main_image.png";
+import ExampleImage from "./top.PNG";
+import SpogoBottom from "./bottom.png";
+import LandingPageProduct from "./landingpageproduct.png";
+import LandingPageHighlights from "./landingpagehighlights.png";
+import LandingPageTrophies from "./landingpagetrophies.png";
+import LandingPageExperiences from "./landingpageexperiences.png";
+import LandingPageMeasurables from "./landingpagemeasurables.png";
+import firebase from "../../firebase";
 
 const LandingPage = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [waitlistInputValid, setWaitlistInputValid] = useState(false);
 
   async function addUserToWaitlist() {
     await firebase
       .firestore()
-      .collection('Waitlist')
+      .collection("Waitlist")
       .add({
         name: name,
         email: email,
       })
       .then(() => {
-        console.log('Worked');
+        console.log("Worked");
       })
       .catch((error) => {
-        console.log('Error:', error);
+        console.log("Error:", error);
       });
   }
 
@@ -42,185 +45,144 @@ const LandingPage = () => {
   };
 
   return (
-    <Router>
+    <>
       <Header />
-      <Switch>
-        <Route path="/" />
-      </Switch>
-      <div className="web_body">
-        <div className="top_banner">
-          <div className="form_area">
-            <div className="form_header">
-              <h1 className="h1_text">
+        <div className="web_body">
+          <div className="top_banner">
+            <div className="form_area">
+              <h1>
                 The New Way To Showcase Yourself and Monetize Your Name, Image,
                 And Likeness Is Here.
               </h1>
-              <p className="p_text">Find out more.</p>
+              <p>Find Out More.</p>
+              <form>
+                <div className="waitlistInputContainer">
+                  <input
+                    maxLength={100}
+                    type="text"
+                    placeholder="Full Name"
+                    value={name}
+                    className="nameInput"
+                    // style={{ marginRight: 20 }}
+                    // onChange={(text) => setName(text.target.value)}
+                  />
+                  <input
+                    maxLength={100}
+                    type="email"
+                    placeholder="Email Address"
+                    value={email}
+                    // onChange={handleOnChangeEmail}
+                    required={true}
+                  />
+                </div>
+                <div className="form_button">
+                  <button
+                    onClick={() =>
+                      waitlistInputValid ? addUserToWaitlist() : null
+                    }
+                  >
+                    Join the Waitlist
+                  </button>
+                </div>
+              </form>
             </div>
-
-            {/* Name */}
-            {/* Email */}
-            {/* Join Waitlist */}
-            <form className="form">
-              <div className="form_inputs">
-                <input
-                  maxLength={100}
-                  type="text"
-                  placeholder="Full Name"
-                  value={name}
-                  onChange={(text) => setName(text.target.value)}
-                />
-                <input
-                  maxLength={100}
-                  type="email"
-                  placeholder="Email Address"
-                  value={email}
-                  onChange={handleOnChangeEmail}
-                  required={true}
-                />
-              </div>
-              <div className="form_button">
-                <button onClick={() => waitlistInputValid ? addUserToWaitlist() : null}>
-                  Join the Waitlist
-                </button>
-                {/* <input
-                  className="form_button"
-                  type="submit"
-                  value="Join the Waitlist"
-                  onSubmit={() =>
-                    waitlistInputValid ? addUserToWaitlist() : null
-                  }
-                /> */}
-              </div>
-            </form>
-          </div>
-
-          <div className="image">
-            <img src={ExampleImage} alt="" />
-          </div>
-        </div>
-        <div className="product_show_header">
-          <h1>This is Spogo.</h1>
-          <p className="landing_subtitle">
-            Spogo is the only platform Lorem ipsum dolor sit amet, consectetur
-            adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-          </p>
-          <img
-            className="big_image"
-            src="https://ally.io/wp-content/uploads/6023f832c71560e7cd9e4265_Ally.io-Business-Operations-Software-p-2000.png"
-            alt="data"
-          />
-          {/* <img className='big_image'
-            src="https://ally.io/wp-content/uploads/6023f832c71560e7cd9e4265_Ally.io-Business-Operations-Software-p-2000.png"
-            alt="data"
-          /> */}
-          <div className="landing_products">
-            <div className="left_text">
-              <div className="left_side_text">
-                <h1>Bio/Position/Socials</h1>
-                <p>
-                  Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                  accusantium doloremque laudantium, totam rem aperiam, eaque
-                  ipsa quae ab illo inventore veritatis et quasi architecto
-                  beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem
-                  quia voluptas sit aspernatur aut odit aut fugit, sed quia
-                  consequuntur magni dolores eos qui ratione voluptatem sequi
-                  nesciunt. Neque porro quisquam est, qui dolorem ipsum quia
-                  dolor sit amet, consectetur, adipisci
-                </p>
-              </div>
+            <div className="imageContainer">
               <img src={ExampleImage} alt="" />
-            </div>
-            <div className="right_text">
-              <img src={ExampleImage} alt="" />
-              <div className="right_side_text">
-                <h1>Bio/Position/Socials</h1>
-                <p>
-                  Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                  accusantium doloremque laudantium, totam rem aperiam, eaque
-                  ipsa quae ab illo inventore veritatis et quasi architecto
-                  beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem
-                  quia voluptas sit aspernatur aut odit aut fugit, sed quia
-                  consequuntur magni dolores eos qui ratione voluptatem sequi
-                  nesciunt. Neque porro quisquam est, qui dolorem ipsum quia
-                  dolor sit amet, consectetur, adipisci
-                </p>
-              </div>
-            </div>
-            <div className="left_text">
-              <div className="left_side_text">
-                <h1>Bio/Position/Socials</h1>
-                <p>
-                  Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                  accusantium doloremque laudantium, totam rem aperiam, eaque
-                  ipsa quae ab illo inventore veritatis et quasi architecto
-                  beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem
-                  quia voluptas sit aspernatur aut odit aut fugit, sed quia
-                  consequuntur magni dolores eos qui ratione voluptatem sequi
-                  nesciunt. Neque porro quisquam est, qui dolorem ipsum quia
-                  dolor sit amet, consectetur, adipisci
-                </p>
-              </div>
-              <img src={ExampleImage} alt="" />
-            </div>
-            <div className="right_text">
-              <img src={ExampleImage} alt="" />
-              <div className="right_side_text">
-                <h1>Bio/Position/Socials</h1>
-                <p>
-                  Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                  accusantium doloremque laudantium, totam rem aperiam, eaque
-                  ipsa quae ab illo inventore veritatis et quasi architecto
-                  beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem
-                  quia voluptas sit aspernatur aut odit aut fugit, sed quia
-                  consequuntur magni dolores eos qui ratione voluptatem sequi
-                  nesciunt. Neque porro quisquam est, qui dolorem ipsum quia
-                  dolor sit amet, consectetur, adipisci
-                </p>
-              </div>
-              {/* Create Highlights */}
-            </div>
-            <div className="left_text">
-              <div className="left_side_text">
-                <h1>Bio/Position/Socials</h1>
-                <p>
-                  Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                  accusantium doloremque laudantium, totam rem aperiam, eaque
-                  ipsa quae ab illo inventore veritatis et quasi architecto
-                  beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem
-                  quia voluptas sit aspernatur aut odit aut fugit, sed quia
-                  consequuntur magni dolores eos qui ratione voluptatem sequi
-                  nesciunt. Neque porro quisquam est, qui dolorem ipsum quia
-                  dolor sit amet, consectetur, adipisci
-                </p>
-              </div>
-              <img src={ExampleImage} alt="" />
-              {/* Bio/Position/Socials */}
             </div>
           </div>
+          <div className="product_show_header">
+            <h1>This is Spogo.</h1>
+            <p className="landing_subtitle">
+              Spogo is the only platform Lorem ipsum dolor sit amet, consectetur
+              adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            </p>
+            <img className="main_image" src={LandingPageProduct} alt="data" />
+          </div>
+          <div className="productDescriptionContainer">
+            <div className="productDescription">
+              <h1>Show your highlights to the world!</h1>
+              <h2>
+                Post your highlights to your Spogo account. Then, show off your
+                tape to coaches and friends.
+              </h2>
+            </div>
+            <div className="productDescription">
+              <img className="big_image" src={LandingPageHighlights} />
+            </div>
+          </div>
+          <div className="productDescriptionContainerInverted">
+            <div className="productDescription">
+              <img className="big_image" src={LandingPageTrophies} />
+            </div>
+            <div className="productDescription">
+              <h1>Tell everyone about your accomplishments!</h1>
+              <h2>
+                In the trophies section of your profile, you can display all of
+                your accomplishments. Tell everyone about your individual and
+                team awards.
+              </h2>
+            </div>
+          </div>
+          <div className="productDescriptionContainer">
+            <div className="productDescription">
+              <h1>Share your experiences!</h1>
+              <h2>
+                In the experiences section of your profile, you can display all
+                of your accomplishments. Tell everyone about your individual and
+                team awards.
+              </h2>
+            </div>
+            <div className="productDescription">
+              <img className="big_image" src={LandingPageExperiences} />
+            </div>
+          </div>
+          <div className="productDescriptionContainerInverted">
+            <div className="productDescription">
+              <img className="big_image" src={LandingPageMeasurables} />
+            </div>
+            <div className="productDescription">
+              <h1>Confirm your measurables!</h1>
+              <h2>
+                In the experiences section of your profile, you can display all
+                of your accomplishments. Tell everyone about your individual and
+                team awards.
+              </h2>
+            </div>
+          </div>
+          {/* Bottom Part */}
           <div className="bottom_part">
             <div className="no_copyright">
-              <img
-                className="spogo_bottom"
-                src={SpogoBottom}
-                alt="Spogo Logo"
-              />
-              <div className="content">
-                <div className="header_column">
-                  <h2>Legal</h2>
-                  <p>Privacy Policy</p>
-                  <p>Terms of Service</p>
-                </div>
-                <div className="header_column">
-                  <h2>Contact</h2>
-                  <p>getspogo@gmail.com</p>
-                </div>
-                <div className="header_column">
-                  <h2>Pages</h2>
-                  <p>Home</p>
-                  <p>About</p>
-                  <p>Blog</p>
-                  <p>FAQ</p>
+              <div className="bottomLogoContainer">
+                <img
+                  className="spogo_bottom"
+                  src={SpogoBottom}
+                  alt="Spogo Logo"
+                />
+              </div>
+              <div className="bottomTabsContainer">
+                <div className="content">
+                  <div className="header_column">
+                    <h2>Legal</h2>
+                    <p>Privacy Policy</p>
+                    <p>Terms of Service</p>
+                  </div>
+                  <div className="header_column">
+                    <h2>Contact</h2>
+                    <p>getspogo@gmail.com</p>
+                  </div>
+                  <div className="header_column">
+                    <h2>Pages</h2>
+                    <Link to={"/home"} className="bottomLinksText">
+                      <p>Home</p>
+                    </Link>
+                    <Link to={"/about"} className="bottomLinksText">
+                      <p>About</p>
+                    </Link><Link to={"/blog"} className="bottomLinksText">
+                      <p>Blog</p>
+                    </Link><Link to={"/FAQ"} className="bottomLinksText">
+                      <p>FAQ</p>
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>
@@ -229,8 +191,7 @@ const LandingPage = () => {
             </div>
           </div>
         </div>
-      </div>
-    </Router>
+      </>
   );
 };
 

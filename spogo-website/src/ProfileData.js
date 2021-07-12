@@ -11,6 +11,16 @@ let measurableItemArray = [];
 let measurableItemCurrentId = 0;
 let videoImageCurrentId = 0;
 
+let userDataCollected = false;
+
+export const getUserDataCollected = () => {
+    return userDataCollected
+}
+
+export const setUserDataCollected = () => {
+    userDataCollected = true;
+}
+
 function ExpTrophyCardObject(title, duration, description, idNum) {
     this.title = title;
     this.duration = duration;

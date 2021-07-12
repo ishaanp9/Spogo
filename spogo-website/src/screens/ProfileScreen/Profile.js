@@ -25,6 +25,8 @@ import {
   getMeasurableArray,
   getUserDict,
   getMediaArray,
+  setUserDataCollected,
+  getUserDataCollected,
 } from "../../ProfileData";
 
 const Profile = (props) => {
@@ -53,7 +55,6 @@ const Profile = (props) => {
   const [showEmail, setShowEmail] = useState(true);
   const [showWildcard, setShowWildcard] = useState(true);
 
-
   useEffect(async () => {
     // async function fetchData () {
     //   await getDBUserInfo();
@@ -62,7 +63,19 @@ const Profile = (props) => {
     //   measurableArray = getMeasurableArray();
     //   mediaArray = getMediaArray()
     // }
-    await getDBUserInfo();
+    if (getUserDataCollected()) {
+      setThisUserInfoDict(getUserDict());
+      setThisTrophyArray(getTrophyArray());
+      setThisExperienceArray(getExperienceArray());
+      setThisMeasurableArray(getMeasurableArray());
+      setThisMediaArray(getMediaArray());
+      setUserInfo();
+      displayProfileImage();
+      setSocialIcons();
+      findSize();
+    } else {
+      await getDBUserInfo();
+    }
   }, []);
 
   const getDBUserInfo = async () => {
@@ -159,7 +172,8 @@ const Profile = (props) => {
     setUserInfo();
     displayProfileImage();
     setSocialIcons();
-    findSize()
+    findSize();
+    setUserDataCollected();
   };
 
   async function displayProfileImage() {
@@ -221,13 +235,13 @@ const Profile = (props) => {
 
   const findSize = () => {
     if (window.innerWidth < 600) {
-      setIconSize(25)
+      setIconSize(25);
     } else if (window.innerWidth < 1200) {
-      setIconSize(40)
+      setIconSize(40);
     } else {
-      setIconSize(55)
+      setIconSize(55);
     }
-  }
+  };
 
   return userExists ? (
     <div className="ProfileScreen">
@@ -302,6 +316,7 @@ const Profile = (props) => {
       >
         <h1>{bio}</h1>
       </div>
+      <hr size="2" color="black" className="BioDivider"/>
       <div className="ProfileList">
         <h1 className="ListHeader">Highlights</h1>
         <ul className="VideoList" style={{ width: window.innerWidth }}>
@@ -323,7 +338,7 @@ const Profile = (props) => {
               color="#ffbb48"
               title={item.title}
               time={item.duration}
-              idNum={item.idNum}
+              key={item.idNum}
               userUID={UID}
             />
           ))}
@@ -338,7 +353,7 @@ const Profile = (props) => {
               color="#A08864"
               title={item.title}
               time={item.duration}
-              idNum={item.idNum}
+              key={item.idNum}
               userUID={UID}
             />
           ))}
@@ -353,7 +368,7 @@ const Profile = (props) => {
               color="dodgerblue"
               title={item.title}
               time={item.value}
-              idNum={item.idNum}
+              key={item.idNum}
               userUID={UID}
             />
           ))}
