@@ -28,7 +28,7 @@ import {
   getMediaArray,
   setUserDataCollected,
   getUserDataCollected,
-} from "../../ProfileData";
+} from '../../ProfileData';
 
 const Profile = (props) => {
   let path = props.url;
@@ -348,16 +348,18 @@ const Profile = (props) => {
           <p></p>
         </div>
       ) : (
-        <div
-          className="bioContainer"
-          style={{
-            marginTop: window.innerHeight / 80,
-            marginBottom: window.innerHeight / 80,
-          }}
-        >
-          <p>{getBio(bio)}</p>
+        <div>
+          <div
+            className="bioContainer"
+            style={{
+              marginTop: window.innerHeight / 80,
+              marginBottom: window.innerHeight / 80,
+            }}
+          >
+            <p>{getBio(bio)}</p>
+          </div>
+          <hr size="2" color="black" className="BioDivider"/>
         </div>
-        <hr size="2" color="black" className="BioDivider"/>
       )}
       {thisMediaArray.length === 0 ? null : (
         <div className="ProfileList">
