@@ -66,6 +66,11 @@
     overflow: hidden;
     
   }
+  
+  .BioDivider {
+    margin-left: 5%;
+    margin-right: 4%;
+  }
 
   .seeMoreButton {
     border: none;
@@ -83,11 +88,7 @@
     color: grey;
     margin-top: 5px;
   }
-  
-
-
  
-
   .ListHeader {
     font-size: 18px;
     margin-left: 5%;
@@ -218,3 +219,102 @@
     white-space: nowrap;
   }
 }
+
+@media screen and (min-width: 1200px) {
+    .ProfileScreen {
+      align-items: center;
+      width: 100%;
+    }
+  
+    .ProfileHeader {
+      border-bottom-left-radius: 50px;
+      border-bottom-right-radius: 50px;
+      background-color: #3eb489;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .ProfileHeader > h1 {
+      font-size: 30px;
+      color: black;
+      font-weight: bold;
+      margin-top: 2%;
+    }
+  
+    .ProfileHeader > h2 {
+      font-size: 24px;
+      color: black;
+      font-weight: 400;
+    }
+  
+    .ProfileHeader > h3 {
+      font-size: 22px;
+      color: black;
+      font-weight: 400;
+    }
+  
+    .ProfileImage {
+      border-radius: 1000px;
+      margin-top: 10%;
+      border: 2px solid white;
+      object-fit: contain;
+      width: 35%;
+    }
+  
+    .iconRow {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      justify-content: center;
+    }
+  
+    .socialIcon {
+      margin-left: 2%;
+      margin-right: 2%;
+    }
+  
+    .bioContainer {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      align-self: center;
+      padding: 0% 5%;
+    }
+  
+    .bioContainer > h1 {
+      font-size: 20px;
+      font-weight: 400;
+    }
+  
+    .ListHeader {
+      font-size: 26px;
+      margin-left: 5%;
+    }
+  
+    .ProfileList {
+      margin-top: 10px;
+    }
+  
+    .SpogoLogo {
+      display: flex;
+      /* width: 100%; */
+      /* align-self: center;
+          align-items: center; */
+    }
+  
+    .SpogoLogo > img {
+      display: block;
+      object-fit: contain;
+      margin: 50px auto;
+      width: 30%;
+    }
+  
+    .VideoList {
+      display: flex;
+      flex-direction: row;
+      overflow-x: auto;
+      overflow-y: hidden;
+      white-space: nowrap;
+    }
+  }

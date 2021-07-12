@@ -14,7 +14,7 @@ function Header() {
     <>
       <div className="navbar">
         <div className="navbar-container container">
-          <Link to="/" className="navbar-logo">
+          <Link to="/home" className="navbar-logo">
             <img src={logo} alt="Spogo Logo" />
           </Link>
           <div className="menu-icon" onClick={handleClick}>
@@ -22,7 +22,7 @@ function Header() {
           </div>
           <ul className={click ? 'nav-menu active' : 'nav-menu'}>
             <li className="nav-item">
-              <Link to="/" className="nav-links">
+              <Link to="/home" className="nav-links">
                 Home
               </Link>
             </li>

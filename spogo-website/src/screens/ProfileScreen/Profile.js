@@ -26,7 +26,9 @@ import {
   getMeasurableArray,
   getUserDict,
   getMediaArray,
-} from '../../ProfileData';
+  setUserDataCollected,
+  getUserDataCollected,
+} from "../../ProfileData";
 
 const Profile = (props) => {
   let path = props.url;
@@ -62,7 +64,19 @@ const Profile = (props) => {
     //   measurableArray = getMeasurableArray();
     //   mediaArray = getMediaArray()
     // }
-    await getDBUserInfo();
+    if (getUserDataCollected()) {
+      setThisUserInfoDict(getUserDict());
+      setThisTrophyArray(getTrophyArray());
+      setThisExperienceArray(getExperienceArray());
+      setThisMeasurableArray(getMeasurableArray());
+      setThisMediaArray(getMediaArray());
+      setUserInfo();
+      displayProfileImage();
+      setSocialIcons();
+      findSize();
+    } else {
+      await getDBUserInfo();
+    }
   }, []);
 
   const getDBUserInfo = async () => {
@@ -160,6 +174,7 @@ const Profile = (props) => {
     displayProfileImage();
     setSocialIcons();
     findSize();
+    setUserDataCollected();
   };
 
   async function displayProfileImage() {
@@ -328,7 +343,6 @@ const Profile = (props) => {
           )}
         </div>
       </div>
-
       {bio === 'This is an empty bio. Edit it as you see fit.' ? (
         <div>
           <p></p>
@@ -343,6 +357,7 @@ const Profile = (props) => {
         >
           <p>{getBio(bio)}</p>
         </div>
+        <hr size="2" color="black" className="BioDivider"/>
       )}
       {thisMediaArray.length === 0 ? null : (
         <div className="ProfileList">
