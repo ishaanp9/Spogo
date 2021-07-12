@@ -1,14 +1,49 @@
 @media screen and (max-width: 800px) {
-    .mediaContainer {
-        display: flex;
-        align-self: flex-start;
-    }
+  .mediaContainer {
+    display: flex;
+    align-self: flex-start;
+  }
 
-    .mediaContainer > img {
-        object-fit: cover;
-    }
+  .mediaContainer > img {
+    object-fit: cover;
+  }
 
-    .mediaContainer > video {
-        object-fit: cover;
-    }
+  .mediaContainer > video {
+    object-fit: cover;
+  }
+
+  .modalMedia {
+    object-fit: cover;
+    width: 100%;
+  }
+
+  .modalContainer {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100%;
+  }
+
+  .closeIcon {
+      position: absolute;
+      margin-top: 5%;
+      margin-left: 5%;
+  }
+
+  .MediaModal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: black;
+  }
+  .ModalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: black;
+  }
 }
