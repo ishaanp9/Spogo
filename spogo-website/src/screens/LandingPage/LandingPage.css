@@ -46,6 +46,11 @@
   margin-bottom: 5%;
 }
 
+.bottomLinksText:hover {
+  color: white;
+ 
+}
+
 .web_body {
   display: flex;
   flex-direction: column;
@@ -97,6 +102,12 @@
   transition: 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
   font-family: 'DM Sans', sans-serif;
   margin-bottom: 20px;
+}
+
+.waitlistInputContainer > input:focus {
+  border-width: 2px;
+  border-color: #3eb489;
+  color: black;
 }
 
 .form_button > button {
@@ -225,7 +236,7 @@
 
 .content {
   display: flex;
-  width: 50%;
+  width: 100%;
   justify-content: space-evenly;
 }
 
@@ -246,6 +257,7 @@
   margin-bottom: 5%;
   font-size: 16px;
   text-decoration: none;
+  
 }
 
 .header_column > p:hover {
