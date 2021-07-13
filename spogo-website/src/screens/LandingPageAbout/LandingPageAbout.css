@@ -1,0 +1,218 @@
+.body {
+  display: flex;
+  flex-direction: column;
+  padding: 0px 10%;
+}
+
+.topImageWithTextOnIt {
+  margin-bottom: 10%;
+}
+
+.topImageWithTextOnIt > h1 {
+  background-image: url(stadium.jpg);
+  padding: 10%;
+  border-radius: 20px;
+  color: rgb(41, 31, 31);
+  font-size: 54px;
+  text-align: center;
+}
+
+.missionContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 10%;
+}
+
+.missionContainer > p {
+  width: 50%;
+  font-size: 17.6px;
+}
+
+.teamContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 10%;
+}
+
+.membersContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  /* justify-content: center; */
+}
+
+.memberContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.memberContainer > img {
+  object-fit: contain;
+  height: 154px;
+  border-radius: 1000px;
+}
+
+.name {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.sport {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.sectionTitle {
+  font-size: 64px;
+  text-align: left;
+  width: 40%;
+}
+
+.aboutUsContentContainer {
+  width: 50%;
+}
+
+.aboutUsContentContainer > p {
+  font-size: 17.6px;
+}
+
+@media screen and (max-width: 650px)  {
+
+  .memberContainer > img {
+    object-fit: contain;
+    height: 125px;
+    border-radius: 1000px;
+  }
+
+  .topImageWithTextOnIt > h1 {
+    background-image: url(stadium.jpg);
+    padding: 10%;
+    border-radius: 20px;
+    color: rgb(41, 31, 31);
+    font-size: 40px;
+    text-align: center;
+  }
+
+  .missionContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 10%;
+  }
+
+  .missionContainer > p {
+    width: 100%;
+    font-size: 17.6px;
+  }
+
+  .name {
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  .sport {
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  .teamContainer {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10%;
+    width: 100%;
+  }
+
+  .sectionTitle {
+    font-size: 40px;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 2%;
+  }
+
+  .aboutUsContentContainer {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 550px) {
+
+
+    
+    .memberContainer > img {
+        object-fit: contain;
+        height: 95px;
+        border-radius: 1000px;
+      }
+    .name {
+        display: flex;
+        flex-direction: column;
+        font-size: 14px;
+        font-weight: 500;
+      }
+    
+      .sport {
+        font-size: 12px;
+        font-weight: 400;
+      }
+
+}
+
+@media screen and (max-width: 400px) {
+
+    .memberContainer > img {
+        object-fit: contain;
+        height: 125px;
+        border-radius: 1000px;
+      }
+    
+      .topImageWithTextOnIt > h1 {
+        background-image: url(stadium.jpg);
+        padding: 10%;
+        border-radius: 20px;
+        color: rgb(41, 31, 31);
+        font-size: 30px;
+        text-align: center;
+      }
+    
+    .memberContainer > img {
+        object-fit: contain;
+        height: 75px;
+        border-radius: 1000px;
+      }
+    .name {
+        display: flex;
+        flex-direction: column;
+        font-size: 13px;
+        font-weight: 500;
+      }
+    
+      .sport {
+        font-size: 12px;
+        font-weight: 400;
+      }
+
+      .missionContainer > p {
+        width: 100%;
+        font-size: 16px;
+      }
+
+      .aboutUsContentContainer > p {
+        font-size: 16px;
+      }
+
+      .sectionTitle {
+        font-size: 32px;
+        text-align: center;
+        width: 100%;
+        margin-bottom: 2%;
+      }
+
+}
+
