@@ -1,9 +1,15 @@
-import React from "react";
-import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import React from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from 'react-router-dom';
 
 import LandingPage from '../screens/LandingPage/LandingPage';
 import LandingPageAbout from '../screens/LandingPageAbout/LandingPageAbout';
 import ProfileScreen from '../screens/ProfileScreen/Profile';
+import LandingPageBlog from '../screens/LandingPageBlog/LandingPageBlog'
 
 const LandingNavigator = (props) => {
   return (
@@ -11,11 +17,14 @@ const LandingNavigator = (props) => {
       <Route exact path="/">
         <Redirect to="/home" />
       </Route>
-      <Route path={"/home"}>
+      <Route path={'/home'}>
         <LandingPage />
       </Route>
-      <Route path={"/blog"}>
+      <Route path={'/about'}>
         <LandingPageAbout />
+      </Route>
+      <Route path={'/blog'}>
+        <LandingPageBlog />
       </Route>
     </Router>
   );
