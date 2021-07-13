@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-d
 
 import LandingPage from '../screens/LandingPage/LandingPage';
 import LandingPageAbout from '../screens/LandingPageAbout/LandingPageAbout';
-import ProfileScreen from '../screens/ProfileScreen/Profile';
+import LandingPageFAQ from '../screens/LandingPageFAQ/LandingPageFAQ';
 
 const LandingNavigator = (props) => {
   return (
@@ -16,6 +16,9 @@ const LandingNavigator = (props) => {
       </Route>
       <Route path={"/blog"}>
         <LandingPageAbout />
+      </Route>
+      <Route path={"/FAQ"}>
+        <LandingPageFAQ />
       </Route>
     </Router>
   );

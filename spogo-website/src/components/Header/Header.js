@@ -22,7 +22,7 @@ function Header() {
           </div>
           <ul className={click ? 'nav-menu active' : 'nav-menu'}>
             <li className="nav-item">
-              <Link to="/home" className="nav-links">
+              <Link to="/" className="nav-links">
                 Home
               </Link>
             </li>
@@ -41,9 +41,11 @@ function Header() {
                 FAQ
               </Link>
             </li>
-            <li className="nav-btn">
-              <button type="text">Join Waitlist</button>
-            </li>
+            <Link to="/" className="waitlistLinkBtn" >
+              <li className="nav-btn">
+                <button type="text">Join Waitlist</button>
+              </li>
+            </Link>
           </ul>
         </div>
       </div>

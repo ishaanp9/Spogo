@@ -49,6 +49,23 @@
   width: 50%;
 }
 
+.seeMoreButton {
+  border: none;
+  background-color: white;
+  font-size: 12px;
+  font-weight: 600;
+  color: grey;
+}
+
+.seeLessButton {
+  border: none;
+  background-color: white;
+  font-size: 12px;
+  font-weight: 600;
+  color: grey;
+  margin-top: 5px;
+}
+
 @media screen and (max-width: 400px) {
   .Header > h1 {
     margin-top: 10px;

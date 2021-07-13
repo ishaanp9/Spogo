@@ -1,49 +1,52 @@
-import React, { useState } from 'react';
-import './LandingPage.css';
-import Header from '../../components/Header/Header';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import MainImage from './main_image.png';
-import ExampleImage from './top.PNG';
-import SpogoBottom from './bottom.png';
-import LandingPageProduct from './landingpageproduct.png';
-import LandingPageHighlights from './landingpagehighlights.png';
-import LandingPageTrophies from './landingpagetrophies.png';
-import LandingPageExperiences from './landingpageexperiences.png';
-import LandingPageMeasurables from './landingpagemeasurables.png';
-import firebase from '../../firebase';
+import React, { useState } from "react";
+import "./LandingPage.css";
+import Header from "../../components/Header/Header";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import MainImage from "./main_image.png";
+import ExampleImage from "./top.PNG";
+import SpogoBottom from "./bottom.png";
+import SpogoTopGraphic from "./spogotopgraphic.png";
+import LandingPageProduct from "./landingpageproduct.png";
+import LandingPageHighlights from "./landingpagehighlights.png";
+import LandingPageTrophies from "./landingpagetrophies.png";
+import LandingPageExperiences from "./landingpageexperiences.png";
+import LandingPageMeasurables from "./landingpagemeasurables.png";
+import firebase from "../../firebase";
 
 const LandingPage = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [waitlistInputValid, setWaitlistInputValid] = useState(false);
+  const [invalidInput, setInvalidInput] = useState(false);
+  const [waitlistAddSuccessful, setWaitlistAddSuccessful] = useState(false);
 
-  async function addUserToWaitlist() {
+  const addUserToWaitlist = async () => {
     await firebase
       .firestore()
-      .collection('Waitlist')
+      .collection("Waitlist")
       .add({
         name: name,
         email: email,
       })
       .then(() => {
-        console.log('Worked');
+        setName("");
+        setEmail("");
       })
       .catch((error) => {
-        console.log('Error:', error);
+        console.log("Error:", error);
       });
-  }
-
-  let handleOnChangeEmail = (email) => {
-    setEmail(email.target.value);
-    let re =
-      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if (re.test(email)) {
-      setWaitlistInputValid(true);
-    } else {
-      setWaitlistInputValid(false);
-    }
   };
 
+  let validator = require("email-validator");
+
+  const validateEmail = () => {
+    if (validator.validate(email)) {
+      addUserToWaitlist();
+      setWaitlistAddSuccessful(true)
+    } else {
+      setInvalidInput(true);
+    }
+  };
   return (
     <>
       <Header />
@@ -55,38 +58,59 @@ const LandingPage = () => {
               And Likeness Is Here.
             </h1>
             <p>Find Out More.</p>
-            <form>
-              <div className="waitlistInputContainer">
-                <input
-                  maxLength={100}
-                  type="text"
-                  placeholder="Full Name"
-                  value={name}
-                  className="nameInput"
-                  onChange={(text) => setName(text.target.value)}
-                />
-                <input
-                  maxLength={100}
-                  type="email"
-                  placeholder="Email Address"
-                  value={email}
-                  onChange={handleOnChangeEmail}
-                  required={true}
-                />
-              </div>
+            {!waitlistAddSuccessful ? (
+              <form onsubmit="return false">
+                <div className="waitlistInputContainer">
+                  <input
+                    maxLength={100}
+                    type="text"
+                    placeholder="Full Name"
+                    value={name}
+                    className="nameInput"
+                    onChange={(text) => setName(text.target.value)}
+                  />
+                  <input
+                    style={
+                      invalidInput
+                        ? { borderWidth: 2, borderColor: "red" }
+                        : {}
+                    }
+                    maxLength={100}
+                    type="email"
+                    placeholder="Email Address"
+                    value={email}
+                    onChange={(text) => {
+                      setEmail(text.target.value);
+                      setInvalidInput(false);
+                    }}
+                    required={true}
+                  />
+                </div>
+                {invalidInput && (
+                  <div className="invalidEmailTextContainer">
+                    <h1 className="invalidText">Invalid Email</h1>
+                  </div>
+                )}
+                <div className="form_button">
+                  <button
+                    type="button"
+                    onClick={
+                      () => validateEmail()
+                      // ? addUserToWaitlist() : null
+                    }
+                  >
+                    Be Notified
+                  </button>
+                </div>
+              </form>
+            ) : (
               <div className="form_button">
-                <button
-                  onClick={() =>
-                    waitlistInputValid ? addUserToWaitlist() : null
-                  }
-                >
-                  Join the Waitlist
-                </button>
+                <button type="button">Thank You!</button>
               </div>
-            </form>
+            )}
           </div>
           <div className="imageContainer">
-            <img src={ExampleImage} alt="" />
+            <img src={SpogoTopGraphic} alt="" />
           </div>
         </div>
         <div className="product_show_header">
@@ -167,26 +191,22 @@ const LandingPage = () => {
                 </div>
                 <div className="header_column">
                   <h2>Contact</h2>
-                  <p
-                    onClick={() => window.open(
-                      'mailto:getspogo@gmail.com'
-                    )}
-                  >
+                  <p onClick={() => window.open("mailto:getspogo@gmail.com")}>
                     getspogo@gmail.com
                   </p>
                 </div>
                 <div className="header_column">
                   <h2>Pages</h2>
-                  <Link to={'/home'} className="bottomLinksText">
+                  <Link to={"/home"} className="bottomLinksText">
                     <p>Home</p>
                   </Link>
-                  <Link to={'/about'} className="bottomLinksText">
+                  <Link to={"/about"} className="bottomLinksText">
                     <p>About</p>
                   </Link>
-                  <Link to={'/blog'} className="bottomLinksText">
+                  <Link to={"/blog"} className="bottomLinksText">
                     <p>Blog</p>
                   </Link>
-                  <Link to={'/FAQ'} className="bottomLinksText">
+                  <Link to={"/FAQ"} className="bottomLinksText">
                     <p>FAQ</p>
                   </Link>
                 </div>

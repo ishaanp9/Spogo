@@ -2,7 +2,7 @@
 .navbar {
   background: white;
   height: 80px;
-  padding: 50px 5%;
+  padding: 50px 30px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -10,7 +10,7 @@
   position: sticky;
   top: 0;
   z-index: 999;
-  margin-bottom: 8%;
+  margin-bottom: 2%;
 }
 
 .navbar-container {
@@ -22,12 +22,13 @@
 .navbar-logo > img {
   object-fit: contain;
   height: 45px;
+  /* position: absolute; */
 }
 
 .container {
   z-index: 1;
   width: 100%;
-  max-width: 1300px;
+  /* max-width: 1300px; */
   margin-right: auto;
   margin-left: auto;
   padding-right: 50px;
@@ -102,6 +103,10 @@
 
 .menu-icon {
   display: none;
+}
+
+.waitlistLinkBtn {
+  text-decoration: none;
 }
 
 @media screen and (max-width: 960px) {
@@ -181,6 +186,7 @@
     align-items: center;
     width: 100%;
     height: 120px;
+    text-decoration: none;
   }
 
   .nav-btn > button {
