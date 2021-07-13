@@ -13,6 +13,7 @@ import LandingNavigator from './navigation/LandingNavigator'
 //npm install react-icons --save
 //npm install react-router-dom
 //npm install --save react-modal
+//npm install email-validator
 
 //npm run bundle
 //firebase deploy
