@@ -17,7 +17,7 @@ const LandingNavigator = (props) => {
       <Route exact path="/">
         <Redirect to="/home" />
       </Route>
-      <Route path={'/'}>
+      <Route path={'/home'}>
         <LandingPage />
       </Route>
       <Route path={'/about'}>
