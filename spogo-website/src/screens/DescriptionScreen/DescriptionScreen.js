@@ -65,6 +65,36 @@ const DescriptionScreen = (props) => {
     }
   };
 
+  const [showMore, setShowMore] = useState(false);
+  const descriptionSeeMoreSeeLess = (text) => {
+    if (text.length <= 121) {
+      return text;
+    }
+    if (text.length > 121 && showMore) {
+      return (
+        <div>
+          <p>{text}</p>
+          <button className="seeLessButton" onClick={() => setShowMore(false)}>
+            See Less
+          </button>
+        </div>
+      );
+    }
+    if (text.length > 121) {
+      return (
+        <div>
+          <p>
+            {text.slice(0, 121)}
+            <span className="seeMoreButton" onClick={() => setShowMore(true)}>
+              {' '}
+              ...See More
+            </span>
+          </p>
+        </div>
+      );
+    }
+  };
+
   {
     if (getUserDataCollected()) {
       return (
@@ -94,7 +124,7 @@ const DescriptionScreen = (props) => {
                         <div className="InfoContainer" key={item.idNum}>
                           <h1>{item.title}</h1>
                           <h2>{item.duration}</h2>
-                          <h3>{item.description}</h3>
+                          <h3>{descriptionSeeMoreSeeLess(item.description)}</h3>
                         </div>
                       </div>
                       <hr size="2" color="lightgrey" className="Divider" />
@@ -111,7 +141,7 @@ const DescriptionScreen = (props) => {
                         <div className="InfoContainer" key={item.idNum}>
                           <h1>{item.title}</h1>
                           <h2>{item.duration}</h2>
-                          <h3>{item.description}</h3>
+                          <h3>{descriptionSeeMoreSeeLess(item.description)}</h3>
                         </div>
                       </div>
                       <hr size="2" color="lightgrey" className="Divider" />
