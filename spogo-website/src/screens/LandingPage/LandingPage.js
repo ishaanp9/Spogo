@@ -4,7 +4,6 @@ import Header from "../../components/Header/Header";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import MainImage from "./main_image.png";
 import ExampleImage from "./top.PNG";
-import SpogoBottom from "./bottom.png";
 import SpogoTopGraphic from "./spogotopgraphic.png";
 import LandingPageProduct from "./landingpageproduct.png";
 import LandingPageHighlights from "./landingpagehighlights.png";
@@ -12,6 +11,8 @@ import LandingPageTrophies from "./landingpagetrophies.png";
 import LandingPageExperiences from "./landingpageexperiences.png";
 import LandingPageMeasurables from "./landingpagemeasurables.png";
 import firebase from "../../firebase";
+import Footer from "../../components/Footer/Footer";
+
 
 const LandingPage = () => {
   const [name, setName] = useState("");
@@ -173,50 +174,7 @@ const LandingPage = () => {
           </div>
         </div>
         {/* Bottom Part */}
-        <div className="bottom_part">
-          <div className="no_copyright">
-            <div className="bottomLogoContainer">
-              <img
-                className="spogo_bottom"
-                src={SpogoBottom}
-                alt="Spogo Logo"
-              />
-            </div>
-            <div className="bottomTabsContainer">
-              <div className="content">
-                <div className="header_column">
-                  <h2>Legal</h2>
-                  <p>Privacy Policy</p>
-                  <p>Terms of Service</p>
-                </div>
-                <div className="header_column">
-                  <h2>Contact</h2>
-                  <p onClick={() => window.open("mailto:getspogo@gmail.com")}>
-                    getspogo@gmail.com
-                  </p>
-                </div>
-                <div className="header_column">
-                  <h2>Pages</h2>
-                  <Link to={"/home"} className="bottomLinksText">
-                    <p>Home</p>
-                  </Link>
-                  <Link to={"/about"} className="bottomLinksText">
-                    <p>About</p>
-                  </Link>
-                  <Link to={"/blog"} className="bottomLinksText">
-                    <p>Blog</p>
-                  </Link>
-                  <Link to={"/FAQ"} className="bottomLinksText">
-                    <p>FAQ</p>
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="copyright">
-            <p>© 2021 Spogo | All rights reserved</p>
-          </div>
-        </div>
+        <Footer/>
       </div>
     </>
   );
