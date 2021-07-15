@@ -1,7 +1,10 @@
 import React from 'react';
+import Footer from '../../components/Footer/Footer';
 import Header from '../../components/Header/Header';
 import './LandingPageAbout.css';
 import stadium from './stadium.jpg';
+import ethan_spogo from './ethan_spogo.jpg'
+import ishaan_spogo from './ishaan_spogo.jpg'
 
 const LandingPageAbout = () => {
   return (
@@ -63,7 +66,7 @@ const LandingPageAbout = () => {
         <div className="membersContainer">
           <div className="memberContainer">
             <img
-              src="https://media-exp3.licdn.com/dms/image/C5603AQFXKsZpMo1fPA/profile-displayphoto-shrink_200_200/0/1626202726000?e=1631750400&v=beta&t=_UzQXur7weofdYLBUgNH8U_Td6Hnbue7oFhl_Vurzic"
+              src={ishaan_spogo}
               alt="Ishaan Picture"
             />
             <p className="name">
@@ -75,7 +78,7 @@ const LandingPageAbout = () => {
           </div>
           <div className="memberContainer">
             <img
-              src="https://media-exp3.licdn.com/dms/image/C4D03AQE43J7qGvqX_w/profile-displayphoto-shrink_800_800/0/1619116118692?e=1631750400&v=beta&t=oi2Mcv4UglYq8cEuuhZqzQ8I3xraYQPTRhCnFPB4k6c"
+              src={ethan_spogo}
               alt="Ethan Kam Picture"
             />
             <p className="name">Ethan Kam - Co-Founder</p>
@@ -83,6 +86,7 @@ const LandingPageAbout = () => {
           </div>
         </div>
       </div>
+      <Footer/>
     </>
   );
 };

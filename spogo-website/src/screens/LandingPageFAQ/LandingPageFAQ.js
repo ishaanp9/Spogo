@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import "./LandingPageFAQ.css";
 import Header from "../../components/Header/Header";
 import { FaPlus, FaMinus } from 'react-icons/fa';
+import Footer from "../../components/Footer/Footer";
 
 
 const LandingPageFAQ = () => {
@@ -51,6 +52,7 @@ const LandingPageFAQ = () => {
         <FAQItem question='After creating my Spogo profile, what do I do with it?' answer='Yessir'/>
         <FAQItem question='How do other people view my Spogo profile?' answer='Yessir'/>
       </div>
+      <Footer/>
     </>
   );
 };

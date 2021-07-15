@@ -53,15 +53,9 @@
   font-size: 14px;
 }
 
-.bottomLinksText {
-  text-decoration: none;
-  color: rgb(236, 227, 227);
-  margin-bottom: 5%;
-}
 
-.bottomLinksText:hover {
-  color: white;
-}
+
+
 
 .web_body {
   display: flex;

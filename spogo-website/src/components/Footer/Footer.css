@@ -1,0 +1,154 @@
+.bottomLinksText {
+  text-decoration: none;
+  color: rgb(236, 227, 227);
+  margin-bottom: 5%;
+}
+
+.bottomLinksText:hover {
+  color: white;
+}
+
+.bottom_part {
+  background-color: #3eb489;
+  margin-top: 5%;
+  padding: 5%;
+  display: flex;
+  flex-direction: column;
+}
+
+.bottomLogoContainer {
+  display: flex;
+  
+  flex: 0.5;
+}
+
+.bottomTabsContainer {
+  display: flex;
+  flex: 0.5;
+  justify-content: center;
+}
+
+.no_copyright {
+  display: flex;
+  align-items: flex-start;
+}
+
+.spogo_bottom {
+  object-fit: contain;
+  height: 50px;
+}
+
+.content {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+}
+
+.header_column {
+  height: 100%;
+  text-decoration: none;
+}
+
+.header_column > h2 {
+  color: white;
+  margin-bottom: 5%;
+  font-size: 16px;
+}
+
+.header_column > p {
+  color: rgb(236, 227, 227);
+  margin-bottom: 5%;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+.header_column > p:hover {
+  color: white;
+  cursor: pointer;
+}
+
+.copyright {
+  color: white;
+  font-size: 12px;
+}
+
+@media screen and (max-width: 960px) {
+  .bottom_part {
+    background-color: #3eb489;
+    margin-top: 5%;
+    padding: 5%;
+  }
+
+  .bottomLogoContainer {
+    display: flex;
+    margin: 8% 0%;
+  }
+
+  .bottomTabsContainer {
+    display: flex;
+    width: 100%;
+    /* align-items: center; */
+    justify-content: center;
+  }
+
+  .no_copyright {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .spogo_bottom {
+    object-fit: contain;
+    height: 50px;
+    display: flex;
+    align-items: center;
+  }
+
+  .header_column {
+    height: 100%;
+    text-decoration: none;
+  }
+
+  .header_column > h2 {
+    color: white;
+    margin-bottom: 5%;
+    /* font-size: 15px; */
+  }
+
+  .header_column > p {
+    color: rgb(236, 227, 227);
+    margin-bottom: 5%;
+    text-decoration: none;
+    /* font-size: 13px; */
+  }
+
+  .header_column > p:hover {
+    color: white;
+    cursor: pointer;
+  }
+
+  .copyright {
+    color: white;
+    font-size: 12px;
+    align-self: center;
+    margin-top: 5%;
+  }
+}
+
+@media screen and (max-width: 460px) {
+  .content {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .header_column {
+    height: 100%;
+    margin: 5% 15%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+  }
+}
