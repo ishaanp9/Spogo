@@ -41,15 +41,18 @@
 .membersContainer {
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: space-around;
+  /* align-items: center; */
+  justify-content: center;
   /* justify-content: center; */
 }
 
 .memberContainer {
+  width: 50%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 0% 10%;
 }
 
 .memberContainer > img {
@@ -81,6 +84,22 @@
 
 .aboutUsContentContainer > p {
   font-size: 17.6px;
+}
+
+.founderBioColumn {
+  display: none;
+}
+
+@media screen and (max-width: 1250px)  {
+  .founderBioColumn {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .founderBioRow {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 650px)  {
@@ -143,9 +162,6 @@
 }
 
 @media screen and (max-width: 550px) {
-
-
-    
     .memberContainer > img {
         object-fit: contain;
         height: 95px;
@@ -218,8 +234,8 @@
       .membersContainer {
         display: flex;
         flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
+        /* align-items: center;
+        justify-content: space-between; */
         
         /* justify-content: center; */
       }
