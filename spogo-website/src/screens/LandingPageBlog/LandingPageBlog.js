@@ -5,8 +5,8 @@ import Header from '../../components/Header/Header'
 function LandingPageBlog() {
     return (
         <>
-        <Header/>
-        <Footer/>
+          <Header/>
+          <Footer/>
         </>
     )
 }
