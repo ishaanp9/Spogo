@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import "./LandingPageFAQ.css";
 import Header from "../../components/Header/Header";
 import { FaPlus, FaMinus } from 'react-icons/fa';
+import Footer from "../../components/Footer/Footer";
 
 
 const LandingPageFAQ = () => {
@@ -59,6 +60,7 @@ const LandingPageFAQ = () => {
         <FAQItem question='After I’ve added information to my profile, can I edit or delete it?' answer='Of course! You can edit and delete all highlights, experiences, accomplishments, and measurables, as well as edit your personal information.'/>
         <FAQItem question='How do other people view my Spogo profile?' answer='Through your generated URL, anyone can view your profile!'/>
       </div>
+      <Footer/>
     </>
   );
 };

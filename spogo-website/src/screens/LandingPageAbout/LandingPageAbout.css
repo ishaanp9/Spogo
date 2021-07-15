@@ -61,6 +61,7 @@
 .name {
   font-size: 18px;
   font-weight: 500;
+  margin-top: 10px;
 }
 
 .sport {
@@ -212,6 +213,15 @@
         text-align: center;
         width: 100%;
         margin-bottom: 2%;
+      }
+
+      .membersContainer {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        
+        /* justify-content: center; */
       }
 
 }
