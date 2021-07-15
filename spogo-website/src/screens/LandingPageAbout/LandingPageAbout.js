@@ -69,20 +69,52 @@ const LandingPageAbout = () => {
               src={ishaan_spogo}
               alt="Ishaan Picture"
             />
-            <p className="name">
-              Ishaan Puri - Co-Founder
-            </p>
-            <p className="sport">
-              High School Sport: Tennis
-            </p>
+            <div className="founderBioRow">
+              <p className="name">
+                Ishaan Puri - Co-Founder
+              </p>
+              <p className="sport">
+                High School Sport: Tennis
+              </p>
+            </div>
+            <div className="founderBioColumn">
+              <p className="name">
+                Ishaan Puri
+              </p>
+              <p className="sport">
+                Co-Founder
+              </p>
+              <p className="sport">
+                High School Sport:
+              </p>
+              <p className="sport">
+                Tennis
+              </p>
+            </div>
           </div>
           <div className="memberContainer">
             <img
               src={ethan_spogo}
               alt="Ethan Kam Picture"
             />
-            <p className="name">Ethan Kam - Co-Founder</p>
-            <p className="sport">High School Sports: Football and Track</p>
+            <div className="founderBioRow">
+              <p className="name">Ethan Kam - Co-Founder</p>
+              <p className="sport">High School Sports: Football and Track</p>
+            </div>
+            <div className="founderBioColumn">
+              <p className="name">
+                Ethan Kam
+              </p>
+              <p className="sport">
+                Co-Founder
+              </p>
+              <p className="sport">
+                High School Sports:
+              </p>
+              <p className="sport">
+                Football and Track
+              </p>
+            </div>
           </div>
         </div>
       </div>
