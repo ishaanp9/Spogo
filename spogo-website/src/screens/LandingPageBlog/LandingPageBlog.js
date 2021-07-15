@@ -1,9 +1,11 @@
 import React from 'react'
+import Header from "../../components/Header/Header";
+
 
 function LandingPageBlog() {
     return (
         <div>
-            <h1>Hello</h1>
+            <Header />
         </div>
     )
 }
