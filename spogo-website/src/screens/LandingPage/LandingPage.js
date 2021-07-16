@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./LandingPage.css";
 import Header from "../../components/Header/Header";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import MainImage from "./main_image.png";
+import Mockup from "./mockup.png";
 import ExampleImage from "./top.PNG";
 import SpogoTopGraphic from "./spogotopgraphic.png";
 import LandingPageProduct from "./landingpageproduct.png";
@@ -111,7 +111,7 @@ const LandingPage = () => {
             )}
           </div>
           <div className="imageContainer">
-            <img src={SpogoTopGraphic} alt="" />
+            <img src={Mockup} alt="Phone Mockup" />
           </div>
         </div>
         <div className="product_show_header">
