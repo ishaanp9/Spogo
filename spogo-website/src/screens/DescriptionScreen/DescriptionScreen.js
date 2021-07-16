@@ -35,7 +35,7 @@ const DescriptionScreen = (props) => {
 
   useEffect(() => {
     if (icon.icon === "trophy") {
-      setHeaderName("Trophies");
+      setHeaderName("Accomplishments");
       setItemArray(getTrophyArray());
     } else {
       setHeaderName("Experiences");
@@ -108,6 +108,7 @@ const DescriptionScreen = (props) => {
               />
             </Link>
             <h1>{headerName}</h1>
+            <h2>B</h2>
           </div>
           <hr className="HeaderDivider" size="2" color="lightgrey" />
           <div>
