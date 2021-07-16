@@ -100,7 +100,7 @@ const LandingPage = () => {
                       // ? addUserToWaitlist() : null
                     }
                   >
-                    Be Notified
+                    Join Waitlist
                   </button>
                 </div>
               </form>
@@ -117,17 +117,15 @@ const LandingPage = () => {
         <div className="product_show_header">
           <h1>This is Spogo.</h1>
           <p className="landing_subtitle">
-            Spogo is the only platform Lorem ipsum dolor sit amet, consectetur
-            adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            Spogo is the premier platform to share your athletic profile. Whether it be to gain exposure to or monetize your name, image and likeness, we’re here to help you along the way.
           </p>
           <img className="main_image" src={LandingPageProduct} alt="data" />
         </div>
         <div className="productDescriptionContainer">
           <div className="productDescription">
-            <h1>Show your highlights to the world!</h1>
+            <h1>Showcase Yourself</h1>
             <h2>
-              Post your highlights to your Spogo account. Then, show off your
-              tape to coaches and friends.
+              Spogo gives you a simple way to post highlights, list your experiences, show off your accomplishments, and display your measurables. These items can be edited and deleted at your convenience, so as you continue along your athletic journey Spogo will be right there with you.
             </h2>
           </div>
           <div className="productDescription">
@@ -139,21 +137,17 @@ const LandingPage = () => {
             <img className="big_image" src={LandingPageTrophies} />
           </div>
           <div className="productDescription">
-            <h1>Tell everyone about your accomplishments!</h1>
+            <h1>Social Media Integration</h1>
             <h2>
-              In the trophies section of your profile, you can display all of
-              your accomplishments. Tell everyone about your individual and team
-              awards.
+              We at Spogo understand that effective marketing as an athlete consists of utilizing all your social media’s, whether you are in high school, college, or even a professional. With that in mind, you can quickly link your Instagram, Twitter, Email, and a link of your choice. Now everyone can access your social media’s all in one place.
             </h2>
           </div>
         </div>
         <div className="productDescriptionContainer">
           <div className="productDescription">
-            <h1>Share your experiences!</h1>
+            <h1>Tailored Customization</h1>
             <h2>
-              In the experiences section of your profile, you can display all of
-              your accomplishments. Tell everyone about your individual and team
-              awards.
+              As an athlete it can be hard to stand out. That’s why Spogo gives you a multitude of customization options that allow you to create a profile curated to your preferences and personality. 
             </h2>
           </div>
           <div className="productDescription">
@@ -165,11 +159,9 @@ const LandingPage = () => {
             <img className="big_image" src={LandingPageMeasurables} />
           </div>
           <div className="productDescription">
-            <h1>Confirm your measurables!</h1>
+            <h1>Use it Anywhere</h1>
             <h2>
-              In the experiences section of your profile, you can display all of
-              your accomplishments. Tell everyone about your individual and team
-              awards.
+              Once you’ve completed your profile, generating your unique URL is effortless. You can paste it on all your social media’s for anyone to view. In addition, send it to coaches, recruiters, teams, agents, and whoever else you have in mind. With Spogo, marketing hasn’t been easier.
             </h2>
           </div>
         </div>

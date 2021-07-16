@@ -90,6 +90,10 @@
   display: none;
 }
 
+.founderBioRow {
+  text-align: center;
+}
+
 @media screen and (max-width: 1250px)  {
   .founderBioColumn {
     display: flex;
