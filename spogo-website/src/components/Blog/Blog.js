@@ -2,6 +2,20 @@ import React from 'react';
 import './Blog.css';
 
 function Blog({ image, title, personImage, name, date, paragraphText }) {
+  
+  const condenseText = (text) => {
+    if (text.length <= 151) {
+      return text;
+    }
+    if (text.length > 151) {
+      return (
+        <>
+          <p className="paragraph_text">{text.slice(0, 151)}<span>...</span></p>
+        </>
+      );
+    }
+  };
+
   return (
     <div className="blog_container">
       <img className="blog_image" src={image} alt="Blog Image" />
@@ -14,7 +28,7 @@ function Blog({ image, title, personImage, name, date, paragraphText }) {
           </p>
           {/* Text by Picture */}
         </div>
-        <p className="paragraph_text">{paragraphText}</p>
+        <p className="paragraph_text">{condenseText(paragraphText)}</p>
         <p className="read_more_text">Read more...</p>
       </div>
     </div>

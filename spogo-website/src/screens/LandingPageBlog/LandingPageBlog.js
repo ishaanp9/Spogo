@@ -13,7 +13,6 @@ function LandingPageBlog() {
         <h1 className='page_header'>Spogo Blog</h1>
         <div className="row">
           <Blog
-            className="blog_item"
             image={
               'https://llandscapes-10674.kxcdn.com/wp-content/uploads/2019/07/lighting.jpg'
             }
@@ -25,8 +24,7 @@ function LandingPageBlog() {
               'Science cuts two ways, of course; its products can be used for both good and evil. But there no turning back from science. The early warnings about technological dangers also come from science. Houston, Tranquillity Base here. The Eagle has landed...'
             }
           />
-          <Blog
-            className="blog_item"
+          <Blog      
             image={
               'https://llandscapes-10674.kxcdn.com/wp-content/uploads/2019/07/lighting.jpg'
             }
