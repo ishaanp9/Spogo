@@ -5,11 +5,11 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Mockup from "./mockup.png";
 import ExampleImage from "./top.PNG";
 import SpogoTopGraphic from "./spogotopgraphic.png";
-import LandingPageProduct from "./landingpageproduct.png";
-import LandingPageHighlights from "./landingpagehighlights.png";
-import LandingPageTrophies from "./landingpagetrophies.png";
-import LandingPageExperiences from "./landingpageexperiences.png";
-import LandingPageMeasurables from "./landingpagemeasurables.png";
+import GirlWithTrophyGraphic from './girlwithtrophy.png';
+import ShowcaseYourselfGraphic from './showcaseyourselfbaseballplayer.png';
+import SocialMediaIntegrationGraphic from './socialmediaintegration.png';
+import TailoredCustomizationGraphic from './tailoredcustomization.png';
+import LinkInBioGraphic from './linkinbio.png';
 import firebase from "../../firebase";
 import Footer from "../../components/Footer/Footer";
 
@@ -119,7 +119,7 @@ const LandingPage = () => {
           <p className="landing_subtitle">
             Spogo is the premier platform to share your athletic profile. Whether it be to gain exposure to or monetize your name, image and likeness, we’re here to help you along the way.
           </p>
-          <img className="main_image" src={LandingPageProduct} alt="data" />
+          <img className="main_image" src={GirlWithTrophyGraphic} alt="data" />
         </div>
         <div className="productDescriptionContainer">
           <div className="productDescription">
@@ -129,12 +129,12 @@ const LandingPage = () => {
             </h2>
           </div>
           <div className="productDescription">
-            <img className="big_image" src={LandingPageHighlights} />
+            <img className="big_image" src={ShowcaseYourselfGraphic} />
           </div>
         </div>
         <div className="productDescriptionContainerInverted">
           <div className="productDescription">
-            <img className="big_image" src={LandingPageTrophies} />
+            <img className="big_image" src={SocialMediaIntegrationGraphic} />
           </div>
           <div className="productDescription">
             <h1>Social Media Integration</h1>
@@ -151,12 +151,12 @@ const LandingPage = () => {
             </h2>
           </div>
           <div className="productDescription">
-            <img className="big_image" src={LandingPageExperiences} />
+            <img className="big_image" src={TailoredCustomizationGraphic} />
           </div>
         </div>
         <div className="productDescriptionContainerInverted">
           <div className="productDescription">
-            <img className="big_image" src={LandingPageMeasurables} />
+            <img className="big_image" src={LinkInBioGraphic} />
           </div>
           <div className="productDescription">
             <h1>Use it Anywhere</h1>
