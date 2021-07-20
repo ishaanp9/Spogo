@@ -1,3 +1,7 @@
+.blogLink {
+  text-decoration: none;
+}
+
 .blog_container {
   border: 1px solid transparent;
   border-radius: 10px;
@@ -27,12 +31,17 @@
   border-top-right-radius: 20px;
 }
 
+.noImageContainerLink {
+  text-decoration: none;
+}
+
 .no_image_container {
   padding: 3% 5%;
 }
 
 .title {
   font-size: 29px;
+  color: black;
 }
 
 .blog_writer_container {
@@ -61,12 +70,14 @@
 
 .paragraph_text {
   font-size: 18px;
+  color: black;
 }
 
 .read_more_text {
   margin-top: 2%;
   color: #3eb489;
   font-weight: 500;
+  text-decoration: none;
 }
 
 @media screen and (max-width: 900px) {

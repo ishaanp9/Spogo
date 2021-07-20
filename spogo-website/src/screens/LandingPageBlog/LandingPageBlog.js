@@ -2,45 +2,39 @@ import React from 'react';
 import Blog from '../../components/Blog/Blog';
 import Footer from '../../components/Footer/Footer';
 import Header from '../../components/Header/Header';
-import ishaan from './ishaan_spogo.jpg';
 import './LandingPageBlog.css';
+import { BlogData } from '../../BlogData';
 
-function LandingPageBlog() {
+const LandingPageBlog = () => {
+  console.log(BlogData);
+
   return (
     <>
       <Header />
       <div className="BlogItemContainer">
-        <h1 className='page_header'>Spogo Blog</h1>
+        <h1 className="page_header">Spogo Blog</h1>
         <div className="row">
           <Blog
-            image={
-              'https://llandscapes-10674.kxcdn.com/wp-content/uploads/2019/07/lighting.jpg'
-            }
-            title={'A Wonderful Blog Post About Earth'}
-            personImage={ishaan}
-            name={'Ishaan Puri'}
-            date={'July 15'}
-            paragraphText={
-              'Science cuts two ways, of course; its products can be used for both good and evil. But there no turning back from science. The early warnings about technological dangers also come from science. Houston, Tranquillity Base here. The Eagle has landed...'
-            }
+            image={BlogData[0].bannerImage}
+            title={BlogData[0].title}
+            personImage={BlogData[0].personImage}
+            name={BlogData[0].name}
+            date={BlogData[0].date}
+            paragraphText={BlogData[0].paragraphText}
           />
-          <Blog      
-            image={
-              'https://llandscapes-10674.kxcdn.com/wp-content/uploads/2019/07/lighting.jpg'
-            }
-            title={'A Wonderful Blog Post About Earth'}
-            personImage={ishaan}
-            name={'Ishaan Puri'}
-            date={'July 15'}
-            paragraphText={
-              'Science cuts two ways, of course; its products can be used for both good and evil. But there no turning back from science. The early warnings about technological dangers also come from science. Houston, Tranquillity Base here. The Eagle has landed...'
-            }
+          <Blog
+            image={BlogData[1].bannerImage}
+            title={BlogData[1].title}
+            personImage={BlogData[1].personImage}
+            name={BlogData[1].name}
+            date={BlogData[1].date}
+            paragraphText={BlogData[1].paragraphText}
           />
         </div>
       </div>
       <Footer />
     </>
   );
-}
+};
 
 export default LandingPageBlog;

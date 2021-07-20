@@ -10,8 +10,10 @@ import LandingPageAbout from '../screens/LandingPageAbout/LandingPageAbout';
 import LandingPageFAQ from '../screens/LandingPageFAQ/LandingPageFAQ';
 import ProfileScreen from '../screens/ProfileScreen/Profile';
 import LandingPageBlog from '../screens/LandingPageBlog/LandingPageBlog'
+import BlogArticleScreen from '../screens/BlogArticleScreen/BlogArticleScreen';
 
 const LandingNavigator = (props) => {
+  let path = props.url;
   return (
     <Router>
       <Route exact path="/">
@@ -26,8 +28,11 @@ const LandingNavigator = (props) => {
       <Route path={"/FAQ"}>
         <LandingPageFAQ />
        </Route>
-      <Route path={'/blog'}>
+      <Route exact path={'/blog'}>
         <LandingPageBlog />
+      </Route>
+      <Route path={'/blog/article'}>
+        <BlogArticleScreen/>
       </Route>
     </Router>
   );

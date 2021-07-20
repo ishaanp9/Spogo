@@ -244,6 +244,8 @@ export const getIconItem = (type) => {
     return (type);
   }
 
+  
+
 export const primaryColor = '#3EB489';
 export const companyName = 'Spogo';
 
