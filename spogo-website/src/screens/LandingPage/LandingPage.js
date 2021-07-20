@@ -55,7 +55,7 @@ const LandingPage = () => {
         <div className="top_banner">
           <div className="form_area">
             <h1>
-              The New Way To Showcase Yourself and Monetize Your Name, Image,
+              The New Way To Market and Monetize Your Name, Image,
               And Likeness Is Here.
             </h1>
             <p>Find Out More.</p>
