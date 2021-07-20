@@ -14,7 +14,9 @@ function Footer() {
           <div className="content">
             <div className="header_column">
               <h2>Legal</h2>
-              <p>Privacy Policy</p>
+              <Link to={{ pathname: 'https://www.iubenda.com/privacy-policy/21046961/legal'}} target="_blank" className="bottomLinksText">
+                <p>Privacy Policy</p>
+              </Link>
               <p>Terms of Service</p>
             </div>
             <div className="header_column">

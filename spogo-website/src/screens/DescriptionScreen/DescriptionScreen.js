@@ -6,6 +6,7 @@ import {
   Route,
   Switch,
   useLocation,
+  Redirect
 } from "react-router-dom";
 import { IoChevronBack } from "react-icons/io5";
 import {
@@ -166,18 +167,21 @@ const DescriptionScreen = (props) => {
       );
     } else {
       return (
-        <div className="DataLoadFailedContainer">
-          <h1>User's data can't be loaded.</h1>
-          <Link to={`/users/${UID}`} className="Link">
-            <h2 className="FailedLoadSecondText">
-              Try going to their profile first.
-            </h2>
-          </Link>
-          {/* spogo.us/users/{UID} */}
-          <div className="SpogoLogoDescriptionScreen">
-            <img src={SpogoLogo} alt="Spogo" />
-          </div>
-        </div>
+        // <div className="DataLoadFailedContainer">
+        //   <h1>User's data can't be loaded.</h1>
+        //   <Link to={`/users/${UID}`} className="Link">
+        //     <h2 className="FailedLoadSecondText">
+        //       Try going to their profile first.
+        //     </h2>
+        //   </Link>
+        //   {/* spogo.us/users/{UID} */}
+        //   <div className="SpogoLogoDescriptionScreen">
+        //     <img src={SpogoLogo} alt="Spogo" />
+        //   </div>
+        // </div>
+        <>        
+          <Redirect to={`/users/${UID}`} />
+        </>
       );
     }
   }
