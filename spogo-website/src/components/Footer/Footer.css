@@ -68,8 +68,21 @@
 }
 
 .copyright {
+  width: 185px;
   color: white;
   font-size: 12px;
+  text-align: center;
+}
+
+.socialIconsFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.socialIconFooter {
+  /* margin-right: 10px; */
 }
 
 @media screen and (max-width: 960px) {
