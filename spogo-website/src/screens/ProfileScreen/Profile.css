@@ -318,3 +318,40 @@
       white-space: nowrap;
     }
   }
+
+  .wildcardLinkModalContentContainer > h1 {
+    margin: 4% 0%;
+    font-size: 20px;
+  }
+
+  .wildcardLinkModalContentContainer > p {
+    margin: 2% 0%;
+  }
+
+  .wildcardLinkModalContainer {
+    background-color: white;
+    padding: 5%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: 40% 5%;
+  }
+
+  .wildcardLinkModalButtonsContainer {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-top: 5%;
+  }
+
+  .wildcardLinkModalButton {
+    flex: 0.5;
+    margin: 0% 2%;
+    border: none;
+    background-color: #3EB489;
+    color: black;
+    padding: 5% 0%;
+    border-radius: 5px;
+  }

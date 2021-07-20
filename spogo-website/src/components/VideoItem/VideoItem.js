@@ -73,7 +73,7 @@ export const ImageItem = (props) => {
   return (
     <div className="mediaContainer">
       <img
-        onClick={openModal}
+        onClick={() => openModal()}
         src={mediaURL}
         style={{
           height:
@@ -90,7 +90,7 @@ export const ImageItem = (props) => {
       />
       <Modal
         isOpen={modalIsOpen}
-        onRequestClose={closeModal}
+        onRequestClose={() => closeModal()}
         contentLabel="Example Modal"
         overlayClassName="ModalOverlay"
         className="MediaModal"
@@ -99,7 +99,7 @@ export const ImageItem = (props) => {
           className="closeIcon"
           size={25}
           color={'white'}
-          onClick={closeModal}
+          onClick={() => closeModal()}
         />
         <div className="modalContainer">
           <img className="modalMedia" src={mediaURL} />

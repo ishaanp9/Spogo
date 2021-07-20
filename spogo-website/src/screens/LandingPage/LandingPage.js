@@ -117,15 +117,14 @@ const LandingPage = () => {
         <div className="product_show_header">
           <h1>This is Spogo.</h1>
           <p className="landing_subtitle">
-            Spogo is the premier platform to share your athletic profile. Whether it be to gain exposure to or monetize your name, image and likeness, we’re here to help you along the way.
-          </p>
+            Spogo is the premier platform to market and monetize your name, image, and likeness. Whether it is finding opportunities or sharing content, every athlete has something to do on Spogo. So as you continue along your athletic journey, Spogo will be right there with you.          </p>
           <img className="main_image" src={GirlWithTrophyGraphic} alt="data" />
         </div>
         <div className="productDescriptionContainer">
           <div className="productDescription">
             <h1>Showcase Yourself</h1>
             <h2>
-              Spogo gives you a simple way to post highlights, list your experiences, show off your accomplishments, and display your measurables. These items can be edited and deleted at your convenience, so as you continue along your athletic journey Spogo will be right there with you.
+              It has never been easier to showcase your athletic profile. With Spogo, you can link all your social media’s, post highlights, list experiences, show off accomplishments, display measurables, and receive testimonials. To help you best stand out, we provide a multitude of customization options that allow you to create a profile curated to your preferences and personality. Once you’ve completed your profile, generate and share your unique Spogo URL for everyone to see.
             </h2>
           </div>
           <div className="productDescription">
@@ -137,24 +136,24 @@ const LandingPage = () => {
             <img className="big_image" src={SocialMediaIntegrationGraphic} />
           </div>
           <div className="productDescription">
-            <h1>Social Media Integration</h1>
+            <h1>Find Opportunities</h1>
             <h2>
-              We at Spogo understand that effective marketing as an athlete consists of utilizing all your social media’s, whether you are in high school, college, or even a professional. With that in mind, you can quickly link your Instagram, Twitter, Email, and a link of your choice. Now everyone can access your social media’s all in one place.
+              At Spogo, we understand that as an athlete you want to maximize your value. We know that finding monetizable opportunities can be difficult and time consuming. That’s why we’ve built an all in one marketplace to link you to your next partnership. Through our simple platform, you can search, apply, and get connected to your next opportunity in just a few clicks.
             </h2>
           </div>
         </div>
         <div className="productDescriptionContainer">
           <div className="productDescription">
-            <h1>Tailored Customization</h1>
+            <h1>Get Noticed</h1>
             <h2>
-              As an athlete it can be hard to stand out. That’s why Spogo gives you a multitude of customization options that allow you to create a profile curated to your preferences and personality. 
+              Spogo provides a unique way to generate exposure and grow your brand. This is why we have a public, private, and trending feed. Because the public feed is the first feed you see, you can showcase yourself and find people you never knew existed. With the private feed, catch up and interact with those you know best. On our trending page, explore what’s going viral. With Spogo, it could even be you!
             </h2>
           </div>
           <div className="productDescription">
             <img className="big_image" src={TailoredCustomizationGraphic} />
           </div>
         </div>
-        <div className="productDescriptionContainerInverted">
+        {/* <div className="productDescriptionContainerInverted">
           <div className="productDescription">
             <img className="big_image" src={LinkInBioGraphic} />
           </div>
@@ -164,7 +163,7 @@ const LandingPage = () => {
               Once you’ve completed your profile, generating your unique URL is effortless. You can paste it on all your social media’s for anyone to view. In addition, send it to coaches, recruiters, teams, agents, and whoever else you have in mind. With Spogo, marketing hasn’t been easier.
             </h2>
           </div>
-        </div>
+        </div> */}
         {/* Bottom Part */}
         <Footer/>
       </div>
