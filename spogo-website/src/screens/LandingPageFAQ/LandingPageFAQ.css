@@ -52,6 +52,11 @@
     padding: 0% 0%;
 }
 
+.missionStatementHereLink {
+    font-weight: 400;
+    color: #3eb489;
+}
+
 @media screen and (max-width: 1400px) {
     .FAQSectionContainer {
         padding: 0% 15%;
