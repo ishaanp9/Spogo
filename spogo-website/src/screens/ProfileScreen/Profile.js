@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import Item from '../../components/ExpTrophyMesItem/Item';
-import { VideoItem, ImageItem } from '../../components/VideoItem/VideoItem';
-import './Profile.css';
-import firebase from '../../firebase';
-import { FaInstagram, FaTwitter } from 'react-icons/fa';
-import { MdEmail, MdMail, MdStar } from 'react-icons/md';
-import BlankProfile from './blank_profile.png';
-import SpogoLogo from './spogo_logo.png';
-import ShowMoreText from 'react-show-more-text';
+import React, { useEffect, useState } from "react";
+import Item from "../../components/ExpTrophyMesItem/Item";
+import { VideoItem, ImageItem } from "../../components/VideoItem/VideoItem";
+import "./Profile.css";
+import firebase from "../../firebase";
+import { FaInstagram, FaTwitter } from "react-icons/fa";
+import { MdEmail, MdMail, MdStar } from "react-icons/md";
+import BlankProfile from "./blank_profile.png";
+import SpogoLogo from "./spogo_logo.png";
+import Modal from "react-modal";
+import ShowMoreText from "react-show-more-text";
+import { Link } from "react-router-dom";
 
 import {
   addUserInfo,
@@ -28,11 +30,11 @@ import {
   getMediaArray,
   setUserDataCollected,
   getUserDataCollected,
-} from '../../ProfileData';
+} from "../../ProfileData";
 
 const Profile = (props) => {
   let path = props.url;
-  let UID = path.substring(path.lastIndexOf('/') + 1);
+  let UID = path.substring(path.lastIndexOf("/") + 1);
   const [thisUserInfoDict, setThisUserInfoDict] = useState({});
   const [thisTrophyArray, setThisTrophyArray] = useState([]);
   const [thisExperienceArray, setThisExperienceArray] = useState([]);
@@ -40,16 +42,16 @@ const Profile = (props) => {
   const [thisMediaArray, setThisMediaArray] = useState([]);
   const [userExists, setUserExists] = useState(true);
 
-  const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
-  const [sport, setSport] = useState('');
-  const [position, setPosition] = useState('');
-  const [location, setLocation] = useState('');
-  const [instagram, setInstagram] = useState('');
-  const [twitter, setTwitter] = useState('');
-  const [wildcard, setWildcard] = useState('');
-  const [bio, setBio] = useState('');
-  const [profileImage, setProfileImage] = useState('');
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [sport, setSport] = useState("");
+  const [position, setPosition] = useState("");
+  const [location, setLocation] = useState("");
+  const [instagram, setInstagram] = useState("");
+  const [twitter, setTwitter] = useState("");
+  const [wildcard, setWildcard] = useState("");
+  const [bio, setBio] = useState("");
+  const [profileImage, setProfileImage] = useState("");
 
   const [showInstagram, setShowInstagram] = useState(true);
   const [showTwitter, setShowTwitter] = useState(true);
@@ -83,12 +85,12 @@ const Profile = (props) => {
     try {
       let dbPath = firebase
         .firestore()
-        .collection('Users')
+        .collection("Users")
         //.doc(user.uid)
         //.doc("2D9V1nIX3lgZvtqG3luh9hkcdPv2")
         .doc(UID)
-        .collection('User Info');
-      let profileData = dbPath.doc('Profile Data');
+        .collection("User Info");
+      let profileData = dbPath.doc("Profile Data");
       await profileData
         .get()
         .then((doc) => {
@@ -96,14 +98,14 @@ const Profile = (props) => {
             setUserDict(doc.data());
           } else {
             // doc.data() will be undefined in this case
-            console.log('User Info doc not found!');
+            console.log("User Info doc not found!");
             setUserExists(false);
           }
         })
         .catch((error) => {
-          console.log('Error getting user info document:', error);
+          console.log("Error getting user info document:", error);
         });
-      let experienceArray = dbPath.doc('Experience Array');
+      let experienceArray = dbPath.doc("Experience Array");
       await experienceArray
         .get()
         .then((doc) => {
@@ -111,13 +113,13 @@ const Profile = (props) => {
             setExperienceArray(doc.data());
           } else {
             // doc.data() will be undefined in this case
-            console.log('Exp Array doc not found!');
+            console.log("Exp Array doc not found!");
           }
         })
         .catch((error) => {
-          console.log('Error getting exp array document:', error);
+          console.log("Error getting exp array document:", error);
         });
-      let trophyArray = dbPath.doc('Trophy Array');
+      let trophyArray = dbPath.doc("Trophy Array");
       await trophyArray
         .get()
         .then((doc) => {
@@ -125,13 +127,13 @@ const Profile = (props) => {
             setTrophyArray(doc.data());
           } else {
             // doc.data() will be undefined in this case
-            console.log('Trophy Array doc not found!');
+            console.log("Trophy Array doc not found!");
           }
         })
         .catch((error) => {
-          console.log('Error getting trophy array document:', error);
+          console.log("Error getting trophy array document:", error);
         });
-      let measurableArray = dbPath.doc('Measurable Array');
+      let measurableArray = dbPath.doc("Measurable Array");
       await measurableArray
         .get()
         .then((doc) => {
@@ -139,13 +141,13 @@ const Profile = (props) => {
             setMeasurableArray(doc.data());
           } else {
             // doc.data() will be undefined in this case
-            console.log('Measurable Array doc not found!');
+            console.log("Measurable Array doc not found!");
           }
         })
         .catch((error) => {
-          console.log('Error getting measurable array document:', error);
+          console.log("Error getting measurable array document:", error);
         });
-      let mediaArray = dbPath.doc('Media Array');
+      let mediaArray = dbPath.doc("Media Array");
       await mediaArray
         .get()
         .then((doc) => {
@@ -153,11 +155,11 @@ const Profile = (props) => {
             setMediaArray(doc.data());
           } else {
             // doc.data() will be undefined in this case
-            console.log('Media Array doc not found!');
+            console.log("Media Array doc not found!");
           }
         })
         .catch((error) => {
-          console.log('Error getting media array document:', error);
+          console.log("Error getting media array document:", error);
         });
     } catch (e) {
       console.log(e);
@@ -181,7 +183,7 @@ const Profile = (props) => {
     try {
       const profileImageUri = await firebase
         .storage()
-        .ref(getUserInfo('profile-image'));
+        .ref(getUserInfo("profile-image"));
       const url = await profileImageUri.getDownloadURL();
       setProfileImage(url);
     } catch (e) {
@@ -190,43 +192,44 @@ const Profile = (props) => {
   }
 
   function setUserInfo() {
-    setEmail(getUserInfo('preferred-email'));
-    setName(getUserInfo('name'));
-    setSport(getUserInfo('sport'));
-    setPosition(getUserInfo('position'));
-    setLocation(getUserInfo('location'));
-    setInstagram(getUserInfo('instagram-handle'));
-    setTwitter(getUserInfo('twitter-handle'));
-    setWildcard(getUserInfo('wildcard'));
-    setBio(getUserInfo('bio'));
+    setEmail(getUserInfo("preferred-email"));
+    console.log(email)
+    setName(getUserInfo("name"));
+    setSport(getUserInfo("sport"));
+    setPosition(getUserInfo("position"));
+    setLocation(getUserInfo("location"));
+    setInstagram(getUserInfo("instagram-handle"));
+    setTwitter(getUserInfo("twitter-handle"));
+    setWildcard(getUserInfo("wildcard"));
+    setBio(getUserInfo("bio"));
   }
 
   function setSocialIcons() {
     if (
-      getUserInfo('preferred-email') === '' ||
-      getUserInfo('preferred-email') === null ||
-      getUserInfo('preferred-email') === undefined
+      getUserInfo("preferred-email") === "" ||
+      getUserInfo("preferred-email") === null ||
+      getUserInfo("preferred-email") === undefined
     ) {
       setShowEmail(false);
     }
     if (
-      getUserInfo('instagram-handle') === '' ||
-      getUserInfo('instagram-handle') === null ||
-      getUserInfo('instagram-handle') === undefined
+      getUserInfo("instagram-handle") === "" ||
+      getUserInfo("instagram-handle") === null ||
+      getUserInfo("instagram-handle") === undefined
     ) {
       setShowInstagram(false);
     }
     if (
-      getUserInfo('twitter-handle') === '' ||
-      getUserInfo('twitter-handle') === null ||
-      getUserInfo('twitter-handle') === undefined
+      getUserInfo("twitter-handle") === "" ||
+      getUserInfo("twitter-handle") === null ||
+      getUserInfo("twitter-handle") === undefined
     ) {
       setShowTwitter(false);
     }
     if (
-      getUserInfo('wildcard') === '' ||
-      getUserInfo('wildcard') === null ||
-      getUserInfo('wildcard') === undefined
+      getUserInfo("wildcard") === "" ||
+      getUserInfo("wildcard") === null ||
+      getUserInfo("wildcard") === undefined
     ) {
       setShowWildcard(false);
     }
@@ -265,7 +268,7 @@ const Profile = (props) => {
           <p>
             {text.slice(0, 151)}
             <span className="seeMoreButton" onClick={() => setShowMore(true)}>
-              {' '}
+              {" "}
               ...See More
             </span>
           </p>
@@ -279,16 +282,43 @@ const Profile = (props) => {
     }
   };
 
+  const [wildcardLinkModalOpen, setWildcardLinkModalOpen] = useState(false);
+
   return userExists ? (
     <div className="ProfileScreen">
+      <Modal
+        isOpen={wildcardLinkModalOpen}
+        onRequestClose={() => setWildcardLinkModalOpen(false)}
+        className="wildcardLinkModalContainer"
+      >
+        <div className="wildcardLinkModalContentContainer">
+          <h1>External Link Warning</h1>
+          <p>
+            This link goes to: {wildcard}. Are you sure you want to continue?
+          </p>
+          <div className="wildcardLinkModalButtonsContainer">
+            <button
+              className="wildcardLinkModalButton"
+              onClick={() => setWildcardLinkModalOpen(false)}
+            >
+              No
+            </button>
+            <button className="wildcardLinkModalButton">
+              <Link to={{ pathname: wildcard }} target="_blank" style={{textDecoration: 'none', color: 'black'}}>
+                Yup
+              </Link>
+            </button>
+          </div>
+        </div>
+      </Modal>
       <div className="ProfileHeader">
-        {profileImage === '' || profileImage === undefined ? (
+        {profileImage === "" || profileImage === undefined ? (
           <img className="ProfileImage" src={BlankProfile} />
         ) : (
           <img className="ProfileImage" src={profileImage} />
         )}
         <h1>{name}</h1>
-        <h2>{position === '' ? sport : sport + ' - ' + position}</h2>
+        <h2>{position === "" ? sport : sport + " - " + position}</h2>
         <h3>{location}</h3>
         <div
           className="iconRow"
@@ -302,10 +332,10 @@ const Profile = (props) => {
               className="socialIcon"
               onClick={() =>
                 // window.location.replace("www.instagram.com/" + instagram)
-                window.open('https://instagram.com/' + instagram)
+                window.open("https://instagram.com/" + instagram)
               }
               size={iconSize}
-              color={'#E1306C'}
+              color={"#E1306C"}
             />
           )}
           {showTwitter && (
@@ -313,37 +343,35 @@ const Profile = (props) => {
               className="socialIcon"
               onClick={() =>
                 // window.location.replace("www.instagram.com/" + instagram)
-                window.open('https://twitter.com/' + twitter)
+                window.open("https://twitter.com/" + twitter)
               }
               size={iconSize}
-              color={'#1DA1F2'}
+              color={"#1DA1F2"}
             />
           )}
           {showEmail && (
             <MdMail
               className="socialIcon"
+              onClick={() => window.open('mailto:' + email)}
               // onClick={() =>
               //   // window.location.replace("www.instagram.com/" + instagram)
               //   window.open("https://instagram.com/" + instagram)
               // }
               size={iconSize}
-              color={'#5D4D4A'}
+              color={"#5D4D4A"}
             />
           )}
           {showWildcard && (
             <MdStar
               className="socialIcon"
-              // onClick={() =>
-              //   // window.location.replace("www.instagram.com/" + instagram)
-              //   window.open("https://instagram.com/" + instagram)
-              // }
+              onClick={() => setWildcardLinkModalOpen(true)}
               size={iconSize}
-              color={'#ffae42'}
+              color={"#ffae42"}
             />
           )}
         </div>
       </div>
-      {bio === 'This is an empty bio. Edit it as you see fit.' ? (
+      {bio === "This is an empty bio. Edit it as you see fit." ? (
         <div>
           <p></p>
         </div>
@@ -358,7 +386,7 @@ const Profile = (props) => {
           >
             <p>{getBio(bio)}</p>
           </div>
-          <hr size="2" color="black" className="BioDivider"/>
+          <hr size="2" color="black" className="BioDivider" />
         </div>
       )}
       {thisMediaArray.length === 0 ? null : (
@@ -366,7 +394,7 @@ const Profile = (props) => {
           <h1 className="ListHeader">Highlights</h1>
           <ul className="VideoList" style={{ width: window.innerWidth }}>
             {thisMediaArray.map((item) => {
-              if (item.media === 'photo') {
+              if (item.media === "photo") {
                 return <ImageItem url={item.url} />;
               } else {
                 return <VideoItem url={item.url} />;
@@ -427,7 +455,7 @@ const Profile = (props) => {
         </div>
       )}
       <div className="SpogoLogo">
-        <img src={SpogoLogo} alt="Spogo" />
+        <img src={SpogoLogo} alt="Spogo" onClick={() => window.open('https://spogo.us')}/>
       </div>
     </div>
   ) : (
