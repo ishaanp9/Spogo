@@ -1,26 +1,21 @@
 .BlogItemContainer {
-    padding: 0% 5%;
+  padding: 0% 5%;
 }
 
 .row {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin-top: 5%;
+  justify-content: space-between;
+}
+
+
+@media screen and (max-width: 900px) {
+  .row {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     width: 100%;
-    margin-top: 5%;
     justify-content: space-between;
+  }
 }
-
-@media screen and (max-width: 900px)  {
-
-    .row {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        justify-content: space-between;
-    }
-
-    
-}
-
-
-

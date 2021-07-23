@@ -2,12 +2,9 @@ import React from 'react';
 import './Footer.css';
 import BottomSpogoLogo from './SpogoLogo.png';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import {
-  FaLinkedin,
-  FaInstagram,
-  FaTwitter,
-  FaFacebookSquare,
-} from 'react-icons/fa';
+import { FaLinkedin, FaInstagram, FaTwitter } from 'react-icons/fa';
+
+import { SiTiktok } from 'react-icons/si';
 
 function Footer() {
   return (
@@ -34,7 +31,16 @@ function Footer() {
               >
                 <p>Privacy Policy</p>
               </Link>
-              <p>Terms of Service</p>
+              <Link
+                to={{
+                  pathname:
+                    'https://www.termsofservicegenerator.net/live.php?token=2CbeOQrnTNaEIZa1ncTsUhFSutOp54hZ',
+                }}
+                target="_blank"
+                className="bottomLinksText"
+              >
+                <p>Terms of Service</p>
+              </Link>
             </div>
             <div className="header_column">
               <h2>Contact</h2>
@@ -76,14 +82,14 @@ function Footer() {
           <a
             target="_blank"
             rel="noopener noreferrer"
-            href="https://www.twitter.com"
+            href="https://twitter.com/getspogo"
           >
             <FaTwitter className="socialIconFooter" size={25} color={'white'} />
           </a>
           <a
             target="_blank"
             rel="noopener noreferrer"
-            href="https://www.instagram.com"
+            href="https://www.instagram.com/getspogo/"
           >
             <FaInstagram
               className="socialIconFooter"
@@ -94,13 +100,9 @@ function Footer() {
           <a
             target="_blank"
             rel="noopener noreferrer"
-            href="https://www.facebook.com"
+            href="https://www.tiktok.com"
           >
-            <FaFacebookSquare
-              className="socialIconFooter"
-              size={25}
-              color={'white'}
-            />
+            <SiTiktok className="socialIconFooter" size={22} color={'white'} />
           </a>
         </div>
         <p>© 2021 Spogo | All rights reserved</p>

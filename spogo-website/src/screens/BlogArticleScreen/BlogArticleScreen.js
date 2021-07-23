@@ -5,6 +5,7 @@ import './BlogArticleScreen.css';
 
 import { BlogData } from '../../BlogData';
 import ErrorScreen from '../../components/ErrorScreen/ErrorScreen';
+import SubscribeBlog from '../../components/SubscribeBlog/SubscribeBlog';
 
 const BlogArticleScreen = (props) => {
   const [id, setId] = useState(0);
@@ -48,6 +49,7 @@ const BlogArticleScreen = (props) => {
             </div>
             <p className="paragraphText">{BlogData[id].paragraphText}</p>
           </div>
+          <SubscribeBlog/>
         </div>
       ): <ErrorScreen/>}
       <Footer />

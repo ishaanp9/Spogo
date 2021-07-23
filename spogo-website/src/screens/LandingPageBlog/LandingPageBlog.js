@@ -1,18 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Blog from '../../components/Blog/Blog';
 import Footer from '../../components/Footer/Footer';
 import Header from '../../components/Header/Header';
 import './LandingPageBlog.css';
 import { BlogData } from '../../BlogData';
+import firebase from '../../firebase';
+import './LandingPageBlog.css';
+import SubscribeBlog from '../../components/SubscribeBlog/SubscribeBlog';
 
 const LandingPageBlog = () => {
   console.log(BlogData);
+
+  
 
   return (
     <>
       <Header />
       <div className="BlogItemContainer">
-        <h1 className="page_header">Spogo Blog</h1>
         <div className="row">
           <Blog
             image={BlogData[0].bannerImage}
@@ -32,6 +36,7 @@ const LandingPageBlog = () => {
           />
         </div>
       </div>
+      <SubscribeBlog/>
       <Footer />
     </>
   );
