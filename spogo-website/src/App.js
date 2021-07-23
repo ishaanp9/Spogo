@@ -14,6 +14,7 @@ import LandingNavigator from './navigation/LandingNavigator'
 //npm install react-router-dom
 //npm install --save react-modal
 //npm install email-validator
+//npm install mixpanel-browser --save
 
 //npm run bundle
 //firebase deploy

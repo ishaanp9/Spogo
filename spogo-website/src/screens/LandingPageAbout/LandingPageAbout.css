@@ -30,6 +30,11 @@
   font-size: 17.6px;
 }
 
+.missionFirstSentance {
+  font-size: 20px;
+  font-weight: 500;
+}
+
 .teamContainer {
   display: flex;
   flex-direction: row;
@@ -104,6 +109,8 @@
   .founderBioRow {
     display: none;
   }
+
+  
 }
 
 @media screen and (max-width: 650px)  {
@@ -134,6 +141,7 @@
   .missionContainer > p {
     width: 100%;
     font-size: 17.6px;
+    text-align: center;
   }
 
   .name {
@@ -162,6 +170,7 @@
 
   .aboutUsContentContainer {
     width: 100%;
+    text-align: center;
   }
 }
 

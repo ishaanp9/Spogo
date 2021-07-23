@@ -1,17 +1,17 @@
 @media screen and (min-width: 960px) {
 
-  .nameInput {
+  .waitlistFullNameInput {
     margin-right: 20px;
   }
 
-  .imageContainer {
+  .landingPageTopImageMockupContainer {
     flex: 0.5;
     display: flex;
     justify-content: center;
     /* height: fit-content; */
   }
   
-  .imageContainer > img {
+  .landingPageTopImageMockupContainer > img {
     object-fit: contain;
     width: 600px;
     /* margin-left: 30%; */
@@ -57,7 +57,7 @@
 
 
 
-.web_body {
+.landingPageBody {
   display: flex;
   flex-direction: column;
   top: 0;
@@ -66,13 +66,13 @@
   left: 0;
 }
 
-.top_banner {
+.topLandingPageContentBannerContainer {
   display: flex;
   /* align-items: center; */
   /* justify-content: center; */
 }
 
-.form_area {
+.landingPageWaitlistContentContainer {
   display: flex;
   flex-direction: column;
   flex: 0.5;
@@ -85,7 +85,7 @@
   /* border: solid; */
 }
 
-.form_area > p {
+.landingPageWaitlistContentContainer > p {
   margin: 12px 0%;
   font-size: 20px;
 }
@@ -116,7 +116,7 @@
   color: black;
 }
 
-.form_button > button {
+.waitlistButton > button {
   background-color: #3eb489;
   height: 50px;
   border-radius: 12px;
@@ -127,27 +127,27 @@
   width: 100%;
 }
 
-.form_button > button:hover {
+.waitlistButton > button:hover {
   cursor: pointer;
   background-color: #22d694;
   color: #000;
   transition: 0.5s ease-in-out;
 }
 
-.main_image {
+.mainProductHeaderImage {
   object-fit: contain;
   /* height: 450px; */
   width: 45%;
 }
 
-.big_image {
+.productBigImage {
   object-fit: contain;
   /* height: 450px; */
   width: 100%;
   /* margin-bottom: 5%; */
 }
 
-.product_show_header {
+.mainProductHeader {
     margin-top: 10%;
     margin-bottom: 10%;
     display: flex;
@@ -202,11 +202,11 @@
   transform: scale(1.05);
 }
 
-.product_show_header > h1 {
+.mainProductHeader > h1 {
   text-align: center;
 }
 
-.landing_subtitle {
+.mainProductHeaderSubtitle {
   text-align: center;
   padding: 2% 25%;
   font-size: 20px;
@@ -280,7 +280,7 @@
 
 @media screen and (max-width: 960px) {
 
-  .web_body {
+  .landingPageBody {
     display: flex;
     flex-direction: column;
     top: 0;
@@ -291,14 +291,14 @@
     overflow-x: hidden;
   }
 
-  .top_banner {
+  .topLandingPageContentBannerContainer {
     display: flex;
     flex-direction: column;
     /* align-items: center; */
     /* justify-content: center; */
   }
 
-  .form_area {
+  .landingPageWaitlistContentContainer {
     padding: 5% 5%;
     /* padding-left: 8%; */
     /* padding-top: 5%; */
@@ -355,7 +355,7 @@
     /* justify-content: space-evenly; */
   }
 
-  .imageContainer {
+  .landingPageTopImageMockupContainer {
     flex: 0.5;
     display: flex;
     justify-content: center;
@@ -364,7 +364,7 @@
     /* height: fit-content; */
   }
   
-  .imageContainer > img {
+  .landingPageTopImageMockupContainer > img {
     object-fit: contain;
     width: 600px;
     /* margin-left: 30%; */
@@ -422,7 +422,7 @@
   }
 
 
-  .form_button > button {
+  .waitlistButton > button {
     background-color: #3eb489;
     width: 100%;
 
@@ -434,7 +434,7 @@
     font-family: 'DM Sans', sans-serif;
   }
 
-  .form_button > button:hover {
+  .waitlistButton > button:hover {
     cursor: pointer;
     background-color: #22d694;
     color: #000;
@@ -452,24 +452,24 @@
     transform: scale(1.05);
   } */
 
-  .product_show_header {
+  .mainProductHeader {
     margin-top: 10%;
     margin-bottom: 30%;
     display: flex;
     align-items: center;
   }
 
-  .product_show_header > h1 {
+  .mainProductHeader > h1 {
     text-align: center;
     padding: 0px 5%;
   }
 
-  .landing_subtitle {
+  .mainProductHeaderSubtitle {
     text-align: center;
     padding: 2% 5%;
   }
 
-  .big_image {
+  .productBigImage {
     object-fit: contain;
     height: 300px;
     width: 100%;
@@ -562,7 +562,7 @@
 }
 
 @media screen and (max-width: 460px) {
-  .imageContainer > img {
+  .landingPageTopImageMockupContainer > img {
     width: 100%;
     padding: 0% 4%;
   }

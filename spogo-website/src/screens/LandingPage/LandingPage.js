@@ -11,6 +11,7 @@ import SocialMediaIntegrationGraphic from './socialmediaintegration.png';
 import TailoredCustomizationGraphic from './tailoredcustomization.png';
 import LinkInBioGraphic from './linkinbio.png';
 import firebase from "../../firebase";
+import {Mixpanel } from "../../mixpanel";
 import Footer from "../../components/Footer/Footer";
 
 
@@ -43,6 +44,7 @@ const LandingPage = () => {
   const validateEmail = () => {
     if (validator.validate(email)) {
       addUserToWaitlist();
+      Mixpanel.track("Waitlist")
       setWaitlistAddSuccessful(true)
     } else {
       setInvalidInput(true);
@@ -51,9 +53,9 @@ const LandingPage = () => {
   return (
     <>
       <Header />
-      <div className="web_body">
-        <div className="top_banner">
-          <div className="form_area">
+      <div className="landingPageBody">
+        <div className="topLandingPageContentBannerContainer">
+          <div className="landingPageWaitlistContentContainer">
             <h1>
               The New Way To Market and Monetize Your Name, Image,
               And Likeness Is Here.
@@ -67,7 +69,7 @@ const LandingPage = () => {
                     type="text"
                     placeholder="Full Name"
                     value={name}
-                    className="nameInput"
+                    className="waitlistFullNameInput"
                     onChange={(text) => setName(text.target.value)}
                   />
                   <input
@@ -92,7 +94,7 @@ const LandingPage = () => {
                     <h1 className="invalidText">Invalid Email</h1>
                   </div>
                 )}
-                <div className="form_button">
+                <div className="waitlistButton">
                   <button
                     type="button"
                     onClick={
@@ -105,20 +107,20 @@ const LandingPage = () => {
                 </div>
               </form>
             ) : (
-              <div className="form_button">
+              <div className="waitlistButton">
                 <button type="button">Thank You!</button>
               </div>
             )}
           </div>
-          <div className="imageContainer">
+          <div className="landingPageTopImageMockupContainer">
             <img src={Mockup} alt="Phone Mockup" />
           </div>
         </div>
-        <div className="product_show_header">
+        <div className="mainProductHeader">
           <h1>This is Spogo.</h1>
-          <p className="landing_subtitle">
+          <p className="mainProductHeaderSubtitle">
             Spogo is the premier platform to market and monetize your name, image, and likeness. Whether it is finding opportunities or sharing content, every athlete has something to do on Spogo. So as you continue along your athletic journey, Spogo will be right there with you.          </p>
-          <img className="main_image" src={GirlWithTrophyGraphic} alt="data" />
+          <img className="mainProductHeaderImage" src={GirlWithTrophyGraphic} alt="data" />
         </div>
         <div className="productDescriptionContainer">
           <div className="productDescription">
@@ -128,12 +130,12 @@ const LandingPage = () => {
             </h2>
           </div>
           <div className="productDescription">
-            <img className="big_image" src={ShowcaseYourselfGraphic} />
+            <img className="productBigImage" src={ShowcaseYourselfGraphic} />
           </div>
         </div>
         <div className="productDescriptionContainerInverted">
           <div className="productDescription">
-            <img className="big_image" src={SocialMediaIntegrationGraphic} />
+            <img className="productBigImage" src={SocialMediaIntegrationGraphic} />
           </div>
           <div className="productDescription">
             <h1>Find Opportunities</h1>
@@ -150,12 +152,12 @@ const LandingPage = () => {
             </h2>
           </div>
           <div className="productDescription">
-            <img className="big_image" src={TailoredCustomizationGraphic} />
+            <img className="productBigImage" src={TailoredCustomizationGraphic} />
           </div>
         </div>
         {/* <div className="productDescriptionContainerInverted">
           <div className="productDescription">
-            <img className="big_image" src={LinkInBioGraphic} />
+            <img className="productBigImage" src={LinkInBioGraphic} />
           </div>
           <div className="productDescription">
             <h1>Use it Anywhere</h1>
