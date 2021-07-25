@@ -59,13 +59,7 @@ const Profile = (props) => {
   const [showWildcard, setShowWildcard] = useState(true);
 
   useEffect(async () => {
-    // async function fetchData () {
-    //   await getDBUserInfo();
-    //   trophyArray = getTrophyArray();
-    //   experienceArray = getExperienceArray();
-    //   measurableArray = getMeasurableArray();
-    //   mediaArray = getMediaArray()
-    // }
+    //Checks if user data has already been retrieved from the database, other retreives data
     if (getUserDataCollected()) {
       setThisUserInfoDict(getUserDict());
       setThisTrophyArray(getTrophyArray());
@@ -75,7 +69,7 @@ const Profile = (props) => {
       setUserInfo();
       displayProfileImage();
       setSocialIcons();
-      findSize();
+      determineIconSize();
     } else {
       await getDBUserInfo();
     }
@@ -83,11 +77,10 @@ const Profile = (props) => {
 
   const getDBUserInfo = async () => {
     try {
+      //Gets user info from database based on UID in the URL
       let dbPath = firebase
         .firestore()
         .collection("Users")
-        //.doc(user.uid)
-        //.doc("2D9V1nIX3lgZvtqG3luh9hkcdPv2")
         .doc(UID)
         .collection("User Info");
       let profileData = dbPath.doc("Profile Data");
@@ -165,8 +158,7 @@ const Profile = (props) => {
       console.log(e);
       setUserExists(false);
     }
-
-    // setArrayID();
+    //Sets all the user info for the profile screen based on Profile Data
     setThisUserInfoDict(getUserDict());
     setThisTrophyArray(getTrophyArray());
     setThisExperienceArray(getExperienceArray());
@@ -175,10 +167,11 @@ const Profile = (props) => {
     setUserInfo();
     displayProfileImage();
     setSocialIcons();
-    findSize();
+    determineIconSize();
     setUserDataCollected();
   };
 
+  //Gets and displays the profile image from firebase storage and firestore
   async function displayProfileImage() {
     try {
       const profileImageUri = await firebase
@@ -191,6 +184,7 @@ const Profile = (props) => {
     }
   }
 
+  //Sets the user profile info from Profile Data
   function setUserInfo() {
     setEmail(getUserInfo("preferred-email"));
     console.log(email)
@@ -204,6 +198,7 @@ const Profile = (props) => {
     setBio(getUserInfo("bio"));
   }
 
+  //Determines which social icosn the profile screen should show based on wether the user has entered the social link
   function setSocialIcons() {
     if (
       getUserInfo("preferred-email") === "" ||
@@ -237,7 +232,8 @@ const Profile = (props) => {
 
   const [iconSize, setIconSize] = useState(25);
 
-  const findSize = () => {
+  //Determines the size to display the icons based on screen width
+  const determineIconSize = () => {
     if (window.innerWidth < 600) {
       setIconSize(25);
     } else if (window.innerWidth < 1200) {
@@ -248,7 +244,8 @@ const Profile = (props) => {
   };
 
   const [showMore, setShowMore] = useState(false);
-  const getBio = (text) => {
+  //See more see less for the bio
+  const getBioSeeMoreSeeLess = (text) => {
     if (text.length <= 151) {
       return text;
     }
@@ -285,7 +282,7 @@ const Profile = (props) => {
   const [wildcardLinkModalOpen, setWildcardLinkModalOpen] = useState(false);
 
   return userExists ? (
-    <div className="ProfileScreen">
+    <div className="ProfileScreenContainer">
       <Modal
         isOpen={wildcardLinkModalOpen}
         onRequestClose={() => setWildcardLinkModalOpen(false)}
@@ -311,17 +308,17 @@ const Profile = (props) => {
           </div>
         </div>
       </Modal>
-      <div className="ProfileHeader">
+      <div className="profileHeader">
         {profileImage === "" || profileImage === undefined ? (
-          <img className="ProfileImage" src={BlankProfile} />
+          <img className="profileImage" src={BlankProfile} />
         ) : (
-          <img className="ProfileImage" src={profileImage} />
+          <img className="profileImage" src={profileImage} />
         )}
         <h1>{name}</h1>
         <h2>{position === "" ? sport : sport + " - " + position}</h2>
         <h3>{location}</h3>
         <div
-          className="iconRow"
+          className="socialIconsRow"
           style={{
             paddingTop: window.innerWidth / 80,
             paddingBottom: window.innerWidth / 80,
@@ -384,15 +381,15 @@ const Profile = (props) => {
               marginBottom: window.innerHeight / 80,
             }}
           >
-            <p>{getBio(bio)}</p>
+            <p>{getBioSeeMoreSeeLess(bio)}</p>
           </div>
-          <hr size="2" color="black" className="BioDivider" />
+          <hr size="2" color="black" className="bioDivider" />
         </div>
       )}
       {thisMediaArray.length === 0 ? null : (
-        <div className="ProfileList">
-          <h1 className="ListHeader">Highlights</h1>
-          <ul className="VideoList" style={{ width: window.innerWidth }}>
+        <div className="profileItemListContainer">
+          <h1 className="profileItemListHeader">Highlights</h1>
+          <ul className="videoItemArrayList" style={{ width: window.innerWidth }}>
             {thisMediaArray.map((item) => {
               if (item.media === "photo") {
                 return <ImageItem url={item.url} />;
@@ -404,9 +401,9 @@ const Profile = (props) => {
         </div>
       )}
       {thisExperienceArray.length === 0 ? null : (
-        <div className="ProfileList">
-          <h1 className="ListHeader">Experiences</h1>
-          <ul className="List">
+        <div className="profileItemListContainer">
+          <h1 className="profileItemListHeader">Experiences</h1>
+          <ul>
             {thisExperienceArray.map((item) => (
               <Item
                 iconName="crown"
@@ -421,9 +418,9 @@ const Profile = (props) => {
         </div>
       )}
       {thisTrophyArray.length === 0 ? null : (
-        <div className="ProfileList">
-          <h1 className="ListHeader">Accoplishments</h1>
-          <ul className="List">
+        <div className="profileItemListContainer">
+          <h1 className="profileItemListHeader">Accoplishments</h1>
+          <ul>
             {thisTrophyArray.map((item) => (
               <Item
                 iconName="trophy"
@@ -438,9 +435,9 @@ const Profile = (props) => {
         </div>
       )}
       {thisMeasurableArray.length === 0 ? null : (
-        <div className="ProfileList">
-          <h1 className="ListHeader">Measurables</h1>
-          <ul className="List">
+        <div className="profileItemListContainer">
+          <h1 className="profileItemListHeader">Measurables</h1>
+          <ul>
             {thisMeasurableArray.map((item) => (
               <Item
                 iconName="rocket-launch"
@@ -454,7 +451,7 @@ const Profile = (props) => {
           </ul>
         </div>
       )}
-      <div className="SpogoLogo">
+      <div className="spogoLogo">
         <img src={SpogoLogo} alt="Spogo" onClick={() => window.open('https://spogo.us')}/>
       </div>
     </div>

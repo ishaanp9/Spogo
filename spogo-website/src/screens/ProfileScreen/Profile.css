@@ -1,11 +1,11 @@
 @media screen and (max-width: 600px) {
-  .ProfileScreen {
+  .ProfileScreenContainer {
     align-items: center;
     width: 100%;
     overflow-x: hidden;
   }
 
-  .ProfileHeader {
+  .profileHeader {
     border-bottom-left-radius: 50px;
     border-bottom-right-radius: 50px;
     background-color: #3eb489;
@@ -14,26 +14,26 @@
     align-items: center;
   }
 
-  .ProfileHeader > h1 {
+  .profileHeader > h1 {
     font-size: 22px;
     color: black;
     font-weight: bold;
     margin-top: 4%;
   }
 
-  .ProfileHeader > h2 {
+  .profileHeader > h2 {
     font-size: 18px;
     color: black;
     font-weight: 400;
   }
 
-  .ProfileHeader > h3 {
+  .profileHeader > h3 {
     font-size: 16px;
     color: black;
     font-weight: 400;
   }
 
-  .ProfileImage {
+  .profileImage {
     border-radius: 1000px;
     margin-top: 10%;
     border: 2px solid white;
@@ -41,7 +41,7 @@
     width: 35%;
   }
 
-  .iconRow {
+  .socialIconsRow {
     display: flex;
     flex-direction: row;
     width: 100%;
@@ -67,7 +67,7 @@
     
   }
   
-  .BioDivider {
+  .bioDivider {
     margin-left: 5%;
     margin-right: 4%;
   }
@@ -89,30 +89,30 @@
     margin-top: 5px;
   }
  
-  .ListHeader {
+  .profileItemListHeader {
     font-size: 18px;
     margin-left: 5%;
   }
 
-  .ProfileList {
+  .profileItemListContainer {
     margin-top: 10px;
   }
 
-  .SpogoLogo {
+  .spogoLogo {
     display: flex;
     /* width: 100%; */
     /* align-self: center;
       align-items: center; */
   }
 
-  .SpogoLogo > img {
+  .spogoLogo > img {
     display: block;
     object-fit: contain;
     margin: 50px auto;
     width: 30%;
   }
 
-  .VideoList {
+  .videoItemArrayList {
     display: flex;
     flex-direction: row;
     overflow-x: auto;
@@ -122,12 +122,12 @@
 }
 
 @media screen and (max-width: 1200px) and (min-width: 600px) {
-  .ProfileScreen {
+  .ProfileScreenContainer {
     align-items: center;
     width: 100%;
   }
 
-  .ProfileHeader {
+  .profileHeader {
     border-bottom-left-radius: 50px;
     border-bottom-right-radius: 50px;
     background-color: #3eb489;
@@ -136,26 +136,26 @@
     align-items: center;
   }
 
-  .ProfileHeader > h1 {
+  .profileHeader > h1 {
     font-size: 30px;
     color: black;
     font-weight: bold;
     margin-top: 2%;
   }
 
-  .ProfileHeader > h2 {
+  .profileHeader > h2 {
     font-size: 24px;
     color: black;
     font-weight: 400;
   }
 
-  .ProfileHeader > h3 {
+  .profileHeader > h3 {
     font-size: 22px;
     color: black;
     font-weight: 400;
   }
 
-  .ProfileImage {
+  .profileImage {
     border-radius: 1000px;
     margin-top: 10%;
     border: 2px solid white;
@@ -163,7 +163,7 @@
     width: 35%;
   }
 
-  .iconRow {
+  .socialIconsRow {
     display: flex;
     flex-direction: row;
     width: 100%;
@@ -188,30 +188,30 @@
     font-weight: 400;
   }
 
-  .ListHeader {
+  .profileItemListHeader {
     font-size: 26px;
     margin-left: 5%;
   }
 
-  .ProfileList {
+  .profileItemListContainer {
     margin-top: 10px;
   }
 
-  .SpogoLogo {
+  .spogoLogo {
     display: flex;
     /* width: 100%; */
     /* align-self: center;
         align-items: center; */
   }
 
-  .SpogoLogo > img {
+  .spogoLogo > img {
     display: block;
     object-fit: contain;
     margin: 50px auto;
     width: 30%;
   }
 
-  .VideoList {
+  .videoItemArrayList {
     display: flex;
     flex-direction: row;
     overflow-x: auto;
@@ -221,12 +221,12 @@
 }
 
 @media screen and (min-width: 1200px) {
-    .ProfileScreen {
+    .ProfileScreenContainer {
       align-items: center;
       width: 100%;
     }
   
-    .ProfileHeader {
+    .profileHeader {
       border-bottom-left-radius: 50px;
       border-bottom-right-radius: 50px;
       background-color: #3eb489;
@@ -235,26 +235,26 @@
       align-items: center;
     }
   
-    .ProfileHeader > h1 {
+    .profileHeader > h1 {
       font-size: 30px;
       color: black;
       font-weight: bold;
       margin-top: 2%;
     }
   
-    .ProfileHeader > h2 {
+    .profileHeader > h2 {
       font-size: 24px;
       color: black;
       font-weight: 400;
     }
   
-    .ProfileHeader > h3 {
+    .profileHeader > h3 {
       font-size: 22px;
       color: black;
       font-weight: 400;
     }
   
-    .ProfileImage {
+    .profileImage {
       border-radius: 1000px;
       margin-top: 10%;
       border: 2px solid white;
@@ -262,7 +262,7 @@
       width: 35%;
     }
   
-    .iconRow {
+    .socialIconsRow {
       display: flex;
       flex-direction: row;
       width: 100%;
@@ -287,30 +287,30 @@
       font-weight: 400;
     }
   
-    .ListHeader {
+    .profileItemListHeader {
       font-size: 26px;
       margin-left: 5%;
     }
   
-    .ProfileList {
+    .profileItemListContainer {
       margin-top: 10px;
     }
   
-    .SpogoLogo {
+    .spogoLogo {
       display: flex;
       /* width: 100%; */
       /* align-self: center;
           align-items: center; */
     }
   
-    .SpogoLogo > img {
+    .spogoLogo > img {
       display: block;
       object-fit: contain;
       margin: 50px auto;
       width: 30%;
     }
   
-    .VideoList {
+    .videoItemArrayList {
       display: flex;
       flex-direction: row;
       overflow-x: auto;
