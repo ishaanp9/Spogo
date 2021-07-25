@@ -28,7 +28,7 @@
   outline: none;
   transition: 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
   font-family: 'DM Sans', sans-serif;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   margin-right: 2%;
 }
 
@@ -60,11 +60,15 @@
   display: flex;
 }
 
+.subscribeForm > div {
+  margin-right: 20px;
+}
+
 .invalidEmailContainer {
   width: 100%;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
+  align-items: flex-start;
+  justify-content: flex-start;
 }
 
 .invalidEmailText {
@@ -73,6 +77,25 @@
   text-align: center;
   font-weight: 500;
   margin-bottom: 2%;
+}
+
+.subscribeSuccessTextContainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 60px;
+}
+
+.subscribeSuccessTextContainer > button {
+  background-color: #3eb489;
+  height: 50px;
+  border-radius: 12px;
+  border: none;
+  font-weight: bold;
+  font-size: 16px;
+  font-family: 'DM Sans', sans-serif;
+  width: 220px;
 }
 
 @media screen and (max-width: 750px) {
@@ -90,7 +113,6 @@
     outline: none;
     transition: 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
     font-family: 'DM Sans', sans-serif;
-    margin-bottom: 20px;
     margin-right: 2%;
   }
 }
@@ -110,7 +132,6 @@
     outline: none;
     transition: 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
     font-family: 'DM Sans', sans-serif;
-    margin-bottom: 20px;
     margin-right: 2%;
   }
 }
@@ -130,12 +151,15 @@
     outline: none;
     transition: 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
     font-family: 'DM Sans', sans-serif;
-    margin-bottom: 20px;
     margin-top: 5px;
   }
   .subscribeForm {
     display: flex;
     flex-direction: column;
+  }
+
+  .subscribeForm > div {
+    margin-right: 0px;
   }
 
   .subscribeInput {

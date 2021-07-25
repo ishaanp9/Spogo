@@ -24,7 +24,7 @@ const DescriptionScreen = (props) => {
   let UID = path.substring(path.lastIndexOf("/") + 1);
   const location = useLocation();
   let icon;
-  //   const {[icon, setIcon]} = useState();
+  //Gets icon type from navigator
   if (location.state === undefined) {
     icon = "null";
   } else {
@@ -35,6 +35,7 @@ const DescriptionScreen = (props) => {
   const [headerName, setHeaderName] = useState("");
 
   useEffect(() => {
+    //Based on icon type, determines what header to show
     if (icon.icon === "trophy") {
       setHeaderName("Accomplishments");
       setItemArray(getTrophyArray());
@@ -42,12 +43,13 @@ const DescriptionScreen = (props) => {
       setHeaderName("Experiences");
       setItemArray(getExperienceArray());
     }
-    findSize();
+    determineIconSize();
   }, []);
 
   const [iconSize, setIconSize] = useState(25);
 
-  const findSize = () => {
+  //Determines what size icons should be based on screen width
+  const determineIconSize = () => {
     if (window.innerWidth < 600) {
       setIconSize(25);
     } else if (window.innerWidth < 1200) {
@@ -57,7 +59,8 @@ const DescriptionScreen = (props) => {
     }
   };
 
-  let ItemIcon = (props) => {
+  //Based on icon type, displays either crown or trophy icons
+  let DetermineAndDisplayItemIcon = (props) => {
     let iconType = props.iconType.icon;
     if (iconType === "trophy") {
       return <TrophyIcon color="#A08864" size={iconSize} />;
@@ -67,6 +70,7 @@ const DescriptionScreen = (props) => {
   };
 
   const [showMore, setShowMore] = useState(false);
+  //See more see less for the item description
   const descriptionSeeMoreSeeLess = (text) => {
     if (text.length <= 121) {
       return text;
@@ -100,8 +104,8 @@ const DescriptionScreen = (props) => {
     if (getUserDataCollected()) {
       return (
         <div>
-          <div className="Header">
-            <Link to={`/users/${UID}`} className="Link">
+          <div className="descriptionScreenHeader">
+            <Link to={`/users/${UID}`}>
               <IoChevronBack
                 size={iconSize}
                 color="blue"
@@ -111,42 +115,42 @@ const DescriptionScreen = (props) => {
             <h1>{headerName}</h1>
             <h2>B</h2>
           </div>
-          <hr className="HeaderDivider" size="2" color="lightgrey" />
+          <hr className="descriptionScreenHeaderDivider" size="2" color="lightgrey" />
           <div>
-            <ul className="List">
+            <ul>
               {itemArray.map((item) => {
                 if (icon === "trophy") {
                   return (
                     <div>
                       <div
-                        className="ItemContainer"
+                        className="descriptionScreenItemContainer"
                         //   style={{ height: window.innerHeight / 12 }}
                       >
-                        <ItemIcon iconType={icon} />
-                        <div className="InfoContainer" key={item.idNum}>
+                        <DetermineAndDisplayItemIcon iconType={icon} />
+                        <div className="itemTextContainer" key={item.idNum}>
                           <h1>{item.title}</h1>
                           <h2>{item.duration}</h2>
                           <h3>{descriptionSeeMoreSeeLess(item.description)}</h3>
                         </div>
                       </div>
-                      <hr size="2" color="lightgrey" className="Divider" />
+                      <hr size="2" color="lightgrey" className="itemBottomDivider" />
                     </div>
                   );
                 } else {
                   return (
                     <div>
                       <div
-                        className="ItemContainer"
+                        className="descriptionScreenItemContainer"
                         //   style={{ height: window.innerHeight / 12 }}
                       >
-                        <ItemIcon iconType={icon} />
-                        <div className="InfoContainer" key={item.idNum}>
+                        <DetermineAndDisplayItemIcon iconType={icon} />
+                        <div className="itemTextContainer" key={item.idNum}>
                           <h1>{item.title}</h1>
                           <h2>{item.duration}</h2>
                           <h3>{descriptionSeeMoreSeeLess(item.description)}</h3>
                         </div>
                       </div>
-                      <hr size="2" color="lightgrey" className="Divider" />
+                      <hr size="2" color="lightgrey" className="itemBottomDivider" />
                     </div>
                   );
                 }
@@ -167,18 +171,6 @@ const DescriptionScreen = (props) => {
       );
     } else {
       return (
-        // <div className="DataLoadFailedContainer">
-        //   <h1>User's data can't be loaded.</h1>
-        //   <Link to={`/users/${UID}`} className="Link">
-        //     <h2 className="FailedLoadSecondText">
-        //       Try going to their profile first.
-        //     </h2>
-        //   </Link>
-        //   {/* spogo.us/users/{UID} */}
-        //   <div className="SpogoLogoDescriptionScreen">
-        //     <img src={SpogoLogo} alt="Spogo" />
-        //   </div>
-        // </div>
         <>        
           <Redirect to={`/users/${UID}`} />
         </>
