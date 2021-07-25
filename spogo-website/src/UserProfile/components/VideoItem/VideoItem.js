@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './VideoItem.css';
 import ReactPlayer from 'react-player';
-import firebase from '../../firebase';
+import firebase from '../../../firebase';
 import Modal from 'react-modal';
 import { MdClose } from 'react-icons/md';
 import { black } from 'jest-matcher-utils/node_modules/chalk';

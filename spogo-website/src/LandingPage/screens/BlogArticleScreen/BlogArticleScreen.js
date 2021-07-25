@@ -3,7 +3,7 @@ import Footer from '../../components/Footer/Footer';
 import Header from '../../components/Header/Header';
 import './BlogArticleScreen.css';
 
-import { BlogData } from '../../BlogData';
+import { BlogData } from '../../../BlogData';
 import ErrorScreen from '../../components/ErrorScreen/ErrorScreen';
 import SubscribeBlog from '../../components/SubscribeBlog/SubscribeBlog';
 

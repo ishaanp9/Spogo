@@ -10,8 +10,8 @@ import ShowcaseYourselfGraphic from './showcaseyourselfbaseballplayer.png';
 import SocialMediaIntegrationGraphic from './socialmediaintegration.png';
 import TailoredCustomizationGraphic from './tailoredcustomization.png';
 import LinkInBioGraphic from './linkinbio.png';
-import firebase from "../../firebase";
-import {Mixpanel } from "../../mixpanel";
+import firebase from '../../../firebase';
+import {Mixpanel } from "../../../mixpanel";
 import Footer from "../../components/Footer/Footer";
 
 

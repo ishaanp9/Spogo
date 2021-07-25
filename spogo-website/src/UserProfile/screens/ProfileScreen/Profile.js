@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Item from "../../components/ExpTrophyMesItem/Item";
 import { VideoItem, ImageItem } from "../../components/VideoItem/VideoItem";
 import "./Profile.css";
-import firebase from "../../firebase";
+import firebase from "../../../firebase";
 import { FaInstagram, FaTwitter } from "react-icons/fa";
 import { MdEmail, MdMail, MdStar } from "react-icons/md";
 import BlankProfile from "./blank_profile.png";
@@ -30,7 +30,7 @@ import {
   getMediaArray,
   setUserDataCollected,
   getUserDataCollected,
-} from "../../ProfileData";
+} from "../../../ProfileData";
 
 const Profile = (props) => {
   let path = props.url;

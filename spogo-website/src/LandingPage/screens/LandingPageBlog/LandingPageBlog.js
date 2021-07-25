@@ -3,15 +3,13 @@ import Blog from '../../components/Blog/Blog';
 import Footer from '../../components/Footer/Footer';
 import Header from '../../components/Header/Header';
 import './LandingPageBlog.css';
-import { BlogData } from '../../BlogData';
-import firebase from '../../firebase';
+import { BlogData } from '../../../BlogData';
+import firebase from '../../../firebase';
 import './LandingPageBlog.css';
 import SubscribeBlog from '../../components/SubscribeBlog/SubscribeBlog';
 
 const LandingPageBlog = () => {
   console.log(BlogData);
-
-  
 
   return (
     <>
