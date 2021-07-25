@@ -13,7 +13,7 @@ import {
   getExperienceArray,
   getTrophyArray,
   getUserDataCollected,
-} from "../../ProfileData";
+} from "../../../ProfileData";
 import CrownIcon from "mdi-react/CrownIcon";
 import TrophyIcon from "mdi-react/TrophyIcon";
 

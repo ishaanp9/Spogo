@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./SubscribeBlog.css";
-import firebase from "../../firebase";
+import firebase from '../../../firebase';
 
 const SubscribeBlog = () => {
   const [email, setEmail] = useState("");

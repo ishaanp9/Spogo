@@ -5,12 +5,11 @@ import {
   Route,
   Redirect,
 } from 'react-router-dom';
-import LandingPage from '../screens/LandingPage/LandingPage';
-import LandingPageAbout from '../screens/LandingPageAbout/LandingPageAbout';
-import LandingPageFAQ from '../screens/LandingPageFAQ/LandingPageFAQ';
-import ProfileScreen from '../screens/ProfileScreen/Profile';
-import LandingPageBlog from '../screens/LandingPageBlog/LandingPageBlog'
-import BlogArticleScreen from '../screens/BlogArticleScreen/BlogArticleScreen';
+import LandingPage from '../LandingPage/screens/LandingPage/LandingPage';
+import LandingPageAbout from '../LandingPage/screens/LandingPageAbout/LandingPageAbout';
+import LandingPageBlog from '../LandingPage/screens/LandingPageBlog/LandingPageBlog';
+import LandingPageFAQ from '../LandingPage/screens/LandingPageFAQ/LandingPageFAQ';
+import BlogArticleScreen from '../LandingPage/screens/BlogArticleScreen/BlogArticleScreen';
 
 const LandingNavigator = (props) => {
   let path = props.url;

@@ -1,10 +1,7 @@
 import React, {useEffect} from 'react';
 
 import './App.css';
-import LandingPage from './screens/LandingPage/LandingPage';
-import Profile from './screens/ProfileScreen/Profile';
 import {Route, BrowserRouter as Router, Switch} from 'react-router-dom';
-import DescriptionScreen from './screens/DescriptionScreen/DescriptionScreen'
 import ProfileNavigator from './navigation/ProfileNavigator'
 import LandingNavigator from './navigation/LandingNavigator'
 
