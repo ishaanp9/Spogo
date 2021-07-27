@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
-import "./Item.css";
-import CrownIcon from "mdi-react/CrownIcon";
-import TrophyIcon from "mdi-react/TrophyIcon";
-import RocketLaunchIcon from "mdi-react/RocketLaunchIcon";
-import { Link, BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import DescriptionScreen from "../../screens/DescriptionScreen/DescriptionScreen";
-import { useHistory } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import './Item.css';
+import CrownIcon from 'mdi-react/CrownIcon';
+import TrophyIcon from 'mdi-react/TrophyIcon';
+import RocketLaunchIcon from 'mdi-react/RocketLaunchIcon';
+import { Link, BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import DescriptionScreen from '../../screens/DescriptionScreen/DescriptionScreen';
+import { useHistory } from 'react-router-dom';
+import { MixpanelConsumer } from 'react-mixpanel';
 
 function Item(props) {
   let icon = props.iconName;
@@ -15,17 +16,22 @@ function Item(props) {
   // let idNum = props.key;
   let UID = props.userUID;
 
+  const [iconToHeaderName, setIconToHeaderName] = useState('');
+
   useEffect(() => {
     findSize();
   }, []);
 
   let ItemIcon = (props) => {
     let iconType = props.iconType;
-    if (iconType === "trophy") {
+    if (iconType === 'trophy') {
+      setIconToHeaderName('Accomplishment');
       return <TrophyIcon color={color} size={iconSize} />;
-    } else if (iconType === "crown") {
+    } else if (iconType === 'crown') {
+      setIconToHeaderName('Experience');
       return <CrownIcon color={color} size={iconSize} />;
     } else {
+      setIconToHeaderName('Measurable');
       return <RocketLaunchIcon color={color} size={iconSize} />;
     }
   };
@@ -43,27 +49,36 @@ function Item(props) {
   };
 
   return (
-    <Link
-      to={icon != 'rocket-launch' ? {
-          pathname: `/descriptions/${UID}`,
-          state: {
-            icon: icon,
+    <MixpanelConsumer>
+      {(mixpanel) => (
+        <Link
+          onClick={() => mixpanel.track('Specific Item Type Pressed', { Item: iconToHeaderName })}
+          to={
+            icon != 'rocket-launch'
+              ? {
+                  pathname: `/descriptions/${UID}`,
+                  state: {
+                    icon: icon,
+                  },
+                }
+              : `/users/${UID}`
           }
-        }
-        :
-        `/users/${UID}`
-      }
-      className="Link"
-    >
-      <div className="Container" style={{ height: window.innerHeight / 12 }}>
-        <ItemIcon iconType={icon} />
-        <div className="TextContainer">
-          <h1>{title}</h1>
-          <h2>{time}</h2>
-        </div>
-      </div>
-      <hr size="2" color="lightgrey" className="Divider" />
-    </Link>
+          className="Link"
+        >
+          <div
+            className="Container"
+            style={{ height: window.innerHeight / 12 }}
+          >
+            <ItemIcon iconType={icon} />
+            <div className="TextContainer">
+              <h1>{title}</h1>
+              <h2>{time}</h2>
+            </div>
+          </div>
+          <hr size="2" color="lightgrey" className="Divider" />
+        </Link>
+      )}
+    </MixpanelConsumer>
   );
 }
 

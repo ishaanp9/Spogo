@@ -19,7 +19,7 @@
   height: 100px;
 }
 
-.navbar-logo > img {
+.headerSpogoLogo > img {
   object-fit: contain;
   height: 45px;
   /* position: absolute; */
@@ -35,7 +35,7 @@
   padding-left: 50px;
 }
 
-.navbar-logo {
+.headerSpogoLogo {
   color: #fff;
   justify-self: start;
   cursor: pointer;
@@ -58,16 +58,16 @@
   justify-content: end;
 }
 
-.nav-item {
+.headerItem {
   height: 80px;
 }
 
-.nav-links:hover {
+.headerLinks:hover {
   color: #3eb489;
   cursor: pointer;
 }
 
-.nav-links {
+.headerLinks {
   color: black;
   display: flex;
   align-items: center;
@@ -78,7 +78,7 @@
   font-weight: bold;
 }
 
-.nav-btn > button {
+.headerButton > button {
   background-color: #3eb489;
   width: 200px;
   height: 48px;
@@ -90,7 +90,7 @@
   margin-left: 20px;
 }
 
-.nav-btn > button:hover {
+.headerButton > button:hover {
   cursor: pointer;
   background-color: #22d694;
   color: #000;
@@ -101,7 +101,7 @@
   color: #fff;
 }
 
-.menu-icon {
+.headerMenuIcon {
   display: none;
 }
 
@@ -135,7 +135,7 @@
     z-index: 1;
   }
 
-  .nav-links {
+  .headerLinks {
     text-align: center;
     font-size: 25px;
     padding: 2rem;
@@ -143,21 +143,21 @@
     display: table;
   }
 
-  .nav-links:hover {
+  .headerLinks:hover {
     color: #3eb489;
     transform: scale(1.2);
     transition: all 0.3s ease;
   }
 
-  .nav-item:hover {
+  .headerItem:hover {
     border: none;
   }
 
-  .nav-item {
+  .headerItem {
     width: 100%;
   }
 
-  .navbar-logo {
+  .headerSpogoLogo {
     position: absolute;
     top: 0;
     left: 0;
@@ -165,7 +165,7 @@
     /* display: none; */
   }
 
-  .menu-icon {
+  .headerMenuIcon {
     display: block;
     position: absolute;
     top: 0;
@@ -180,7 +180,7 @@
     font-size: 2rem;
   }
 
-  .nav-btn {
+  .headerButton {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -190,7 +190,7 @@
     margin-left: -20px;
   }
 
-  .nav-btn > button {
+  .headerButton > button {
     background-color: #3eb489;
     width: 250px;
     height: 48px;
@@ -201,7 +201,7 @@
     font-family: 'DM Sans', sans-serif;
   }
 
-  .nav-btn > button:hover {
+  .headerButton > button:hover {
     cursor: pointer;
     background-color: #22d694;
     color: #000;
