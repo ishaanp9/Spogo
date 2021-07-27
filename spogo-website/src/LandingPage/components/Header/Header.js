@@ -31,11 +31,11 @@ function Header() {
                 About
               </Link>
             </li>
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <Link to="/blog" className="nav-links">
                 Blog
               </Link>
-            </li>
+            </li> */}
             <li className="nav-item">
               <Link to="/FAQ" className="nav-links">
                 FAQ

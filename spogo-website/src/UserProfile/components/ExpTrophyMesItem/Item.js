@@ -7,7 +7,7 @@ import { Link, BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import DescriptionScreen from "../../screens/DescriptionScreen/DescriptionScreen";
 import { useHistory } from "react-router-dom";
 
-function Item(props) {
+const Item = (props) => {
   let icon = props.iconName;
   let color = props.color;
   let title = props.title;
@@ -36,9 +36,9 @@ function Item(props) {
     if (window.innerWidth < 600) {
       setIconSize(25);
     } else if (window.innerWidth < 1200) {
-      setIconSize(40);
+      setIconSize(25);
     } else {
-      setIconSize(55);
+      setIconSize(25);
     }
   };
 
@@ -55,14 +55,16 @@ function Item(props) {
       }
       className="Link"
     >
-      <div className="Container" style={{ height: window.innerHeight / 12 }}>
-        <ItemIcon iconType={icon} />
+      <div className="Container">
+        <div className="itemIconContainer">
+          <ItemIcon iconType={icon} />
+        </div>
         <div className="TextContainer">
           <h1>{title}</h1>
           <h2>{time}</h2>
         </div>
       </div>
-      <hr size="2" color="lightgrey" className="Divider" />
+      {/* <hr size="2" color="lightgrey" className="Divider" /> */}
     </Link>
   );
 }

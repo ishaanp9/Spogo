@@ -14,14 +14,14 @@
     align-items: center;
   }
 
-  .profileHeader > h1 {
+  .profileHeader > div > h1 {
     font-size: 22px;
     color: black;
     font-weight: bold;
     margin-top: 4%;
   }
 
-  .profileHeader > h2 {
+  .profileHeader > div > h2 {
     font-size: 18px;
     color: black;
     font-weight: 400;
@@ -64,9 +64,8 @@
     width: 100%;
     white-space: pre-wrap;
     overflow: hidden;
-    
   }
-  
+
   .bioDivider {
     margin-left: 5%;
     margin-right: 4%;
@@ -88,7 +87,13 @@
     color: grey;
     margin-top: 5px;
   }
- 
+
+  .nameSportTextContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
   .profileItemListHeader {
     font-size: 18px;
     margin-left: 5%;
@@ -119,6 +124,43 @@
     overflow-y: hidden;
     white-space: nowrap;
   }
+
+  .wildcardLinkModalContentContainer > h1 {
+    margin: 4% 0%;
+    font-size: 20px;
+  }
+  
+  .wildcardLinkModalContentContainer > p {
+    margin: 2% 0%;
+  }
+  
+  .wildcardLinkModalContainer {
+    background-color: white;
+    padding: 3% 8%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: 100px 10%;
+  }
+  
+  .wildcardLinkModalButtonsContainer {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-top: 5%;
+  }
+  
+  .wildcardLinkModalButton {
+    flex: 0.5;
+    margin: 0% 2%;
+    border: none;
+    background-color: #3eb489;
+    color: black;
+    padding: 5% 0%;
+    border-radius: 5px;
+  }
 }
 
 @media screen and (max-width: 1200px) and (min-width: 600px) {
@@ -136,14 +178,14 @@
     align-items: center;
   }
 
-  .profileHeader > h1 {
+  .profileHeader > div > h1 {
     font-size: 30px;
     color: black;
     font-weight: bold;
     margin-top: 2%;
   }
 
-  .profileHeader > h2 {
+  .profileHeader > div > h2 {
     font-size: 24px;
     color: black;
     font-weight: 400;
@@ -161,6 +203,12 @@
     border: 2px solid white;
     object-fit: contain;
     width: 35%;
+  }
+
+  .nameSportTextContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .socialIconsRow {
@@ -218,140 +266,263 @@
     overflow-y: hidden;
     white-space: nowrap;
   }
-}
-
-@media screen and (min-width: 1200px) {
-    .ProfileScreenContainer {
-      align-items: center;
-      width: 100%;
-    }
-  
-    .profileHeader {
-      border-bottom-left-radius: 50px;
-      border-bottom-right-radius: 50px;
-      background-color: #3eb489;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-  
-    .profileHeader > h1 {
-      font-size: 30px;
-      color: black;
-      font-weight: bold;
-      margin-top: 2%;
-    }
-  
-    .profileHeader > h2 {
-      font-size: 24px;
-      color: black;
-      font-weight: 400;
-    }
-  
-    .profileHeader > h3 {
-      font-size: 22px;
-      color: black;
-      font-weight: 400;
-    }
-  
-    .profileImage {
-      border-radius: 1000px;
-      margin-top: 10%;
-      border: 2px solid white;
-      object-fit: contain;
-      width: 35%;
-    }
-  
-    .socialIconsRow {
-      display: flex;
-      flex-direction: row;
-      width: 100%;
-      justify-content: center;
-    }
-  
-    .socialIcon {
-      margin-left: 2%;
-      margin-right: 2%;
-    }
-  
-    .bioContainer {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      align-self: center;
-      padding: 0% 5%;
-    }
-  
-    .bioContainer > h1 {
-      font-size: 20px;
-      font-weight: 400;
-    }
-  
-    .profileItemListHeader {
-      font-size: 26px;
-      margin-left: 5%;
-    }
-  
-    .profileItemListContainer {
-      margin-top: 10px;
-    }
-  
-    .spogoLogo {
-      display: flex;
-      /* width: 100%; */
-      /* align-self: center;
-          align-items: center; */
-    }
-  
-    .spogoLogo > img {
-      display: block;
-      object-fit: contain;
-      margin: 50px auto;
-      width: 30%;
-    }
-  
-    .videoItemArrayList {
-      display: flex;
-      flex-direction: row;
-      overflow-x: auto;
-      overflow-y: hidden;
-      white-space: nowrap;
-    }
-  }
 
   .wildcardLinkModalContentContainer > h1 {
     margin: 4% 0%;
     font-size: 20px;
   }
-
+  
   .wildcardLinkModalContentContainer > p {
     margin: 2% 0%;
   }
-
+  
   .wildcardLinkModalContainer {
     background-color: white;
-    padding: 5%;
+    padding: 3% 10%;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    margin: 40% 5%;
+    margin: 100px 20%;
   }
-
+  
   .wildcardLinkModalButtonsContainer {
     display: flex;
     flex-direction: row;
     width: 100%;
     margin-top: 5%;
   }
-
+  
   .wildcardLinkModalButton {
     flex: 0.5;
     margin: 0% 2%;
     border: none;
-    background-color: #3EB489;
+    background-color: #3eb489;
     color: black;
     padding: 5% 0%;
     border-radius: 5px;
   }
+}
+
+@media screen and (min-width: 1200px) {
+  .ProfileScreenContainer {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    background-color: whitesmoke;
+  }
+
+  .profileScrollBarContainer {
+    width: 20%;
+    height: 200px;
+    /* background-color: white; */
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .profileChatRightTab {
+    width: 20%;
+    height: 200px;
+    /* background-color: white; */
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .middleProfileContent {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .profileHeader {
+    /* border: solid; */
+    width: 100%;
+    /* border-radius: 50px; */
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 3%;
+  }
+
+  .profileTopContainer {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    /* align-items: center; */
+  }
+
+  .nameSportTextContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 1%;
+  }
+
+  .nameSportTextContainer > h1 {
+    font-size: 20px;
+    color: black;
+    font-weight: bold;
+  }
+
+  .nameSportTextContainer > h2 {
+    font-size: 20px;
+    color: black;
+    font-weight: 400;
+  }
+
+  .nameSportDivider {
+    padding: 0% 3%;
+    font-size: 30px;
+  }
+
+  .locationIconTextContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  .profileHeader > h3 {
+    font-size: 22px;
+    color: black;
+    font-weight: 400;
+  }
+
+  .profileTextContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-left: 5%;
+    border: solid;
+    justify-content: space-evenly;
+  }
+
+  .profileImage {
+    border-radius: 1000px;
+    border: 2px solid white;
+    object-fit: contain;
+    width: 150px;
+  }
+
+  .socialIconsRow {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    /* justify-content: flex-start; */
+  }
+
+  .socialIcon {
+    margin-right: 4%;
+  }
+
+  .bioContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: center;
+    padding: 0% 3%;
+    background-color: white;
+  }
+
+  .bioContainer > h1 {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 20px 0px;
+  }
+
+  .bioContainer > p {
+    font-size: 16px;
+    font-weight: 300;
+    margin: 20px 0px;
+  }
+
+  .componentHeaderDivider {
+    width: 100%;
+  }
+
+  .profileItemListHeader {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 20px 0px;
+  }
+
+  .profileItemListContainer {
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 0% 3%;
+    padding-bottom: 3%;
+  }
+
+  .spogoLogo {
+    display: flex;
+    /* width: 100%; */
+    /* align-self: center;
+          align-items: center; */
+  }
+
+  .spogoLogo > img {
+    display: block;
+    object-fit: contain;
+    margin: 50px auto;
+    width: 30%;
+  }
+
+  .videoItemArrayList {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+  }
+
+  .wildcardLinkModalContentContainer > h1 {
+    margin: 4% 0%;
+    font-size: 20px;
+  }
+  
+  .wildcardLinkModalContentContainer > p {
+    margin: 2% 0%;
+  }
+  
+  .wildcardLinkModalContainer {
+    background-color: white;
+    padding: 3% 5%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: 100px 35%;
+  }
+  
+  .wildcardLinkModalButtonsContainer {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-top: 5%;
+  }
+  
+  .wildcardLinkModalButton {
+    flex: 0.5;
+    margin: 0% 2%;
+    border: none;
+    background-color: #3eb489;
+    color: black;
+    padding: 5% 0%;
+    border-radius: 5px;
+  }
+
+}
