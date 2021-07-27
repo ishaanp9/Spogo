@@ -27,9 +27,9 @@ const LandingNavigator = (props) => {
       <Route path={"/FAQ"}>
         <LandingPageFAQ />
        </Route>
-      <Route exact path={'/blog'}>
+      {/* <Route exact path={'/blog'}>
         <LandingPageBlog />
-      </Route>
+      </Route> */}
       <Route path={'/blog/article'}>
         <BlogArticleScreen/>
       </Route>

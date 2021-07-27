@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import Item from '../../components/ExpTrophyMesItem/Item';
-import { VideoItem, ImageItem } from '../../components/VideoItem/VideoItem';
-import './Profile.css';
-import firebase from '../../../firebase';
-import { FaInstagram, FaTwitter } from 'react-icons/fa';
-import { MdEmail, MdMail, MdStar } from 'react-icons/md';
-import BlankProfile from './blank_profile.png';
-import SpogoLogo from './spogo_logo.png';
-import Modal from 'react-modal';
-import ShowMoreText from 'react-show-more-text';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import Item from "../../components/ExpTrophyMesItem/Item";
+import { VideoItem, ImageItem } from "../../components/VideoItem/VideoItem";
+import "./Profile.css";
+import firebase from "../../../firebase";
+import { FaInstagram, FaTwitter } from "react-icons/fa";
+import { MdEmail, MdMail, MdStar, MdLocationOn } from "react-icons/md";
+import { BsLink45Deg } from 'react-icons/bs';
+import BlankProfile from "./blank_profile.png";
+import SpogoLogo from "./spogo_logo.png";
+import Modal from "react-modal";
+import ShowMoreText from "react-show-more-text";
+import { Link } from "react-router-dom";
 import { MixpanelConsumer } from 'react-mixpanel';
 
 import {
@@ -187,16 +188,16 @@ const Profile = (props) => {
 
   //Sets the user profile info from Profile Data
   function setUserInfo() {
-    setEmail(getUserInfo('preferred-email'));
+    setEmail(getUserInfo("preferred-email"));
     console.log(email);
-    setName(getUserInfo('name'));
-    setSport(getUserInfo('sport'));
-    setPosition(getUserInfo('position'));
-    setLocation(getUserInfo('location'));
-    setInstagram(getUserInfo('instagram-handle'));
-    setTwitter(getUserInfo('twitter-handle'));
-    setWildcard(getUserInfo('wildcard'));
-    setBio(getUserInfo('bio'));
+    setName(getUserInfo("name"));
+    setSport(getUserInfo("sport"));
+    setPosition(getUserInfo("position"));
+    setLocation(getUserInfo("location"));
+    setInstagram(getUserInfo("instagram-handle"));
+    setTwitter(getUserInfo("twitter-handle"));
+    setWildcard(getUserInfo("wildcard"));
+    setBio(getUserInfo("bio"));
   }
 
   //Determines which social icosn the profile screen should show based on wether the user has entered the social link
@@ -240,7 +241,7 @@ const Profile = (props) => {
     } else if (window.innerWidth < 1200) {
       setIconSize(40);
     } else {
-      setIconSize(55);
+      setIconSize(25);
     }
   };
 
@@ -304,46 +305,61 @@ const Profile = (props) => {
                 >
                   No
                 </button>
-                <button
-                  onClick={() =>
-                    mixpanel.track(
+                <button className="wildcardLinkModalButton" onClick={() => {window.open(wildcard); setWildcardLinkModalOpen(false); mixpanel.track(
                       'Profile Icons Pressed by External Visitor',
                       { 'Profile Icon': 'Wildcard' }
-                    )
-                  }
-                  className="wildcardLinkModalButton"
-                >
-                  <Link
-                    to={{ pathname: wildcard }}
-                    target="_blank"
-                    style={{ textDecoration: 'none', color: 'black' }}
-                  >
-                    Yup
-                  </Link>
-                </button>
+                    ) }}>
+              {/* <Link
+                to={{ pathname: wildcard }}
+                target="_blank"
+                style={{ textDecoration: "none", color: "black" }}
+              > */}
+                Yup
+              {/* </Link> */}
+            </button>
               </div>
             </div>
           </Modal>
-          <div className="profileHeader">
-            {profileImage === '' || profileImage === undefined ? (
-              <img className="profileImage" src={BlankProfile} />
-            ) : (
-              <img className="profileImage" src={profileImage} />
-            )}
-            <h1>{name}</h1>
-            <h2>{position === '' ? sport : sport + ' - ' + position}</h2>
-            <h3>{location}</h3>
-            <div
-              className="socialIconsRow"
-              style={{
-                paddingTop: window.innerWidth / 80,
-                paddingBottom: window.innerWidth / 80,
-              }}
-            >
-              {showInstagram && (
-                <FaInstagram
-                  className="socialIcon"
-                  onClick={() =>
+      {window.innerWidth > 1200 && (
+        <div className="profileScrollBarContainer">
+          <p>ScrollBar Goes Here</p>
+        </div>
+      )}
+      <div className="middleProfileContent">
+        {window.innerWidth > 1200 ? (
+          <>
+            <div className="profileHeader">
+              <div className="profileTopContainer">
+                <div className="profileImageContainer">
+                  {profileImage === "" || profileImage === undefined ? (
+                    <img className="profileImage" src={BlankProfile} />
+                  ) : (
+                    <img className="profileImage" src={profileImage} />
+                  )}
+                </div>
+                <div className="profileTextContainer">
+                  <div className="nameSportTextContainer">
+                    <h1>{name}</h1>
+                    <p className="nameSportDivider"> | </p>
+                    <h2>
+                      {position === "" ? sport : sport + " - " + position}
+                    </h2>
+                  </div>
+                  <div className="locationIconTextContainer">
+                    <MdLocationOn color={"#E1306C"} />
+                    <h3>{location}</h3>
+                  </div>
+                  <div
+                    className="socialIconsRow"
+                    style={{
+                      paddingTop: window.innerWidth / 80,
+                      paddingBottom: window.innerWidth / 80,
+                    }}
+                  >
+                    {showInstagram && (
+                      <FaInstagram
+                        className="socialIcon"
+                        onClick={() =>
                     // window.location.replace("www.instagram.com/" + instagram)
                     {
                       mixpanel.track(
@@ -353,14 +369,14 @@ const Profile = (props) => {
                       window.open('https://instagram.com/' + instagram);
                     }
                   }
-                  size={iconSize}
-                  color={'#E1306C'}
-                />
-              )}
-              {showTwitter && (
-                <FaTwitter
-                  className="socialIcon"
-                  onClick={() =>
+                        size={iconSize}
+                        color={"#E1306C"}
+                      />
+                    )}
+                    {showTwitter && (
+                      <FaTwitter
+                        className="socialIcon"
+                        onClick={() =>
                     // window.location.replace("www.instagram.com/" + instagram)
                     {
                       mixpanel.track(
@@ -370,137 +386,256 @@ const Profile = (props) => {
                       window.open('https://twitter.com/' + twitter);
                     }
                   }
-                  size={iconSize}
-                  color={'#1DA1F2'}
-                />
-              )}
-              {showEmail && (
-                <MdMail
-                  className="socialIcon"
-                  onClick={() => {
+                        size={iconSize}
+                        color={"#1DA1F2"}
+                      />
+                    )}
+                    {showEmail && (
+                      <MdMail
+                        className="socialIcon"
+                        onClick={() => {
                     mixpanel.track(
                       'Profile Icons Pressed by External Visitor',
                       { 'Profile Icon': 'Email' }
                     );
                     window.open('mailto:' + email);
                   }}
-                  // onClick={() =>
-                  //   // window.location.replace("www.instagram.com/" + instagram)
-                  //   window.open("https://instagram.com/" + instagram)
-                  // }
-                  size={iconSize}
-                  color={'#5D4D4A'}
-                />
-              )}
-              {showWildcard && (
-                <MdStar
-                  className="socialIcon"
-                  onClick={() => setWildcardLinkModalOpen(true)}
-                  size={iconSize}
-                  color={'#ffae42'}
-                />
-              )}
+                        // onClick={() =>
+                        //   // window.location.replace("www.instagram.com/" + instagram)
+                        //   window.open("https://instagram.com/" + instagram)
+                        // }
+                        size={iconSize}
+                        color={"#5D4D4A"}
+                      />
+                    )}
+                    {showWildcard && (
+                      <BsLink45Deg
+                        className="socialIcon"
+                        onClick={() => setWildcardLinkModalOpen(true)}
+                        size={iconSize}
+                        color={"#ffae42"}
+                      />
+                    )}
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-          {bio === 'This is an empty bio. Edit it as you see fit.' ? (
-            <div>
-              <p></p>
-            </div>
-          ) : (
-            <div>
+            {bio === "This is an empty bio. Edit it as you see fit." ? (
+              <div>
+                <p></p>
+              </div>
+            ) : (
+              <>
+                <div
+                  className="bioContainer"
+                  style={{
+                    marginTop: window.innerHeight / 80,
+                    marginBottom: window.innerHeight / 80,
+                  }}
+                >
+                  <h1>Bio</h1>
+                  <hr
+                    className="componentHeaderDivider"
+                    color="lightgrey"
+                    size="1"
+                  />
+                  <p>{getBioSeeMoreSeeLess(bio)}</p>
+                </div>
+                <hr size="2" color="black" className="bioDivider" />
+              </>
+            )}
+          </>
+        ) : (
+          <>
+            <div className="profileHeader">
+              {profileImage === "" || profileImage === undefined ? (
+                <img className="profileImage" src={BlankProfile} />
+              ) : (
+                <img className="profileImage" src={profileImage} />
+              )}
+              <div className="nameSportTextContainer">
+                <h1>{name}</h1>
+                <h2>{position === "" ? sport : sport + " - " + position}</h2>
+              </div>
+
+              <h3>{location}</h3>
               <div
-                className="bioContainer"
+                className="socialIconsRow"
                 style={{
-                  marginTop: window.innerHeight / 80,
-                  marginBottom: window.innerHeight / 80,
+                  paddingTop: window.innerWidth / 80,
+                  paddingBottom: window.innerWidth / 80,
                 }}
               >
-                <p>{getBioSeeMoreSeeLess(bio)}</p>
-              </div>
-              <hr size="2" color="black" className="bioDivider" />
-            </div>
-          )}
-          {thisMediaArray.length === 0 ? null : (
-            <div className="profileItemListContainer">
-              <h1 className="profileItemListHeader">Highlights</h1>
-              <ul
-                className="videoItemArrayList"
-                style={{ width: window.innerWidth }}
-              >
-                {thisMediaArray.map((item) => {
-                  if (item.media === 'photo') {
-                    return <ImageItem url={item.url} />;
-                  } else {
-                    return <VideoItem url={item.url} />;
+                {showInstagram && (
+                  <FaInstagram
+                    className="socialIcon"
+                    onClick={() =>
+                    // window.location.replace("www.instagram.com/" + instagram)
+                    {
+                      mixpanel.track(
+                        'Profile Icons Pressed by External Visitor',
+                        { 'Profile Icon': 'Instagram' }
+                      );
+                      window.open('https://instagram.com/' + instagram);
+                    }
                   }
-                })}
-              </ul>
-            </div>
-          )}
-          {thisExperienceArray.length === 0 ? null : (
-            <div className="profileItemListContainer">
-              <h1 className="profileItemListHeader">Experiences</h1>
-              <ul>
-                {thisExperienceArray.map((item) => (
-                  <Item
-                    iconName="crown"
-                    color="#ffbb48"
-                    title={item.title}
-                    time={item.duration}
-                    idNum={item.idNum}
-                    userUID={UID}
+                    size={iconSize}
+                    color={"#E1306C"}
                   />
-                ))}
-              </ul>
-            </div>
-          )}
-          {thisTrophyArray.length === 0 ? null : (
-            <div className="profileItemListContainer">
-              <h1 className="profileItemListHeader">Accoplishments</h1>
-              <ul>
-                {thisTrophyArray.map((item) => (
-                  <Item
-                    iconName="trophy"
-                    color="#A08864"
-                    title={item.title}
-                    time={item.duration}
-                    idNum={item.idNum}
-                    userUID={UID}
+                )}
+                {showTwitter && (
+                  <FaTwitter
+                    className="socialIcon"
+                    onClick={() =>
+                    // window.location.replace("www.instagram.com/" + instagram)
+                    {
+                      mixpanel.track(
+                        'Profile Icons Pressed by External Visitor',
+                        { 'Profile Icon': 'Twitter' }
+                      );
+                      window.open('https://twitter.com/' + twitter);
+                    }
+                  }
+                    size={iconSize}
+                    color={"#1DA1F2"}
                   />
-                ))}
-              </ul>
-            </div>
-          )}
-          {thisMeasurableArray.length === 0 ? null : (
-            <div className="profileItemListContainer">
-              <h1 className="profileItemListHeader">Measurables</h1>
-              <ul>
-                {thisMeasurableArray.map((item) => (
-                  <Item
-                    iconName="rocket-launch"
-                    color="dodgerblue"
-                    title={item.title}
-                    time={item.value}
-                    idNum={item.idNum}
-                    userUID={UID}
+                )}
+                {showEmail && (
+                  <MdMail
+                    className="socialIcon"
+                    onClick={() => {
+                    mixpanel.track(
+                      'Profile Icons Pressed by External Visitor',
+                      { 'Profile Icon': 'Email' }
+                    );
+                    window.open('mailto:' + email);
+                  }}
+                    // onClick={() =>
+                    //   // window.location.replace("www.instagram.com/" + instagram)
+                    //   window.open("https://instagram.com/" + instagram)
+                    // }
+                    size={iconSize}
+                    color={"#5D4D4A"}
                   />
-                ))}
-              </ul>
+                )}
+                {showWildcard && (
+                  <BsLink45Deg
+                    className="socialIcon"
+                    onClick={() => setWildcardLinkModalOpen(true)}
+                    size={iconSize}
+                    color={"#ffae42"}
+                  />
+                )}
+              </div>
             </div>
-          )}
-          <div className="spogoLogo">
-            <img
-              src={SpogoLogo}
-              alt="Spogo"
-              onClick={() => {
+            {bio === "This is an empty bio. Edit it as you see fit." ? (
+              <div>
+                <p></p>
+              </div>
+            ) : (
+              <div>
+                <div
+                  className="bioContainer"
+                  style={{
+                    marginTop: window.innerHeight / 80,
+                    marginBottom: window.innerHeight / 80,
+                  }}
+                >
+                  <p>{getBioSeeMoreSeeLess(bio)}</p>
+                </div>
+                <hr size="2" color="black" className="bioDivider" />
+              </div>
+            )}
+          </>
+        )}
+        {thisMediaArray.length === 0 ? null : (
+          <div className="profileItemListContainer">
+            <h1 className="profileItemListHeader">Highlights</h1>
+            <ul
+              className="videoItemArrayList"
+              style={{ width: window.innerWidth }}
+            >
+              {thisMediaArray.map((item) => {
+                if (item.media === "photo") {
+                  return <ImageItem url={item.url} />;
+                } else {
+                  return <VideoItem url={item.url} />;
+                }
+              })}
+            </ul>
+          </div>
+        )}
+        {thisExperienceArray.length === 0 ? null : (
+          <div className="profileItemListContainer">
+            <h1 className="profileItemListHeader">Experiences</h1>
+            <hr className="componentHeaderDivider" size="1" color="lightgrey" />
+            <ul>
+              {thisExperienceArray.map((item) => (
+                <Item
+                  iconName="crown"
+                  color="#ffbb48"
+                  title={item.title}
+                  time={item.duration}
+                  idNum={item.idNum}
+                  userUID={UID}
+                />
+              ))}
+            </ul>
+          </div>
+        )}
+        {thisTrophyArray.length === 0 ? null : (
+          <div className="profileItemListContainer">
+            <h1 className="profileItemListHeader">Accomplishments</h1>
+            <hr className="componentHeaderDivider" size="1" color="lightgrey" />
+            <ul>
+              {thisTrophyArray.map((item) => (
+                <Item
+                  iconName="trophy"
+                  color="#A08864"
+                  title={item.title}
+                  time={item.duration}
+                  idNum={item.idNum}
+                  userUID={UID}
+                />
+              ))}
+            </ul>
+          </div>
+        )}
+        {thisMeasurableArray.length === 0 ? null : (
+          <div className="profileItemListContainer">
+            <h1 className="profileItemListHeader">Measurables</h1>
+            <hr className="componentHeaderDivider" size="1" color="lightgrey" />
+            <ul>
+              {thisMeasurableArray.map((item) => (
+                <Item
+                  iconName="rocket-launch"
+                  color="dodgerblue"
+                  title={item.title}
+                  time={item.value}
+                  idNum={item.idNum}
+                  userUID={UID}
+                />
+              ))}
+            </ul>
+          </div>
+        )}
+        <div className="spogoLogo">
+          <img
+            src={SpogoLogo}
+            alt="Spogo"
+            onClick={() => {
                 window.open('https://spogo.us');
                 mixpanel.track(
                   'Profile Spogo Botton Pressed by External Visitor'
                 );
               }}
-            />
-          </div>
+          />
         </div>
+      </div>
+      {window.innerWidth > 1200 && (
+        <div className="profileChatRightTab">Chat Goes Here</div>
+      )}
+    </div>
       )}
     </MixpanelConsumer>
   ) : (

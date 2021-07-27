@@ -8,7 +8,7 @@ import DescriptionScreen from '../../screens/DescriptionScreen/DescriptionScreen
 import { useHistory } from 'react-router-dom';
 import { MixpanelConsumer } from 'react-mixpanel';
 
-function Item(props) {
+const Item = (props) => {
   let icon = props.iconName;
   let color = props.color;
   let title = props.title;
@@ -42,9 +42,9 @@ function Item(props) {
     if (window.innerWidth < 600) {
       setIconSize(25);
     } else if (window.innerWidth < 1200) {
-      setIconSize(40);
+      setIconSize(25);
     } else {
-      setIconSize(55);
+      setIconSize(25);
     }
   };
 

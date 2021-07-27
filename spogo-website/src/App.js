@@ -4,6 +4,7 @@ import './App.css';
 import {Route, BrowserRouter as Router, Switch} from 'react-router-dom';
 import ProfileNavigator from './navigation/ProfileNavigator'
 import LandingNavigator from './navigation/LandingNavigator'
+import ProfileHeader from './UserProfile/components/ProfileHeader/ProfileHeader';
 
 //npm install mdi-react
 //npm install react-player
@@ -12,9 +13,12 @@ import LandingNavigator from './navigation/LandingNavigator'
 //npm install --save react-modal
 //npm install email-validator
 //npm install mixpanel-browser --save
+//npm i react-mixpanel
 
 //npm run bundle
 //firebase deploy
+
+
 
 
 function App() {
@@ -29,6 +33,9 @@ function App() {
        {/* {path === 'spogo.us' || path === 'https://spogo.us/' || path === 'https://spogo.us' ? <LandingPage /> : <Profile url={path}/>} */}
        {path.includes('users') || path.includes('descriptions') ? <ProfileNavigator url={path}/> : <LandingNavigator />}
     </div>
+    // <> 
+    //   <ProfileHeader/>
+    // </>
   );
 }
 
