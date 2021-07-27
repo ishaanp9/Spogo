@@ -69,13 +69,15 @@ const Item = (props) => {
             className="Container"
             style={{ height: window.innerHeight / 12 }}
           >
-            <ItemIcon iconType={icon} />
+            <div className="itemIconContainer">
+              <ItemIcon iconType={icon} />
+            </div>
             <div className="TextContainer">
               <h1>{title}</h1>
               <h2>{time}</h2>
+              <hr size="2" color="lightgrey" className="Divider" />
             </div>
           </div>
-          <hr size="2" color="lightgrey" className="Divider" />
         </Link>
       )}
     </MixpanelConsumer>
