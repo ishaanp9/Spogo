@@ -11,7 +11,7 @@ import SocialMediaIntegrationGraphic from './socialmediaintegration.png';
 import TailoredCustomizationGraphic from './tailoredcustomization.png';
 import LinkInBioGraphic from './linkinbio.png';
 import firebase from '../../../firebase';
-import {Mixpanel } from "../../../mixpanel";
+import { MixpanelConsumer } from 'react-mixpanel';
 import Footer from "../../components/Footer/Footer";
 
 
@@ -44,7 +44,11 @@ const LandingPage = () => {
   const validateEmail = () => {
     if (validator.validate(email)) {
       addUserToWaitlist();
-      Mixpanel.track("Waitlist")
+      <MixpanelConsumer>
+        {(mixpanel) => (
+          mixpanel.track('Waitlist User Added')
+        )}
+      </MixpanelConsumer>
       setWaitlistAddSuccessful(true)
     } else {
       setInvalidInput(true);
