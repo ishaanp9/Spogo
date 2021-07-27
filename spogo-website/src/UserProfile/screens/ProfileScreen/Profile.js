@@ -5,13 +5,13 @@ import "./Profile.css";
 import firebase from "../../../firebase";
 import { FaInstagram, FaTwitter } from "react-icons/fa";
 import { MdEmail, MdMail, MdStar, MdLocationOn } from "react-icons/md";
-import { BsLink45Deg } from 'react-icons/bs';
+import { BsLink45Deg } from "react-icons/bs";
 import BlankProfile from "./blank_profile.png";
 import SpogoLogo from "./spogo_logo.png";
 import Modal from "react-modal";
 import ShowMoreText from "react-show-more-text";
 import { Link } from "react-router-dom";
-import { MixpanelConsumer } from 'react-mixpanel';
+import { MixpanelConsumer } from "react-mixpanel";
 
 import {
   addUserInfo,
@@ -32,11 +32,11 @@ import {
   getMediaArray,
   setUserDataCollected,
   getUserDataCollected,
-} from '../../../ProfileData';
+} from "../../../ProfileData";
 
 const Profile = (props) => {
   let path = props.url;
-  let UID = path.substring(path.lastIndexOf('/') + 1);
+  let UID = path.substring(path.lastIndexOf("/") + 1);
   const [thisUserInfoDict, setThisUserInfoDict] = useState({});
   const [thisTrophyArray, setThisTrophyArray] = useState([]);
   const [thisExperienceArray, setThisExperienceArray] = useState([]);
@@ -44,16 +44,16 @@ const Profile = (props) => {
   const [thisMediaArray, setThisMediaArray] = useState([]);
   const [userExists, setUserExists] = useState(true);
 
-  const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
-  const [sport, setSport] = useState('');
-  const [position, setPosition] = useState('');
-  const [location, setLocation] = useState('');
-  const [instagram, setInstagram] = useState('');
-  const [twitter, setTwitter] = useState('');
-  const [wildcard, setWildcard] = useState('');
-  const [bio, setBio] = useState('');
-  const [profileImage, setProfileImage] = useState('');
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [sport, setSport] = useState("");
+  const [position, setPosition] = useState("");
+  const [location, setLocation] = useState("");
+  const [instagram, setInstagram] = useState("");
+  const [twitter, setTwitter] = useState("");
+  const [wildcard, setWildcard] = useState("");
+  const [bio, setBio] = useState("");
+  const [profileImage, setProfileImage] = useState("");
 
   const [showInstagram, setShowInstagram] = useState(true);
   const [showTwitter, setShowTwitter] = useState(true);
@@ -82,10 +82,10 @@ const Profile = (props) => {
       //Gets user info from database based on UID in the URL
       let dbPath = firebase
         .firestore()
-        .collection('Users')
+        .collection("Users")
         .doc(UID)
-        .collection('User Info');
-      let profileData = dbPath.doc('Profile Data');
+        .collection("User Info");
+      let profileData = dbPath.doc("Profile Data");
       await profileData
         .get()
         .then((doc) => {
@@ -93,14 +93,14 @@ const Profile = (props) => {
             setUserDict(doc.data());
           } else {
             // doc.data() will be undefined in this case
-            console.log('User Info doc not found!');
+            console.log("User Info doc not found!");
             setUserExists(false);
           }
         })
         .catch((error) => {
-          console.log('Error getting user info document:', error);
+          console.log("Error getting user info document:", error);
         });
-      let experienceArray = dbPath.doc('Experience Array');
+      let experienceArray = dbPath.doc("Experience Array");
       await experienceArray
         .get()
         .then((doc) => {
@@ -108,13 +108,13 @@ const Profile = (props) => {
             setExperienceArray(doc.data());
           } else {
             // doc.data() will be undefined in this case
-            console.log('Exp Array doc not found!');
+            console.log("Exp Array doc not found!");
           }
         })
         .catch((error) => {
-          console.log('Error getting exp array document:', error);
+          console.log("Error getting exp array document:", error);
         });
-      let trophyArray = dbPath.doc('Trophy Array');
+      let trophyArray = dbPath.doc("Trophy Array");
       await trophyArray
         .get()
         .then((doc) => {
@@ -122,13 +122,13 @@ const Profile = (props) => {
             setTrophyArray(doc.data());
           } else {
             // doc.data() will be undefined in this case
-            console.log('Trophy Array doc not found!');
+            console.log("Trophy Array doc not found!");
           }
         })
         .catch((error) => {
-          console.log('Error getting trophy array document:', error);
+          console.log("Error getting trophy array document:", error);
         });
-      let measurableArray = dbPath.doc('Measurable Array');
+      let measurableArray = dbPath.doc("Measurable Array");
       await measurableArray
         .get()
         .then((doc) => {
@@ -136,13 +136,13 @@ const Profile = (props) => {
             setMeasurableArray(doc.data());
           } else {
             // doc.data() will be undefined in this case
-            console.log('Measurable Array doc not found!');
+            console.log("Measurable Array doc not found!");
           }
         })
         .catch((error) => {
-          console.log('Error getting measurable array document:', error);
+          console.log("Error getting measurable array document:", error);
         });
-      let mediaArray = dbPath.doc('Media Array');
+      let mediaArray = dbPath.doc("Media Array");
       await mediaArray
         .get()
         .then((doc) => {
@@ -150,11 +150,11 @@ const Profile = (props) => {
             setMediaArray(doc.data());
           } else {
             // doc.data() will be undefined in this case
-            console.log('Media Array doc not found!');
+            console.log("Media Array doc not found!");
           }
         })
         .catch((error) => {
-          console.log('Error getting media array document:', error);
+          console.log("Error getting media array document:", error);
         });
     } catch (e) {
       console.log(e);
@@ -178,7 +178,7 @@ const Profile = (props) => {
     try {
       const profileImageUri = await firebase
         .storage()
-        .ref(getUserInfo('profile-image'));
+        .ref(getUserInfo("profile-image"));
       const url = await profileImageUri.getDownloadURL();
       setProfileImage(url);
     } catch (e) {
@@ -203,30 +203,30 @@ const Profile = (props) => {
   //Determines which social icosn the profile screen should show based on wether the user has entered the social link
   function setSocialIcons() {
     if (
-      getUserInfo('preferred-email') === '' ||
-      getUserInfo('preferred-email') === null ||
-      getUserInfo('preferred-email') === undefined
+      getUserInfo("preferred-email") === "" ||
+      getUserInfo("preferred-email") === null ||
+      getUserInfo("preferred-email") === undefined
     ) {
       setShowEmail(false);
     }
     if (
-      getUserInfo('instagram-handle') === '' ||
-      getUserInfo('instagram-handle') === null ||
-      getUserInfo('instagram-handle') === undefined
+      getUserInfo("instagram-handle") === "" ||
+      getUserInfo("instagram-handle") === null ||
+      getUserInfo("instagram-handle") === undefined
     ) {
       setShowInstagram(false);
     }
     if (
-      getUserInfo('twitter-handle') === '' ||
-      getUserInfo('twitter-handle') === null ||
-      getUserInfo('twitter-handle') === undefined
+      getUserInfo("twitter-handle") === "" ||
+      getUserInfo("twitter-handle") === null ||
+      getUserInfo("twitter-handle") === undefined
     ) {
       setShowTwitter(false);
     }
     if (
-      getUserInfo('wildcard') === '' ||
-      getUserInfo('wildcard') === null ||
-      getUserInfo('wildcard') === undefined
+      getUserInfo("wildcard") === "" ||
+      getUserInfo("wildcard") === null ||
+      getUserInfo("wildcard") === undefined
     ) {
       setShowWildcard(false);
     }
@@ -267,7 +267,7 @@ const Profile = (props) => {
           <p>
             {text.slice(0, 151)}
             <span className="seeMoreButton" onClick={() => setShowMore(true)}>
-              {' '}
+              {" "}
               ...See More
             </span>
           </p>
@@ -305,50 +305,171 @@ const Profile = (props) => {
                 >
                   No
                 </button>
-                <button className="wildcardLinkModalButton" onClick={() => {window.open(wildcard); setWildcardLinkModalOpen(false); mixpanel.track(
-                      'Profile Icons Pressed by External Visitor',
-                      { 'Profile Icon': 'Wildcard' }
-                    ) }}>
-              {/* <Link
+                <button
+                  className="wildcardLinkModalButton"
+                  onClick={() => {
+                    window.open(wildcard);
+                    setWildcardLinkModalOpen(false);
+                    mixpanel.track(
+                      "Profile Icons Pressed by External Visitor",
+                      { "Profile Icon": "Wildcard" }
+                    );
+                  }}
+                >
+                  {/* <Link
                 to={{ pathname: wildcard }}
                 target="_blank"
                 style={{ textDecoration: "none", color: "black" }}
               > */}
-                Yup
-              {/* </Link> */}
-            </button>
+                  Yup
+                  {/* </Link> */}
+                </button>
               </div>
             </div>
           </Modal>
-      {window.innerWidth > 1200 && (
-        <div className="profileScrollBarContainer">
-          <p>ScrollBar Goes Here</p>
-        </div>
-      )}
-      <div className="middleProfileContent">
-        {window.innerWidth > 1200 ? (
-          <>
-            <div className="profileHeader">
-              <div className="profileTopContainer">
-                <div className="profileImageContainer">
+          {window.innerWidth > 1200 && (
+            <div className="profileScrollBarContainer">
+              <p>ScrollBar Goes Here</p>
+            </div>
+          )}
+          <div className="middleProfileContent">
+            {window.innerWidth > 1200 ? (
+              <>
+                <div className="profileHeader">
+                  <div className="profileTopContainer">
+                    <div className="profileImageContainer">
+                      {profileImage === "" || profileImage === undefined ? (
+                        <img className="profileImage" src={BlankProfile} />
+                      ) : (
+                        <img className="profileImage" src={profileImage} />
+                      )}
+                    </div>
+                    <div className="profileTextContainer">
+                      <div className="nameSportTextContainer">
+                        <h1>{name}</h1>
+                        <p className="nameSportDivider"> | </p>
+                        <h2>
+                          {position === "" ? sport : sport + " - " + position}
+                        </h2>
+                      </div>
+                      <div className="locationIconTextContainer">
+                        <MdLocationOn color={"#E1306C"} />
+                        <h3>{location}</h3>
+                      </div>
+                      <div
+                        className="socialIconsRow"
+                        style={{
+                          paddingTop: window.innerWidth / 80,
+                          paddingBottom: window.innerWidth / 80,
+                        }}
+                      >
+                        {showInstagram && (
+                          <FaInstagram
+                            className="socialIcon"
+                            onClick={() =>
+                              // window.location.replace("www.instagram.com/" + instagram)
+                              {
+                                mixpanel.track(
+                                  "Profile Icons Pressed by External Visitor",
+                                  { "Profile Icon": "Instagram" }
+                                );
+                                window.open(
+                                  "https://instagram.com/" + instagram
+                                );
+                              }
+                            }
+                            size={iconSize}
+                            color={"#E1306C"}
+                          />
+                        )}
+                        {showTwitter && (
+                          <FaTwitter
+                            className="socialIcon"
+                            onClick={() =>
+                              // window.location.replace("www.instagram.com/" + instagram)
+                              {
+                                mixpanel.track(
+                                  "Profile Icons Pressed by External Visitor",
+                                  { "Profile Icon": "Twitter" }
+                                );
+                                window.open("https://twitter.com/" + twitter);
+                              }
+                            }
+                            size={iconSize}
+                            color={"#1DA1F2"}
+                          />
+                        )}
+                        {showEmail && (
+                          <MdMail
+                            className="socialIcon"
+                            onClick={() => {
+                              mixpanel.track(
+                                "Profile Icons Pressed by External Visitor",
+                                { "Profile Icon": "Email" }
+                              );
+                              window.open("mailto:" + email);
+                            }}
+                            // onClick={() =>
+                            //   // window.location.replace("www.instagram.com/" + instagram)
+                            //   window.open("https://instagram.com/" + instagram)
+                            // }
+                            size={iconSize}
+                            color={"#5D4D4A"}
+                          />
+                        )}
+                        {showWildcard && (
+                          <BsLink45Deg
+                            className="socialIcon"
+                            onClick={() => setWildcardLinkModalOpen(true)}
+                            size={iconSize}
+                            color={"#ffae42"}
+                          />
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {bio === "This is an empty bio. Edit it as you see fit." ? (
+                  <div>
+                    <p></p>
+                  </div>
+                ) : (
+                  <>
+                    <div
+                      className="bioContainer"
+                      style={{
+                        marginTop: window.innerHeight / 80,
+                        marginBottom: window.innerHeight / 80,
+                      }}
+                    >
+                      <h1>Bio</h1>
+                      <hr
+                        className="componentHeaderDivider"
+                        color="lightgrey"
+                        size="1"
+                      />
+                      <p>{getBioSeeMoreSeeLess(bio)}</p>
+                    </div>
+                    <hr size="2" color="black" className="bioDivider" />
+                  </>
+                )}
+              </>
+            ) : (
+              <>
+                <div className="profileHeader">
                   {profileImage === "" || profileImage === undefined ? (
                     <img className="profileImage" src={BlankProfile} />
                   ) : (
                     <img className="profileImage" src={profileImage} />
                   )}
-                </div>
-                <div className="profileTextContainer">
                   <div className="nameSportTextContainer">
                     <h1>{name}</h1>
-                    <p className="nameSportDivider"> | </p>
                     <h2>
                       {position === "" ? sport : sport + " - " + position}
                     </h2>
                   </div>
-                  <div className="locationIconTextContainer">
-                    <MdLocationOn color={"#E1306C"} />
-                    <h3>{location}</h3>
-                  </div>
+
+                  <h3>{location}</h3>
                   <div
                     className="socialIconsRow"
                     style={{
@@ -360,15 +481,15 @@ const Profile = (props) => {
                       <FaInstagram
                         className="socialIcon"
                         onClick={() =>
-                    // window.location.replace("www.instagram.com/" + instagram)
-                    {
-                      mixpanel.track(
-                        'Profile Icons Pressed by External Visitor',
-                        { 'Profile Icon': 'Instagram' }
-                      );
-                      window.open('https://instagram.com/' + instagram);
-                    }
-                  }
+                          // window.location.replace("www.instagram.com/" + instagram)
+                          {
+                            mixpanel.track(
+                              "Profile Icons Pressed by External Visitor",
+                              { "Profile Icon": "Instagram" }
+                            );
+                            window.open("https://instagram.com/" + instagram);
+                          }
+                        }
                         size={iconSize}
                         color={"#E1306C"}
                       />
@@ -377,15 +498,15 @@ const Profile = (props) => {
                       <FaTwitter
                         className="socialIcon"
                         onClick={() =>
-                    // window.location.replace("www.instagram.com/" + instagram)
-                    {
-                      mixpanel.track(
-                        'Profile Icons Pressed by External Visitor',
-                        { 'Profile Icon': 'Twitter' }
-                      );
-                      window.open('https://twitter.com/' + twitter);
-                    }
-                  }
+                          // window.location.replace("www.instagram.com/" + instagram)
+                          {
+                            mixpanel.track(
+                              "Profile Icons Pressed by External Visitor",
+                              { "Profile Icon": "Twitter" }
+                            );
+                            window.open("https://twitter.com/" + twitter);
+                          }
+                        }
                         size={iconSize}
                         color={"#1DA1F2"}
                       />
@@ -394,12 +515,12 @@ const Profile = (props) => {
                       <MdMail
                         className="socialIcon"
                         onClick={() => {
-                    mixpanel.track(
-                      'Profile Icons Pressed by External Visitor',
-                      { 'Profile Icon': 'Email' }
-                    );
-                    window.open('mailto:' + email);
-                  }}
+                          mixpanel.track(
+                            "Profile Icons Pressed by External Visitor",
+                            { "Profile Icon": "Email" }
+                          );
+                          window.open("mailto:" + email);
+                        }}
                         // onClick={() =>
                         //   // window.location.replace("www.instagram.com/" + instagram)
                         //   window.open("https://instagram.com/" + instagram)
@@ -418,224 +539,126 @@ const Profile = (props) => {
                     )}
                   </div>
                 </div>
-              </div>
-            </div>
-            {bio === "This is an empty bio. Edit it as you see fit." ? (
-              <div>
-                <p></p>
-              </div>
-            ) : (
-              <>
-                <div
-                  className="bioContainer"
-                  style={{
-                    marginTop: window.innerHeight / 80,
-                    marginBottom: window.innerHeight / 80,
-                  }}
-                >
-                  <h1>Bio</h1>
-                  <hr
-                    className="componentHeaderDivider"
-                    color="lightgrey"
-                    size="1"
-                  />
-                  <p>{getBioSeeMoreSeeLess(bio)}</p>
-                </div>
-                <hr size="2" color="black" className="bioDivider" />
+                {bio === "This is an empty bio. Edit it as you see fit." ? (
+                  <div>
+                    <p></p>
+                  </div>
+                ) : (
+                  <div>
+                    <div
+                      className="bioContainer"
+                      style={{
+                        marginTop: window.innerHeight / 80,
+                        marginBottom: window.innerHeight / 80,
+                      }}
+                    >
+                      <p>{getBioSeeMoreSeeLess(bio)}</p>
+                    </div>
+                    <hr size="2" color="black" className="bioDivider" />
+                  </div>
+                )}
               </>
             )}
-          </>
-        ) : (
-          <>
-            <div className="profileHeader">
-              {profileImage === "" || profileImage === undefined ? (
-                <img className="profileImage" src={BlankProfile} />
-              ) : (
-                <img className="profileImage" src={profileImage} />
-              )}
-              <div className="nameSportTextContainer">
-                <h1>{name}</h1>
-                <h2>{position === "" ? sport : sport + " - " + position}</h2>
-              </div>
-
-              <h3>{location}</h3>
-              <div
-                className="socialIconsRow"
-                style={{
-                  paddingTop: window.innerWidth / 80,
-                  paddingBottom: window.innerWidth / 80,
-                }}
-              >
-                {showInstagram && (
-                  <FaInstagram
-                    className="socialIcon"
-                    onClick={() =>
-                    // window.location.replace("www.instagram.com/" + instagram)
-                    {
-                      mixpanel.track(
-                        'Profile Icons Pressed by External Visitor',
-                        { 'Profile Icon': 'Instagram' }
-                      );
-                      window.open('https://instagram.com/' + instagram);
-                    }
-                  }
-                    size={iconSize}
-                    color={"#E1306C"}
-                  />
-                )}
-                {showTwitter && (
-                  <FaTwitter
-                    className="socialIcon"
-                    onClick={() =>
-                    // window.location.replace("www.instagram.com/" + instagram)
-                    {
-                      mixpanel.track(
-                        'Profile Icons Pressed by External Visitor',
-                        { 'Profile Icon': 'Twitter' }
-                      );
-                      window.open('https://twitter.com/' + twitter);
-                    }
-                  }
-                    size={iconSize}
-                    color={"#1DA1F2"}
-                  />
-                )}
-                {showEmail && (
-                  <MdMail
-                    className="socialIcon"
-                    onClick={() => {
-                    mixpanel.track(
-                      'Profile Icons Pressed by External Visitor',
-                      { 'Profile Icon': 'Email' }
-                    );
-                    window.open('mailto:' + email);
-                  }}
-                    // onClick={() =>
-                    //   // window.location.replace("www.instagram.com/" + instagram)
-                    //   window.open("https://instagram.com/" + instagram)
-                    // }
-                    size={iconSize}
-                    color={"#5D4D4A"}
-                  />
-                )}
-                {showWildcard && (
-                  <BsLink45Deg
-                    className="socialIcon"
-                    onClick={() => setWildcardLinkModalOpen(true)}
-                    size={iconSize}
-                    color={"#ffae42"}
-                  />
-                )}
-              </div>
-            </div>
-            {bio === "This is an empty bio. Edit it as you see fit." ? (
-              <div>
-                <p></p>
-              </div>
-            ) : (
-              <div>
-                <div
-                  className="bioContainer"
-                  style={{
-                    marginTop: window.innerHeight / 80,
-                    marginBottom: window.innerHeight / 80,
-                  }}
+            {thisMediaArray.length === 0 ? null : (
+              <div className="profileItemListContainer">
+                <h1 className="profileItemListHeader">Highlights</h1>
+                <ul
+                  className="videoItemArrayList"
+                  style={{ width: window.innerWidth }}
                 >
-                  <p>{getBioSeeMoreSeeLess(bio)}</p>
-                </div>
-                <hr size="2" color="black" className="bioDivider" />
+                  {thisMediaArray.map((item) => {
+                    if (item.media === "photo") {
+                      return <ImageItem url={item.url} />;
+                    } else {
+                      return <VideoItem url={item.url} />;
+                    }
+                  })}
+                </ul>
               </div>
             )}
-          </>
-        )}
-        {thisMediaArray.length === 0 ? null : (
-          <div className="profileItemListContainer">
-            <h1 className="profileItemListHeader">Highlights</h1>
-            <ul
-              className="videoItemArrayList"
-              style={{ width: window.innerWidth }}
-            >
-              {thisMediaArray.map((item) => {
-                if (item.media === "photo") {
-                  return <ImageItem url={item.url} />;
-                } else {
-                  return <VideoItem url={item.url} />;
-                }
-              })}
-            </ul>
-          </div>
-        )}
-        {thisExperienceArray.length === 0 ? null : (
-          <div className="profileItemListContainer">
-            <h1 className="profileItemListHeader">Experiences</h1>
-            <hr className="componentHeaderDivider" size="1" color="lightgrey" />
-            <ul>
-              {thisExperienceArray.map((item) => (
-                <Item
-                  iconName="crown"
-                  color="#ffbb48"
-                  title={item.title}
-                  time={item.duration}
-                  idNum={item.idNum}
-                  userUID={UID}
+            {thisExperienceArray.length === 0 ? null : (
+              <div className="profileItemListContainer">
+                <h1 className="profileItemListHeader">Experiences</h1>
+                <hr
+                  className="componentHeaderDivider"
+                  size="1"
+                  color="lightgrey"
                 />
-              ))}
-            </ul>
-          </div>
-        )}
-        {thisTrophyArray.length === 0 ? null : (
-          <div className="profileItemListContainer">
-            <h1 className="profileItemListHeader">Accomplishments</h1>
-            <hr className="componentHeaderDivider" size="1" color="lightgrey" />
-            <ul>
-              {thisTrophyArray.map((item) => (
-                <Item
-                  iconName="trophy"
-                  color="#A08864"
-                  title={item.title}
-                  time={item.duration}
-                  idNum={item.idNum}
-                  userUID={UID}
+                <ul>
+                  {thisExperienceArray.map((item) => (
+                    <Item
+                      iconName="crown"
+                      color="#ffbb48"
+                      title={item.title}
+                      time={item.duration}
+                      idNum={item.idNum}
+                      userUID={UID}
+                    />
+                  ))}
+                </ul>
+              </div>
+            )}
+            {thisTrophyArray.length === 0 ? null : (
+              <div className="profileItemListContainer">
+                <h1 className="profileItemListHeader">Accomplishments</h1>
+                <hr
+                  className="componentHeaderDivider"
+                  size="1"
+                  color="lightgrey"
                 />
-              ))}
-            </ul>
-          </div>
-        )}
-        {thisMeasurableArray.length === 0 ? null : (
-          <div className="profileItemListContainer">
-            <h1 className="profileItemListHeader">Measurables</h1>
-            <hr className="componentHeaderDivider" size="1" color="lightgrey" />
-            <ul>
-              {thisMeasurableArray.map((item) => (
-                <Item
-                  iconName="rocket-launch"
-                  color="dodgerblue"
-                  title={item.title}
-                  time={item.value}
-                  idNum={item.idNum}
-                  userUID={UID}
+                <ul>
+                  {thisTrophyArray.map((item) => (
+                    <Item
+                      iconName="trophy"
+                      color="#A08864"
+                      title={item.title}
+                      time={item.duration}
+                      idNum={item.idNum}
+                      userUID={UID}
+                    />
+                  ))}
+                </ul>
+              </div>
+            )}
+            {thisMeasurableArray.length === 0 ? null : (
+              <div className="profileItemListContainer">
+                <h1 className="profileItemListHeader">Measurables</h1>
+                <hr
+                  className="componentHeaderDivider"
+                  size="1"
+                  color="lightgrey"
                 />
-              ))}
-            </ul>
+                <ul>
+                  {thisMeasurableArray.map((item) => (
+                    <Item
+                      iconName="rocket-launch"
+                      color="dodgerblue"
+                      title={item.title}
+                      time={item.value}
+                      idNum={item.idNum}
+                      userUID={UID}
+                    />
+                  ))}
+                </ul>
+              </div>
+            )}
+            <div className="spogoLogo">
+              <img
+                src={SpogoLogo}
+                alt="Spogo"
+                onClick={() => {
+                  window.open("https://spogo.us");
+                  mixpanel.track(
+                    "Profile Spogo Botton Pressed by External Visitor"
+                  );
+                }}
+              />
+            </div>
           </div>
-        )}
-        <div className="spogoLogo">
-          <img
-            src={SpogoLogo}
-            alt="Spogo"
-            onClick={() => {
-                window.open('https://spogo.us');
-                mixpanel.track(
-                  'Profile Spogo Botton Pressed by External Visitor'
-                );
-              }}
-          />
+          {window.innerWidth > 1200 && (
+            <div className="profileChatRightTab">Chat Goes Here</div>
+          )}
         </div>
-      </div>
-      {window.innerWidth > 1200 && (
-        <div className="profileChatRightTab">Chat Goes Here</div>
-      )}
-    </div>
       )}
     </MixpanelConsumer>
   ) : (
