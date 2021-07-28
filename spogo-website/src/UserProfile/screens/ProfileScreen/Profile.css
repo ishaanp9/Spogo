@@ -76,7 +76,7 @@
     background-color: white;
     font-size: 12px;
     font-weight: 600;
-    color: grey;
+    color: lightgrey;
   }
 
   .seeLessButton {
@@ -84,7 +84,7 @@
     background-color: white;
     font-size: 12px;
     font-weight: 600;
-    color: grey;
+    color: lightgrey;
     margin-top: 5px;
   }
 
@@ -442,7 +442,7 @@
 
   .bioContainer > p {
     font-size: 16px;
-    font-weight: 300;
+    font-weight: 400;
     margin: 20px 0px;
   }
 

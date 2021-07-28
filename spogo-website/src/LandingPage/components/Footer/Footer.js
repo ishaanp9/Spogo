@@ -62,9 +62,9 @@ const Footer = () => {
                   <Link to={'/about'} className="bottomLinksText">
                     <p>About</p>
                   </Link>
-                  <Link to={'/blog'} className="bottomLinksText">
+                  {/* <Link to={'/blog'} className="bottomLinksText">
                     <p>Blog</p>
-                  </Link>
+                  </Link> */}
                   <Link to={'/FAQ'} className="bottomLinksText">
                     <p>FAQ</p>
                   </Link>
