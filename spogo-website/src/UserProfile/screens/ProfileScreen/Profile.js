@@ -248,10 +248,10 @@ const Profile = (props) => {
   const [showMore, setShowMore] = useState(false);
   //See more see less for the bio
   const getBioSeeMoreSeeLess = (text) => {
-    if (text.length <= 151) {
+    if (text.length <= 351) {
       return text;
     }
-    if (text.length > 151 && showMore) {
+    if (text.length > 351 && showMore) {
       return (
         <div className="seeLessBio">
           <p>{text}</p>
@@ -261,11 +261,11 @@ const Profile = (props) => {
         </div>
       );
     }
-    if (text.length > 151) {
+    if (text.length > 351) {
       return (
         <div className="seeMoreBio">
           <p>
-            {text.slice(0, 151)}
+            {text.slice(0, 351)}
             <span className="seeMoreButton" onClick={() => setShowMore(true)}>
               {" "}
               ...See More
