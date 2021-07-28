@@ -7,19 +7,37 @@ import { Link, BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import DescriptionScreen from '../../screens/DescriptionScreen/DescriptionScreen';
 import { useHistory } from 'react-router-dom';
 import { MixpanelConsumer } from 'react-mixpanel';
+import {
+  getExperienceArray,
+  getTrophyArray,
+  getMeasurableArray,
+} from '../../../ProfileData';
 
 const Item = (props) => {
   let icon = props.iconName;
   let color = props.color;
   let title = props.title;
   let time = props.time;
-  // let idNum = props.key;
+  let idNum = props.idNum;
   let UID = props.userUID;
 
   const [iconToHeaderName, setIconToHeaderName] = useState('');
 
+  const [specificItemArray, setSpecificArray] = useState([]);
+
+  const getSpecificArray = () => {
+    if (icon === 'crown') {
+      setSpecificArray(getExperienceArray());
+    } else if (icon === 'trophy') {
+      setSpecificArray(getTrophyArray());
+    } else {
+      setSpecificArray(getMeasurableArray());
+    }
+  };
+
   useEffect(() => {
     findSize();
+    getSpecificArray();
   }, []);
 
   let ItemIcon = (props) => {
@@ -52,7 +70,11 @@ const Item = (props) => {
     <MixpanelConsumer>
       {(mixpanel) => (
         <Link
-          onClick={() => mixpanel.track('Specific Item Type Pressed', { Item: iconToHeaderName })}
+          onClick={() =>
+            mixpanel.track('Specific Item Type Pressed', {
+              Item: iconToHeaderName,
+            })
+          }
           to={
             icon != 'rocket-launch'
               ? {
@@ -75,13 +97,15 @@ const Item = (props) => {
             <div className="TextContainer">
               <h1>{title}</h1>
               <h2>{time}</h2>
-              <hr size="2" color="lightgrey" className="Divider" />
+              {(idNum === 0 && !specificItemArray.length === 1) || idNum != specificItemArray.length - 1 ? (
+                <hr size="1" color="lightgrey" className="Divider" />
+              ) : null}
             </div>
           </div>
         </Link>
       )}
     </MixpanelConsumer>
   );
-}
+};
 
 export default Item;

@@ -129,11 +129,11 @@
     margin: 4% 0%;
     font-size: 20px;
   }
-  
+
   .wildcardLinkModalContentContainer > p {
     margin: 2% 0%;
   }
-  
+
   .wildcardLinkModalContainer {
     background-color: white;
     padding: 3% 8%;
@@ -144,14 +144,14 @@
     text-align: center;
     margin: 100px 10%;
   }
-  
+
   .wildcardLinkModalButtonsContainer {
     display: flex;
     flex-direction: row;
     width: 100%;
     margin-top: 5%;
   }
-  
+
   .wildcardLinkModalButton {
     flex: 0.5;
     margin: 0% 2%;
@@ -271,11 +271,11 @@
     margin: 4% 0%;
     font-size: 20px;
   }
-  
+
   .wildcardLinkModalContentContainer > p {
     margin: 2% 0%;
   }
-  
+
   .wildcardLinkModalContainer {
     background-color: white;
     padding: 3% 10%;
@@ -286,14 +286,14 @@
     text-align: center;
     margin: 100px 20%;
   }
-  
+
   .wildcardLinkModalButtonsContainer {
     display: flex;
     flex-direction: row;
     width: 100%;
     margin-top: 5%;
   }
-  
+
   .wildcardLinkModalButton {
     flex: 0.5;
     margin: 0% 2%;
@@ -343,9 +343,11 @@
 
   .profileHeader {
     /* border: solid; */
+    margin-top: 20px;
     width: 100%;
-    /* border-radius: 50px; */
-    background-color: white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    /* background-color: white; */
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -365,18 +367,17 @@
     align-items: center;
     width: 100%;
     justify-content: flex-start;
-    align-items: center;
-    margin-bottom: 1%;
+    /* margin-bottom: 1%; */
   }
 
-  .nameSportTextContainer > h1 {
-    font-size: 20px;
+  .websiteUserName {
+    font-size: 30px;
     color: black;
-    font-weight: bold;
+    font-weight: 500;
   }
 
-  .nameSportTextContainer > h2 {
-    font-size: 20px;
+  .websiteSportPositionText {
+    font-size: 30px;
     color: black;
     font-weight: 400;
   }
@@ -386,15 +387,23 @@
     font-size: 30px;
   }
 
+  .locationIconMediaTextContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
   .locationIconTextContainer {
     display: flex;
     flex-direction: row;
     align-items: center;
   }
-  .profileHeader > h3 {
-    font-size: 22px;
+  .locationText {
+    font-size: 18px;
     color: black;
     font-weight: 400;
+    margin-left: 5px;
   }
 
   .profileTextContainer {
@@ -402,7 +411,6 @@
     flex-direction: column;
     width: 100%;
     padding-left: 5%;
-    border: solid;
     justify-content: space-evenly;
   }
 
@@ -416,12 +424,13 @@
   .socialIconsRow {
     display: flex;
     flex-direction: row;
-    width: 100%;
+    width: 250px;
+   
     /* justify-content: flex-start; */
   }
 
   .socialIcon {
-    margin-right: 4%;
+    margin-right: 5%;
   }
 
   .bioContainer {
@@ -435,15 +444,23 @@
   }
 
   .bioContainer > h1 {
-    font-size: 20px;
-    font-weight: bold;
+    font-size: 16px;
+    font-weight: 500;
     margin: 20px 0px;
   }
 
   .bioContainer > p {
-    font-size: 16px;
-    font-weight: 300;
+    font-size: 14px;
+    font-weight: 400;
     margin: 20px 0px;
+  }
+
+  .seeLessButton:hover {
+    cursor: pointer;
+  }
+
+  .seeMoreButton:hover {
+    cursor: pointer;
   }
 
   .componentHeaderDivider {
@@ -451,8 +468,8 @@
   }
 
   .profileItemListHeader {
-    font-size: 20px;
-    font-weight: bold;
+    font-size: 16px;
+    font-weight: 500;
     margin: 20px 0px;
   }
 
@@ -462,6 +479,7 @@
     display: flex;
     flex-direction: column;
     background-color: white;
+    /* border-radius: 10px; */
     padding: 0% 3%;
     padding-bottom: 3%;
   }
@@ -492,11 +510,11 @@
     margin: 4% 0%;
     font-size: 20px;
   }
-  
+
   .wildcardLinkModalContentContainer > p {
     margin: 2% 0%;
   }
-  
+
   .wildcardLinkModalContainer {
     background-color: white;
     padding: 3% 5%;
@@ -507,14 +525,14 @@
     text-align: center;
     margin: 100px 35%;
   }
-  
+
   .wildcardLinkModalButtonsContainer {
     display: flex;
     flex-direction: row;
     width: 100%;
     margin-top: 5%;
   }
-  
+
   .wildcardLinkModalButton {
     flex: 0.5;
     margin: 0% 2%;
@@ -524,5 +542,4 @@
     padding: 5% 0%;
     border-radius: 5px;
   }
-
 }
