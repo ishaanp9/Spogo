@@ -18,16 +18,16 @@
   }
 
   .modalContainer {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
   }
 
   .closeIcon {
-      position: absolute;
-      margin-top: 5%;
-      margin-left: 5%;
+    position: absolute;
+    margin-top: 5%;
+    margin-left: 5%;
   }
 
   .MediaModal {
@@ -45,5 +45,68 @@
     right: 0;
     bottom: 0;
     background-color: black;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .mediaContainer {
+    display: flex;
+    align-self: flex-start;
+    margin-top: 1%;
+  }
+
+  .mediaContainer > img {
+    object-fit: cover;
+    border-radius: 10px;
+  }
+
+  .mediaContainer > video {
+    object-fit: cover;
+    border-radius: 10px;
+  }
+
+  .mediaContainer:hover {
+    cursor: pointer;
+  }
+
+  .modalMedia {
+    object-fit: cover; 
+    width: 40%;
+  }
+
+  .modalContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    justify-content: center;
+  }
+
+  .closeIcon {
+    position: absolute;
+    margin-top: 3%;
+    margin-left: 3%;
+    /* background-color: rgb(51, 45, 45);
+    border-radius: 50px; */
+  }
+  .closeIcon:hover {
+    cursor: pointer;
+  }
+
+  .MediaModal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(34, 31, 31, 0.5);
+  }
+  .ModalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(34, 31, 31, 0.8);
   }
 }

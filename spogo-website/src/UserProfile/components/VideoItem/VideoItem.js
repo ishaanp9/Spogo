@@ -79,15 +79,17 @@ export const ImageItem = (props) => {
           height:
             window.innerWidth < 600
               ? window.innerHeight / 6
-              : window.innerHeight / 6,
+              : window.innerHeight / 5,
           width:
             window.innerWidth < 600
               ? window.innerWidth / 2
-              : window.innerWidth / 3,
+              : window.innerWidth / 6,
           marginRight: window.innerWidth / 150,
           marginTop: window.innerHeight / 80,
         }}
       />
+      {/* These are the same modals but the first one is for 
+      the website, the last one is for the mobile view */}
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={() => closeModal()}
@@ -98,7 +100,7 @@ export const ImageItem = (props) => {
         <MdClose
           className="closeIcon"
           size={25}
-          color={'white'}
+          color={'black'}
           onClick={() => closeModal()}
         />
         <div className="modalContainer">
