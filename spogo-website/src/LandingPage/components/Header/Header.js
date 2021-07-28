@@ -57,7 +57,7 @@ function Header() {
                   About
                 </Link>
               </li>
-              <li className="headerItem">
+              {/* <li className="headerItem">
                 <Link
                   onClick={() =>
                     mixpanel.track('Header Tabs Pressed', {
@@ -69,7 +69,7 @@ function Header() {
                 >
                   Blog
                 </Link>
-              </li>
+              </li> */}
               <li className="headerItem">
                 <Link
                   onClick={() =>
