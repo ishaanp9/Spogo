@@ -386,8 +386,10 @@ const Profile = (props) => {
                 <Item
                   iconName="crown"
                   color="#ffbb48"
-                  title={item.title}
-                  time={item.duration}
+                 title={item.title}
+                      team={item.team}
+                      time={item.duration}
+                      description={item.description}
                   idNum={item.idNum - itemLengthDifferenceNumberExperience}
                   userUID={UID}
                 />
@@ -402,8 +404,10 @@ const Profile = (props) => {
               <Item
                 iconName="crown"
                 color="#ffbb48"
-                title={item.title}
-                time={item.duration}
+               title={item.title}
+                      team={item.team}
+                      time={item.duration}
+                      description={item.description}
                 idNum={item.idNum}
                 userUID={UID}
               />
@@ -428,6 +432,7 @@ const Profile = (props) => {
                   color="#A08864"
                   title={item.title}
                   time={item.duration}
+      description={item.description}
                   idNum={item.idNum - itemLengthDifferenceNumberAccoplishment}
                   userUID={UID}
                 />
@@ -444,6 +449,7 @@ const Profile = (props) => {
                 color="#A08864"
                 title={item.title}
                 time={item.duration}
+description={item.description}
                 idNum={item.idNum}
                 userUID={UID}
               />
@@ -659,14 +665,9 @@ const Profile = (props) => {
                     <p></p>
                   </div>
                 ) : (
-                  <>
                     <div
                       ref={scrollBio}
                       className="bioContainer"
-                      style={{
-                        marginTop: window.innerHeight / 80,
-                        marginBottom: window.innerHeight / 80,
-                      }}
                     >
                       <h1>Bio</h1>
                       <hr
@@ -676,8 +677,6 @@ const Profile = (props) => {
                       />
                       <p>{getBioSeeMoreSeeLess(bio, 'website')}</p>
                     </div>
-                    <hr size="2" color="black" className="bioDivider" />
-                  </>
                 )}
               </>
             ) : (
@@ -770,18 +769,17 @@ const Profile = (props) => {
                     <p></p>
                   </div>
                 ) : (
-                  <div>
                     <div
                       className="bioContainer"
-                      style={{
-                        marginTop: window.innerHeight / 80,
-                        marginBottom: window.innerHeight / 80,
-                      }}
                     >
+                      <h1>Bio</h1>
+                      <hr
+                        className="componentHeaderDivider"
+                        color="lightgrey"
+                        size="1"
+                      />
                       <p>{getBioSeeMoreSeeLess(bio, 'phone')}</p>
                     </div>
-                    <hr size="2" color="black" className="bioDivider" />
-                  </div>
                 )}
               </>
             )}
@@ -795,7 +793,7 @@ const Profile = (props) => {
                 />
                 <ul
                   className="videoItemArrayList"
-                  style={{ width: window.innerWidth }}
+                  // style={{ width: window.innerWidth }}
                 >
                   {thisMediaArray.map((item) => {
                     if (item.media === 'photo') {
@@ -815,8 +813,13 @@ const Profile = (props) => {
                   size="1"
                   color="lightgrey"
                 />
+
                 {ShowMoreShowLess('Experience')}
-                <hr size="1" color="lightgrey" className="Divider" />
+                 <hr
+                  className="componentBottomDivider"
+                  size="1"
+                  color="lightgrey"
+                />
                 {thisExperienceArray.length > 3 ? (
                   <button
                     className={'seeMoreSeeLessItemButton'}
@@ -843,7 +846,13 @@ const Profile = (props) => {
                   size="1"
                   color="lightgrey"
                 />
+
                 {ShowMoreShowLess('Accoplishment')}
+ <hr
+                  className="componentBottomDivider"
+                  size="1"
+                  color="lightgrey"
+                />
                 {thisTrophyArray.length > 3 ? (
                   <button
                     onClick={() =>
@@ -857,7 +866,6 @@ const Profile = (props) => {
                     {showMoreShowLessButtonTextAccoplishment}
                   </button>
                 ) : null}
-                <hr size="1" color="lightgrey" className="Divider" />
               </div>
             )}
             {thisMeasurableArray.length === 0 ? null : (
@@ -868,7 +876,13 @@ const Profile = (props) => {
                   size="1"
                   color="lightgrey"
                 />
+
                 {ShowMoreShowLess('Measurables')}
+                 <hr
+                  className="componentBottomDivider"
+                  size="1"
+                  color="lightgrey"
+                />
                 {thisMeasurableArray.length > 3 ? (
                   <button
                     onClick={() =>
@@ -882,7 +896,6 @@ const Profile = (props) => {
                     {showMoreShowLessButtonTextMeasurables}
                   </button>
                 ) : null}
-                <hr size="1" color="lightgrey" className="Divider" />
               </div>
             )}
             <div className="spogoLogo">
