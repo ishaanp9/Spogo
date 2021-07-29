@@ -1,17 +1,17 @@
-import React, { useEffect, useState, useRef } from 'react';
-import Item from '../../components/ExpTrophyMesItem/Item';
-import { VideoItem, ImageItem } from '../../components/VideoItem/VideoItem';
-import './Profile.css';
-import firebase from '../../../firebase';
-import { FaInstagram, FaTwitter } from 'react-icons/fa';
-import { MdEmail, MdMail, MdStar, MdLocationOn } from 'react-icons/md';
-import { BsLink45Deg } from 'react-icons/bs';
-import BlankProfile from './blank_profile.png';
-import SpogoLogo from './spogo_logo.png';
-import Modal from 'react-modal';
-import ShowMoreText from 'react-show-more-text';
-import { Link } from 'react-router-dom';
-import { MixpanelConsumer } from 'react-mixpanel';
+import React, { useEffect, useState, useRef } from "react";
+import Item from "../../components/ExpTrophyMesItem/Item";
+import { VideoItem, ImageItem } from "../../components/VideoItem/VideoItem";
+import "./Profile.css";
+import firebase from "../../../firebase";
+import { FaInstagram, FaTwitter } from "react-icons/fa";
+import { MdEmail, MdMail, MdStar, MdLocationOn } from "react-icons/md";
+import { BsLink45Deg } from "react-icons/bs";
+import BlankProfile from "./blank_profile.png";
+import SpogoLogo from "./spogo_logo.png";
+import Modal from "react-modal";
+import ShowMoreText from "react-show-more-text";
+import { Link } from "react-router-dom";
+import { MixpanelConsumer } from "react-mixpanel";
 
 import {
   addUserInfo,
@@ -32,12 +32,12 @@ import {
   getMediaArray,
   setUserDataCollected,
   getUserDataCollected,
-} from '../../../ProfileData';
-import ProfileWaitlistComponent from '../../components/ProfileWaitlistComponent/ProfileWaitlistComponent';
+} from "../../../ProfileData";
+import ProfileWaitlistComponent from "../../components/ProfileWaitlistComponent/ProfileWaitlistComponent";
 
 const Profile = (props) => {
   let path = props.url;
-  let UID = path.substring(path.lastIndexOf('/') + 1);
+  let UID = path.substring(path.lastIndexOf("/") + 1);
   const [thisUserInfoDict, setThisUserInfoDict] = useState({});
   const [thisTrophyArray, setThisTrophyArray] = useState([]);
   const [thisExperienceArray, setThisExperienceArray] = useState([]);
@@ -45,16 +45,16 @@ const Profile = (props) => {
   const [thisMediaArray, setThisMediaArray] = useState([]);
   const [userExists, setUserExists] = useState(true);
 
-  const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
-  const [sport, setSport] = useState('');
-  const [position, setPosition] = useState('');
-  const [location, setLocation] = useState('');
-  const [instagram, setInstagram] = useState('');
-  const [twitter, setTwitter] = useState('');
-  const [wildcard, setWildcard] = useState('');
-  const [bio, setBio] = useState('');
-  const [profileImage, setProfileImage] = useState('');
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [sport, setSport] = useState("");
+  const [position, setPosition] = useState("");
+  const [location, setLocation] = useState("");
+  const [instagram, setInstagram] = useState("");
+  const [twitter, setTwitter] = useState("");
+  const [wildcard, setWildcard] = useState("");
+  const [bio, setBio] = useState("");
+  const [profileImage, setProfileImage] = useState("");
 
   const [showInstagram, setShowInstagram] = useState(true);
   const [showTwitter, setShowTwitter] = useState(true);
@@ -69,15 +69,15 @@ const Profile = (props) => {
 
   //there has to be a better way to do this, using a function didint work.
   const executeBioScroll = () =>
-    scrollBio.current.scrollIntoView({ behavior: 'smooth' });
+    scrollBio.current.scrollIntoView({ behavior: "smooth" });
   const executeHighlightsScroll = () =>
-    scrollHighlights.current.scrollIntoView({ behavior: 'smooth' });
+    scrollHighlights.current.scrollIntoView({ behavior: "smooth" });
   const executeExperiencesScroll = () =>
-    scrollExperience.current.scrollIntoView({ behavior: 'smooth' });
+    scrollExperience.current.scrollIntoView({ behavior: "smooth" });
   const executeAccoplishmentsScroll = () =>
-    scrollAccomplishments.current.scrollIntoView({ behavior: 'smooth' });
+    scrollAccomplishments.current.scrollIntoView({ behavior: "smooth" });
   const executeMeasurablesScroll = () =>
-    scrollMeasurables.current.scrollIntoView({ behavior: 'smooth' });
+    scrollMeasurables.current.scrollIntoView({ behavior: "smooth" });
 
   useEffect(async () => {
     //Checks if user data has already been retrieved from the database, other retreives data
@@ -101,10 +101,10 @@ const Profile = (props) => {
       //Gets user info from database based on UID in the URL
       let dbPath = firebase
         .firestore()
-        .collection('Users')
+        .collection("Users")
         .doc(UID)
-        .collection('User Info');
-      let profileData = dbPath.doc('Profile Data');
+        .collection("User Info");
+      let profileData = dbPath.doc("Profile Data");
       await profileData
         .get()
         .then((doc) => {
@@ -112,14 +112,14 @@ const Profile = (props) => {
             setUserDict(doc.data());
           } else {
             // doc.data() will be undefined in this case
-            console.log('User Info doc not found!');
+            console.log("User Info doc not found!");
             setUserExists(false);
           }
         })
         .catch((error) => {
-          console.log('Error getting user info document:', error);
+          console.log("Error getting user info document:", error);
         });
-      let experienceArray = dbPath.doc('Experience Array');
+      let experienceArray = dbPath.doc("Experience Array");
       await experienceArray
         .get()
         .then((doc) => {
@@ -127,13 +127,13 @@ const Profile = (props) => {
             setExperienceArray(doc.data());
           } else {
             // doc.data() will be undefined in this case
-            console.log('Exp Array doc not found!');
+            console.log("Exp Array doc not found!");
           }
         })
         .catch((error) => {
-          console.log('Error getting exp array document:', error);
+          console.log("Error getting exp array document:", error);
         });
-      let trophyArray = dbPath.doc('Trophy Array');
+      let trophyArray = dbPath.doc("Trophy Array");
       await trophyArray
         .get()
         .then((doc) => {
@@ -141,13 +141,13 @@ const Profile = (props) => {
             setTrophyArray(doc.data());
           } else {
             // doc.data() will be undefined in this case
-            console.log('Trophy Array doc not found!');
+            console.log("Trophy Array doc not found!");
           }
         })
         .catch((error) => {
-          console.log('Error getting trophy array document:', error);
+          console.log("Error getting trophy array document:", error);
         });
-      let measurableArray = dbPath.doc('Measurable Array');
+      let measurableArray = dbPath.doc("Measurable Array");
       await measurableArray
         .get()
         .then((doc) => {
@@ -155,13 +155,13 @@ const Profile = (props) => {
             setMeasurableArray(doc.data());
           } else {
             // doc.data() will be undefined in this case
-            console.log('Measurable Array doc not found!');
+            console.log("Measurable Array doc not found!");
           }
         })
         .catch((error) => {
-          console.log('Error getting measurable array document:', error);
+          console.log("Error getting measurable array document:", error);
         });
-      let mediaArray = dbPath.doc('Media Array');
+      let mediaArray = dbPath.doc("Media Array");
       await mediaArray
         .get()
         .then((doc) => {
@@ -169,11 +169,11 @@ const Profile = (props) => {
             setMediaArray(doc.data());
           } else {
             // doc.data() will be undefined in this case
-            console.log('Media Array doc not found!');
+            console.log("Media Array doc not found!");
           }
         })
         .catch((error) => {
-          console.log('Error getting media array document:', error);
+          console.log("Error getting media array document:", error);
         });
     } catch (e) {
       console.log(e);
@@ -197,7 +197,7 @@ const Profile = (props) => {
     try {
       const profileImageUri = await firebase
         .storage()
-        .ref(getUserInfo('profile-image'));
+        .ref(getUserInfo("profile-image"));
       const url = await profileImageUri.getDownloadURL();
       setProfileImage(url);
     } catch (e) {
@@ -207,45 +207,45 @@ const Profile = (props) => {
 
   //Sets the user profile info from Profile Data
   function setUserInfo() {
-    setEmail(getUserInfo('preferred-email'));
+    setEmail(getUserInfo("preferred-email"));
     console.log(email);
-    setName(getUserInfo('name'));
-    setSport(getUserInfo('sport'));
-    setPosition(getUserInfo('position'));
-    setLocation(getUserInfo('location'));
-    setInstagram(getUserInfo('instagram-handle'));
-    setTwitter(getUserInfo('twitter-handle'));
-    setWildcard(getUserInfo('wildcard'));
-    setBio(getUserInfo('bio'));
+    setName(getUserInfo("name"));
+    setSport(getUserInfo("sport"));
+    setPosition(getUserInfo("position"));
+    setLocation(getUserInfo("location"));
+    setInstagram(getUserInfo("instagram-handle"));
+    setTwitter(getUserInfo("twitter-handle"));
+    setWildcard(getUserInfo("wildcard"));
+    setBio(getUserInfo("bio"));
   }
 
   //Determines which social icosn the profile screen should show based on wether the user has entered the social link
   function setSocialIcons() {
     if (
-      getUserInfo('preferred-email') === '' ||
-      getUserInfo('preferred-email') === null ||
-      getUserInfo('preferred-email') === undefined
+      getUserInfo("preferred-email") === "" ||
+      getUserInfo("preferred-email") === null ||
+      getUserInfo("preferred-email") === undefined
     ) {
       setShowEmail(false);
     }
     if (
-      getUserInfo('instagram-handle') === '' ||
-      getUserInfo('instagram-handle') === null ||
-      getUserInfo('instagram-handle') === undefined
+      getUserInfo("instagram-handle") === "" ||
+      getUserInfo("instagram-handle") === null ||
+      getUserInfo("instagram-handle") === undefined
     ) {
       setShowInstagram(false);
     }
     if (
-      getUserInfo('twitter-handle') === '' ||
-      getUserInfo('twitter-handle') === null ||
-      getUserInfo('twitter-handle') === undefined
+      getUserInfo("twitter-handle") === "" ||
+      getUserInfo("twitter-handle") === null ||
+      getUserInfo("twitter-handle") === undefined
     ) {
       setShowTwitter(false);
     }
     if (
-      getUserInfo('wildcard') === '' ||
-      getUserInfo('wildcard') === null ||
-      getUserInfo('wildcard') === undefined
+      getUserInfo("wildcard") === "" ||
+      getUserInfo("wildcard") === null ||
+      getUserInfo("wildcard") === undefined
     ) {
       setShowWildcard(false);
     }
@@ -267,7 +267,7 @@ const Profile = (props) => {
   const [showMore, setShowMore] = useState(false);
   //See more see less for the bio
   const getBioSeeMoreSeeLess = (text, platform) => {
-    if (platform === 'phone') {
+    if (platform === "phone") {
       if (text.length <= 151) {
         return text;
       }
@@ -290,7 +290,7 @@ const Profile = (props) => {
             <p>
               {text.slice(0, 151)}
               <span className="seeMoreButton" onClick={() => setShowMore(true)}>
-                {' '}
+                {" "}
                 ...See More
               </span>
             </p>
@@ -325,7 +325,7 @@ const Profile = (props) => {
             <p>
               {text.slice(0, 500)}
               <span className="seeMoreButton" onClick={() => setShowMore(true)}>
-                {' '}
+                {" "}
                 ...See More
               </span>
             </p>
@@ -356,24 +356,24 @@ const Profile = (props) => {
   const [
     showMoreShowLessButtonTextExperience,
     setShowMoreShowLessButtonTextExperience,
-  ] = useState('Show More');
+  ] = useState("Show More");
   const [
     showMoreShowLessButtonTextAccoplishment,
     setShowMoreShowLessButtonTextAccoplishment,
-  ] = useState('Show More');
+  ] = useState("Show More");
   const [
     showMoreShowLessButtonTextMeasurables,
     setShowMoreShowLessButtonTextMeasurables,
-  ] = useState('Show More');
+  ] = useState("Show More");
   let itemLengthDifferenceNumberExperience;
   let itemLengthDifferenceNumberAccoplishment;
   let itemLengthDifferenceNumberMeasurables;
 
   const ShowMoreShowLess = (itemType) => {
-    if (itemType === 'Experience') {
+    if (itemType === "Experience") {
       if (thisExperienceArray.length > 3 && !showMoreShowLessButtonExperience) {
         itemLengthDifferenceNumberExperience = thisExperienceArray.length - 3;
-        setShowMoreShowLessButtonTextExperience('Show More');
+        setShowMoreShowLessButtonTextExperience("Show More");
         return (
           <ul>
             {thisExperienceArray
@@ -386,10 +386,10 @@ const Profile = (props) => {
                 <Item
                   iconName="crown"
                   color="#ffbb48"
-                 title={item.title}
-                      team={item.team}
-                      time={item.duration}
-                      description={item.description}
+                  title={item.title}
+                  team={item.team}
+                  time={item.duration}
+                  description={item.description}
                   idNum={item.idNum - itemLengthDifferenceNumberExperience}
                   userUID={UID}
                 />
@@ -397,17 +397,17 @@ const Profile = (props) => {
           </ul>
         );
       } else {
-        setShowMoreShowLessButtonTextExperience('Show Less');
+        setShowMoreShowLessButtonTextExperience("Show Less");
         return (
           <ul>
             {thisExperienceArray.map((item) => (
               <Item
                 iconName="crown"
                 color="#ffbb48"
-               title={item.title}
-                      team={item.team}
-                      time={item.duration}
-                      description={item.description}
+                title={item.title}
+                team={item.team}
+                time={item.duration}
+                description={item.description}
                 idNum={item.idNum}
                 userUID={UID}
               />
@@ -415,10 +415,10 @@ const Profile = (props) => {
           </ul>
         );
       }
-    } else if (itemType === 'Accoplishment') {
+    } else if (itemType === "Accoplishment") {
       if (thisTrophyArray.length > 3 && !showMoreShowLessButtonAccoplishment) {
         itemLengthDifferenceNumberAccoplishment = thisTrophyArray.length - 3;
-        setShowMoreShowLessButtonTextAccoplishment('Show More');
+        setShowMoreShowLessButtonTextAccoplishment("Show More");
         return (
           <ul>
             {thisTrophyArray
@@ -432,7 +432,7 @@ const Profile = (props) => {
                   color="#A08864"
                   title={item.title}
                   time={item.duration}
-      description={item.description}
+                  description={item.description}
                   idNum={item.idNum - itemLengthDifferenceNumberAccoplishment}
                   userUID={UID}
                 />
@@ -440,7 +440,7 @@ const Profile = (props) => {
           </ul>
         );
       } else {
-        setShowMoreShowLessButtonTextAccoplishment('Show Less');
+        setShowMoreShowLessButtonTextAccoplishment("Show Less");
         return (
           <ul>
             {thisTrophyArray.map((item) => (
@@ -449,7 +449,7 @@ const Profile = (props) => {
                 color="#A08864"
                 title={item.title}
                 time={item.duration}
-description={item.description}
+                description={item.description}
                 idNum={item.idNum}
                 userUID={UID}
               />
@@ -457,13 +457,13 @@ description={item.description}
           </ul>
         );
       }
-    } else if (itemType === 'Measurables') {
+    } else if (itemType === "Measurables") {
       if (
         thisMeasurableArray.length > 3 &&
         !showMoreShowLessButtonMeasurables
       ) {
         itemLengthDifferenceNumberMeasurables = thisMeasurableArray.length - 3;
-        setShowMoreShowLessButtonTextMeasurables('Show More');
+        setShowMoreShowLessButtonTextMeasurables("Show More");
         return (
           <ul>
             {thisMeasurableArray
@@ -485,7 +485,7 @@ description={item.description}
           </ul>
         );
       } else {
-        setShowMoreShowLessButtonTextMeasurables('Show Less');
+        setShowMoreShowLessButtonTextMeasurables("Show Less");
         return (
           <ul>
             {thisMeasurableArray.map((item) => (
@@ -534,8 +534,8 @@ description={item.description}
                     window.open(wildcard);
                     setWildcardLinkModalOpen(false);
                     mixpanel.track(
-                      'Profile Icons Pressed by External Visitor',
-                      { 'Profile Icon': 'Wildcard' }
+                      "Profile Icons Pressed by External Visitor",
+                      { "Profile Icon": "Wildcard" }
                     );
                   }}
                 >
@@ -553,7 +553,7 @@ description={item.description}
           {window.innerWidth > 1200 && (
             // We should use refs so we can scroll to the ref clicked on
             <div className="profileScrollBarContainer">
-              {bio != 'This is an empty bio. Edit it as you see fit.' ? (
+              {bio != "This is an empty bio. Edit it as you see fit." ? (
                 <p onClick={executeBioScroll}>Bio</p>
               ) : null}
               {thisMediaArray.length > 0 ? (
@@ -575,7 +575,7 @@ description={item.description}
               <>
                 <div className="profileHeader">
                   <div className="profileImageContainer">
-                    {profileImage === '' || profileImage === undefined ? (
+                    {profileImage === "" || profileImage === undefined ? (
                       <img className="profileImage" src={BlankProfile} />
                     ) : (
                       <img className="profileImage" src={profileImage} />
@@ -585,13 +585,13 @@ description={item.description}
                     <div className="nameSportTextContainer">
                       <h1 className="websiteUserName">{name}</h1>
                       <h2 className="websiteSportPositionText">
-                        {position === '' ? sport : sport + ' - ' + position}
+                        {position === "" ? sport : sport + " - " + position}
                       </h2>
                     </div>
 
                     {location ? (
                       <div className="locationIconTextContainer">
-                        <MdLocationOn color={'grey'} size={20} />
+                        <MdLocationOn color={"grey"} size={20} />
                         <h3 className="locationText">{location}</h3>
                       </div>
                     ) : null}
@@ -604,14 +604,14 @@ description={item.description}
                             // window.location.replace("www.instagram.com/" + instagram)
                             {
                               mixpanel.track(
-                                'Profile Icons Pressed by External Visitor',
-                                { 'Profile Icon': 'Instagram' }
+                                "Profile Icons Pressed by External Visitor",
+                                { "Profile Icon": "Instagram" }
                               );
-                              window.open('https://instagram.com/' + instagram);
+                              window.open("https://instagram.com/" + instagram);
                             }
                           }
                           size={iconSize}
-                          color={'#E1306C'}
+                          color={"#E1306C"}
                         />
                       )}
                       {showTwitter && (
@@ -621,14 +621,14 @@ description={item.description}
                             // window.location.replace("www.instagram.com/" + instagram)
                             {
                               mixpanel.track(
-                                'Profile Icons Pressed by External Visitor',
-                                { 'Profile Icon': 'Twitter' }
+                                "Profile Icons Pressed by External Visitor",
+                                { "Profile Icon": "Twitter" }
                               );
-                              window.open('https://twitter.com/' + twitter);
+                              window.open("https://twitter.com/" + twitter);
                             }
                           }
                           size={iconSize}
-                          color={'#1DA1F2'}
+                          color={"#1DA1F2"}
                         />
                       )}
                       {showEmail && (
@@ -636,17 +636,17 @@ description={item.description}
                           className="socialIcon"
                           onClick={() => {
                             mixpanel.track(
-                              'Profile Icons Pressed by External Visitor',
-                              { 'Profile Icon': 'Email' }
+                              "Profile Icons Pressed by External Visitor",
+                              { "Profile Icon": "Email" }
                             );
-                            window.open('mailto:' + email);
+                            window.open("mailto:" + email);
                           }}
                           // onClick={() =>
                           //   // window.location.replace("www.instagram.com/" + instagram)
                           //   window.open("https://instagram.com/" + instagram)
                           // }
                           size={iconSize}
-                          color={'#5D4D4A'}
+                          color={"#5D4D4A"}
                         />
                       )}
                       {showWildcard && (
@@ -654,35 +654,32 @@ description={item.description}
                           className="socialIcon"
                           onClick={() => setWildcardLinkModalOpen(true)}
                           size={iconSize}
-                          color={'#ffae42'}
+                          color={"#ffae42"}
                         />
                       )}
                     </div>
                   </div>
                 </div>
-                {bio === 'This is an empty bio. Edit it as you see fit.' ? (
+                {bio === "This is an empty bio. Edit it as you see fit." ? (
                   <div>
                     <p></p>
                   </div>
                 ) : (
-                    <div
-                      ref={scrollBio}
-                      className="bioContainer"
-                    >
-                      <h1>Bio</h1>
-                      <hr
-                        className="componentHeaderDivider"
-                        color="lightgrey"
-                        size="1"
-                      />
-                      <p>{getBioSeeMoreSeeLess(bio, 'website')}</p>
-                    </div>
+                  <div ref={scrollBio} className="bioContainer">
+                    <h1>Bio</h1>
+                    <hr
+                      className="componentHeaderDivider"
+                      color="lightgrey"
+                      size="1"
+                    />
+                    <p>{getBioSeeMoreSeeLess(bio, "website")}</p>
+                  </div>
                 )}
               </>
             ) : (
               <>
                 <div className="profileHeader">
-                  {profileImage === '' || profileImage === undefined ? (
+                  {profileImage === "" || profileImage === undefined ? (
                     <img className="profileImage" src={BlankProfile} />
                   ) : (
                     <img className="profileImage" src={profileImage} />
@@ -690,7 +687,7 @@ description={item.description}
                   <div className="nameSportTextContainer">
                     <h1>{name}</h1>
                     <h2>
-                      {position === '' ? sport : sport + ' - ' + position}
+                      {position === "" ? sport : sport + " - " + position}
                     </h2>
                   </div>
 
@@ -709,14 +706,14 @@ description={item.description}
                           // window.location.replace("www.instagram.com/" + instagram)
                           {
                             mixpanel.track(
-                              'Profile Icons Pressed by External Visitor',
-                              { 'Profile Icon': 'Instagram' }
+                              "Profile Icons Pressed by External Visitor",
+                              { "Profile Icon": "Instagram" }
                             );
-                            window.open('https://instagram.com/' + instagram);
+                            window.open("https://instagram.com/" + instagram);
                           }
                         }
                         size={iconSize}
-                        color={'#E1306C'}
+                        color={"#E1306C"}
                       />
                     )}
                     {showTwitter && (
@@ -726,14 +723,14 @@ description={item.description}
                           // window.location.replace("www.instagram.com/" + instagram)
                           {
                             mixpanel.track(
-                              'Profile Icons Pressed by External Visitor',
-                              { 'Profile Icon': 'Twitter' }
+                              "Profile Icons Pressed by External Visitor",
+                              { "Profile Icon": "Twitter" }
                             );
-                            window.open('https://twitter.com/' + twitter);
+                            window.open("https://twitter.com/" + twitter);
                           }
                         }
                         size={iconSize}
-                        color={'#1DA1F2'}
+                        color={"#1DA1F2"}
                       />
                     )}
                     {showEmail && (
@@ -741,17 +738,17 @@ description={item.description}
                         className="socialIcon"
                         onClick={() => {
                           mixpanel.track(
-                            'Profile Icons Pressed by External Visitor',
-                            { 'Profile Icon': 'Email' }
+                            "Profile Icons Pressed by External Visitor",
+                            { "Profile Icon": "Email" }
                           );
-                          window.open('mailto:' + email);
+                          window.open("mailto:" + email);
                         }}
                         // onClick={() =>
                         //   // window.location.replace("www.instagram.com/" + instagram)
                         //   window.open("https://instagram.com/" + instagram)
                         // }
                         size={iconSize}
-                        color={'#5D4D4A'}
+                        color={"#5D4D4A"}
                       />
                     )}
                     {showWildcard && (
@@ -759,27 +756,25 @@ description={item.description}
                         className="socialIcon"
                         onClick={() => setWildcardLinkModalOpen(true)}
                         size={iconSize}
-                        color={'#ffae42'}
+                        color={"#ffae42"}
                       />
                     )}
                   </div>
                 </div>
-                {bio === 'This is an empty bio. Edit it as you see fit.' ? (
+                {bio === "This is an empty bio. Edit it as you see fit." ? (
                   <div>
                     <p></p>
                   </div>
                 ) : (
-                    <div
-                      className="bioContainer"
-                    >
-                      <h1>Bio</h1>
-                      <hr
-                        className="componentHeaderDivider"
-                        color="lightgrey"
-                        size="1"
-                      />
-                      <p>{getBioSeeMoreSeeLess(bio, 'phone')}</p>
-                    </div>
+                  <div className="bioContainer">
+                    <h1>Bio</h1>
+                    <hr
+                      className="componentHeaderDivider"
+                      color="lightgrey"
+                      size="1"
+                    />
+                    <p>{getBioSeeMoreSeeLess(bio, "phone")}</p>
+                  </div>
                 )}
               </>
             )}
@@ -796,7 +791,7 @@ description={item.description}
                   // style={{ width: window.innerWidth }}
                 >
                   {thisMediaArray.map((item) => {
-                    if (item.media === 'photo') {
+                    if (item.media === "photo") {
                       return <ImageItem url={item.url} />;
                     } else {
                       return <VideoItem url={item.url} />;
@@ -814,15 +809,15 @@ description={item.description}
                   color="lightgrey"
                 />
 
-                {ShowMoreShowLess('Experience')}
-                 <hr
+                {ShowMoreShowLess("Experience")}
+                <hr
                   className="componentBottomDivider"
                   size="1"
                   color="lightgrey"
                 />
                 {thisExperienceArray.length > 3 ? (
                   <button
-                    className={'seeMoreSeeLessItemButton'}
+                    className={"seeMoreSeeLessItemButton"}
                     onClick={() =>
                       setshowMoreShowLessButtonExperience(
                         !showMoreShowLessButtonExperience
@@ -847,8 +842,8 @@ description={item.description}
                   color="lightgrey"
                 />
 
-                {ShowMoreShowLess('Accoplishment')}
- <hr
+                {ShowMoreShowLess("Accoplishment")}
+                <hr
                   className="componentBottomDivider"
                   size="1"
                   color="lightgrey"
@@ -877,8 +872,8 @@ description={item.description}
                   color="lightgrey"
                 />
 
-                {ShowMoreShowLess('Measurables')}
-                 <hr
+                {ShowMoreShowLess("Measurables")}
+                <hr
                   className="componentBottomDivider"
                   size="1"
                   color="lightgrey"
@@ -903,9 +898,9 @@ description={item.description}
                 src={SpogoLogo}
                 alt="Spogo"
                 onClick={() => {
-                  window.open('https://spogo.us');
+                  window.open("https://spogo.us");
                   mixpanel.track(
-                    'Profile Spogo Botton Pressed by External Visitor'
+                    "Profile Spogo Botton Pressed by External Visitor"
                   );
                 }}
               />
@@ -913,7 +908,9 @@ description={item.description}
           </div>
           {/* This needs to be its own component */}
           {window.innerWidth > 1200 && (
-            <div className="profileChatRightTab">{<ProfileWaitlistComponent/>}</div>
+            <div className="profileChatRightTab">
+              {<ProfileWaitlistComponent />}
+            </div>
           )}
         </div>
       )}
