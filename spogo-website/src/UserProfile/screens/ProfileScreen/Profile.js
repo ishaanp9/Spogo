@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Item from '../../components/ExpTrophyMesItem/Item';
 import { VideoItem, ImageItem } from '../../components/VideoItem/VideoItem';
 import './Profile.css';
@@ -33,6 +33,7 @@ import {
   setUserDataCollected,
   getUserDataCollected,
 } from '../../../ProfileData';
+import ProfileWaitlistComponent from '../../components/ProfileWaitlistComponent/ProfileWaitlistComponent';
 
 const Profile = (props) => {
   let path = props.url;
@@ -59,6 +60,24 @@ const Profile = (props) => {
   const [showTwitter, setShowTwitter] = useState(true);
   const [showEmail, setShowEmail] = useState(true);
   const [showWildcard, setShowWildcard] = useState(true);
+
+  const scrollBio = useRef(null);
+  const scrollHighlights = useRef(null);
+  const scrollExperience = useRef(null);
+  const scrollAccomplishments = useRef(null);
+  const scrollMeasurables = useRef(null);
+
+  //there has to be a better way to do this, using a function didint work.
+  const executeBioScroll = () =>
+    scrollBio.current.scrollIntoView({ behavior: 'smooth' });
+  const executeHighlightsScroll = () =>
+    scrollHighlights.current.scrollIntoView({ behavior: 'smooth' });
+  const executeExperiencesScroll = () =>
+    scrollExperience.current.scrollIntoView({ behavior: 'smooth' });
+  const executeAccoplishmentsScroll = () =>
+    scrollAccomplishments.current.scrollIntoView({ behavior: 'smooth' });
+  const executeMeasurablesScroll = () =>
+    scrollMeasurables.current.scrollIntoView({ behavior: 'smooth' });
 
   useEffect(async () => {
     //Checks if user data has already been retrieved from the database, other retreives data
@@ -241,7 +260,7 @@ const Profile = (props) => {
     } else if (window.innerWidth < 1200) {
       setIconSize(40);
     } else {
-      setIconSize(25);
+      setIconSize(22);
     }
   };
 
@@ -320,6 +339,170 @@ const Profile = (props) => {
       }
     }
   };
+  //Show More / Show Less Button for Items
+
+  const [
+    showMoreShowLessButtonExperience,
+    setshowMoreShowLessButtonExperience,
+  ] = useState(false);
+  const [
+    showMoreShowLessButtonAccoplishment,
+    setshowMoreShowLessButtonAccoplishment,
+  ] = useState(false);
+  const [
+    showMoreShowLessButtonMeasurables,
+    setshowMoreShowLessButtonMeasurables,
+  ] = useState(false);
+  const [
+    showMoreShowLessButtonTextExperience,
+    setShowMoreShowLessButtonTextExperience,
+  ] = useState('Show More');
+  const [
+    showMoreShowLessButtonTextAccoplishment,
+    setShowMoreShowLessButtonTextAccoplishment,
+  ] = useState('Show More');
+  const [
+    showMoreShowLessButtonTextMeasurables,
+    setShowMoreShowLessButtonTextMeasurables,
+  ] = useState('Show More');
+  let itemLengthDifferenceNumberExperience;
+  let itemLengthDifferenceNumberAccoplishment;
+  let itemLengthDifferenceNumberMeasurables;
+
+  const ShowMoreShowLess = (itemType) => {
+    if (itemType === 'Experience') {
+      if (thisExperienceArray.length > 3 && !showMoreShowLessButtonExperience) {
+        itemLengthDifferenceNumberExperience = thisExperienceArray.length - 3;
+        setShowMoreShowLessButtonTextExperience('Show More');
+        return (
+          <ul>
+            {thisExperienceArray
+              .slice(
+                0,
+                thisExperienceArray.length -
+                  itemLengthDifferenceNumberExperience
+              )
+              .map((item) => (
+                <Item
+                  iconName="crown"
+                  color="#ffbb48"
+                 title={item.title}
+                      team={item.team}
+                      time={item.duration}
+                      description={item.description}
+                  idNum={item.idNum - itemLengthDifferenceNumberExperience}
+                  userUID={UID}
+                />
+              ))}
+          </ul>
+        );
+      } else {
+        setShowMoreShowLessButtonTextExperience('Show Less');
+        return (
+          <ul>
+            {thisExperienceArray.map((item) => (
+              <Item
+                iconName="crown"
+                color="#ffbb48"
+               title={item.title}
+                      team={item.team}
+                      time={item.duration}
+                      description={item.description}
+                idNum={item.idNum}
+                userUID={UID}
+              />
+            ))}
+          </ul>
+        );
+      }
+    } else if (itemType === 'Accoplishment') {
+      if (thisTrophyArray.length > 3 && !showMoreShowLessButtonAccoplishment) {
+        itemLengthDifferenceNumberAccoplishment = thisTrophyArray.length - 3;
+        setShowMoreShowLessButtonTextAccoplishment('Show More');
+        return (
+          <ul>
+            {thisTrophyArray
+              .slice(
+                0,
+                thisTrophyArray.length - itemLengthDifferenceNumberAccoplishment
+              )
+              .map((item) => (
+                <Item
+                  iconName="trophy"
+                  color="#A08864"
+                  title={item.title}
+                  time={item.duration}
+      description={item.description}
+                  idNum={item.idNum - itemLengthDifferenceNumberAccoplishment}
+                  userUID={UID}
+                />
+              ))}
+          </ul>
+        );
+      } else {
+        setShowMoreShowLessButtonTextAccoplishment('Show Less');
+        return (
+          <ul>
+            {thisTrophyArray.map((item) => (
+              <Item
+                iconName="trophy"
+                color="#A08864"
+                title={item.title}
+                time={item.duration}
+description={item.description}
+                idNum={item.idNum}
+                userUID={UID}
+              />
+            ))}
+          </ul>
+        );
+      }
+    } else if (itemType === 'Measurables') {
+      if (
+        thisMeasurableArray.length > 3 &&
+        !showMoreShowLessButtonMeasurables
+      ) {
+        itemLengthDifferenceNumberMeasurables = thisMeasurableArray.length - 3;
+        setShowMoreShowLessButtonTextMeasurables('Show More');
+        return (
+          <ul>
+            {thisMeasurableArray
+              .slice(
+                0,
+                thisMeasurableArray.length -
+                  itemLengthDifferenceNumberMeasurables
+              )
+              .map((item) => (
+                <Item
+                  iconName="rocket-launch"
+                  color="dodgerblue"
+                  title={item.title}
+                  time={item.value}
+                  idNum={item.idNum - itemLengthDifferenceNumberMeasurables}
+                  userUID={UID}
+                />
+              ))}
+          </ul>
+        );
+      } else {
+        setShowMoreShowLessButtonTextMeasurables('Show Less');
+        return (
+          <ul>
+            {thisMeasurableArray.map((item) => (
+              <Item
+                iconName="rocket-launch"
+                color="dodgerblue"
+                title={item.title}
+                time={item.value}
+                idNum={item.idNum}
+                userUID={UID}
+              />
+            ))}
+          </ul>
+        );
+      }
+    }
+  };
 
   const [wildcardLinkModalOpen, setWildcardLinkModalOpen] = useState(false);
 
@@ -368,105 +551,112 @@ const Profile = (props) => {
             </div>
           </Modal>
           {window.innerWidth > 1200 && (
-            // We should use refs so we can scroll to the ref clicked on 
+            // We should use refs so we can scroll to the ref clicked on
             <div className="profileScrollBarContainer">
-              <p>ScrollBar Goes Here</p>
+              {bio != 'This is an empty bio. Edit it as you see fit.' ? (
+                <p onClick={executeBioScroll}>Bio</p>
+              ) : null}
+              {thisMediaArray.length > 0 ? (
+                <p onClick={executeHighlightsScroll}>Highlights</p>
+              ) : null}
+              {thisExperienceArray.length > 0 ? (
+                <p onClick={executeExperiencesScroll}>Experiences</p>
+              ) : null}
+              {thisTrophyArray.length > 0 ? (
+                <p onClick={executeAccoplishmentsScroll}>Accoplishments</p>
+              ) : null}
+              {thisMeasurableArray.length > 0 ? (
+                <p onClick={executeMeasurablesScroll}>Measurables</p>
+              ) : null}
             </div>
           )}
           <div className="middleProfileContent">
             {window.innerWidth > 1200 ? (
               <>
                 <div className="profileHeader">
-                  <div className="profileTopContainer">
-                    <div className="profileImageContainer">
-                      {profileImage === '' || profileImage === undefined ? (
-                        <img className="profileImage" src={BlankProfile} />
-                      ) : (
-                        <img className="profileImage" src={profileImage} />
-                      )}
+                  <div className="profileImageContainer">
+                    {profileImage === '' || profileImage === undefined ? (
+                      <img className="profileImage" src={BlankProfile} />
+                    ) : (
+                      <img className="profileImage" src={profileImage} />
+                    )}
+                  </div>
+                  <div className="profileTextContainer">
+                    <div className="nameSportTextContainer">
+                      <h1 className="websiteUserName">{name}</h1>
+                      <h2 className="websiteSportPositionText">
+                        {position === '' ? sport : sport + ' - ' + position}
+                      </h2>
                     </div>
-                    <div className="profileTextContainer">
-                      <div className="nameSportTextContainer">
-                        <h1 className="websiteUserName">{name}</h1>
-                        <p className="nameSportDivider"> | </p>
-                        <h2 className="websiteSportPositionText">
-                          {position === '' ? sport : sport + ' - ' + position}
-                        </h2>
+
+                    {location ? (
+                      <div className="locationIconTextContainer">
+                        <MdLocationOn color={'grey'} size={20} />
+                        <h3 className="locationText">{location}</h3>
                       </div>
-                      <div className="locationIconMediaTextContainer">
-                        {location ? (
-                          <div className="locationIconTextContainer">
-                            <MdLocationOn color={'grey'} size={20} />
-                            <h3 className="locationText">{location}</h3>
-                          </div>
-                        ) : (
-                          null
-                        )}
-                        <div className="socialIconsRow">
-                          {showInstagram && (
-                            <FaInstagram
-                              className="socialIcon"
-                              onClick={() =>
-                                // window.location.replace("www.instagram.com/" + instagram)
-                                {
-                                  mixpanel.track(
-                                    'Profile Icons Pressed by External Visitor',
-                                    { 'Profile Icon': 'Instagram' }
-                                  );
-                                  window.open(
-                                    'https://instagram.com/' + instagram
-                                  );
-                                }
-                              }
-                              size={iconSize}
-                              color={'#E1306C'}
-                            />
-                          )}
-                          {showTwitter && (
-                            <FaTwitter
-                              className="socialIcon"
-                              onClick={() =>
-                                // window.location.replace("www.instagram.com/" + instagram)
-                                {
-                                  mixpanel.track(
-                                    'Profile Icons Pressed by External Visitor',
-                                    { 'Profile Icon': 'Twitter' }
-                                  );
-                                  window.open('https://twitter.com/' + twitter);
-                                }
-                              }
-                              size={iconSize}
-                              color={'#1DA1F2'}
-                            />
-                          )}
-                          {showEmail && (
-                            <MdMail
-                              className="socialIcon"
-                              onClick={() => {
-                                mixpanel.track(
-                                  'Profile Icons Pressed by External Visitor',
-                                  { 'Profile Icon': 'Email' }
-                                );
-                                window.open('mailto:' + email);
-                              }}
-                              // onClick={() =>
-                              //   // window.location.replace("www.instagram.com/" + instagram)
-                              //   window.open("https://instagram.com/" + instagram)
-                              // }
-                              size={iconSize}
-                              color={'#5D4D4A'}
-                            />
-                          )}
-                          {showWildcard && (
-                            <BsLink45Deg
-                              className="socialIcon"
-                              onClick={() => setWildcardLinkModalOpen(true)}
-                              size={iconSize}
-                              color={'#ffae42'}
-                            />
-                          )}
-                        </div>
-                      </div>
+                    ) : null}
+
+                    <div className="socialIconsRow">
+                      {showInstagram && (
+                        <FaInstagram
+                          className="socialIcon"
+                          onClick={() =>
+                            // window.location.replace("www.instagram.com/" + instagram)
+                            {
+                              mixpanel.track(
+                                'Profile Icons Pressed by External Visitor',
+                                { 'Profile Icon': 'Instagram' }
+                              );
+                              window.open('https://instagram.com/' + instagram);
+                            }
+                          }
+                          size={iconSize}
+                          color={'#E1306C'}
+                        />
+                      )}
+                      {showTwitter && (
+                        <FaTwitter
+                          className="socialIcon"
+                          onClick={() =>
+                            // window.location.replace("www.instagram.com/" + instagram)
+                            {
+                              mixpanel.track(
+                                'Profile Icons Pressed by External Visitor',
+                                { 'Profile Icon': 'Twitter' }
+                              );
+                              window.open('https://twitter.com/' + twitter);
+                            }
+                          }
+                          size={iconSize}
+                          color={'#1DA1F2'}
+                        />
+                      )}
+                      {showEmail && (
+                        <MdMail
+                          className="socialIcon"
+                          onClick={() => {
+                            mixpanel.track(
+                              'Profile Icons Pressed by External Visitor',
+                              { 'Profile Icon': 'Email' }
+                            );
+                            window.open('mailto:' + email);
+                          }}
+                          // onClick={() =>
+                          //   // window.location.replace("www.instagram.com/" + instagram)
+                          //   window.open("https://instagram.com/" + instagram)
+                          // }
+                          size={iconSize}
+                          color={'#5D4D4A'}
+                        />
+                      )}
+                      {showWildcard && (
+                        <BsLink45Deg
+                          className="socialIcon"
+                          onClick={() => setWildcardLinkModalOpen(true)}
+                          size={iconSize}
+                          color={'#ffae42'}
+                        />
+                      )}
                     </div>
                   </div>
                 </div>
@@ -476,6 +666,7 @@ const Profile = (props) => {
                   </div>
                 ) : (
                     <div
+                      ref={scrollBio}
                       className="bioContainer"
                     >
                       <h1>Bio</h1>
@@ -593,7 +784,7 @@ const Profile = (props) => {
               </>
             )}
             {thisMediaArray.length === 0 ? null : (
-              <div className="profileItemListContainer">
+              <div ref={scrollHighlights} className="profileItemListContainer">
                 <h1 className="profileItemListHeader">Highlights</h1>
                 <hr
                   className="componentHeaderDivider"
@@ -615,87 +806,96 @@ const Profile = (props) => {
               </div>
             )}
             {thisExperienceArray.length === 0 ? null : (
-              <div className="profileItemListContainer">
+              <div ref={scrollExperience} className="profileItemListContainer">
                 <h1 className="profileItemListHeader">Experiences</h1>
                 <hr
                   className="componentHeaderDivider"
                   size="1"
                   color="lightgrey"
                 />
-                <ul>
-                  {thisExperienceArray.map((item) => (
-                    <Item
-                      iconName="crown"
-                      color="#ffbb48"
-                      title={item.title}
-                      team={item.team}
-                      time={item.duration}
-                      description={item.description}
-                      idNum={item.idNum}
-                      userUID={UID}
-                    />
-                  ))}
-                </ul>
-                <hr
+
+                {ShowMoreShowLess('Experience')}
+                 <hr
                   className="componentBottomDivider"
                   size="1"
                   color="lightgrey"
                 />
+                {thisExperienceArray.length > 3 ? (
+                  <button
+                    className={'seeMoreSeeLessItemButton'}
+                    onClick={() =>
+                      setshowMoreShowLessButtonExperience(
+                        !showMoreShowLessButtonExperience
+                      )
+                    }
+                    type="button"
+                  >
+                    {showMoreShowLessButtonTextExperience}
+                  </button>
+                ) : null}
               </div>
             )}
             {thisTrophyArray.length === 0 ? null : (
-              <div className="profileItemListContainer">
+              <div
+                ref={scrollAccomplishments}
+                className="profileItemListContainer"
+              >
                 <h1 className="profileItemListHeader">Accomplishments</h1>
                 <hr
                   className="componentHeaderDivider"
                   size="1"
                   color="lightgrey"
                 />
-                <ul>
-                  {thisTrophyArray.map((item) => (
-                    <Item
-                      iconName="trophy"
-                      color="#A08864"
-                      title={item.title}
-                      time={item.duration}
-                      description={item.description}
-                      idNum={item.idNum}
-                      userUID={UID}
-                    />
-                  ))}
-                </ul>
-                <hr
+
+                {ShowMoreShowLess('Accoplishment')}
+ <hr
                   className="componentBottomDivider"
                   size="1"
                   color="lightgrey"
                 />
+                {thisTrophyArray.length > 3 ? (
+                  <button
+                    onClick={() =>
+                      setshowMoreShowLessButtonAccoplishment(
+                        !showMoreShowLessButtonAccoplishment
+                      )
+                    }
+                    style={{ height: 100 }}
+                    type="button"
+                  >
+                    {showMoreShowLessButtonTextAccoplishment}
+                  </button>
+                ) : null}
               </div>
             )}
             {thisMeasurableArray.length === 0 ? null : (
-              <div className="profileItemListContainer">
+              <div ref={scrollMeasurables} className="profileItemListContainer">
                 <h1 className="profileItemListHeader">Measurables</h1>
                 <hr
                   className="componentHeaderDivider"
                   size="1"
                   color="lightgrey"
                 />
-                <ul>
-                  {thisMeasurableArray.map((item) => (
-                    <Item
-                      iconName="rocket-launch"
-                      color="dodgerblue"
-                      title={item.title}
-                      time={item.value}
-                      idNum={item.idNum}
-                      userUID={UID}
-                    />
-                  ))}
-                </ul>
-                <hr
+
+                {ShowMoreShowLess('Measurables')}
+                 <hr
                   className="componentBottomDivider"
                   size="1"
                   color="lightgrey"
                 />
+                {thisMeasurableArray.length > 3 ? (
+                  <button
+                    onClick={() =>
+                      setshowMoreShowLessButtonMeasurables(
+                        !showMoreShowLessButtonMeasurables
+                      )
+                    }
+                    style={{ height: 100 }}
+                    type="button"
+                  >
+                    {showMoreShowLessButtonTextMeasurables}
+                  </button>
+                ) : null}
               </div>
             )}
             <div className="spogoLogo">
@@ -713,7 +913,7 @@ const Profile = (props) => {
           </div>
           {/* This needs to be its own component */}
           {window.innerWidth > 1200 && (
-            <div className="profileChatRightTab">Chat Goes Here</div>
+            <div className="profileChatRightTab">{<ProfileWaitlistComponent/>}</div>
           )}
         </div>
       )}

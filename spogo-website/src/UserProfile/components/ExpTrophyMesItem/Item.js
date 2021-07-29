@@ -64,7 +64,7 @@ const Item = (props) => {
     } else if (window.innerWidth < 1200) {
       setIconSize(25);
     } else {
-      setIconSize(25);
+      setIconSize(20);
     }
   };
 

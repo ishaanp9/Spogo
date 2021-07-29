@@ -367,7 +367,6 @@
 
 @media screen and (min-width: 1200px) {
   .ProfileScreenContainer {
-    align-items: center;
     display: flex;
     flex-direction: row;
     width: 100%;
@@ -376,12 +375,15 @@
   }
 
   .profileScrollBarContainer {
+    position: fixed;
     width: 20%;
-    height: 200px;
+    height: 100%;
+    padding-left: 5%;
     /* background-color: white; */
     border-radius: 50px;
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
     justify-content: center;
   }
 
@@ -400,50 +402,44 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-left: 20%;
   }
 
   .profileHeader {
     /* border: solid; */
     margin-top: 20px;
-    width: 100%;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+    width: 100%;
     /* background-color: white; */
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    padding: 3%;
+    align-items: center;
   }
-
-  .profileTopContainer {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    /* align-items: center; */
-  }
-
   .nameSportTextContainer {
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    flex-direction: column;
     width: 100%;
     justify-content: flex-start;
+    align-items: center;
     /* margin-bottom: 1%; */
   }
 
   .websiteUserName {
-    font-size: 30px;
+    font-size: 22px;
     color: black;
     font-weight: 500;
   }
 
   .websiteSportPositionText {
-    font-size: 30px;
+    font-size: 18px;
     color: black;
     font-weight: 400;
   }
 
-  .nameSportDivider {
+
+
+/*   .nameSportDivider {
     padding: 0% 3%;
     font-size: 30px;
   }
@@ -455,44 +451,51 @@
     justify-content: space-between;
     width: 100%;
   }
+ */
 
   .locationIconTextContainer {
     display: flex;
     flex-direction: row;
-    align-items: center;
+    justify-content: center;
+    width: 100%;
+    align-self: center;
   }
 
   .locationText {
-    font-size: 18px;
+    font-size: 14px;
     color: black;
     font-weight: 400;
     margin-left: 5px;
+    width: 100%;
   }
 
   .profileTextContainer {
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding-left: 5%;
-    justify-content: space-evenly;
   }
 
   .profileImage {
     border-radius: 1000px;
-    border: 2px solid white;
+    border: 3px solid white;
     object-fit: contain;
-    width: 150px;
+    width: 120px;
   }
 
   .socialIconsRow {
     display: flex;
     flex-direction: row;
     width: 250px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+
+
     /* justify-content: flex-start; */
   }
 
   .socialIcon {
-    margin-right: 5%;
+    /* margin-right: 5%; */
   }
 
   .bioContainer {
@@ -529,8 +532,17 @@
     width: 100%;
   }
 
+
+  .seeMoreSeeLessItemButton {
+    border: none;
+    background-color: transparent;
+    width: 100%;
+    margin: 20px 0px;
+    color: blue;
+
   .componentBottomDivider {
     width: 100%;
+
   }
 
   .profileItemListHeader {
@@ -547,7 +559,6 @@
     background-color: white;
     /* border-radius: 10px; */
     padding: 0% 3%;
-    padding-bottom: 3%;
   }
 
   .spogoLogo {
