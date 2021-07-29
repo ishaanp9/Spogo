@@ -1,4 +1,4 @@
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 600px) {
   .mediaContainer {
     display: flex;
     align-self: flex-start;
@@ -6,10 +6,20 @@
 
   .mediaContainer > img {
     object-fit: cover;
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-right: 5px;
+    height: 140px;
+    width: 210px;
   }
 
   .mediaContainer > video {
-    object-fit: cover;
+    object-fit: contain;
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-right: 5px;
+    height: 140px;
+    width: 210px;
   }
 
   .modalMedia {
@@ -48,6 +58,77 @@
   }
 }
 
+@media screen and (max-width: 1200px) and (min-width: 600px) {
+  .mediaContainer {
+    display: flex;
+    align-self: flex-start;
+    margin-top: 1%;
+  }
+
+  .mediaContainer > img {
+    object-fit: cover;
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-right: 5px;
+    height: 200px;
+    width: 300px;
+  }
+
+  .mediaContainer > video {
+    object-fit: contain;
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-right: 5px;
+    height: 200px;
+    width: 300px;
+  }
+
+  .mediaContainer:hover {
+    cursor: pointer;
+  }
+
+  .modalMedia {
+    object-fit: cover; 
+    width: 40%;
+  }
+
+  .modalContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    justify-content: center;
+  }
+
+  .closeIcon {
+    position: absolute;
+    margin-top: 3%;
+    margin-left: 3%;
+    /* background-color: rgb(51, 45, 45);
+    border-radius: 50px; */
+  }
+  .closeIcon:hover {
+    cursor: pointer;
+  }
+
+  .MediaModal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(34, 31, 31, 0.5);
+  }
+  .ModalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(34, 31, 31, 0.8);
+  }
+}
+
 @media screen and (min-width: 1200px) {
   .mediaContainer {
     display: flex;
@@ -58,11 +139,19 @@
   .mediaContainer > img {
     object-fit: cover;
     border-radius: 10px;
+    margin-top: 20px;
+    margin-right: 5px;
+    height: 200px;
+    width: 300px;
   }
 
   .mediaContainer > video {
-    object-fit: cover;
+    object-fit: contain;
     border-radius: 10px;
+    margin-top: 20px;
+    margin-right: 5px;
+    height: 200px;
+    width: 300px;
   }
 
   .mediaContainer:hover {

@@ -29,18 +29,18 @@ export const VideoItem = (props) => {
       <video
         src={mediaURL}
         controls
-        style={{
-          height:
-            window.innerWidth < 600
-              ? window.innerHeight / 6
-              : window.innerHeight / 6,
-          width:
-            window.innerWidth < 600
-              ? window.innerWidth / 2
-              : window.innerWidth / 3,
-          marginRight: window.innerWidth / 150,
-          marginTop: window.innerHeight / 80,
-        }}
+        // style={{
+        //   height:
+        //     window.innerWidth < 1200
+        //       ? window.innerHeight / 6
+        //       : window.innerHeight / 5,
+        //   width:
+        //     window.innerWidth < 1200
+        //       ? window.innerWidth / 4
+        //       : window.innerWidth / 6,
+        //   marginRight: window.innerWidth / 150,
+        //   marginTop: 20,
+        // }}
       >
         {/* <source src={mediaURL} type="video/mp4"/> */}
       </video>
@@ -75,18 +75,18 @@ export const ImageItem = (props) => {
       <img
         onClick={() => openModal()}
         src={mediaURL}
-        style={{
-          height:
-            window.innerWidth < 600
-              ? window.innerHeight / 6
-              : window.innerHeight / 5,
-          width:
-            window.innerWidth < 600
-              ? window.innerWidth / 2
-              : window.innerWidth / 6,
-          marginRight: window.innerWidth / 150,
-          marginTop: window.innerHeight / 80,
-        }}
+        // style={{
+        //   height:
+        //     window.innerWidth < 1200
+        //       ? window.innerHeight / 6
+        //       : window.innerHeight / 5,
+        //   width:
+        //     window.innerWidth < 1200
+        //       ? window.innerWidth / 2
+        //       : window.innerWidth / 3,
+        //   marginRight: window.innerWidth / 150,
+        //   marginTop: 20,
+        // }}
       />
       {/* These are the same modals but the first one is for 
       the website, the last one is for the mobile view */}
@@ -100,7 +100,7 @@ export const ImageItem = (props) => {
         <MdClose
           className="closeIcon"
           size={25}
-          color={'black'}
+          color={'white'}
           onClick={() => closeModal()}
         />
         <div className="modalContainer">

@@ -475,13 +475,8 @@ const Profile = (props) => {
                     <p></p>
                   </div>
                 ) : (
-                  <>
                     <div
                       className="bioContainer"
-                      style={{
-                        marginTop: window.innerHeight / 80,
-                        marginBottom: window.innerHeight / 80,
-                      }}
                     >
                       <h1>Bio</h1>
                       <hr
@@ -491,8 +486,6 @@ const Profile = (props) => {
                       />
                       <p>{getBioSeeMoreSeeLess(bio, 'website')}</p>
                     </div>
-                    <hr size="2" color="black" className="bioDivider" />
-                  </>
                 )}
               </>
             ) : (
@@ -585,18 +578,17 @@ const Profile = (props) => {
                     <p></p>
                   </div>
                 ) : (
-                  <div>
                     <div
                       className="bioContainer"
-                      style={{
-                        marginTop: window.innerHeight / 80,
-                        marginBottom: window.innerHeight / 80,
-                      }}
                     >
+                      <h1>Bio</h1>
+                      <hr
+                        className="componentHeaderDivider"
+                        color="lightgrey"
+                        size="1"
+                      />
                       <p>{getBioSeeMoreSeeLess(bio, 'phone')}</p>
                     </div>
-                    <hr size="2" color="black" className="bioDivider" />
-                  </div>
                 )}
               </>
             )}
@@ -610,7 +602,7 @@ const Profile = (props) => {
                 />
                 <ul
                   className="videoItemArrayList"
-                  style={{ width: window.innerWidth }}
+                  // style={{ width: window.innerWidth }}
                 >
                   {thisMediaArray.map((item) => {
                     if (item.media === 'photo') {
@@ -636,12 +628,19 @@ const Profile = (props) => {
                       iconName="crown"
                       color="#ffbb48"
                       title={item.title}
+                      team={item.team}
                       time={item.duration}
+                      description={item.description}
                       idNum={item.idNum}
                       userUID={UID}
                     />
                   ))}
                 </ul>
+                <hr
+                  className="componentBottomDivider"
+                  size="1"
+                  color="lightgrey"
+                />
               </div>
             )}
             {thisTrophyArray.length === 0 ? null : (
@@ -659,11 +658,17 @@ const Profile = (props) => {
                       color="#A08864"
                       title={item.title}
                       time={item.duration}
+                      description={item.description}
                       idNum={item.idNum}
                       userUID={UID}
                     />
                   ))}
                 </ul>
+                <hr
+                  className="componentBottomDivider"
+                  size="1"
+                  color="lightgrey"
+                />
               </div>
             )}
             {thisMeasurableArray.length === 0 ? null : (
@@ -686,6 +691,11 @@ const Profile = (props) => {
                     />
                   ))}
                 </ul>
+                <hr
+                  className="componentBottomDivider"
+                  size="1"
+                  color="lightgrey"
+                />
               </div>
             )}
             <div className="spogoLogo">
