@@ -115,7 +115,7 @@ const DescriptionScreen = (props) => {
             <h1>{headerName}</h1>
             <h2>B</h2>
           </div>
-          <hr className="descriptionScreenHeaderDivider" size="2" color="lightgrey" />
+          <hr className="descriptionScreenHeaderDivider" size="1" color="lightgrey" />
           <div>
             <ul>
               {itemArray.map((item) => {
@@ -133,7 +133,7 @@ const DescriptionScreen = (props) => {
                           <h3>{descriptionSeeMoreSeeLess(item.description)}</h3>
                         </div>
                       </div>
-                      <hr size="2" color="lightgrey" className="itemBottomDivider" />
+                      <hr size="1" color="lightgrey" className="itemBottomDivider" />
                     </div>
                   );
                 } else {
@@ -141,16 +141,18 @@ const DescriptionScreen = (props) => {
                     <div>
                       <div
                         className="descriptionScreenItemContainer"
-                        //   style={{ height: window.innerHeight / 12 }}
                       >
-                        <DetermineAndDisplayItemIcon iconType={icon} />
+                        <div className="itemIconContainer">
+                          <DetermineAndDisplayItemIcon iconType={icon} />
+                        </div>
                         <div className="itemTextContainer" key={item.idNum}>
                           <h1>{item.title}</h1>
-                          <h2>{item.duration}</h2>
-                          <h3>{descriptionSeeMoreSeeLess(item.description)}</h3>
+                          <h2>{item.team}</h2>
+                          <h3>{item.duration}</h3>
+                          <h4>{descriptionSeeMoreSeeLess(item.description)}</h4>
+                          <hr size="1" color="lightgrey" className="itemBottomDivider" />
                         </div>
                       </div>
-                      <hr size="2" color="lightgrey" className="itemBottomDivider" />
                     </div>
                   );
                 }

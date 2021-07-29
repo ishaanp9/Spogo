@@ -6,7 +6,7 @@
   width: 100%;
 }
 
-.descriptionScreenHeader > h2{
+.descriptionScreenHeader > h2 {
   color: white;
 }
 
@@ -15,13 +15,14 @@
 }
 
 .descriptionScreenItemContainer {
-  width: 85%;
+  width: 100%;
   display: flex;
   flex-direction: row;
   align-self: center;
-  margin-left: 5%;
   align-items: center;
   overflow-x: hidden;
+  padding-left: 10px;
+  /* border: solid; */
 }
 
 .seeMoreButton {
@@ -42,60 +43,78 @@
 }
 
 .itemBottomDivider {
-  margin-left: 15%;
+  margin-top: 20px;
 }
 
-@media screen and (max-width: 400px) {
-  .descriptionScreenHeader {
-    padding: 0% 5%;
-  }
-
-  .descriptionScreenHeader > h1 {
-    margin-top: 10px;
-    /* margin-left: 20%; */
-    font-size: 19px;
-  }
-
-  .BackIcon {
-    margin-top: 15px;
-    padding-right: 25%;
-  }
-
-  .itemTextContainer {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-self: center;
-    justify-content: flex-start;
-    margin-top: 2%;
-    margin-left: 5%;
-    margin-bottom: 2%;
-  }
-
-  .itemTextContainer > h1 {
-    font-size: 16px;
-    font-weight: bold;
-    color: black;
-    margin-bottom: 3%;
-    margin-top: 3%;
-  }
-
-  .itemTextContainer > h2 {
-    font-size: 14px;
-    font-weight: 300;
-    color: black;
-    margin-bottom: 2%;
-  }
-
-  .itemTextContainer > h3 {
-    font-size: 14px;
-    font-weight: 300;
-    color: black;
-    margin-bottom: 2%;
-  }
+/* @media screen and (max-width: 400px) { */
+.descriptionScreenHeader {
+  padding: 0% 5%;
 }
 
-@media screen and (max-width: 600px) and (min-width: 400px) {
+.descriptionScreenHeader > h1 {
+  margin-top: 10px;
+  /* margin-left: 20%; */
+  font-size: 19px;
+}
+
+.BackIcon {
+  margin-top: 15px;
+  padding-right: 25%;
+}
+
+.itemIconContainer {
+  /* border: solid; */
+  margin-right: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.itemTextContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  justify-content: flex-start;
+  margin-top: 20px;
+}
+
+.itemTextContainer > h1 {
+  font-size: 16px;
+  font-weight: bold;
+  color: black;
+  margin-right: 5px;
+  /* margin-bottom: 3%;
+  margin-top: 3%; */
+}
+
+.itemTextContainer > h2 {
+  font-size: 14px;
+  font-weight: 300;
+  color: grey;
+  margin-right: 5px;
+
+  /* margin-bottom: 2%; */
+}
+
+.itemTextContainer > h3 {
+  font-size: 14px;
+  font-weight: 300;
+  color: grey;
+  margin-right: 5px;
+  /* margin-bottom: 2%; */
+}
+
+.itemTextContainer > h4 {
+  font-size: 14px;
+  font-weight: 300;
+  color: grey;
+  margin-right: 5px;
+  /* margin-bottom: 2%; */
+}
+
+/* @media screen and (max-width: 600px) and (min-width: 400px) {
   .descriptionScreenHeader > h1 {
     margin-top: 12px;
     display: flex;
@@ -139,4 +158,4 @@
     color: black;
     margin-bottom: 2%;
   }
-}
+} */
