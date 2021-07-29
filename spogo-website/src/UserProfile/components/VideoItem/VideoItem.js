@@ -33,11 +33,11 @@ export const VideoItem = (props) => {
           height:
             window.innerWidth < 600
               ? window.innerHeight / 6
-              : window.innerHeight / 6,
+              : window.innerHeight / 5,
           width:
             window.innerWidth < 600
               ? window.innerWidth / 2
-              : window.innerWidth / 3,
+              : window.innerWidth / 6,
           marginRight: window.innerWidth / 150,
           marginTop: window.innerHeight / 80,
         }}
