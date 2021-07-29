@@ -190,6 +190,7 @@
 
   .componentBottomDivider {
     width: 100%;
+    margin-bottom: 20px;
   }
 }
 
@@ -362,6 +363,7 @@
 
   .componentBottomDivider {
     width: 100%;
+    margin-bottom: 20px;
   }
 }
 
@@ -437,9 +439,7 @@
     font-weight: 400;
   }
 
-
-
-/*   .nameSportDivider {
+  /*   .nameSportDivider {
     padding: 0% 3%;
     font-size: 30px;
   }
@@ -489,7 +489,6 @@
     justify-content: center;
     width: 100%;
 
-
     /* justify-content: flex-start; */
   }
 
@@ -531,7 +530,6 @@
     width: 100%;
   }
 
-
   .seeMoreSeeLessItemButton {
     border: none;
     background-color: transparent;
@@ -539,9 +537,10 @@
     margin: 20px 0px;
     color: blue;
   }
+
   .componentBottomDivider {
     width: 100%;
-
+    margin-bottom: 20px;
   }
 
   .profileItemListHeader {
@@ -581,6 +580,7 @@
     overflow-y: hidden;
     white-space: nowrap;
     width: 100%;
+    margin-bottom: 20px;
   }
 
   .wildcardLinkModalContentContainer > h1 {
