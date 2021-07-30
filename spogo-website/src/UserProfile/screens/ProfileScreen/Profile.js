@@ -554,19 +554,19 @@ const Profile = (props) => {
             // We should use refs so we can scroll to the ref clicked on
             <div className="profileScrollBarContainer">
               {bio != "This is an empty bio. Edit it as you see fit." ? (
-                <p onClick={executeBioScroll}>Bio</p>
+                <p className='profileSideBarItem' onClick={executeBioScroll}>Bio</p>
               ) : null}
               {thisMediaArray.length > 0 ? (
-                <p onClick={executeHighlightsScroll}>Highlights</p>
+                <p className='profileSideBarItem' onClick={executeHighlightsScroll}>Highlights</p>
               ) : null}
               {thisExperienceArray.length > 0 ? (
-                <p onClick={executeExperiencesScroll}>Experiences</p>
+                <p className='profileSideBarItem' onClick={executeExperiencesScroll}>Experiences</p>
               ) : null}
               {thisTrophyArray.length > 0 ? (
-                <p onClick={executeAccoplishmentsScroll}>Accoplishments</p>
+                <p className='profileSideBarItem' onClick={executeAccoplishmentsScroll}>Accoplishments</p>
               ) : null}
               {thisMeasurableArray.length > 0 ? (
-                <p onClick={executeMeasurablesScroll}>Measurables</p>
+                <p className='profileSideBarItem' onClick={executeMeasurablesScroll}>Measurables</p>
               ) : null}
             </div>
           )}
@@ -907,11 +907,11 @@ const Profile = (props) => {
             </div>
           </div>
           {/* This needs to be its own component */}
-          {window.innerWidth > 1200 && (
+          {/* {window.innerWidth > 1200 && (
             <div className="profileChatRightTab">
               {<ProfileWaitlistComponent />}
             </div>
-          )}
+          )} */}
         </div>
       )}
     </MixpanelConsumer>
