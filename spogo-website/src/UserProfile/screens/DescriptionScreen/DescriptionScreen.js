@@ -6,7 +6,7 @@ import {
   Route,
   Switch,
   useLocation,
-  Redirect
+  Redirect,
 } from "react-router-dom";
 import { IoChevronBack } from "react-icons/io5";
 import {
@@ -50,13 +50,7 @@ const DescriptionScreen = (props) => {
 
   //Determines what size icons should be based on screen width
   const determineIconSize = () => {
-    if (window.innerWidth < 600) {
-      setIconSize(25);
-    } else if (window.innerWidth < 1200) {
-      setIconSize(40);
-    } else {
-      setIconSize(55);
-    }
+    setIconSize(25)
   };
 
   //Based on icon type, displays either crown or trophy icons
@@ -91,7 +85,7 @@ const DescriptionScreen = (props) => {
           <p>
             {text.slice(0, 121)}
             <span className="seeMoreButton" onClick={() => setShowMore(true)}>
-              {' '}
+              {" "}
               ...See More
             </span>
           </p>
@@ -115,34 +109,39 @@ const DescriptionScreen = (props) => {
             <h1>{headerName}</h1>
             <h2>B</h2>
           </div>
-          <hr className="descriptionScreenHeaderDivider" size="1" color="lightgrey" />
+          <hr
+            className="descriptionScreenHeaderDivider"
+            size="1"
+            color="lightgrey"
+          />
           <div>
             <ul>
               {itemArray.map((item) => {
                 if (icon === "trophy") {
                   return (
                     <div>
-                      <div
-                        className="descriptionScreenItemContainer"
-                        //   style={{ height: window.innerHeight / 12 }}
-                      >
-                        <DetermineAndDisplayItemIcon iconType={icon} />
+                      <div className="descriptionScreenItemContainer">
+                        <div className="descriptionItemIconContainer">
+                          <DetermineAndDisplayItemIcon iconType={icon} />
+                        </div>{" "}
                         <div className="itemTextContainer" key={item.idNum}>
                           <h1>{item.title}</h1>
                           <h2>{item.duration}</h2>
                           <h3>{descriptionSeeMoreSeeLess(item.description)}</h3>
                         </div>
                       </div>
-                      <hr size="1" color="lightgrey" className="itemBottomDivider" />
+                      <hr
+                        size="1"
+                        color="lightgrey"
+                        className="itemBottomDivider"
+                      />
                     </div>
                   );
                 } else {
                   return (
                     <div>
-                      <div
-                        className="descriptionScreenItemContainer"
-                      >
-                        <div className="itemIconContainer">
+                      <div className="descriptionScreenItemContainer">
+                        <div className="descriptionItemIconContainer">
                           <DetermineAndDisplayItemIcon iconType={icon} />
                         </div>
                         <div className="itemTextContainer" key={item.idNum}>
@@ -150,7 +149,11 @@ const DescriptionScreen = (props) => {
                           <h2>{item.team}</h2>
                           <h3>{item.duration}</h3>
                           <h4>{descriptionSeeMoreSeeLess(item.description)}</h4>
-                          <hr size="1" color="lightgrey" className="itemBottomDivider" />
+                          <hr
+                            size="1"
+                            color="lightgrey"
+                            className="itemBottomDivider"
+                          />
                         </div>
                       </div>
                     </div>
@@ -173,7 +176,7 @@ const DescriptionScreen = (props) => {
       );
     } else {
       return (
-        <>        
+        <>
           <Redirect to={`/users/${UID}`} />
         </>
       );
