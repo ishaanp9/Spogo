@@ -22,7 +22,6 @@
   align-items: center;
   overflow-x: hidden;
   padding-left: 10px;
-  /* border: solid; */
 }
 
 .seeMoreButton {
@@ -46,7 +45,6 @@
   margin-top: 20px;
 }
 
-/* @media screen and (max-width: 400px) { */
 .descriptionScreenHeader {
   padding: 0% 5%;
 }
@@ -62,13 +60,8 @@
   padding-right: 25%;
 }
 
-.itemIconContainer {
-  /* border: solid; */
+.descriptionItemIconContainer {
   margin-right: 5%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
 }
 
 .itemTextContainer {
