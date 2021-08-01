@@ -554,19 +554,41 @@ const Profile = (props) => {
             // We should use refs so we can scroll to the ref clicked on
             <div className="profileScrollBarContainer">
               {bio != "This is an empty bio. Edit it as you see fit." ? (
-                <p className='profileSideBarItem' onClick={executeBioScroll}>Bio</p>
+                <p className="profileSideBarItem" onClick={executeBioScroll}>
+                  Bio
+                </p>
               ) : null}
               {thisMediaArray.length > 0 ? (
-                <p className='profileSideBarItem' onClick={executeHighlightsScroll}>Highlights</p>
+                <p
+                  className="profileSideBarItem"
+                  onClick={executeHighlightsScroll}
+                >
+                  Highlights
+                </p>
               ) : null}
               {thisExperienceArray.length > 0 ? (
-                <p className='profileSideBarItem' onClick={executeExperiencesScroll}>Experiences</p>
+                <p
+                  className="profileSideBarItem"
+                  onClick={executeExperiencesScroll}
+                >
+                  Experiences
+                </p>
               ) : null}
               {thisTrophyArray.length > 0 ? (
-                <p className='profileSideBarItem' onClick={executeAccoplishmentsScroll}>Accoplishments</p>
+                <p
+                  className="profileSideBarItem"
+                  onClick={executeAccoplishmentsScroll}
+                >
+                  Accoplishments
+                </p>
               ) : null}
               {thisMeasurableArray.length > 0 ? (
-                <p className='profileSideBarItem' onClick={executeMeasurablesScroll}>Measurables</p>
+                <p
+                  className="profileSideBarItem"
+                  onClick={executeMeasurablesScroll}
+                >
+                  Measurables
+                </p>
               ) : null}
             </div>
           )}
@@ -591,7 +613,7 @@ const Profile = (props) => {
 
                     {location ? (
                       <div className="locationIconTextContainer">
-                        <MdLocationOn color={"grey"} size={20} />
+                        <MdLocationOn color={"#EA4335"} size={20} />
                         <h3 className="locationText">{location}</h3>
                       </div>
                     ) : null}
@@ -691,7 +713,13 @@ const Profile = (props) => {
                     </h2>
                   </div>
 
-                  <h3>{location}</h3>
+                  {location ? (
+                    <div className="locationIconTextContainer">
+                      <MdLocationOn color={"#EA4335"} size={20} />
+                      <h3 className="locationText">{location}</h3>
+                    </div>
+                  ) : null}
+
                   <div
                     className="socialIconsRow"
                     style={{

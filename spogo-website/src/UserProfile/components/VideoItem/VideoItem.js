@@ -103,8 +103,8 @@ export const ImageItem = (props) => {
           color={'white'}
           onClick={() => closeModal()}
         />
-        <div className="modalContainer">
-          <img className="modalMedia" src={mediaURL} />
+        <div className="modalContainer" onClick={window.innerWidth > 600 ? () => closeModal() : null}>
+          <img className="modalMedia" src={mediaURL} onClick={null}/>
         </div>
       </Modal>
     </div>
