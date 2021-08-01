@@ -29,7 +29,6 @@
     margin-top: 2px;
   }
 
-
   .locationIconTextContainer {
     display: flex;
     flex-direction: row;
@@ -44,7 +43,7 @@
     font-weight: 400;
     margin-left: 5px;
     /* text-align: center; */
-
+  }
 
   .profileImage {
     border-radius: 1000px;
@@ -164,7 +163,6 @@
     background-color: aliceblue;
   }
 
-
   .spogoLogo {
     display: flex;
     /* width: 100%; */
@@ -276,7 +274,6 @@
     font-weight: 480;
     margin-top: 5px;
   }
-
 
   .locationIconTextContainer {
     display: flex;
@@ -397,7 +394,6 @@
     background-color: aliceblue;
   }
 
-
   .spogoLogo {
     display: flex;
     /* width: 100%; */
@@ -486,8 +482,8 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    margin-top: 20%; 
-    margin-left: 5%; 
+    margin-top: 20%;
+    margin-left: 5%;
     padding: 20px;
     border-radius: 10px;
     /* background-color: rgb(235, 223, 223); */
@@ -716,9 +712,8 @@
   }
 
   .spogoLogo > img:hover {
-   cursor: pointer;
+    cursor: pointer;
   }
-
 
   .videoItemArrayList {
     display: flex;
