@@ -11,6 +11,7 @@ const ProfileNavigator = (props) => {
         <Route path={"/descriptions"}>
           <DescriptionScreen url={path}/>
         </Route>
+        
         <Route path={"/users"}>
           <ProfileScreen url={path} />
         </Route>
