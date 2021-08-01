@@ -156,6 +156,7 @@
     color: rgb(19, 99, 204);
     font-size: 15px;
     font-weight: 500;
+    margin-top: -20px;
   }
 
   .seeMoreSeeLessItemButton:hover {
@@ -387,6 +388,7 @@
     color: rgb(19, 99, 204);
     font-size: 15px;
     font-weight: 500;
+    margin-top: -20px;
   }
 
   .seeMoreSeeLessItemButton:hover {
@@ -661,6 +663,7 @@
     border: none;
     background-color: transparent;
     width: 106.5%;
+    margin-top: -20px;
     /* margin: 0% -20%; */
     align-self: center;
     height: 60px;
