@@ -562,6 +562,7 @@ const Profile = (props) => {
           {window.innerWidth > 1200 && (
             // We should use refs so we can scroll to the ref clicked on
             <div className="profileScrollBarContainer">
+
               {bio != 'This is an empty bio. Edit it as you see fit.' ? (
                 <p className="profileSideBarItem" onClick={executeBioScroll}>
                   Bio
@@ -622,7 +623,7 @@ const Profile = (props) => {
 
                     {location ? (
                       <div className="locationIconTextContainer">
-                        <MdLocationOn color={'grey'} size={20} />
+                        <MdLocationOn color={"#EA4335"} size={20} />
                         <h3 className="locationText">{location}</h3>
                       </div>
                     ) : null}
@@ -723,11 +724,11 @@ const Profile = (props) => {
                   </div>
 
                   {location ? (
-                      <div className="locationIconTextContainer">
-                        <MdLocationOn color={'grey'} size={20} />
-                        <h3 className="locationText">{location}</h3>
-                      </div>
-                    ) : null}
+                    <div className="locationIconTextContainer">
+                      <MdLocationOn color={"#EA4335"} size={20} />
+                      <h3 className="locationText">{location}</h3>
+                    </div>
+                  ) : null}
                   <div
                     className="socialIconsRow"
                     style={{

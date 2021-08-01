@@ -29,6 +29,7 @@
     margin-top: 2px;
   }
 
+
   .locationIconTextContainer {
     display: flex;
     flex-direction: row;
@@ -43,7 +44,7 @@
     font-weight: 400;
     margin-left: 5px;
     /* text-align: center; */
-  }
+
 
   .profileImage {
     border-radius: 1000px;
@@ -117,6 +118,15 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+
+  .locationIconTextContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 5px;
   }
 
   .profileItemListHeader {
@@ -221,6 +231,8 @@
 
   .componentBottomDivider {
     width: 100%;
+    margin-bottom: 20px;
+    margin-top: -1px;
   }
 }
 
@@ -265,6 +277,7 @@
     margin-top: 5px;
   }
 
+
   .locationIconTextContainer {
     display: flex;
     flex-direction: row;
@@ -293,6 +306,15 @@
     border: 3px solid white;
     object-fit: contain;
     width: 120px;
+  }
+
+  .locationIconTextContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 5px;
   }
 
   .socialIconsRow {
@@ -441,6 +463,8 @@
 
   .componentBottomDivider {
     width: 100%;
+    margin-bottom: 20px;
+    margin-top: -1px;
   }
 }
 
@@ -451,6 +475,7 @@
     width: 100%;
     background-color: whitesmoke;
     overflow-x: hidden;
+    height: 100vh;
   }
 
   .profileScrollBarContainer {
@@ -656,6 +681,8 @@
 
   .componentBottomDivider {
     width: 100%;
+    margin-bottom: 20px;
+    margin-top: -1px;
   }
 
   .profileItemListHeader {
