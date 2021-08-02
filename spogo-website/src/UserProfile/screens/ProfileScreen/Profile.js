@@ -12,6 +12,8 @@ import Modal from 'react-modal';
 import ShowMoreText from 'react-show-more-text';
 import { Link } from 'react-router-dom';
 import { MixpanelConsumer } from 'react-mixpanel';
+import WebFont from 'webfontloader';
+
 
 import {
   addUserInfo,
@@ -98,6 +100,14 @@ const Profile = (props) => {
       await getDBUserInfo();
     }
   }, []);
+
+  useEffect(() => {
+    WebFont.load({
+      google: {
+        families: ['Montserrat', 'Open Sans']
+      }
+    });
+   }, []);
 
   const getDBUserInfo = async () => {
     try {

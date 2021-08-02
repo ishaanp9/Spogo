@@ -12,6 +12,8 @@ import {
   getTrophyArray,
   getMeasurableArray,
 } from '../../../ProfileData';
+import WebFont from 'webfontloader';
+
 
 const Item = (props) => {
   let icon = props.iconName;
@@ -36,6 +38,14 @@ const Item = (props) => {
       setSpecificArray(getMeasurableArray());
     }
   };
+
+  useEffect(() => {
+    WebFont.load({
+      google: {
+        families: ['Montserrat', 'Poppins']
+      }
+    });
+   }, []);
 
   useEffect(() => {
     findSize();

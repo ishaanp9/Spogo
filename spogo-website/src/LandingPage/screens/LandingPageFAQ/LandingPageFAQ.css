@@ -3,6 +3,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    font-family: 'Montserrat', sans-serif;
 }
 
 
@@ -29,6 +30,7 @@
 .FAQSectionHeader > h1 {
     font-size: 26px;
     margin-bottom: 2%;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .FAQAnswer {

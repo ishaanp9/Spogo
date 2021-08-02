@@ -11,6 +11,7 @@ import LandingPageBlog from '../LandingPage/screens/LandingPageBlog/LandingPageB
 import LandingPageFAQ from '../LandingPage/screens/LandingPageFAQ/LandingPageFAQ';
 import BlogArticleScreen from '../LandingPage/screens/BlogArticleScreen/BlogArticleScreen';
 
+
 const LandingNavigator = (props) => {
   let path = props.url;
   return (

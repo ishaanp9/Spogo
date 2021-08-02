@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./LandingPage.css";
 import Header from "../../components/Header/Header";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
@@ -13,6 +13,7 @@ import LinkInBioGraphic from './linkinbio.png';
 import firebase from '../../../firebase';
 import { MixpanelConsumer } from 'react-mixpanel';
 import Footer from "../../components/Footer/Footer";
+import WebFont from "webfontloader";
 
 
 const LandingPage = () => {
@@ -21,6 +22,14 @@ const LandingPage = () => {
   const [waitlistInputValid, setWaitlistInputValid] = useState(false);
   const [invalidInput, setInvalidInput] = useState(false);
   const [waitlistAddSuccessful, setWaitlistAddSuccessful] = useState(false);
+
+  useEffect(() => {
+    WebFont.load({
+      google: {
+        families: ['Montserrat', 'Open Sans', 'Public Sans']
+      }
+    });
+   }, []);
 
   const addUserToWaitlist = async () => {
     await firebase
