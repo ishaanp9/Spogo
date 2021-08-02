@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './LandingPageFAQ.css';
 import Header from '../../components/Header/Header';
 import { FaPlus, FaMinus } from 'react-icons/fa';
 import Footer from '../../components/Footer/Footer';
+import WebFont from 'webfontloader';
 
 const LandingPageFAQ = () => {
   const FAQItem = (props) => {
@@ -10,7 +11,13 @@ const LandingPageFAQ = () => {
     let answer = props.answer;
     const [FAQOpened, setFAQOpened] = useState(false);
 
-    
+    useEffect(() => {
+      WebFont.load({
+        google: {
+          families: ['Montserrat', 'Open_Sans']
+        }
+      });
+     }, []);
 
     return (
       <div className="FAQContainer">

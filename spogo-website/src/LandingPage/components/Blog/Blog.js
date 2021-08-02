@@ -1,9 +1,20 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Link, useParams } from 'react-router-dom';
 import './Blog.css';
+import WebFont from 'webfontloader';
 
 
 const Blog = ({ image, title, personImage, name, date, paragraphText }) => {
+
+  useEffect(() => {
+    WebFont.load({
+      google: {
+        families: ['Montserrat', 'Open_Sans']
+      }
+    });
+   }, []);
+
+
   const condenseText = (text) => {
     if (text.length <= 151) {
       return text;

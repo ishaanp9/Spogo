@@ -1,12 +1,24 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Footer from '../../components/Footer/Footer';
 import Header from '../../components/Header/Header';
 import './LandingPageAbout.css';
 import stadium from './stadium.jpg';
 import ethan_spogo from './ethan_spogo.jpg';
 import ishaan_spogo from './ishaan_spogo.jpg';
+import WebFont from "webfontloader";
+
+
 
 const LandingPageAbout = () => {
+
+  useEffect(() => {
+    WebFont.load({
+      google: {
+        families: ['Montserrat', 'Open_Sans']
+      }
+    });
+   }, []);
+
   return (
     <>
       <Header />

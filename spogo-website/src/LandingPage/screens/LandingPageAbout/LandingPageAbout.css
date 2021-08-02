@@ -13,8 +13,10 @@
   padding: 10%;
   border-radius: 20px;
   color: rgb(41, 31, 31);
-  font-size: 54px;
+  font-size: 53.4px;
+  font-family: 'Montserrat', sans-serif;
   text-align: center;
+  font-weight: bold;
 }
 
 .missionContainer {
@@ -81,6 +83,7 @@
   font-size: 64px;
   text-align: left;
   width: 40%;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .aboutUsContentContainer {

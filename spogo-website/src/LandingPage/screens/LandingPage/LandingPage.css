@@ -80,6 +80,7 @@
   justify-content: center;
   padding: 0% 5%;
   padding-bottom: 8%;
+  font-family: 'Montserrat', sans-serif;
   /* padding-left: 8%; */
   /* padding-top: 5%; */
   /* border: solid; */
@@ -106,8 +107,8 @@
   font-weight: 400;
   outline: none;
   transition: 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
-  font-family: 'DM Sans', sans-serif;
   margin-bottom: 20px;
+  
 }
 
 .waitlistInputContainer > input:focus {
@@ -123,8 +124,8 @@
   border: none;
   font-weight: bold;
   font-size: 16px;
-  font-family: 'DM Sans', sans-serif;
   width: 100%;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .waitlistButton > button:hover {
@@ -155,6 +156,10 @@
     align-items: center;  
 }
 
+.mainProductHeader > h1 {
+  font-family: 'Montserrat', sans-serif;
+}
+
 .productDescription {
   padding: 2% 5%;
   display: flex;
@@ -168,11 +173,14 @@
 .productDescription > h1 {
   font-size: 28px;
   font-weight: bold;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .productDescription > h2 {
   font-size: 20px;
-  font-weight: 400;
+  font-weight: 350;
+  margin-top: 20px;
+  /* font-family: 'Public Sans', sans-serif; */
 }
 
 /* New Work for styling  */
@@ -207,6 +215,8 @@
 }
 
 .mainProductHeaderSubtitle {
+  /* font-family: 'Open_Sans', sans-serif; */
+  font-weight: 350;
   text-align: center;
   padding: 2% 25%;
   font-size: 20px;
@@ -391,7 +401,6 @@
     font-weight: 400;
     outline: none;
     transition: 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
-    font-family: 'DM Sans', sans-serif;
     width: 95%;
     margin-top: 2%;
   }
@@ -431,7 +440,7 @@
     border: none;
     font-weight: bold;
     font-size: 16px;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Montserrat', sans-serif;
   }
 
   .waitlistButton > button:hover {
@@ -557,7 +566,7 @@
   
   .productDescription > h2 {
     font-size: 20px;
-    font-weight: 400;
+    font-weight: 350;
   }
 }
 
@@ -587,4 +596,8 @@
     text-decoration: none;
   }
 
+  .productDescription > h2 {
+    font-size: 18px;
+    font-weight: 350;
+  }
 }

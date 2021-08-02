@@ -1,15 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Header.css';
 import logo from './spogo_logo.png';
 import top from './top.PNG';
 import { Link } from 'react-router-dom';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { MixpanelConsumer } from 'react-mixpanel';
+import WebFont from 'webfontloader';
 // logo has to have no background at all
 
 function Header() {
   const [click, setClick] = useState(false);
   const handleClick = () => setClick(!click);
+
+  
+  useEffect(() => {
+    WebFont.load({
+      google: {
+        families: ['Montserrat', 'Open_Sans']
+      }
+    });
+   }, []);
 
   return (
     <MixpanelConsumer>

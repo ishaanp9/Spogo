@@ -1,3 +1,5 @@
+
+
 @media screen and (max-width: 600px) {
   .ProfileScreenContainer {
     align-items: center;
@@ -18,7 +20,7 @@
   .profileHeader > div > h1 {
     font-size: 20px;
     color: black;
-    font-weight: 500;
+    font-weight: 600;
     margin-top: 5px;
   }
 
@@ -27,6 +29,7 @@
     color: black;
     font-weight: 480;
     margin-top: 2px;
+
   }
 
   .locationIconTextContainer {
@@ -42,6 +45,7 @@
     color: black;
     font-weight: 400;
     margin-left: 5px;
+    
     /* text-align: center; */
   }
 
@@ -83,6 +87,7 @@
     font-size: 16px;
     font-weight: bold;
     margin: 20px 0px;
+    font-family: 'Montserrat', sans-serif;
   }
 
   .bioContainer > p {
@@ -132,6 +137,7 @@
     font-size: 16px;
     font-weight: bold;
     margin: 20px 0px;
+    font-family: 'Montserrat', sans-serif;
   }
 
   .profileItemListContainer {
@@ -153,10 +159,11 @@
     align-self: center;
     height: 60px;
     /* margin: 20px 0px; */
-    color: rgb(19, 99, 204);
+    color: #3eb489;
     font-size: 15px;
     font-weight: 500;
     margin-top: -20px;
+    font-family: 'Montserrat', sans-serif;
   }
 
   .seeMoreSeeLessItemButton:hover {
@@ -352,6 +359,7 @@
     font-size: 16px;
     font-weight: bold;
     margin: 20px 0px;
+    font-family: 'Montserrat', sans-serif;
   }
 
   .bioContainer > p {
@@ -364,6 +372,7 @@
     font-size: 16px;
     font-weight: bold;
     margin: 20px 0px;
+    font-family: 'Montserrat', sans-serif;
   }
 
   .profileItemListContainer {
@@ -385,10 +394,11 @@
     align-self: center;
     height: 60px;
     /* margin: 20px 0px; */
-    color: rgb(19, 99, 204);
+    color: #3eb489;
     font-size: 15px;
     font-weight: 500;
     margin-top: -20px;
+    font-family: 'Montserrat', sans-serif;
   }
 
   .seeMoreSeeLessItemButton:hover {
@@ -636,8 +646,9 @@
   }
 
   .bioContainer > h1 {
+    font-family: 'Montserrat', sans-serif;
     font-size: 16px;
-    font-weight: 500;
+    font-weight: bold;
     margin: 20px 0px;
   }
 
@@ -668,9 +679,10 @@
     align-self: center;
     height: 60px;
     /* margin: 20px 0px; */
-    color: rgb(19, 99, 204);
+    color: #3eb489;
     font-size: 15px;
     font-weight: 500;
+    font-family: 'Montserrat', sans-serif;
   }
 
   .seeMoreSeeLessItemButton:hover {
@@ -685,6 +697,7 @@
   }
 
   .profileItemListHeader {
+    font-family: 'Montserrat', sans-serif;
     font-size: 16px;
     font-weight: bold;
     margin: 20px 0px;

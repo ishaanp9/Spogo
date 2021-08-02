@@ -1,12 +1,23 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './Footer.css';
 import BottomSpogoLogo from './SpogoLogo.png';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import { FaLinkedin, FaInstagram, FaTwitter } from 'react-icons/fa';
 import { MixpanelConsumer } from 'react-mixpanel';
 import { SiTiktok } from 'react-icons/si';
+import WebFont from 'webfontloader';
 
 const Footer = () => {
+
+  
+  useEffect(() => {
+    WebFont.load({
+      google: {
+        families: ['Montserrat', 'Open_Sans']
+      }
+    });
+   }, []);
+
   return (
     <MixpanelConsumer>
       {(mixpanel) => (
