@@ -5,15 +5,16 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Mockup from "./mockup.png";
 import ExampleImage from "./top.PNG";
 import SpogoTopGraphic from "./spogotopgraphic.png";
-import GirlWithTrophyGraphic from './girlwithtrophy.png';
-import ShowcaseYourselfGraphic from './showcaseyourselfbaseballplayer.png';
-import SocialMediaIntegrationGraphic from './socialmediaintegration.png';
-import TailoredCustomizationGraphic from './tailoredcustomization.png';
-import LinkInBioGraphic from './linkinbio.png';
-import firebase from '../../../firebase';
-import { MixpanelConsumer } from 'react-mixpanel';
+import GirlWithTrophyGraphic from "./girlwithtrophy.png";
+import ShowcaseYourselfGraphic from "./showcaseyourselfbaseballplayer.png";
+import SocialMediaIntegrationGraphic from "./socialmediaintegration.png";
+import TailoredCustomizationGraphic from "./tailoredcustomization.png";
+import LinkInBioGraphic from "./linkinbio.png";
+import firebase from "../../../firebase";
+import { MixpanelConsumer } from "react-mixpanel";
 import Footer from "../../components/Footer/Footer";
 import WebFont from "webfontloader";
+// import waitlistFBProj from "../../../waitlistFBProj";
 
 
 const LandingPage = () => {
@@ -46,6 +47,12 @@ const LandingPage = () => {
       .catch((error) => {
         console.log("Error:", error);
       });
+    // await waitlistFBProj
+    //   .auth(waitlistFBProj, "secondary")
+    //   .createUserWithEmailAndPassword(email, "password")
+    //   .catch((error) => {
+    //     console.log("Error:", error);
+    //   });
   };
 
   let validator = require("email-validator");
@@ -54,11 +61,9 @@ const LandingPage = () => {
     if (validator.validate(email)) {
       addUserToWaitlist();
       <MixpanelConsumer>
-        {(mixpanel) => (
-          mixpanel.track('Waitlist User Added')
-        )}
-      </MixpanelConsumer>
-      setWaitlistAddSuccessful(true)
+        {(mixpanel) => mixpanel.track("Waitlist User Added")}
+      </MixpanelConsumer>;
+      setWaitlistAddSuccessful(true);
     } else {
       setInvalidInput(true);
     }
@@ -70,8 +75,8 @@ const LandingPage = () => {
         <div className="topLandingPageContentBannerContainer">
           <div className="landingPageWaitlistContentContainer">
             <h1>
-              The New Way To Market and Monetize Your Name, Image,
-              And Likeness Is Here.
+              The New Way To Market and Monetize Your Name, Image, And Likeness
+              Is Here.
             </h1>
             <p>Find Out More.</p>
             {!waitlistAddSuccessful ? (
@@ -87,9 +92,7 @@ const LandingPage = () => {
                   />
                   <input
                     style={
-                      invalidInput
-                        ? { borderWidth: 2, borderColor: "red" }
-                        : {}
+                      invalidInput ? { borderWidth: 2, borderColor: "red" } : {}
                     }
                     maxLength={100}
                     type="email"
@@ -132,14 +135,30 @@ const LandingPage = () => {
         <div className="mainProductHeader">
           <h1>This is Spogo.</h1>
           <p className="mainProductHeaderSubtitle">
-            Spogo is the premier platform to market and monetize your name, image, and likeness. Whether it is finding opportunities or sharing content, every athlete has something to do on Spogo. So as you continue along your athletic journey, Spogo will be right there with you.          </p>
-          <img className="mainProductHeaderImage" src={GirlWithTrophyGraphic} alt="data" />
+            Spogo is the premier platform to market and monetize your name,
+            image, and likeness. Whether it is finding opportunities or sharing
+            content, every athlete has something to do on Spogo. So as you
+            continue along your athletic journey, Spogo will be right there with
+            you.{" "}
+          </p>
+          <img
+            className="mainProductHeaderImage"
+            src={GirlWithTrophyGraphic}
+            alt="data"
+          />
         </div>
         <div className="productDescriptionContainer">
           <div className="productDescription">
             <h1>Showcase Yourself</h1>
             <h2>
-              It has never been easier to showcase your athletic profile. With Spogo, you can link all your social media’s, post highlights, list experiences, show off accomplishments, display measurables, and receive testimonials. To help you best stand out, we provide a multitude of customization options that allow you to create a profile curated to your preferences and personality. Once you’ve completed your profile, generate and share your unique Spogo URL for everyone to see.
+              It has never been easier to showcase your athletic profile. With
+              Spogo, you can link all your social media’s, post highlights, list
+              experiences, show off accomplishments, display measurables, and
+              receive testimonials. To help you best stand out, we provide a
+              multitude of customization options that allow you to create a
+              profile curated to your preferences and personality. Once you’ve
+              completed your profile, generate and share your unique Spogo URL
+              for everyone to see.
             </h2>
           </div>
           <div className="productDescription">
@@ -148,12 +167,20 @@ const LandingPage = () => {
         </div>
         <div className="productDescriptionContainerInverted">
           <div className="productDescription">
-            <img className="productBigImage" src={SocialMediaIntegrationGraphic} />
+            <img
+              className="productBigImage"
+              src={SocialMediaIntegrationGraphic}
+            />
           </div>
           <div className="productDescription">
             <h1>Find Opportunities</h1>
             <h2>
-              At Spogo, we understand that as an athlete you want to maximize your value. We know that finding monetizable opportunities can be difficult and time consuming. That’s why we’ve built an all in one marketplace to link you to your next partnership. Through our simple platform, you can search, apply, and get connected to your next opportunity in just a few clicks.
+              At Spogo, we understand that as an athlete you want to maximize
+              your value. We know that finding monetizable opportunities can be
+              difficult and time consuming. That’s why we’ve built an all in one
+              marketplace to link you to your next partnership. Through our
+              simple platform, you can search, apply, and get connected to your
+              next opportunity in just a few clicks.
             </h2>
           </div>
         </div>
@@ -161,11 +188,20 @@ const LandingPage = () => {
           <div className="productDescription">
             <h1>Get Noticed</h1>
             <h2>
-              Spogo provides a unique way to generate exposure and grow your brand. This is why we have a public, private, and trending feed. Because the public feed is the first feed you see, you can showcase yourself and find people you never knew existed. With the private feed, catch up and interact with those you know best. On our trending page, explore what’s going viral. With Spogo, it could even be you!
+              Spogo provides a unique way to generate exposure and grow your
+              brand. This is why we have a public, private, and trending feed.
+              Because the public feed is the first feed you see, you can
+              showcase yourself and find people you never knew existed. With the
+              private feed, catch up and interact with those you know best. On
+              our trending page, explore what’s going viral. With Spogo, it
+              could even be you!
             </h2>
           </div>
           <div className="productDescription">
-            <img className="productBigImage" src={TailoredCustomizationGraphic} />
+            <img
+              className="productBigImage"
+              src={TailoredCustomizationGraphic}
+            />
           </div>
         </div>
         {/* <div className="productDescriptionContainerInverted">
@@ -180,7 +216,7 @@ const LandingPage = () => {
           </div>
         </div> */}
         {/* Bottom Part */}
-        <Footer/>
+        <Footer />
       </div>
     </>
   );
