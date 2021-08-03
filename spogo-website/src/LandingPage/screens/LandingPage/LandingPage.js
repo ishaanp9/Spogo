@@ -189,9 +189,9 @@ const LandingPage = () => {
             <h1>Get Noticed</h1>
             <h2>
               Spogo provides a unique way to generate exposure and grow your
-              brand. This is why we have a public, private, and trending feed.
-              Because the public feed is the first feed you see, you can
-              showcase yourself and find people you never knew existed. With the
+              brand through an innovative public, private, and trending feed concept.
+              Since the public feed is the first feed you see, you can generate impressions
+              with your athletic content and find people you never knew existed. With the
               private feed, catch up and interact with those you know best. On
               our trending page, explore what’s going viral. With Spogo, it
               could even be you!
