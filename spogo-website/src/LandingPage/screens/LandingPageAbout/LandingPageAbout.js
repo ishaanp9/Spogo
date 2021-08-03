@@ -69,11 +69,10 @@ const LandingPageAbout = () => {
           <h1 className="sectionTitle">About Us</h1>
           <div className="aboutUsContentContainer">
             <p>
-              Ishaan Puri and Ethan Kam founded Spogo in June 2021. They met in
-              3rd grade and now study together at the Paul Allen School of
+              Ishaan Puri and Ethan Kam founded Spogo in June 2021. They have known each other for 10+ years and now study together at the Paul Allen School of
               Computer Science at the University of Washington. <br />
               <br />
-              As high school athletes themselves, they understand the struggles
+              As former high school athletes themselves, they understand the struggles
               that athletes continue to face day to day. And, with a shared
               passion for amazing products and new technologies, they created
               Spogo.

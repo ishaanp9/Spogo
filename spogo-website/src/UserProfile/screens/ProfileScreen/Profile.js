@@ -4,7 +4,7 @@ import { VideoItem, ImageItem } from '../../components/VideoItem/VideoItem';
 import './Profile.css';
 import firebase from '../../../firebase';
 import { FaInstagram, FaTwitter } from 'react-icons/fa';
-import { MdEmail, MdMail, MdStar, MdLocationOn } from 'react-icons/md';
+import { MdEmail, MdMail, MdStar, MdLocationOn, MdClose } from 'react-icons/md';
 import { BsLink45Deg } from 'react-icons/bs';
 import BlankProfile from './blank_profile.png';
 import SpogoLogo from './spogo_logo.png';
@@ -13,7 +13,6 @@ import ShowMoreText from 'react-show-more-text';
 import { Link } from 'react-router-dom';
 import { MixpanelConsumer } from 'react-mixpanel';
 import WebFont from 'webfontloader';
-
 
 import {
   addUserInfo,
@@ -36,7 +35,6 @@ import {
   getUserDataCollected,
 } from '../../../ProfileData';
 import ProfileWaitlistComponent from '../../components/ProfileWaitlistComponent/ProfileWaitlistComponent';
-
 
 const Profile = (props) => {
   let path = props.url;
@@ -70,8 +68,6 @@ const Profile = (props) => {
   const scrollAccomplishments = useRef(null);
   const scrollMeasurables = useRef(null);
 
-  
-
   //there has to be a better way to do this, using a function didint work.
   const executeBioScroll = () =>
     scrollBio.current.scrollIntoView({ behavior: 'smooth' });
@@ -104,10 +100,10 @@ const Profile = (props) => {
   useEffect(() => {
     WebFont.load({
       google: {
-        families: ['Montserrat', 'Open Sans']
-      }
+        families: ['Montserrat', 'Open Sans'],
+      },
     });
-   }, []);
+  }, []);
 
   const getDBUserInfo = async () => {
     try {
@@ -524,6 +520,7 @@ const Profile = (props) => {
   };
 
   const [wildcardLinkModalOpen, setWildcardLinkModalOpen] = useState(false);
+  const [experienceModalOpen, setExperienceModalOpen] = useState(false);
 
   return userExists ? (
     <MixpanelConsumer>
@@ -569,10 +566,79 @@ const Profile = (props) => {
               </div>
             </div>
           </Modal>
+
+          {/* Experience Modal */}
+          <Modal
+            isOpen={experienceModalOpen}
+            onRequestClose={() => setExperienceModalOpen(false)}
+            className="experienceModal"
+            overlayClassName='experienceModalOverlay'
+          >
+            <div>
+              <div className="modalHeaderContainer">
+                <p>Add Experience</p>
+                <MdClose
+                  style={{ cursor: 'pointer' }}
+                  onClick={() => setExperienceModalOpen(false)}
+                  size={20}
+                  color={'grey'}
+                />
+              </div>
+              <div>
+                <form>
+                  <p className="textInputHeaders">Title</p>
+                  <input
+                    required
+                    className="modalTextInputItems"
+                    type="text"
+                    maxLength="100"
+                  />
+                  <p className="textInputHeaders">Team</p>
+                  <input
+                    required
+                    className="modalTextInputItems"
+                    type="text"
+                    maxLength="100"
+                  />
+                  <div className="modalDatePickerContainer">
+                    <div>
+                      <p className="textInputHeaders">Start Date</p>
+                      <select className='modalDatePicker' style={{marginRight: 10}} required name={'Month'}>
+                        <option>Month</option>
+                      </select>
+                      <select style={{marginRight: 25}} className='modalDatePicker' required name={'Year'}>
+                        <option>Year</option>
+                      </select>
+                    </div>
+                    <div className='modalDatePickerItemContainer'>
+                      <p className="textInputHeaders">End Date</p>
+                      <select className='modalDatePicker' style={{marginRight: 10}} required name={'Month'}>
+                        <option>Month</option>
+                      </select>
+                      <select className='modalDatePicker' required name={'Year'}>
+                        <option>Year</option>
+                      </select>
+                      <p className='presentTimeText'>Currently doing this? <span>Click here.</span></p>
+                    </div>
+                  </div>
+                  <p className="textInputHeaders">Description</p>
+                  <textarea
+                    style={{resize: 'none'}}
+                    className="modalTextInputItems"
+                    rows={5}
+                    name={'description'}
+                  />
+                </form>
+              </div>
+              <div>
+              <button className='addEditItemModalButton' type={'button'}>Create</button>
+              </div>
+            </div>
+          </Modal>
+
           {window.innerWidth > 1200 && (
             // We should use refs so we can scroll to the ref clicked on
             <div className="profileScrollBarContainer">
-
               {bio != 'This is an empty bio. Edit it as you see fit.' ? (
                 <p className="profileSideBarItem" onClick={executeBioScroll}>
                   Bio
@@ -633,7 +699,7 @@ const Profile = (props) => {
 
                     {location ? (
                       <div className="locationIconTextContainer">
-                        <MdLocationOn color={"#EA4335"} size={20} />
+                        <MdLocationOn color={'#EA4335'} size={20} />
                         <h3 className="locationText">{location}</h3>
                       </div>
                     ) : null}
@@ -708,7 +774,7 @@ const Profile = (props) => {
                   </div>
                 ) : (
                   <div ref={scrollBio} className="bioContainer">
-                    <h1>Bio</h1>
+                    <h1 onClick={() => setExperienceModalOpen(true)}>Bio</h1>
                     <hr
                       className="componentHeaderDivider"
                       color="lightgrey"
@@ -735,7 +801,7 @@ const Profile = (props) => {
 
                   {location ? (
                     <div className="locationIconTextContainer">
-                      <MdLocationOn color={"#EA4335"} size={20} />
+                      <MdLocationOn color={'#EA4335'} size={20} />
                       <h3 className="locationText">{location}</h3>
                     </div>
                   ) : null}
@@ -857,12 +923,14 @@ const Profile = (props) => {
                 />
 
                 {ShowMoreShowLess('Experience')}
-                {thisExperienceArray.length < 3 ? <hr
+                {thisExperienceArray.length < 3 ? (
+                  <hr
                     className="componentBottomDivider"
                     size="1"
                     color="lightgrey"
-                    style={{marginBottom: 20}}
-                  />  : (
+                    style={{ marginBottom: 20 }}
+                  />
+                ) : (
                   <hr
                     className="componentBottomDivider"
                     size="1"
@@ -897,12 +965,14 @@ const Profile = (props) => {
                 />
 
                 {ShowMoreShowLess('Accoplishment')}
-                {thisTrophyArray.length < 3 ? <hr
+                {thisTrophyArray.length < 3 ? (
+                  <hr
                     className="componentBottomDivider"
                     size="1"
                     color="lightgrey"
-                    style={{marginBottom: 20}}
-                  />  : (
+                    style={{ marginBottom: 20 }}
+                  />
+                ) : (
                   <hr
                     className="componentBottomDivider"
                     size="1"
@@ -934,12 +1004,14 @@ const Profile = (props) => {
                 />
 
                 {ShowMoreShowLess('Measurables')}
-                {thisMeasurableArray.length < 3 ? <hr
+                {thisMeasurableArray.length < 3 ? (
+                  <hr
                     className="componentBottomDivider"
                     size="1"
                     color="lightgrey"
-                    style={{marginBottom: 20}}
-                  />  : (
+                    style={{ marginBottom: 20 }}
+                  />
+                ) : (
                   <hr
                     className="componentBottomDivider"
                     size="1"
