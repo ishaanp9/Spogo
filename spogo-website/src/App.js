@@ -5,6 +5,8 @@ import {Route, BrowserRouter as Router, Switch} from 'react-router-dom';
 import ProfileNavigator from './navigation/ProfileNavigator'
 import LandingNavigator from './navigation/LandingNavigator'
 import ProfileHeader from './UserProfile/components/ProfileHeader/ProfileHeader';
+import SignUpScreen from './SignUpLoginFlow/screens/SignUpScreen/SignUpScreen';
+import SignInScreen from './SignUpLoginFlow/screens/SignInScreen/SignInScreen';
 
 //npm install mdi-react
 //npm install react-player
@@ -31,7 +33,8 @@ function App() {
   return (
     <div className="app">
        {/* {path === 'spogo.us' || path === 'https://spogo.us/' || path === 'https://spogo.us' ? <LandingPage /> : <Profile url={path}/>} */}
-       {path.includes('users') || path.includes('descriptions') ? <ProfileNavigator url={path}/> : <LandingNavigator />}
+       {/* {path.includes('users') || path.includes('descriptions') ? <ProfileNavigator url={path}/> : <LandingNavigator />} */}
+       <SignInScreen/>
     </div>
     // <> 
     //   <ProfileHeader/>

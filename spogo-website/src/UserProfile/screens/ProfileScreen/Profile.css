@@ -784,6 +784,7 @@
     bottom: 15%;
     padding: 2% 2%;
     border-radius: 10px;
+    outline: none;
   }
 
   .experienceModalOverlay {
