@@ -14,7 +14,6 @@ import firebase from "../../../firebase";
 import { MixpanelConsumer } from "react-mixpanel";
 import Footer from "../../components/Footer/Footer";
 import WebFont from "webfontloader";
-// import waitlistFBProj from "../../../waitlistFBProj";
 
 
 const LandingPage = () => {
@@ -33,26 +32,32 @@ const LandingPage = () => {
    }, []);
 
   const addUserToWaitlist = async () => {
-    await firebase
-      .firestore()
-      .collection("Waitlist")
-      .add({
-        name: name,
-        email: email,
-      })
-      .then(() => {
-        setName("");
-        setEmail("");
-      })
+    await firebase.app('secondary')
+      .auth()
+      .createUserWithEmailAndPassword(email, "password")
       .catch((error) => {
         console.log("Error:", error);
       });
-    // await waitlistFBProj
-    //   .auth(waitlistFBProj, "secondary")
-    //   .createUserWithEmailAndPassword(email, "password")
+      // await firebase
+    //   .firestore()
+    //   .collection("Waitlist")
+    //   .add({
+    //     name: name,
+    //     email: email,
+    //   })
+    //   .then(() => {
+    //     setName("");
+    //     setEmail("");
+    //   })
     //   .catch((error) => {
     //     console.log("Error:", error);
     //   });
+
+    // const apps = firebase.apps;
+
+    // apps.forEach(app => {
+    //   console.log('App name: ', app.name);
+    // });
   };
 
   let validator = require("email-validator");
