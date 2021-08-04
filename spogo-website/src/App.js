@@ -1,4 +1,5 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from "react";
+
 
 import './App.css';
 import {Route, BrowserRouter as Router, Switch} from 'react-router-dom';
@@ -7,6 +8,8 @@ import LandingNavigator from './navigation/LandingNavigator'
 import ProfileHeader from './UserProfile/components/ProfileHeader/ProfileHeader';
 import SignUpScreen from './SignUpLoginFlow/screens/SignUpScreen/SignUpScreen';
 import SignInScreen from './SignUpLoginFlow/screens/SignInScreen/SignInScreen';
+import CreateProfile from "./UserProfile/screens/CreateProfileScreen/CreateProfile";
+
 
 //npm install mdi-react
 //npm install react-player
@@ -20,15 +23,12 @@ import SignInScreen from './SignUpLoginFlow/screens/SignInScreen/SignInScreen';
 //npm run bundle
 //firebase deploy
 
-
-
-
 function App() {
   let path = window.location.href;
 
   useEffect(() => {
-    path = window.location.href
-  }, [])
+    path = window.location.href;
+  }, []);
 
   return (
     <div className="app">
