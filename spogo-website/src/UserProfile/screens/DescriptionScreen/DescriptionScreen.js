@@ -16,6 +16,7 @@ import {
 } from "../../../ProfileData";
 import CrownIcon from "mdi-react/CrownIcon";
 import TrophyIcon from "mdi-react/TrophyIcon";
+import WebFont from 'webfontloader';
 
 import SpogoLogo from "./spogo_logo.png";
 
@@ -46,6 +47,14 @@ const DescriptionScreen = (props) => {
     determineIconSize();
   }, []);
 
+  useEffect(() => {
+    WebFont.load({
+      google: {
+        families: ['Montserrat', 'Open Sans', 'Public Sans'],
+      },
+    });
+  }, []);
+
   const [iconSize, setIconSize] = useState(25);
 
   //Determines what size icons should be based on screen width
@@ -66,6 +75,9 @@ const DescriptionScreen = (props) => {
   const [showMore, setShowMore] = useState(false);
   //See more see less for the item description
   const descriptionSeeMoreSeeLess = (text) => {
+    if (text.length === 0) {
+      return null;
+    }
     if (text.length <= 121) {
       return text;
     }
