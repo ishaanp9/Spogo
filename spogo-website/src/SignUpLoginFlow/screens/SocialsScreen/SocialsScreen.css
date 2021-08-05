@@ -1,0 +1,73 @@
+.socialScreenContainer {
+  border: 1px solid transparent;
+  border-radius: 10px;
+  width: 40%;
+  height: auto;
+  box-shadow: 0 4px 8px 0 rgba(66, 65, 65, 0.203),
+    0 6px 20px 0 rgba(161, 155, 155, 0.59);
+  transition: 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+  margin-left: 5%;
+  margin-top: 7%;
+  padding: 4% 3%;
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+}
+
+.socialScreenFormHeader {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+  font-size: 22px;
+  margin-bottom: 2%;
+  color: #3eb489;
+}
+
+.socialScreenHeadlineHeader {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.socialsTextInputContainer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.socialScreenTextInput {
+  height: 50px;
+  width: 100%;
+  padding: 16px;
+  border: 1px solid black;
+  border-radius: 5px;
+  color: #000;
+  font-size: 14px;
+  font-weight: 400;
+  outline: none;
+  transition: 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+  margin-left: 10px;
+}
+
+.socialScreenTextInput:focus {
+  border-width: 2px;
+  border-color: #3eb489;
+  color: black;
+}
+
+.socialsScreenNextButton {
+  background-color: #3eb489;
+  height: 50px;
+  border-radius: 12px;
+  border: none;
+  font-weight: bold;
+  font-size: 16px;
+  width: 100%;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.socialsScreenNextButton:hover {
+  cursor: pointer;
+  background-color: #22d694;
+  color: #000;
+  transition: 0.5s ease-in-out;
+}

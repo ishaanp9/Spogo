@@ -9,6 +9,9 @@ import ProfileHeader from './UserProfile/components/ProfileHeader/ProfileHeader'
 import SignUpScreen from './SignUpLoginFlow/screens/SignUpScreen/SignUpScreen';
 import SignInScreen from './SignUpLoginFlow/screens/SignInScreen/SignInScreen';
 import CreateProfile from "./UserProfile/screens/CreateProfileScreen/CreateProfile";
+import SportPosition from "./SignUpLoginFlow/screens/SportPositionScreen/SportPosition";
+import SocialsScreen from "./SignUpLoginFlow/screens/SocialsScreen/SocialsScreen";
+import Profile from "./UserProfile/screens/ProfileScreen/Profile";
 
 
 //npm install mdi-react
@@ -32,9 +35,12 @@ function App() {
 
   return (
     <div className="app">
-       {/* {path === 'spogo.us' || path === 'https://spogo.us/' || path === 'https://spogo.us' ? <LandingPage /> : <Profile url={path}/>} */}
-       {/* {path.includes('users') || path.includes('descriptions') ? <ProfileNavigator url={path}/> : <LandingNavigator />} */}
-       <SignInScreen/>
+       {/* {path === 'spogo.us' || path === 'https://spogo.us/' || path === 'https://spogo.us' ? <LandingPage /> : <Profile url={path}/>}
+       {path.includes('users') || path.includes('descriptions') ? <ProfileNavigator url={path}/> : <LandingNavigator />} */}
+       {/* <CreateProfile/> */}
+       <SportPosition/>
+       {/* <SocialsScreen/> */}
+       {/* <SignInScreen/> */}
     </div>
     // <> 
     //   <ProfileHeader/>
