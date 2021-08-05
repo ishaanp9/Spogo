@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./CreateProfile.css";
 import Modal from "react-modal";
 import { MdClose } from "react-icons/md";
+    import WebFont from 'webfontloader';
 
 const CreateProfile = () => {
   const [experienceModalOpen, setExperienceModalOpen] = useState(false);
@@ -12,6 +13,14 @@ const CreateProfile = () => {
 
   useEffect(() => {
     getCurrentDate();
+  }, []);
+  
+    useEffect(() => {
+    WebFont.load({
+      google: {
+        families: ['Montserrat', 'Open Sans', 'Public Sans'],
+      },
+    });
   }, []);
 
   const getCurrentDate = () => {
@@ -58,10 +67,10 @@ const CreateProfile = () => {
           <div className="modalHeaderContainer">
             <p>Add Experience</p>
             <MdClose
-              style={{ cursor: "pointer" }}
+              style={{ cursor: 'pointer' }}
               onClick={() => setExperienceModalOpen(false)}
               size={20}
-              color={"grey"}
+              color={'grey'}
             />
           </div>
           <div>
@@ -84,6 +93,7 @@ const CreateProfile = () => {
                 <div className="expModalDatePickerItemContainer">
                   <p className="textInputHeaders">Start Date</p>
                   <div className="datePickerRow">
+
                     <select className="modalDatePicker" required name={"Month"}>
                       <option selected hidden>
                         Month
@@ -190,15 +200,15 @@ const CreateProfile = () => {
               </div>
               <p className="textInputHeaders">Description</p>
               <textarea
-                style={{ resize: "none" }}
+                style={{ resize: 'none' }}
                 className="modalTextInputItems"
                 rows={5}
-                name={"description"}
+                name={'description'}
               />
             </form>
           </div>
           <div>
-            <button className="addEditItemModalButton" type={"button"}>
+            <button className="addEditItemModalButton" type={'button'}>
               Create
             </button>
           </div>
@@ -217,16 +227,17 @@ const CreateProfile = () => {
           <div className="modalHeaderContainer">
             <p>Add Accomplishment</p>
             <MdClose
-              style={{ cursor: "pointer" }}
+              style={{ cursor: 'pointer' }}
               onClick={() => setAccomplishmentModalOpen(false)}
               size={20}
-              color={"grey"}
+              color={'grey'}
             />
           </div>
           <div>
             <form>
               <p className="textInputHeaders">Title</p>
               <input
+                placeholder="Ex: MVP, State Title, Help me "
                 required
                 className="modalTextInputItems"
                 type="text"
@@ -290,15 +301,15 @@ const CreateProfile = () => {
               </div>
               <p className="textInputHeaders">Description</p>
               <textarea
-                style={{ resize: "none" }}
+                style={{ resize: 'none' }}
                 className="modalTextInputItems"
                 rows={5}
-                name={"description"}
+                name={'description'}
               />
             </form>
           </div>
           <div>
-            <button className="addEditItemModalButton" type={"button"}>
+            <button className="addEditItemModalButton" type={'button'}>
               Create
             </button>
           </div>
@@ -317,10 +328,10 @@ const CreateProfile = () => {
           <div className="modalHeaderContainer">
             <p>Add Measurable</p>
             <MdClose
-              style={{ cursor: "pointer" }}
+              style={{ cursor: 'pointer' }}
               onClick={() => setMeasurableModalOpen(false)}
               size={20}
-              color={"grey"}
+              color={'grey'}
             />
           </div>
           <div>
@@ -328,21 +339,22 @@ const CreateProfile = () => {
               <p className="textInputHeaders">Title</p>
               <input
                 required
+                placeholder="Ex: 40 time, Height, GPA"
                 className="modalTextInputItems"
                 type="text"
                 maxLength="100"
               />
-              <p className="textInputHeaders">Description</p>
-              <textarea
-                style={{ resize: "none" }}
+              <p className="textInputHeaders">Value</p>
+              <input
+                placeholder="Ex: 4.50, 6'1, 3.5"
                 className="modalTextInputItems"
                 rows={5}
-                name={"description"}
+                name={'value'}
               />
             </form>
           </div>
           <div>
-            <button className="addEditItemModalButton" type={"button"}>
+            <button className="addEditItemModalButton" type={'button'}>
               Create
             </button>
           </div>
@@ -355,7 +367,6 @@ const CreateProfile = () => {
       {/* Add Item Modals */}
       {/* Add Item Modals */}
       {/* Add Item Modals */}
-
     </div>
   );
 };
