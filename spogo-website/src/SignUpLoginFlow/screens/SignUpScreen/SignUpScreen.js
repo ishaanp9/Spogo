@@ -3,7 +3,7 @@ import './SignUpScreen.css';
 import WebFont from 'webfontloader';
 import SignUpImage from '../../assets/signUpImage.png';
 
-function SignUpScreen() {
+const SignUpScreen = () => {
   useEffect(() => {
     WebFont.load({
       google: {
