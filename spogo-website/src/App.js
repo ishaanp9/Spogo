@@ -8,7 +8,6 @@ import ProfileHeader from "./UserProfile/components/ProfileHeader/ProfileHeader"
 import CreateProfile from "./UserProfile/screens/CreateProfileScreen/CreateProfile";
 import SignUpScreen from './SignUpLoginFlow/screens/SignUpScreen/SignUpScreen';
 import SignInScreen from './SignUpLoginFlow/screens/SignInScreen/SignInScreen';
-import CreateProfile from "./UserProfile/screens/CreateProfileScreen/CreateProfile";
 import SportPosition from "./SignUpLoginFlow/screens/SportPositionScreen/SportPosition";
 import SocialsScreen from "./SignUpLoginFlow/screens/SocialsScreen/SocialsScreen";
 import Profile from "./UserProfile/screens/ProfileScreen/Profile";
@@ -41,7 +40,7 @@ function App() {
        {path.includes('users') || path.includes('descriptions') ? <ProfileNavigator url={path}/> : <LandingNavigator />} */}
        {/* {path.includes('users') || path.includes('descriptions') ? <ProfileNavigator url={path}/> : <LandingNavigator />} */}
         <AuthProvider>
-          <SignInScreen />
+          <CreateProfile/>
         </AuthProvider>
     </div>
     // <>

@@ -17,6 +17,7 @@ import {
 import CrownIcon from "mdi-react/CrownIcon";
 import TrophyIcon from "mdi-react/TrophyIcon";
 
+
 import SpogoLogo from "./spogo_logo.png";
 
 const DescriptionScreen = (props) => {
@@ -45,6 +46,7 @@ const DescriptionScreen = (props) => {
     }
     determineIconSize();
   }, []);
+
 
   const [iconSize, setIconSize] = useState(25);
 
