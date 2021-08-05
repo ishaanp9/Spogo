@@ -1,15 +1,14 @@
 import React, { useEffect } from "react";
 
-
-import './App.css';
-import {Route, BrowserRouter as Router, Switch} from 'react-router-dom';
-import ProfileNavigator from './navigation/ProfileNavigator'
-import LandingNavigator from './navigation/LandingNavigator'
-import ProfileHeader from './UserProfile/components/ProfileHeader/ProfileHeader';
+import "./App.css";
+import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
+import ProfileNavigator from "./navigation/ProfileNavigator";
+import LandingNavigator from "./navigation/LandingNavigator";
+import ProfileHeader from "./UserProfile/components/ProfileHeader/ProfileHeader";
+import CreateProfile from "./UserProfile/screens/CreateProfileScreen/CreateProfile";
 import SignUpScreen from './SignUpLoginFlow/screens/SignUpScreen/SignUpScreen';
 import SignInScreen from './SignUpLoginFlow/screens/SignInScreen/SignInScreen';
-import CreateProfile from "./UserProfile/screens/CreateProfileScreen/CreateProfile";
-
+import {AuthProvider} from './AuthProvider';
 
 //npm install mdi-react
 //npm install react-player
@@ -32,12 +31,14 @@ function App() {
 
   return (
     <div className="app">
-       {/* {path === 'spogo.us' || path === 'https://spogo.us/' || path === 'https://spogo.us' ? <LandingPage /> : <Profile url={path}/>} */}
        {/* {path.includes('users') || path.includes('descriptions') ? <ProfileNavigator url={path}/> : <LandingNavigator />} */}
-       <SignInScreen/>
+        <AuthProvider>
+          <SignInScreen />
+        </AuthProvider>
+        {/* <CreateProfile /> */}
     </div>
-    // <> 
-    //   <ProfileHeader/>
+    // <>
+    //   <CreateProfile />
     // </>
   );
 }

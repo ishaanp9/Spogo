@@ -1,21 +1,38 @@
-import React, {useState} from "react";
-import './CreateProfile.css'
+import React, { useState, useEffect } from "react";
+import "./CreateProfile.css";
 import Modal from "react-modal";
 import { MdClose } from "react-icons/md";
 
-
 const CreateProfile = () => {
-    const [experienceModalOpen, setExperienceModalOpen] = useState(false);
-    const [accomplishmentModalOpen, setAccomplishmentModalOpen] = useState(false);
-    const [measurableModalOpen, setMeasurableModalOpen] = useState(false);
+  const [experienceModalOpen, setExperienceModalOpen] = useState(false);
+  const [accomplishmentModalOpen, setAccomplishmentModalOpen] = useState(false);
+  const [measurableModalOpen, setMeasurableModalOpen] = useState(false);
+  const [currentMonth, setCurrentMonth] = useState("");
+  const [currentYear, setCurrentYear] = useState("");
 
-    const getCurrentDate = () => {
-      let monthNumber = (new Date().getMonth());
-      let yearNumber = (new Date().getFullYear())
-      let monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-      let monthName = monthNames[monthNumber];
-      console.log(monthName + " " + yearNumber)
-    }
+  useEffect(() => {
+    getCurrentDate();
+  }, []);
+
+  const getCurrentDate = () => {
+    let monthNumber = new Date().getMonth();
+    setCurrentYear(new Date().getFullYear());
+    let monthNames = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+    setCurrentMonth(monthNames[monthNumber]);
+  };
 
   return (
     <div>
@@ -23,6 +40,13 @@ const CreateProfile = () => {
       <h2 onClick={() => setAccomplishmentModalOpen(true)}>Accomplishment</h2>
       <h3 onClick={() => setMeasurableModalOpen(true)}>Measurable</h3>
 
+      
+
+      {/* Add Item Modals */}
+      {/* Add Item Modals */}
+      {/* Add Item Modals */}
+      {/* Add Item Modals */}
+      {/* Add Item Modals */}
       {/* Experience Modal */}
       <Modal
         isOpen={experienceModalOpen}
@@ -61,7 +85,10 @@ const CreateProfile = () => {
                   <p className="textInputHeaders">Start Date</p>
                   <div className="datePickerRow">
                     <select className="modalDatePicker" required name={"Month"}>
-                    <option>January</option>
+                      <option selected hidden>
+                        Month
+                      </option>
+                      <option>January</option>
                       <option>February</option>
                       <option>March</option>
                       <option>April</option>
@@ -77,30 +104,9 @@ const CreateProfile = () => {
                     {/* <div style={{width: '0.5%'}}></div> */}
                     <div className="datePickerRowMiddleDivider"></div>
                     <select className="modalDatePicker" required name={"Year"}>
-                      <option>Year</option>
-                    </select>
-                  </div>
-                </div>
-                <div style={{ width: 20 }}></div>
-                <div className="expModalDatePickerItemContainer">
-                  <p className="textInputHeaders">End Date</p>
-                  <div className="datePickerRow">
-                    <select className="modalDatePicker" required name={"Month"}>
-                    <option>January</option>
-                      <option>February</option>
-                      <option>March</option>
-                      <option>April</option>
-                      <option>May</option>
-                      <option>June</option>
-                      <option>July</option>
-                      <option>August</option>
-                      <option>September</option>
-                      <option>October</option>
-                      <option>November</option>
-                      <option>December</option>
-                    </select>
-                    <div className="datePickerRowMiddleDivider"></div>
-                    <select className="modalDatePicker" required name={"Year"}>
+                      <option selected hidden>
+                        Year
+                      </option>
                       <option>2021</option>
                       <option>2020</option>
                       <option>2019</option>
@@ -125,9 +131,61 @@ const CreateProfile = () => {
                       <option>2000</option>
                     </select>
                   </div>
-                  <p className="presentTimeText">
-                    Currently doing this? <span onClick={() => getCurrentDate()}>Click here.</span>
-                  </p>
+                </div>
+                <div style={{ width: 20 }}></div>
+                <div className="expModalDatePickerItemContainer">
+                  <p className="textInputHeaders">End Date</p>
+                  <div className="datePickerRow">
+                    <select className="modalDatePicker" required name={"Month"}>
+                      <option selected hidden>
+                        {currentMonth}
+                      </option>
+                      <option>January</option>
+                      <option>February</option>
+                      <option>March</option>
+                      <option>April</option>
+                      <option>May</option>
+                      <option>June</option>
+                      <option>July</option>
+                      <option>August</option>
+                      <option>September</option>
+                      <option>October</option>
+                      <option>November</option>
+                      <option>December</option>
+                    </select>
+                    <div className="datePickerRowMiddleDivider"></div>
+                    <select className="modalDatePicker" required name={"Year"}>
+                      <option selected hidden>
+                        {currentYear}
+                      </option>
+                      <option>2021</option>
+                      <option>2020</option>
+                      <option>2019</option>
+                      <option>2018</option>
+                      <option>2017</option>
+                      <option>2016</option>
+                      <option>2015</option>
+                      <option>2014</option>
+                      <option>2013</option>
+                      <option>2012</option>
+                      <option>2011</option>
+                      <option>2010</option>
+                      <option>2009</option>
+                      <option>2008</option>
+                      <option>2007</option>
+                      <option>2006</option>
+                      <option>2005</option>
+                      <option>2004</option>
+                      <option>2003</option>
+                      <option>2002</option>
+                      <option>2001</option>
+                      <option>2000</option>
+                    </select>
+                  </div>
+                  {/* <p className="presentTimeText">
+                    Currently doing this?{" "}
+                    <span onClick={() => getCurrentDate()}>Click here.</span>
+                  </p> */}
                 </div>
               </div>
               <p className="textInputHeaders">Description</p>
@@ -179,6 +237,9 @@ const CreateProfile = () => {
                   <p className="textInputHeaders">Date Received</p>
                   <div className="datePickerRow">
                     <select className="modalDatePicker" required name={"Month"}>
+                      <option selected hidden>
+                        Month
+                      </option>
                       <option>January</option>
                       <option>February</option>
                       <option>March</option>
@@ -195,7 +256,31 @@ const CreateProfile = () => {
                     {/* <div style={{width: '0.5%'}}></div> */}
                     <div className="datePickerRowMiddleDivider"></div>
                     <select className="modalDatePicker" required name={"Year"}>
-                      <option>Year</option>
+                      <option selected hidden>
+                        Year
+                      </option>
+                      <option>2021</option>
+                      <option>2020</option>
+                      <option>2019</option>
+                      <option>2018</option>
+                      <option>2017</option>
+                      <option>2016</option>
+                      <option>2015</option>
+                      <option>2014</option>
+                      <option>2013</option>
+                      <option>2012</option>
+                      <option>2011</option>
+                      <option>2010</option>
+                      <option>2009</option>
+                      <option>2008</option>
+                      <option>2007</option>
+                      <option>2006</option>
+                      <option>2005</option>
+                      <option>2004</option>
+                      <option>2003</option>
+                      <option>2002</option>
+                      <option>2001</option>
+                      <option>2000</option>
                     </select>
                   </div>
                   {/* <p className="presentTimeText">
@@ -264,6 +349,12 @@ const CreateProfile = () => {
         </div>
       </Modal>
       {/* Measurable Modal */}
+      {/* Add Item Modals */}
+      {/* Add Item Modals */}
+      {/* Add Item Modals */}
+      {/* Add Item Modals */}
+      {/* Add Item Modals */}
+      {/* Add Item Modals */}
 
     </div>
   );
