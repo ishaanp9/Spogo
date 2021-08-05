@@ -13,6 +13,7 @@ import ShowMoreText from "react-show-more-text";
 import { Link } from "react-router-dom";
 import { MixpanelConsumer } from "react-mixpanel";
 import WebFont from "webfontloader";
+import userErrorImage from "../../../SignUpLoginFlow/assets/signUpImage.png";
 
 import {
   addUserInfo,
@@ -988,8 +989,51 @@ const Profile = (props) => {
       )}
     </MixpanelConsumer>
   ) : (
-    <div>
-      <h1>User Doesn't Exist</h1>
+    // <div className="userNotFoundErrorContainer">
+    //   <h1 className="userNotFoundText">User Doesn't Exist</h1>
+    //   <Link className="returnHomeText">
+    //     <h2>Return Home</h2>
+    //   </Link>
+    //   <div className="userNotFoundSpogoLogo">
+    //     <img
+    //       src={SpogoLogo}
+    //       alt="Spogo"
+    //       onClick={() => {
+    //         window.open("https://spogo.us");
+    //       }}
+    //     />
+    //   </div>
+    // </div>
+    <div className="userNotFoundErrorContainer">
+      <div className="errorMessageContainer">
+        <div className="errorMessageTextContainer">
+          <h1 className="errorHeaderText">User Not Found</h1>
+          <p className="errorHeadlineText">
+            Sorry, the user's profile you were trying to navigate to wasn't
+            found.
+          </p>
+          <div className="userNotFoundSpogoLogo">
+            <img
+              src={SpogoLogo}
+              alt="Spogo"
+              onClick={() => {
+                window.location.replace("https://spogo.us");
+              }}
+            />
+          </div>
+          <p
+            className="returnHomeText"
+            onClick={() => {
+              window.location.replace("https://spogo.us");
+            }}
+          >
+            <span>Return Home</span>
+          </p>
+        </div>
+        <div className="errorImageContainer">
+          <img className="errorImage" src={userErrorImage} />
+        </div>
+      </div>
     </div>
   );
 };
