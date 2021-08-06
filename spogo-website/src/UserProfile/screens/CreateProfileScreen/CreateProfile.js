@@ -1,10 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./CreateProfile.css";
 import Modal from "react-modal";
 import { MdClose } from "react-icons/md";
-    import WebFont from 'webfontloader';
+import WebFont from 'webfontloader';
+import {AuthContext} from '../../../AuthProvider';
 
 const CreateProfile = () => {
+
+  const { logout } = useContext(AuthContext);
+
   const [experienceModalOpen, setExperienceModalOpen] = useState(false);
   const [accomplishmentModalOpen, setAccomplishmentModalOpen] = useState(false);
   const [measurableModalOpen, setMeasurableModalOpen] = useState(false);
@@ -48,6 +52,9 @@ const CreateProfile = () => {
       <h1 onClick={() => setExperienceModalOpen(true)}>Experience</h1>
       <h2 onClick={() => setAccomplishmentModalOpen(true)}>Accomplishment</h2>
       <h3 onClick={() => setMeasurableModalOpen(true)}>Measurable</h3>
+      <button style={{marginTop: 20}} type="button" onClick={() => logout()}>
+        Logout
+      </button>
 
       
 
