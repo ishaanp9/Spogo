@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import './SignUpScreen.css';
 import WebFont from 'webfontloader';
 import SignUpImage from '../../assets/signUpImage.png';
+import Google from './google.png';
 
 const SignUpScreen = () => {
   useEffect(() => {
@@ -44,6 +45,15 @@ const SignUpScreen = () => {
             />
           </div>
           <button className="signUpCreateAccountButton">Create Account</button>
+          <div style={{display: 'flex', alignItems: 'center', width: '100%', justifyContent: 'space-between'}}>
+            <hr style={{ marginTop: 20, width: '45%' }} />
+            <p style={{fontSize: 14, marginTop: 20}}>or</p>
+            <hr style={{ marginTop: 20, width: '45%' }} />
+          </div>
+          <div className="googleSignUpContainer">
+            <img className="googleImageSignUp" src={Google} />
+            <p className="googleTextSignUp">Sign Up with Google</p>
+          </div>
           <p className="signUpHaveAccountText">
             Already have an account?{' '}
             <span className="signUpHaveAccountTextSpan">Sign in</span>
@@ -55,6 +65,6 @@ const SignUpScreen = () => {
       </div>
     </div>
   );
-}
+};
 
 export default SignUpScreen;

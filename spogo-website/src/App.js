@@ -23,6 +23,7 @@ import {AuthProvider} from './AuthProvider';
 //npm install email-validator
 //npm install mixpanel-browser --save
 //npm i react-mixpanel
+//npm i react-places-autocomplete
 
 //npm run bundle
 //firebase deploy
@@ -47,7 +48,7 @@ function App() {
   return (
     <div className="app">
       <AuthProvider>
-        <DetermineNavigatorPath/>
+       <CreateProfile/>
       </AuthProvider>
        {/* {path.includes('users') || path.includes('descriptions') ? <ProfileNavigator url={path}/> : <LandingNavigator />} */}
         {/* <AuthProvider>
