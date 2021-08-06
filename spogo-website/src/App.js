@@ -28,6 +28,7 @@ import firebase from "./firebase";
 //npm install email-validator
 //npm install mixpanel-browser --save
 //npm i react-mixpanel
+//npm i react-places-autocomplete
 
 //npm run bundle
 //firebase deploy
@@ -103,8 +104,6 @@ const App = () => {
       {/* <AuthProvider>
           <SignInScreen />
         </AuthProvider> */}
-      {/* <SocialsScreen /> */}
-      {/* <CreateProfile /> */}
     </div>
   );
 };

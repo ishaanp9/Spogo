@@ -5,6 +5,10 @@ import {Link} from 'react-router-dom';
 import { BsPlus } from "react-icons/bs";
 import { BiMinus } from "react-icons/bi";
 import {getUserDict, getUserHolderDict} from '../../../UserData';
+import PlacesAutocomplete, {
+  geocodeByAddress,
+  getLatLng,
+} from 'react-places-autocomplete';
 
 const SportPosition = () => {
   const [userName, setUserName] = useState(getUserHolderDict().name)
@@ -12,13 +16,16 @@ const SportPosition = () => {
   useEffect(() => {
     WebFont.load({
       google: {
-        families: ["Montserrat", "Open Sans", "Public Sans"],
+        families: ['Montserrat', 'Open Sans', 'Public Sans'],
       },
     });
   }, []);
 
-  const [positionIcon, setPositionIcon] = useState("BsPlus");
-  const [positionIconText, setPositionIconText] = useState("Add a Position");
+  const [positionIcon, setPositionIcon] = useState('BsPlus');
+  const [positionIconText, setPositionIconText] = useState('Add a Position');
+  const [address, setAddress] = useState('');
+
+  const handleSelect = async (value) => {};
 
   const onIconPressed = () => {
     if (positionIcon === "BsPlus") {
@@ -46,10 +53,45 @@ const SportPosition = () => {
           <div className="sportPositionInputForms">
             <p
               className="sportPositionTextInputHeader"
-              style={{ marginTop: "8%" }}
+              style={{ marginTop: '8%' }}
             >
-              Sport
+              Location
             </p>
+            <PlacesAutocomplete
+              value={address}
+              onChange={setAddress}
+              onSelect={handleSelect}
+            >
+              {({
+                getInputProps,
+                suggestions,
+                getSuggestionItemProps,
+                loading,
+              }) => (
+                <div>
+                  <input
+                    {...getInputProps({ className: 'sportPositionTextInput' })}
+                  />
+
+                  <div>
+                    {loading ? <div>Loading...</div> : null}
+
+                    {suggestions.map((suggestion) => {
+                      const style = {
+                        backgroundColor: suggestion.active ? '#41b6e6' : '#fff',
+                      };
+
+                      return (
+                        <div {...getSuggestionItemProps(suggestion, { style })}>
+                          {suggestion.description}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+            </PlacesAutocomplete>
+            <p className="sportPositionTextInputHeader">Sport</p>
             <select className="sportPositionTextInput">
               <option>Sport</option>
               <option>Football</option>
@@ -69,31 +111,31 @@ const SportPosition = () => {
             </select>
             <div
               style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
               }}
             >
               <p className="sportPositionTextInputHeader">Position</p>
-              <div style={{ display: "flex", alignItems: "center" }}>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
                 <p
                   className="sportPositionTextInputHeader"
-                  style={{ fontWeight: "bold" }}
+                  style={{ fontWeight: 'bold' }}
                   onClick={() => {
                     onIconPressed();
                   }}
                 >
                   {positionIconText}
                 </p>
-                {positionIcon === "BiMinus" ? (
+                {positionIcon === 'BiMinus' ? (
                   <BiMinus
                     onClick={() => {
                       // setPositionIcon("BsPlus");
                       onIconPressed();
                     }}
-                    style={{ marginBottom: 5, cursor: "pointer" }}
+                    style={{ marginBottom: 5, cursor: 'pointer' }}
                     size={20}
-                    color={"black"}
+                    color={'black'}
                   />
                 ) : (
                   <BsPlus
@@ -101,9 +143,9 @@ const SportPosition = () => {
                       // setPositionIcon("BiMinus");
                       onIconPressed();
                     }}
-                    style={{ marginBottom: 5, cursor: "pointer" }}
+                    style={{ marginBottom: 5, cursor: 'pointer' }}
                     size={20}
-                    color={"black"}
+                    color={'black'}
                   />
                 )}
               </div>
@@ -111,20 +153,20 @@ const SportPosition = () => {
             <input
               className="sportPositionTextInput"
               required
-              placeholder={"Ex: Quarterback, Point Guard, Midfielder"}
+              placeholder={'Ex: Quarterback, Point Guard, Midfielder'}
               type="text"
               id="Position"
             />
-            {positionIcon === "BiMinus" ? (
+            {positionIcon === 'BiMinus' ? (
               <input
                 className="sportPositionTextInput"
                 required
-                placeholder={"Ex: Quarterback, Point Guard, Midfielder"}
+                placeholder={'Ex: Quarterback, Point Guard, Midfielder'}
                 type="text"
                 id="Position"
               />
             ) : null}
-            {positionIcon === "BsPlus" ? (
+            {positionIcon === 'BsPlus' ? (
               <p className="sportsNoPositionText">I don't have a position.</p>
             ) : null}
             <Link

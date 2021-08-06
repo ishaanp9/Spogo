@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 import WebFont from "webfontloader";
 import SignUpImage from "../../assets/signUpImage.png";
 import { AuthContext } from "../../../AuthProvider";
+import Google from './google.png';
 
 const SignUpScreen = () => {
   const [name, setName] = useState("");
@@ -107,6 +108,15 @@ const SignUpScreen = () => {
           >
             Create Account
           </button>
+          <div style={{display: 'flex', alignItems: 'center', width: '100%', justifyContent: 'space-between'}}>
+            <hr style={{ marginTop: 20, width: '45%' }} />
+            <p style={{fontSize: 14, marginTop: 20}}>or</p>
+            <hr style={{ marginTop: 20, width: '45%' }} />
+          </div>
+          <div className="googleSignUpContainer">
+            <img className="googleImageSignUp" src={Google} />
+            <p className="googleTextSignUp">Sign Up with Google</p>
+          </div>
           <p className="signUpHaveAccountText">
             Already have an account?{" "}
             <Link className="signUpHaveAccountTextSpan" to={"/auth/sign-in"}>
