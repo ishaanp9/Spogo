@@ -1,21 +1,25 @@
-import React, { useState, useEffect } from "react";
-import "./CreateProfile.css";
-import Modal from "react-modal";
-import { MdClose } from "react-icons/md";
-    import WebFont from 'webfontloader';
+import React, { useState, useEffect } from 'react';
+import './CreateProfile.css';
+import Modal from 'react-modal';
+import WebFont from 'webfontloader';
+import { FaInstagram, FaTwitter } from 'react-icons/fa';
+import { MdEmail, MdMail, MdStar, MdLocationOn, MdClose } from 'react-icons/md';
+import { BsLink45Deg } from 'react-icons/bs';
+import BlankProfile from '../ProfileScreen/blank_profile.png';
+import { MixpanelConsumer } from 'react-mixpanel';
 
 const CreateProfile = () => {
   const [experienceModalOpen, setExperienceModalOpen] = useState(false);
   const [accomplishmentModalOpen, setAccomplishmentModalOpen] = useState(false);
   const [measurableModalOpen, setMeasurableModalOpen] = useState(false);
-  const [currentMonth, setCurrentMonth] = useState("");
-  const [currentYear, setCurrentYear] = useState("");
+  const [currentMonth, setCurrentMonth] = useState('');
+  const [currentYear, setCurrentYear] = useState('');
 
   useEffect(() => {
     getCurrentDate();
   }, []);
-  
-    useEffect(() => {
+
+  useEffect(() => {
     WebFont.load({
       google: {
         families: ['Montserrat', 'Open Sans', 'Public Sans'],
@@ -27,30 +31,228 @@ const CreateProfile = () => {
     let monthNumber = new Date().getMonth();
     setCurrentYear(new Date().getFullYear());
     let monthNames = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',
     ];
     setCurrentMonth(monthNames[monthNumber]);
   };
 
   return (
     <div>
-      <h1 onClick={() => setExperienceModalOpen(true)}>Experience</h1>
-      <h2 onClick={() => setAccomplishmentModalOpen(true)}>Accomplishment</h2>
-      <h3 onClick={() => setMeasurableModalOpen(true)}>Measurable</h3>
+      <>
+        <div className="createScreenProfileHeader">
+          <div className="createScreenProfileImageContainer">
+            <img className="createScreenProfileImage" src={BlankProfile} />
+            {/* {profileImage === '' || profileImage === undefined ? (
+              <img className="profileImage" src={BlankProfile} />
+            ) : (
+              <img className="profileImage" src={profileImage} />
+            )} */}
+          </div>
+          <div className="createScreenProfileTextContainer">
+            <div className="createScreenNameSportTextContainer">
+              <h1 className="createScreenWebsiteUserName">Ishaan Puri</h1>
+              <h2 className="createScreenWebsiteSportPositionText">
+                Basketball - PG
+                {/* {position === '' ? sport : sport + ' - ' + position} */}
+              </h2>
+            </div>
 
-      
+            <div className="createScreenLocationIconTextContainer">
+              <MdLocationOn color={'#EA4335'} size={20} />
+              <h3 className="createScreenLocationText">Seattle, WA</h3>
+            </div>
 
+            <div className="createScreenSocialIconsRow">
+              <FaInstagram
+                className="createScreenSocialIcon"
+                // onClick={() =>
+                //   // window.location.replace("www.instagram.com/" + instagram)
+                //   {
+                //     mixpanel.track(
+                //       'Profile Icons Pressed by External Visitor',
+                //       { 'Profile Icon': 'Instagram' }
+                //     );
+                //     window.open('https://instagram.com/' + instagram);
+                //   }
+                // }
+                size={25}
+                color={'#E1306C'}
+              />
+
+              <FaTwitter
+                className="createScreenSocialIcon"
+                // onClick={() =>
+                //   // window.location.replace("www.instagram.com/" + instagram)
+                //   {
+                //     mixpanel.track(
+                //       'Profile Icons Pressed by External Visitor',
+                //       { 'Profile Icon': 'Twitter' }
+                //     );
+                //     window.open('https://twitter.com/' + twitter);
+                //   }
+                // }
+                size={25}
+                color={'#1DA1F2'}
+              />
+
+              <MdMail
+                className="createScreenSocialIcon"
+                // onClick={() => {
+                //   mixpanel.track(
+                //     'Profile Icons Pressed by External Visitor',
+                //     { 'Profile Icon': 'Email' }
+                //   );
+                //   window.open('mailto:' + email);
+                // }}
+                // onClick={() =>
+                //   // window.location.replace("www.instagram.com/" + instagram)
+                //   window.open("https://instagram.com/" + instagram)
+                // }
+                size={25}
+                color={'#5D4D4A'}
+              />
+
+              <BsLink45Deg
+                className="createScreenSocialIcon"
+                // onClick={() => setWildcardLinkModalOpen(true)}
+                size={25}
+                color={'#ffae42'}
+              />
+            </div>
+          </div>
+        </div>
+        <div>
+          <p></p>
+        </div>
+        <div className="createScreenBioContainer">
+          <h1>Bio</h1>
+          <hr
+            className="createScreenComponentHeaderDivider"
+            color="lightgrey"
+            size="1"
+          />
+          <p>This is an empty bio, edit as you see fit.</p>
+        </div>
+      </>
+      <div className="createScreenProfileItemListContainer">
+        <h1 className="createScreenProfileItemListHeader">Highlights</h1>
+        <hr
+          className="createScreenComponentHeaderDivider"
+          size="1"
+          color="lightgrey"
+        />
+        <ul
+          className="createScreenVideoItemArrayList"
+          // style={{ width: window.innerWidth }}
+        >
+          {/* {thisMediaArray.map((item) => {
+            if (item.media === 'photo') {
+              return <ImageItem url={item.url} />;
+            } else {
+              return <VideoItem url={item.url} />;
+            }
+          })} */}
+        </ul>
+      </div>
+      <div className="createScreenProfileItemListContainer">
+        <h1 className="createScreenProfileItemListHeader" onClick={() => setExperienceModalOpen(true)}>Experiences</h1>
+        <hr className="createScreenComponentHeaderDivider" size="1" color="lightgrey" />
+
+        {/* {ShowMoreShowLess('Experience')}
+          {thisExperienceArray.length < 3 ? (
+            <hr
+              className="componentBottomDivider"
+              size="1"
+              color="lightgrey"
+              style={{ marginBottom: 20 }}
+            />
+          ) : (
+            <hr className="componentBottomDivider" size="1" color="lightgrey" />
+          )} */}
+        {/* {thisExperienceArray.length > 3 ? (
+            <button
+              className={'seeMoreSeeLessItemButton'}
+              onClick={() =>
+                setshowMoreShowLessButtonExperience(
+                  !showMoreShowLessButtonExperience
+                )
+              }
+              type="button"
+            >
+              {showMoreShowLessButtonTextExperience}
+            </button>
+          ) : null} */}
+      </div>
+      )
+      <div className="createScreenProfileItemListContainer">
+        <h1 className="createScreenProfileItemListHeader" onClick={() => setAccomplishmentModalOpen(true)}>Accomplishments</h1>
+        <hr className="createScreenComponentHeaderDivider" size="1" color="lightgrey" />
+
+        {/* {ShowMoreShowLess('Accoplishment')} */}
+        {/* {thisTrophyArray.length < 3 ? (
+            <hr
+              className="componentBottomDivider"
+              size="1"
+              color="lightgrey"
+              style={{ marginBottom: 20 }}
+            />
+          ) : (
+            <hr className="componentBottomDivider" size="1" color="lightgrey" />
+          )} */}
+        {/* {thisTrophyArray.length > 3 ? (
+            <button
+              className={'seeMoreSeeLessItemButton'}
+              onClick={() =>
+                setshowMoreShowLessButtonAccoplishment(
+                  !showMoreShowLessButtonAccoplishment
+                )
+              }
+              type="button"
+            >
+              {showMoreShowLessButtonTextAccoplishment}
+            </button>
+          ) : null} */}
+      </div>
+      <div className="createScreenProfileItemListContainer">
+        <h1 className="createScreenProfileItemListHeader" onClick={() => setMeasurableModalOpen(true)}>Measurables</h1>
+        <hr className="createScreenComponentHeaderDivider" size="1" color="lightgrey" />
+
+        {/* {ShowMoreShowLess('Measurables')} */}
+        {/* {thisMeasurableArray.length < 3 ? (
+          <hr
+            className="componentBottomDivider"
+            size="1"
+            color="lightgrey"
+            style={{ marginBottom: 20 }}
+          />
+        ) : (
+          <hr className="componentBottomDivider" size="1" color="lightgrey" />
+        )} */}
+        {/* {thisMeasurableArray.length > 3 ? (
+          <button
+            className={'seeMoreSeeLessItemButton'}
+            onClick={() =>
+              setshowMoreShowLessButtonMeasurables(
+                !showMoreShowLessButtonMeasurables
+              )
+            }
+            type="button"
+          >
+            {showMoreShowLessButtonTextMeasurables}
+          </button>
+        ) : null} */}
+      </div>
       {/* Add Item Modals */}
       {/* Add Item Modals */}
       {/* Add Item Modals */}
@@ -93,8 +295,7 @@ const CreateProfile = () => {
                 <div className="expModalDatePickerItemContainer">
                   <p className="textInputHeaders">Start Date</p>
                   <div className="datePickerRow">
-
-                    <select className="modalDatePicker" required name={"Month"}>
+                    <select className="modalDatePicker" required name={'Month'}>
                       <option selected hidden>
                         Month
                       </option>
@@ -113,7 +314,7 @@ const CreateProfile = () => {
                     </select>
                     {/* <div style={{width: '0.5%'}}></div> */}
                     <div className="datePickerRowMiddleDivider"></div>
-                    <select className="modalDatePicker" required name={"Year"}>
+                    <select className="modalDatePicker" required name={'Year'}>
                       <option selected hidden>
                         Year
                       </option>
@@ -146,7 +347,7 @@ const CreateProfile = () => {
                 <div className="expModalDatePickerItemContainer">
                   <p className="textInputHeaders">End Date</p>
                   <div className="datePickerRow">
-                    <select className="modalDatePicker" required name={"Month"}>
+                    <select className="modalDatePicker" required name={'Month'}>
                       <option selected hidden>
                         {currentMonth}
                       </option>
@@ -164,7 +365,7 @@ const CreateProfile = () => {
                       <option>December</option>
                     </select>
                     <div className="datePickerRowMiddleDivider"></div>
-                    <select className="modalDatePicker" required name={"Year"}>
+                    <select className="modalDatePicker" required name={'Year'}>
                       <option selected hidden>
                         {currentYear}
                       </option>
@@ -215,7 +416,6 @@ const CreateProfile = () => {
         </div>
       </Modal>
       {/* Experience Modal */}
-
       {/* Accomplishment Modal */}
       <Modal
         isOpen={accomplishmentModalOpen}
@@ -247,7 +447,7 @@ const CreateProfile = () => {
                 <div className="accomplishmentMeasurableDatePickerItemContainer">
                   <p className="textInputHeaders">Date Received</p>
                   <div className="datePickerRow">
-                    <select className="modalDatePicker" required name={"Month"}>
+                    <select className="modalDatePicker" required name={'Month'}>
                       <option selected hidden>
                         Month
                       </option>
@@ -266,7 +466,7 @@ const CreateProfile = () => {
                     </select>
                     {/* <div style={{width: '0.5%'}}></div> */}
                     <div className="datePickerRowMiddleDivider"></div>
-                    <select className="modalDatePicker" required name={"Year"}>
+                    <select className="modalDatePicker" required name={'Year'}>
                       <option selected hidden>
                         Year
                       </option>
@@ -316,7 +516,6 @@ const CreateProfile = () => {
         </div>
       </Modal>
       {/* Accomplishment Modal */}
-
       {/* Measurable Modal */}
       <Modal
         isOpen={measurableModalOpen}

@@ -16,6 +16,7 @@
     "react-icons": "^4.2.0",
     "react-mixpanel": "^1.0.5",
     "react-modal": "^3.14.3",
+    "react-places-autocomplete": "^7.3.0",
     "react-player": "^2.9.0",
     "react-redux": "^7.2.4",
     "react-router-dom": "^5.2.0",
