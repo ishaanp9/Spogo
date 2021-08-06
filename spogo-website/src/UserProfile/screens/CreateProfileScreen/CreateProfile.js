@@ -7,8 +7,12 @@ import { MdEmail, MdMail, MdStar, MdLocationOn, MdClose } from 'react-icons/md';
 import { BsLink45Deg } from 'react-icons/bs';
 import BlankProfile from '../ProfileScreen/blank_profile.png';
 import { MixpanelConsumer } from 'react-mixpanel';
+import {AuthContext} from '../../../AuthProvider';
 
 const CreateProfile = () => {
+
+  const { logout } = useContext(AuthContext);
+
   const [experienceModalOpen, setExperienceModalOpen] = useState(false);
   const [accomplishmentModalOpen, setAccomplishmentModalOpen] = useState(false);
   const [measurableModalOpen, setMeasurableModalOpen] = useState(false);
@@ -566,6 +570,8 @@ const CreateProfile = () => {
       {/* Add Item Modals */}
       {/* Add Item Modals */}
       {/* Add Item Modals */}
+
+      <button style={{marginTop: 20}} type="button" onClick={() => logout()}>
     </div>
   );
 };

@@ -1,8 +1,9 @@
-import React, { useEffect, useContext, useState } from 'react';
-import './SignInScreen.css';
-import WebFont from 'webfontloader';
-import SignInImage from '../../assets/signUpImage.png';
-import { AuthContext } from '../../../AuthProvider';
+import React, { useEffect, useContext, useState } from "react";
+import "./SignInScreen.css";
+import {Link} from 'react-router-dom';
+import WebFont from "webfontloader";
+import SignInImage from "../../assets/signUpImage.png";
+import { AuthContext } from "../../../AuthProvider";
 import Google from '../SignUpScreen/google.png';
 
 const SignInScreen = () => {
@@ -80,7 +81,7 @@ const SignInScreen = () => {
               <input
                 className="signInTextInput"
                 required
-                type="text"
+                type="password"
                 id="Password"
                 value={password}
                 onChange={(text) => setPassword(text.target.value)}
@@ -116,14 +117,16 @@ const SignInScreen = () => {
               <p className="googleTextSignIn">Sign In with Google</p>
             </div>
             <p className="signInHaveAccountText">
-              Don't have an Account?{' '}
-              <span className="signInHaveAccountTextSpan">Sign Up</span>
+              Don't have an Account?{" "}
+              <Link className="signInHaveAccountTextSpan" to={"/auth/sign-up"}>
+                <span >Sign Up</span>
+              </Link>
             </p>
           </form>
         </div>
-        <div className="signInImageContainer">
+        {/* <div className="signInImageContainer">
           <img className="signInImage" src={SignInImage} />
-        </div>
+        </div> */}
       </div>
     </div>
   );

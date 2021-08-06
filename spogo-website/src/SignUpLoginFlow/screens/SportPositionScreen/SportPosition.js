@@ -1,14 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import WebFont from 'webfontloader';
-import './SportPosition.css';
-import { BsPlus } from 'react-icons/bs';
-import { BiMinus } from 'react-icons/bi';
+import React, { useEffect, useState } from "react";
+import WebFont from "webfontloader";
+import "./SportPosition.css";
+import {Link} from 'react-router-dom';
+import { BsPlus } from "react-icons/bs";
+import { BiMinus } from "react-icons/bi";
+import {getUserDict, getUserHolderDict} from '../../../UserData';
 import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from 'react-places-autocomplete';
 
 const SportPosition = () => {
+  const [userName, setUserName] = useState(getUserHolderDict().name)
+
   useEffect(() => {
     WebFont.load({
       google: {
@@ -24,14 +28,14 @@ const SportPosition = () => {
   const handleSelect = async (value) => {};
 
   const onIconPressed = () => {
-    if (positionIcon === 'BsPlus') {
-      setPositionIcon('BsMinus');
-      setPositionIconText('Remove a Position');
+    if (positionIcon === "BsPlus") {
+      setPositionIcon("BsMinus");
+      setPositionIconText("Remove a Position");
       console.log(positionIcon);
     }
-    if (positionIcon === 'BiMinus') {
-      setPositionIcon('BsPlus');
-      setPositionIconText('Add a Position');
+    if (positionIcon === "BiMinus") {
+      setPositionIcon("BsPlus");
+      setPositionIconText("Add a Position");
       console.log(positionIcon);
     }
   };
@@ -40,7 +44,7 @@ const SportPosition = () => {
     <div className="sportPositionScreenContainer">
       <div className="sportPositionContainer">
         <p className="sportPositionFormHeader">
-          Hello [name]! Welcome to Spogo!
+          Hello{' ' + userName}! Welcome to Spogo!
         </p>
         <p className="sportPositionHeadlineHeader">
           Let's start creating your athletic profile.
@@ -165,7 +169,16 @@ const SportPosition = () => {
             {positionIcon === 'BsPlus' ? (
               <p className="sportsNoPositionText">I don't have a position.</p>
             ) : null}
-            <button className="sportPositionNextButton">Next</button>
+            <Link
+              to={"/auth/sign-up/socials"}
+              className="sportPositionNextButton"
+            >
+              <button
+                className="sportPositionNextButton"
+              >
+                Next
+              </button>
+            </Link>
           </div>
         </form>
       </div>

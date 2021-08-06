@@ -1,19 +1,24 @@
-import React, { useEffect } from "react";
-
+import React, { useState, useEffect } from "react";
 import "./App.css";
-import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
+import {
+  Route,
+  BrowserRouter as Router,
+  Switch,
+  BrowserRouter,
+} from "react-router-dom";
 import ProfileNavigator from "./navigation/ProfileNavigator";
 import LandingNavigator from "./navigation/LandingNavigator";
-import UserAuthCreateNavigation from './navigation/UserAuthCreateNavigation';
+import UserAuthCreateNavigation from "./navigation/UserAuthCreateNavigation";
 import ProfileHeader from "./UserProfile/components/ProfileHeader/ProfileHeader";
-import SignUpScreen from './SignUpLoginFlow/screens/SignUpScreen/SignUpScreen';
-import SignInScreen from './SignUpLoginFlow/screens/SignInScreen/SignInScreen';
+import SignUpScreen from "./SignUpLoginFlow/screens/SignUpScreen/SignUpScreen";
+import SignInScreen from "./SignUpLoginFlow/screens/SignInScreen/SignInScreen";
 import CreateProfile from "./UserProfile/screens/CreateProfileScreen/CreateProfile";
 import SportPosition from "./SignUpLoginFlow/screens/SportPositionScreen/SportPosition";
 import SocialsScreen from "./SignUpLoginFlow/screens/SocialsScreen/SocialsScreen";
 import Profile from "./UserProfile/screens/ProfileScreen/Profile";
-import {AuthProvider} from './AuthProvider';
-
+import { AuthProvider } from "./AuthProvider";
+import { getUserDict, setUserDict } from "./UserData";
+import firebase from "./firebase";
 
 //npm install mdi-react
 //npm install react-player
@@ -28,36 +33,79 @@ import {AuthProvider} from './AuthProvider';
 //npm run bundle
 //firebase deploy
 
-function App() {
+const App = () => {
   let path = window.location.href;
+
+  const [initializing, setInitializing] = useState(true);
+  const [user, setUser] = useState(null);
+
+  const [userInfoDictHolder, setUserInfoDictHolder] = useState({});
+
+  useEffect(() => {
+    const subscriber = firebase.auth().onAuthStateChanged(onAuthStateChanged);
+    return subscriber; // unsubscribe on unmount
+  }, []);
+
+  // Handle user state changes
+  const onAuthStateChanged = async (user) => {
+    setUser(user);
+    if (user) {
+      // console.log(user.uid);
+      if (user != null) {
+        await getDBUserInfo(user);
+      }
+    }
+  };
+
+  const getDBUserInfo = async (user) => {
+    let dbPath = firebase
+      .firestore()
+      .collection("Users")
+      .doc(user.uid)
+      .collection("User Info");
+    let profileData = dbPath.doc("Profile Data");
+    await profileData
+      .get()
+      .then((doc) => {
+        if (doc.exists) {
+          setUserDict(doc.data());
+        } else {
+          // doc.data() will be undefined in this case
+          console.log("User Info doc not found!");
+        }
+      })
+      .catch((error) => {
+        console.log("Error getting user info document:", error);
+      });
+    setUserInfoDictHolder(getUserDict());
+  };
 
   useEffect(() => {
     path = window.location.href;
   }, []);
 
   const DetermineNavigatorPath = () => {
-    if (path.includes('users') || path.includes('descriptions')) {
-      return <ProfileNavigator url={path}/>
-    } else if (path.includes('auth') || path.includes('create')) {
-      return <UserAuthCreateNavigation />
+    if (path.includes("users") || path.includes("descriptions")) {
+      return <ProfileNavigator url={path} />;
+    } else if (path.includes("auth") || path.includes("create")) {
+      return <UserAuthCreateNavigation />;
     } else {
-      return <LandingNavigator />
+      return <LandingNavigator />;
     }
-  }
+  };
 
   return (
     <div className="app">
       <AuthProvider>
-       <CreateProfile/>
+        <DetermineNavigatorPath />
       </AuthProvider>
-       {/* {path.includes('users') || path.includes('descriptions') ? <ProfileNavigator url={path}/> : <LandingNavigator />} */}
-        {/* <AuthProvider>
+
+      {/* {path.includes('users') || path.includes('descriptions') ? <ProfileNavigator url={path}/> : <LandingNavigator />} */}
+      {/* <AuthProvider>
           <SignInScreen />
         </AuthProvider> */}
-        {/* <SportPosition /> */}
-        {/* <CreateProfile /> */}
     </div>
   );
-}
+};
 
 export default App;
