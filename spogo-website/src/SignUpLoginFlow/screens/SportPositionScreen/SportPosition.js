@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from "react";
-import WebFont from "webfontloader";
-import "./SportPosition.css";
-import {Link} from 'react-router-dom';
-import { BsPlus } from "react-icons/bs";
-import { BiMinus } from "react-icons/bi";
-import {getUserDict, getUserHolderDict} from '../../../UserData';
+import React, { useEffect, useState } from 'react';
+import WebFont from 'webfontloader';
+import './SportPosition.css';
+import { Link } from 'react-router-dom';
+import { BsPlus } from 'react-icons/bs';
+import { BiMinus } from 'react-icons/bi';
+import { getUserDict, getUserHolderDict } from '../../../UserData';
 import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from 'react-places-autocomplete';
 
 const SportPosition = () => {
-  const [userName, setUserName] = useState(getUserHolderDict().name)
+  const [userName, setUserName] = useState(getUserHolderDict().name);
 
   useEffect(() => {
     WebFont.load({
@@ -23,22 +23,38 @@ const SportPosition = () => {
 
   const [positionIcon, setPositionIcon] = useState('BsPlus');
   const [positionIconText, setPositionIconText] = useState('Add a Position');
-  const [address, setAddress] = useState('');
+  // const [address, setAddress] = useState('');
 
-  const handleSelect = async (value) => {};
+  // const handleSelect = async (value) => {};
+
+  const [address, setAddress] = React.useState('');
+
+  const handleSelect = async (value) => {
+    const results = await geocodeByAddress(value);
+    setAddress(value);
+  };
 
   const onIconPressed = () => {
-    if (positionIcon === "BsPlus") {
-      setPositionIcon("BsMinus");
-      setPositionIconText("Remove a Position");
-      console.log(positionIcon);
+    if (positionIcon === 'BsPlus') {
+      setPositionIcon('BiMinus');
+      setPositionIconText('Remove a Position');
     }
-    if (positionIcon === "BiMinus") {
-      setPositionIcon("BsPlus");
-      setPositionIconText("Add a Position");
-      console.log(positionIcon);
+    if (positionIcon === 'BiMinus') {
+      setPositionIcon('BsPlus');
+      setPositionIconText('Add a Position');
     }
   };
+
+  //use this to store in database - by the second comma, suggestion.description.substring(0, nthIndex(suggestion.description, ',', 2))
+  function nthIndex(str, pat, n) {
+    var L = str.length,
+      i = -1;
+    while (n-- && i++ < L) {
+      i = str.indexOf(pat, i);
+      if (i < 0) break;
+    }
+    return i;
+  }
 
   return (
     <div className="sportPositionScreenContainer">
@@ -57,10 +73,12 @@ const SportPosition = () => {
             >
               Location
             </p>
+
             <PlacesAutocomplete
               value={address}
               onChange={setAddress}
               onSelect={handleSelect}
+              searchOptions={{ types: ['(cities)'] }}
             >
               {({
                 getInputProps,
@@ -74,11 +92,15 @@ const SportPosition = () => {
                   />
 
                   <div>
-                    {loading ? <div>Loading...</div> : null}
+                    {/* {loading ? <div>Loading...</div> : null} */}
 
                     {suggestions.map((suggestion) => {
                       const style = {
-                        backgroundColor: suggestion.active ? '#41b6e6' : '#fff',
+                        backgroundColor: suggestion.active ? '#3eb489' : '#fff',
+                        cursor: 'pointer',
+                        marginBottom: 5,
+                        fontSize: 12,
+                        fontFamily: "Open Sans"
                       };
 
                       return (
@@ -92,7 +114,7 @@ const SportPosition = () => {
               )}
             </PlacesAutocomplete>
             <p className="sportPositionTextInputHeader">Sport</p>
-            <select className="sportPositionTextInput">
+            <select name='sportsPicker' className="sportPositionTextInput">
               <option>Sport</option>
               <option>Football</option>
               <option>Basketball</option>
@@ -107,8 +129,17 @@ const SportPosition = () => {
               <option>Golf</option>
               <option>Rowing</option>
               <option>Volleyball</option>
-              <option>Other</option>
+              <option value='Other'>Other</option>
             </select>
+            {/* If other is pressed this code executes */}
+            {/* <p className="sportPositionTextInputHeader">Sport</p>
+            <input
+              className="sportPositionTextInput"
+              required
+              placeholder={'What Sport do you play?'}
+              type="text"
+              id="OtherSport"
+            /> */}
             <div
               style={{
                 display: 'flex',
@@ -120,7 +151,7 @@ const SportPosition = () => {
               <div style={{ display: 'flex', alignItems: 'center' }}>
                 <p
                   className="sportPositionTextInputHeader"
-                  style={{ fontWeight: 'bold' }}
+                  style={{ fontWeight: 'bold', cursor: 'pointer' }}
                   onClick={() => {
                     onIconPressed();
                   }}
@@ -170,14 +201,10 @@ const SportPosition = () => {
               <p className="sportsNoPositionText">I don't have a position.</p>
             ) : null}
             <Link
-              to={"/auth/sign-up/socials"}
+              to={'/auth/sign-up/socials'}
               className="sportPositionNextButton"
             >
-              <button
-                className="sportPositionNextButton"
-              >
-                Next
-              </button>
+              <button className="sportPositionNextButton">Next</button>
             </Link>
           </div>
         </form>

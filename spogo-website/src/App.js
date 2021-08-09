@@ -29,6 +29,7 @@ import firebase from "./firebase";
 //npm install mixpanel-browser --save
 //npm i react-mixpanel
 //npm i react-places-autocomplete
+//npm install --save react-copy-to-clipboard
 
 //npm run bundle
 //firebase deploy
@@ -97,7 +98,7 @@ const App = () => {
   return (
     <div className="app">
       <AuthProvider>
-        <DetermineNavigatorPath />
+        <DetermineNavigatorPath/>
       </AuthProvider>
 
       {/* {path.includes('users') || path.includes('descriptions') ? <ProfileNavigator url={path}/> : <LandingNavigator />} */}
