@@ -368,8 +368,8 @@ const Profile = (props) => {
     setShowMoreShowLessButtonTextExperience,
   ] = useState("Show More");
   const [
-    showMoreShowLessButtonTextAccoplishment,
-    setShowMoreShowLessButtonTextAccoplishment,
+    showMoreShowLessButtonTextAccomplishment,
+    setShowMoreShowLessButtonTextAccomplishment,
   ] = useState("Show More");
   const [
     showMoreShowLessButtonTextMeasurables,
@@ -434,7 +434,7 @@ const Profile = (props) => {
     } else if (itemType === "Accoplishment") {
       if (thisTrophyArray.length > 3 && !showMoreShowLessButtonAccoplishment) {
         itemLengthDifferenceNumberAccoplishment = thisTrophyArray.length - 3;
-        setShowMoreShowLessButtonTextAccoplishment("Show More");
+        setShowMoreShowLessButtonTextAccomplishment("Show More");
         return (
           <ul>
             {thisTrophyArray
@@ -456,7 +456,7 @@ const Profile = (props) => {
           </ul>
         );
       } else {
-        setShowMoreShowLessButtonTextAccoplishment("Show Less");
+        setShowMoreShowLessButtonTextAccomplishment("Show Less");
         return (
           <ul>
             {thisTrophyArray.map((item) => (
@@ -922,7 +922,7 @@ const Profile = (props) => {
                     }
                     type="button"
                   >
-                    {showMoreShowLessButtonTextAccoplishment}
+                    {showMoreShowLessButtonTextAccomplishment}
                   </button>
                 ) : null}
               </div>

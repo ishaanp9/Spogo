@@ -1,12 +1,14 @@
 import React, { useEffect, useState, useContext } from "react";
 import "./SignUpScreen.css";
-import {Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import WebFont from "webfontloader";
 import SignUpImage from "../../assets/signUpImage.png";
 import { AuthContext } from "../../../AuthProvider";
 import Google from './google.png';
 
-const SignUpScreen = () => {
+const SignUpScreen = (props) => {
+  let userUID = props.userUID
+  let history = useHistory()
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -21,6 +23,10 @@ const SignUpScreen = () => {
         families: ["Montserrat", "Open Sans", "Public Sans"],
       },
     });
+    if (userUID != 'noUser') {
+      console.log(userUID)
+      history.push('/create')
+    }
   }, []);
 
   let validator = require("email-validator");
@@ -62,7 +68,6 @@ const SignUpScreen = () => {
             </p>
             <input
               className="signUpTextInput"
-              required
               type="text"
               id="name"
               autoComplete="off"
@@ -76,7 +81,6 @@ const SignUpScreen = () => {
             <p className="signUpTextInputHeader">Email</p>
             <input
               className="signUpTextInput"
-              required
               type="text"
               id="Email"
               value={email}
@@ -90,7 +94,7 @@ const SignUpScreen = () => {
             <input
               className="signUpTextInput"
               required
-              type="text"
+              type="password"
               id="Password"
               autoComplete="off"
               value={password}

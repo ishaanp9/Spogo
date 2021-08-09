@@ -1,3 +1,11 @@
+.invalidText {
+  font-family: "Montserrat", sans-serif;
+  color: red;
+  font-size: 12px;
+  margin-top: -15px;
+  margin-bottom: 15px;
+}
+
 @media screen and (max-width: 600px) {
   .sportPositionScreenContainer {
     display: flex;
@@ -39,6 +47,7 @@
     margin-bottom: 5px;
     font-size: 12px;
     font-family: "Open Sans", sans-serif;
+    cursor: pointer;
   }
 
   .sportPositionTextInput {
@@ -66,7 +75,7 @@
     font-family: "Open Sans", sans-serif;
     font-weight: 600;
     cursor: pointer;
-    margin-top: -15px;
+    margin-top: -10px;
     margin-bottom: 20px;
   }
 
@@ -129,6 +138,7 @@
     margin-bottom: 5px;
     font-size: 12px;
     font-family: "Open Sans", sans-serif;
+    cursor: pointer;
   }
 
   .sportPositionTextInput {
@@ -156,7 +166,7 @@
     font-family: "Open Sans", sans-serif;
     font-weight: 600;
     cursor: pointer;
-    margin-top: -15px;
+    margin-top: -10px;
     margin-bottom: 20px;
   }
 
@@ -221,6 +231,7 @@
     margin-bottom: 5px;
     font-size: 12px;
     font-family: "Open Sans", sans-serif;
+    cursor: pointer;
   }
 
   .sportPositionTextInput {
@@ -248,7 +259,7 @@
     font-family: "Open Sans", sans-serif;
     font-weight: 600;
     cursor: pointer;
-    margin-top: -15px;
+    margin-top: -10px;
     margin-bottom: 20px;
   }
 

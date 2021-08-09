@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -11,10 +11,10 @@ import SportPositionScreen from "../SignUpLoginFlow/screens/SportPositionScreen/
 import SocialsScreen from "../SignUpLoginFlow/screens/SocialsScreen/SocialsScreen";
 import CreateProfileScreen from "../UserProfile/screens/CreateProfileScreen/CreateProfile";
 
-import firebase from "../firebase";
 import { AuthProvider } from "../AuthProvider";
 
-const UserAuthCreateNavigation = () => {
+const UserAuthCreateNavigation = (props) => {
+  let userUID = props.uid
   return (
     <Router>
       <AuthProvider>
@@ -22,19 +22,19 @@ const UserAuthCreateNavigation = () => {
           <Redirect to="auth/sign-in" />
         </Route>
         <Route path={"/auth/sign-in"}>
-          <SignInScreen />
+          <SignInScreen userUID={userUID}/>
         </Route>
         <Route exact path={"/auth/sign-up"}>
-          <SignUpScreen />
+          <SignUpScreen userUID={userUID}/>
         </Route>
         <Route exact path={"/auth/sign-up/location-sport-position"}>
-          <SportPositionScreen />
+          <SportPositionScreen userUID={userUID}/>
         </Route>
         <Route exact path={"/auth/sign-up/socials"}>
-          <SocialsScreen />
+          <SocialsScreen userUID={userUID}/>
         </Route>
         <Route path="/create/">
-          <CreateProfileScreen />
+          <CreateProfileScreen userUID={userUID} />
         </Route>
       </AuthProvider>
     </Router>

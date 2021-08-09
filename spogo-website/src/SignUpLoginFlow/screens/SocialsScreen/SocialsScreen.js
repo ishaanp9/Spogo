@@ -1,21 +1,86 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./SocialsScreen.css";
-import {Link} from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 import { FaInstagram, FaTwitter } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { BsLink45Deg } from "react-icons/bs";
 import WebFont from "webfontloader";
-import {getUserDict, getUserHolderDict} from '../../../UserData';
+import { addUserInfo, getUserDict, getUserInfo} from "../../../UserData";
+import firebase from '../../../firebase';
 
-const SocialsScreen = () => {
+const SocialsScreen = (props) => {
+  let userUID = props.userUID
+  let history = useHistory()
+  const [instagramHandle, setInstagramHandle] = useState("");
+  const [twitterHandle, setTwitterHandle] = useState("");
+  const [preferredEmail, setPreferredEmail] = useState("");
+  const [wildcardLink, setWildcardLink] = useState("");
+  const [invalidEmail, setInvalidEmail] = useState(false);
+  const [invalidWildcard, setInvalidWildcard] = useState(false);
+
   useEffect(() => {
     WebFont.load({
       google: {
         families: ["Montserrat", "Open Sans", "Public Sans"],
       },
     });
-    console.log(getUserHolderDict())
+    if (getUserInfo('sport') === null && getUserInfo('position') === null) {
+      history.push("/auth/sign-up/location-sport-position");
+    }
+    console.log(getUserDict());
   }, []);
+
+  let validator = require("email-validator");
+
+  const handleSubmission = async () => {
+    let validLinksSubmission = true;
+    if (preferredEmail != '') {
+      if (!validator.validate(preferredEmail)) {
+        setInvalidEmail(true);
+        validLinksSubmission = false;
+      }
+    }
+    if (wildcardLink != "") {
+      if (wildcardLink.substring(0, 8) != "https://") {
+        validLinksSubmission = false;
+        setInvalidWildcard(true)
+      }
+    }
+    if (validLinksSubmission) {
+      if (userUID === "noUser") {
+        history.push('/auth')
+      } else {
+        addUserInfo("instagram-handle", instagramHandle.replace("@", ""));
+        addUserInfo("twitter-handle", twitterHandle.replace("@", ""));
+        if (preferredEmail === '') {
+          addUserInfo("preferred-email", getUserInfo('email'));
+  
+        } else {
+          addUserInfo("preferred-email", preferredEmail);
+        }
+        addUserInfo("wildcard", wildcardLink);
+        history.push('/create')
+        console.log(getUserDict())
+        await addUserInfoDictToDB()
+      }
+    }
+  };
+
+  const addUserInfoDictToDB = () => {
+    firebase
+      .firestore()
+      .collection("Users")
+      .doc(userUID)
+      .collection("User Info")
+      .doc("Profile Data")
+      .set({
+        userArray: getUserDict(),
+      })
+      .then(() => {
+        console.log("User added!");
+      });
+  };
+
   return (
     <div className="enterSocialsContainer">
       <div className="socialScreenContainer">
@@ -31,6 +96,10 @@ const SocialsScreen = () => {
               placeholder="Enter Instagram Handle"
               type="text"
               id="Instagram"
+              value={instagramHandle}
+              onChange={(text) => {
+                setInstagramHandle(text.target.value);
+              }}
             />
           </div>
           <div className="socialsTextInputContainer">
@@ -40,6 +109,10 @@ const SocialsScreen = () => {
               placeholder="Enter Twitter Handle"
               type="text"
               id="Twitter"
+              value={twitterHandle}
+              onChange={(text) => {
+                setTwitterHandle(text.target.value);
+              }}
             />
           </div>
           <div className="socialsTextInputContainer">
@@ -49,9 +122,14 @@ const SocialsScreen = () => {
               placeholder="Note: Email they sign up with will be here by defualt"
               type="text"
               id="Email"
+              value={preferredEmail}
+              onChange={(text) => {
+                setPreferredEmail(text.target.value);
+                setInvalidEmail(false)
+              }}
             />
           </div>
-
+          {invalidEmail && <h1 className="invalidText">Invalid email</h1>}
           <div className="socialsTextInputContainer">
             <BsLink45Deg size={25} color={"#3eb489"} />
             <input
@@ -59,18 +137,23 @@ const SocialsScreen = () => {
               placeholder="Enter Link a of Your Choice"
               type="text"
               id="Link"
+              value={wildcardLink}
+              onChange={(text) => {
+                setWildcardLink(text.target.value);
+                setInvalidWildcard(false)
+              }}
             />
           </div>
-          <Link
-              to={"/create"}
-              className="socialsScreenNextButton"
-              >
-              <button
+          {invalidWildcard && <h1 className="invalidText">Link must start with https://</h1>}
+          {/* <Link to={"/create"} className="socialsScreenNextButton"> */}
+          <button
             className="socialsScreenNextButton"
-            >
-                Next
-              </button>
-            </Link>
+            type="button"
+            onClick={() => handleSubmission()}
+          >
+            Next
+          </button>
+          {/* </Link> */}
         </form>
       </div>
     </div>

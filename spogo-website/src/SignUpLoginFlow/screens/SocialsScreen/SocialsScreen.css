@@ -1,3 +1,11 @@
+.invalidText {
+  font-family: "Montserrat", sans-serif;
+  color: red;
+  font-size: 12px;
+  margin-top: -15px;
+  margin-bottom: 15px;
+}
+
 @media screen and (max-width: 600px) {
   .enterSocialsContainer {
     display: flex;
