@@ -1,13 +1,15 @@
 import React, { useEffect, useContext, useState } from "react";
 import "./SignInScreen.css";
-import {Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import WebFont from "webfontloader";
 import SignInImage from "../../assets/signUpImage.png";
 import { AuthContext } from "../../../AuthProvider";
 import Google from '../SignUpScreen/google.png';
 
-const SignInScreen = () => {
-  const { login, logout } = useContext(AuthContext);
+const SignInScreen = (props) => {
+  let userUID = props.userUID
+  let history = useHistory()
+  const { login } = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [invalidEmail, setInvalidEmail] = useState(false);
@@ -19,6 +21,10 @@ const SignInScreen = () => {
         families: ['Montserrat', 'Open Sans', 'Public Sans'],
       },
     });
+    if (userUID != 'noUser') {
+      console.log(userUID)
+      history.push('/create')
+    }
   }, []);
 
   const loginFailedFunction = () => {

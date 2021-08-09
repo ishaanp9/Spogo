@@ -1,39 +1,47 @@
-import React, { createContext, useState } from "react";
-import {
-  Redirect,
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  useHistory
-} from "react-router-dom";
+import React, { createContext, useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import firebase from "./firebase";
-import {
-  addUserInfo,
-  addUserInfoToHolder,
-  getUserHolderDict,
-} from "./UserData";
-import SportPositionScreen from './SignUpLoginFlow/screens/SportPositionScreen/SportPosition'
+import { addUserInfo, getUserDict } from "./UserData";
+import SportPositionScreen from "./SignUpLoginFlow/screens/SportPositionScreen/SportPosition";
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   let history = useHistory();
   const [user, setUser] = useState(null);
-  const [signInNavigation, setSignInNavigation] = useState(false);
-  const [signUpNavigation, setSignUpNavigation] = useState(false);
+  // const [userAuthenticationType, setUserAuthenticationType] = useState("");
+  let userAuthenticationType = "";
 
-  // if (signUpNavigation) {
-  //   return (
-  //     <Router>
-  //       <Redirect to={"/auth/sign-up/location-sport-position"} />
-  //       <Switch>
-  //         <Route exact path={"/auth/sign-up/location-sport-position"}>
-  //           <SportPositionScreen />
-  //         </Route>
-  //       </Switch>
-  //     </Router>
-  //   );
-  // }
+  useEffect(() => {
+    const subscriber = firebase.auth().onAuthStateChanged(onAuthStateChanged);
+    return subscriber; // unsubscribe on unmount
+  }, []);
+
+  // Handle user state changes
+  const onAuthStateChanged = async (user) => {
+    setUser(user);
+    if (user) {
+      if (userAuthenticationType === 'Signup') {
+        addUserInfoDictToDB(user)
+      }
+    }
+  };
+
+  const addUserInfoDictToDB = (user) => {
+    console.log('Tried to add')
+    firebase
+      .firestore()
+      .collection("Users")
+      .doc(user.uid)
+      .collection("User Info")
+      .doc("Profile Data")
+      .set({
+        userArray: getUserDict(),
+      })
+      .then(() => {
+        console.log("User added!");
+      });
+  };
 
   return (
     <AuthContext.Provider
@@ -41,23 +49,33 @@ export const AuthProvider = ({ children }) => {
         user,
         setUser,
         login: async (email, password, loginFailedFunction) => {
+          userAuthenticationType = 'Login'
           try {
-            await firebase.auth().signInWithEmailAndPassword(email, password);
+            await firebase
+              .auth()
+              .signInWithEmailAndPassword(email, password)
+              .then(() => {
+                history.push("/create");
+              });
             console.log("Successfully Logged In");
-            // window.location.assign("/create")
           } catch (e) {
             console.log(e);
             loginFailedFunction();
           }
         },
         register: async (email, password, name) => {
+          userAuthenticationType = 'Signup'
+          console.log(userAuthenticationType)
           try {
-            // await firebase.auth().createUserWithEmailAndPassword(email, password)
-            addUserInfoToHolder('email', email);
-            addUserInfoToHolder('name', name);
-            console.log(getUserHolderDict())
-            history.push('/auth/sign-up/location-sport-position')
-            // window.location.assign('/auth/sign-up/location-sport-position')
+            await firebase
+              .auth()
+              .createUserWithEmailAndPassword(email, password)
+              .then(async () => {
+                addUserInfo("email", email);
+                addUserInfo("name", name);
+                addUserInfo("sign-up-finished", false);
+                history.push("/auth/sign-up/location-sport-position");
+              });
           } catch (e) {
             console.log(e);
           }

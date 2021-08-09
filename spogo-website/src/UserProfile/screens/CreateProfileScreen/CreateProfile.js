@@ -1,577 +1,1138 @@
-import React, { useState, useEffect } from 'react';
-import './CreateProfile.css';
-import Modal from 'react-modal';
-import WebFont from 'webfontloader';
-import { FaInstagram, FaTwitter } from 'react-icons/fa';
-import { MdEmail, MdMail, MdStar, MdLocationOn, MdClose } from 'react-icons/md';
-import { BsLink45Deg } from 'react-icons/bs';
-import BlankProfile from '../ProfileScreen/blank_profile.png';
-import { MixpanelConsumer } from 'react-mixpanel';
-import {AuthContext} from '../../../AuthProvider';
+import React, { useState, useEffect, useContext } from "react";
+import "./CreateProfile.css";
+import Modal from "react-modal";
+import WebFont from "webfontloader";
+import { FaInstagram, FaTwitter } from "react-icons/fa";
+import { MdEmail, MdMail, MdAdd, MdLocationOn, MdClose } from "react-icons/md";
+import { BsLink45Deg } from "react-icons/bs";
+import BlankProfile from "../ProfileScreen/blank_profile.png";
+import { MixpanelConsumer } from "react-mixpanel";
+import { AuthContext } from "../../../AuthProvider";
+import { useHistory } from "react-router-dom";
 
-const CreateProfile = () => {
+import {
+  getExperienceArray,
+  getMeasurableArray,
+  getMediaArray,
+  getAccomplishmentArray,
+  getUserInfo,
+  setUserDict,
+  setExperienceArray,
+  setAccomplishmentArray,
+  setMeasurableArray,
+  setMediaArray,
+  addExperienceItem,
+  getExperienceID,
+  setExperienceID,
+  setAccomplishmentID,
+  setMeasurableID,
+  setVideoImageID,
+  addAccomplishmentItem,
+  getAccomplishmentID,
+  addMeasurableItem,
+  getMeasurableID,
+} from "../../../UserData";
+import firebase from "../../../firebase";
+
+import EditableProfileItem from "../../components/EditableProfileItem/EditableProfileItem";
+import { ImageItem } from "../../components/VideoItem/VideoItem";
+import { VideoItem } from "../../components/VideoItem/VideoItem";
+
+const CreateProfile = (props) => {
+  let userUID = props.userUID;
+  let history = useHistory();
 
   const { logout } = useContext(AuthContext);
 
+  // Experience States
   const [experienceModalOpen, setExperienceModalOpen] = useState(false);
+  const [experienceTitleText, setExperienceTitleText] = useState("");
+  const [experienceTeamText, setExperienceTeamText] = useState("");
+  const [experienceStartMonth, setExperienceStartMonth] = useState("");
+  const [experienceStartYear, setExperienceStartYear] = useState("");
+  const [experienceEndMonth, setExperienceEndMonth] = useState("");
+  const [experienceEndYear, setExperienceEndYear] = useState("");
+  const [experienceDescriptionText, setExperienceDescriptionText] =
+    useState("");
+
+  // Accomplishment States
   const [accomplishmentModalOpen, setAccomplishmentModalOpen] = useState(false);
+  const [accomplishmentTitleText, setAccomplishmentTitleText] = useState("");
+  const [accomplishmentMonthReceived, setAccomplishmentMonthReceived] =
+    useState("");
+  const [accomplishmentYearReceived, setAccomplishmentYearReceived] =
+    useState("");
+  const [accomplishmentDescriptionText, setAccomplishmentDescriptionText] =
+    useState("");
+
+  // Measurable States
   const [measurableModalOpen, setMeasurableModalOpen] = useState(false);
-  const [currentMonth, setCurrentMonth] = useState('');
-  const [currentYear, setCurrentYear] = useState('');
+  const [measurableTitleText, setMeasurableTitleText] = useState("");
+  const [measurableValueText, setMeasurableValueText] = useState("");
+
+  const [currentMonth, setCurrentMonth] = useState("");
+  const [currentYear, setCurrentYear] = useState("");
+  const [currentExperienceText, setCurrentExperienceText] = useState(
+    "Currently doing this?"
+  );
+  const [currentExperience, setCurrentExperience] = useState(false);
+  const [name, setName] = useState(getUserInfo("name"));
+  const [sport, setSport] = useState(getUserInfo("sport"));
+  const [position, setPosition] = useState(getUserInfo("position"));
+  const [showLoadingModal, setShowLoadingModal] = useState(true);
+
+  const [thisAccomplishmentArray, setThisAccomplishmentArray] = useState([]);
+  const [thisExperienceArray, setThisExperienceArray] = useState([]);
+  const [thisMeasurableArray, setThisMeasurableArray] = useState([]);
+  const [thisMediaArray, setThisMediaArray] = useState([]);
 
   useEffect(() => {
     getCurrentDate();
+    getDBUserInfo();
   }, []);
 
   useEffect(() => {
     WebFont.load({
       google: {
-        families: ['Montserrat', 'Open Sans', 'Public Sans'],
+        families: ["Montserrat", "Open Sans", "Public Sans"],
       },
     });
   }, []);
+
+  // Toggles the experience end date between current and not
+  const toggleCurrentExperienceText = () => {
+    if (currentExperienceText === "Currently doing this?") {
+      setCurrentExperienceText("Not currently doing this?");
+    } else {
+      setCurrentExperienceText("Currently doing this?");
+    }
+  };
+
+  // Gets user's info and loads it from database
+  const getDBUserInfo = async () => {
+    let dbPath = firebase
+      .firestore()
+      .collection("Users")
+      .doc(userUID)
+      .collection("User Info");
+    let profileData = dbPath.doc("Profile Data");
+    await profileData
+      .get()
+      .then(async (doc) => {
+        if (doc.exists) {
+          setUserDict(doc.data());
+        } else {
+          console.log("Doc doesn't exist");
+        }
+      })
+      .catch((error) => {
+        console.log("Error getting user info document:", error);
+      });
+    let experienceArray = dbPath.doc("Experience Array");
+    await experienceArray
+      .get()
+      .then((doc) => {
+        if (doc.exists) {
+          setExperienceArray(doc.data());
+        } else {
+          // doc.data() will be undefined in this case
+          console.log("Exp Array doc not found!");
+        }
+      })
+      .catch((error) => {
+        console.log("Error getting exp array document:", error);
+      });
+    let trophyArray = dbPath.doc("Trophy Array");
+    await trophyArray
+      .get()
+      .then((doc) => {
+        if (doc.exists) {
+          setAccomplishmentArray(doc.data());
+        } else {
+          // doc.data() will be undefined in this case
+          console.log("Trophy Array doc not found!");
+        }
+      })
+      .catch((error) => {
+        console.log("Error getting trophy array document:", error);
+      });
+    let measurableArray = dbPath.doc("Measurable Array");
+    await measurableArray
+      .get()
+      .then((doc) => {
+        if (doc.exists) {
+          setMeasurableArray(doc.data());
+        } else {
+          // doc.data() will be undefined in this case
+          console.log("Measurable Array doc not found!");
+        }
+      })
+      .catch((error) => {
+        console.log("Error getting measurable array document:", error);
+      });
+    let mediaArray = dbPath.doc("Media Array");
+    await mediaArray
+      .get()
+      .then((doc) => {
+        if (doc.exists) {
+          setMediaArray(doc.data());
+        } else {
+          // doc.data() will be undefined in this case
+          console.log("Media Array doc not found!");
+        }
+      })
+      .catch((error) => {
+        console.log("Error getting media array document:", error);
+      });
+    console.log("Fetched from DB");
+    setUserInfo();
+    setArrayID();
+    setThisMediaArray(getMediaArray());
+    setThisExperienceArray(getExperienceArray());
+    setThisAccomplishmentArray(getAccomplishmentArray());
+    setThisMeasurableArray(getMeasurableArray());
+    setShowLoadingModal(false);
+    if (userUID === "noUser") {
+      console.log("should go to auth");
+      history.push("/auth");
+    }
+  };
+
+  const setUserInfo = () => {
+    setName(getUserInfo("name"));
+    setSport(getUserInfo("sport"));
+    setPosition(getUserInfo("position"));
+  };
+
+  const setArrayID = () => {
+    setExperienceID();
+    setAccomplishmentID();
+    setMeasurableID();
+    setVideoImageID();
+  };
 
   const getCurrentDate = () => {
     let monthNumber = new Date().getMonth();
     setCurrentYear(new Date().getFullYear());
     let monthNames = [
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
-      'July',
-      'August',
-      'September',
-      'October',
-      'November',
-      'December',
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
     ];
     setCurrentMonth(monthNames[monthNumber]);
   };
 
+  //Method that checks whether a experience submission is valid
+  //If so, adds experience item to arrays
+  //If not, shows errors saying the submission fields are invalid
+  const [invalidExperienceTitle, setInvalidExperienceTitle] = useState(false);
+  const [invalidExperienceTeam, setInvalidExperienceTeam] = useState(false);
+  const [invalidExperienceStartDate, setInvalidExperienceStartDate] =
+    useState(false);
+  const [invalidExperienceEndDate, setInvalidExperienceEndDate] =
+    useState(false);
+
+  const checkValidExperience = async () => {
+    if (
+      experienceTitleText != "" &&
+      experienceTeamText != "" &&
+      experienceStartMonth != "" &&
+      experienceStartYear != "" &&
+      ((experienceEndMonth != "" && experienceEndYear != "") ||
+        currentExperienceText === "Not currently doing this?")
+    ) {
+      {
+        let experienceDurationText;
+        if (currentExperienceText === "Not currently doing this?") {
+          experienceDurationText =
+            experienceStartMonth + ", " + experienceStartYear + " - Present";
+        } else {
+          experienceDurationText =
+            experienceStartMonth +
+            ", " +
+            experienceStartYear +
+            " - " +
+            experienceEndMonth +
+            ", " +
+            experienceEndYear;
+        }
+        setExperienceModalOpen(false);
+        addExperienceItem(
+          experienceTitleText,
+          experienceTeamText,
+          experienceDurationText,
+          experienceDescriptionText,
+          getExperienceID()
+        );
+        setExperienceTitleText("");
+        setExperienceTeamText("");
+        setExperienceStartMonth("");
+        setExperienceStartYear("");
+        setExperienceEndMonth("");
+        setExperienceEndYear("");
+        setExperienceDescriptionText("");
+        setCurrentExperienceText("Currently doing this?");
+        setThisExperienceArray(getExperienceArray());
+        console.log(thisExperienceArray);
+      }
+    } else {
+      if (experienceTitleText === "") {
+        setInvalidExperienceTitle(true);
+      }
+      if (experienceTeamText === "") {
+        setInvalidExperienceTeam(true);
+      }
+      if (experienceStartMonth === "" || experienceStartYear === "") {
+        setInvalidExperienceStartDate(true);
+      }
+      if (
+        (experienceEndMonth === "" || experienceEndYear === "") &&
+        currentExperienceText === "Currently doing this?"
+      ) {
+        setInvalidExperienceEndDate(true);
+      }
+    }
+  };
+
+  //Method that checks whether an accomplishment submission is valid
+  //If so, adds accomplishment item to arrays
+  //If not, shows errors saying the submission fields are invalid
+  const [invalidAccomplishmentTitle, setInvalidAccomplishmentTitle] =
+    useState(false);
+  const [
+    invalidAccomplishmentDateReceived,
+    setInvalidAccomplishmentDateReceived,
+  ] = useState(false);
+
+  const checkValidAccomplishment = async () => {
+    if (
+      accomplishmentTitleText != "" &&
+      accomplishmentMonthReceived != "" &&
+      accomplishmentYearReceived != ""
+    ) {
+      let accomplishmentDateReceivedText =
+        accomplishmentMonthReceived + ", " + accomplishmentYearReceived;
+      setAccomplishmentModalOpen(false);
+      addAccomplishmentItem(
+        accomplishmentTitleText,
+        accomplishmentDateReceivedText,
+        accomplishmentDescriptionText,
+        getAccomplishmentID()
+      );
+      setAccomplishmentTitleText("");
+      setAccomplishmentDescriptionText("");
+      setAccomplishmentMonthReceived("");
+      setAccomplishmentYearReceived("");
+      setInvalidAccomplishmentTitle(false);
+      setInvalidAccomplishmentDateReceived(false);
+      setThisAccomplishmentArray(getAccomplishmentArray());
+    } else {
+      if (accomplishmentTitleText === "") {
+        setInvalidAccomplishmentTitle(true);
+      }
+      if (
+        accomplishmentMonthReceived === "" ||
+        accomplishmentYearReceived === ""
+      ) {
+        setInvalidAccomplishmentDateReceived(true);
+      }
+    }
+  };
+
+  //Method that checks whether a measurable submission is valid
+  //If so, adds measurable item to arrays
+  //If not, shows errors saying the submission fields are invalid
+
+  const [invalidMeasurableTitle, setInvalidMeasurableTitle] = useState(false);
+  const [invalidMeasurableValue, setInvalidMeasurableValue] = useState(false);
+
+  const checkValidMeasurable = async () => {
+    if (measurableTitleText != "" && measurableValueText != "") {
+      setMeasurableModalOpen(false);
+      addMeasurableItem(
+        measurableTitleText,
+        measurableValueText,
+        getMeasurableID()
+      );
+      setMeasurableTitleText("");
+      setMeasurableValueText("");
+      setInvalidMeasurableTitle(false);
+      setInvalidMeasurableValue(false);
+      setThisMeasurableArray(getMeasurableArray());
+    } else {
+      if (measurableTitleText === "") {
+        setInvalidMeasurableTitle(true);
+      }
+      if (measurableValueText === "") {
+        setInvalidMeasurableValue(true);
+      }
+    }
+  };
+
   return (
-    <div>
-      <>
-        <div className="createScreenProfileHeader">
-          <div className="createScreenProfileImageContainer">
-            <img className="createScreenProfileImage" src={BlankProfile} />
-            {/* {profileImage === '' || profileImage === undefined ? (
+    <div className="profileScreenContainer">
+      <div className="profileContentContainer">
+        <>
+          <div className="createScreenProfileHeader">
+            <div className="createScreenProfileImageContainer">
+              <img className="createScreenProfileImage" src={BlankProfile} />
+              {/* {profileImage === '' || profileImage === undefined ? (
               <img className="profileImage" src={BlankProfile} />
             ) : (
               <img className="profileImage" src={profileImage} />
             )} */}
+            </div>
+            <div className="createScreenProfileTextContainer">
+              <div className="createScreenNameSportTextContainer">
+                <h1 className="createScreenWebsiteUserName">{name}</h1>
+                <h2 className="createScreenWebsiteSportPositionText">
+                  {position === "" ? sport : sport + " - " + position}
+                </h2>
+              </div>
+
+              <div className="createScreenLocationIconTextContainer">
+                <MdLocationOn color={"#EA4335"} size={20} />
+                <h3 className="createScreenLocationText">Seattle, WA</h3>
+              </div>
+
+              <div className="createScreenSocialIconsRow">
+                <FaInstagram
+                  className="createScreenSocialIcon"
+                  // onClick={() =>
+                  //   // window.location.replace("www.instagram.com/" + instagram)
+                  //   {
+                  //     mixpanel.track(
+                  //       'Profile Icons Pressed by External Visitor',
+                  //       { 'Profile Icon': 'Instagram' }
+                  //     );
+                  //     window.open('https://instagram.com/' + instagram);
+                  //   }
+                  // }
+                  size={25}
+                  color={"#E1306C"}
+                />
+
+                <FaTwitter
+                  className="createScreenSocialIcon"
+                  // onClick={() =>
+                  //   // window.location.replace("www.instagram.com/" + instagram)
+                  //   {
+                  //     mixpanel.track(
+                  //       'Profile Icons Pressed by External Visitor',
+                  //       { 'Profile Icon': 'Twitter' }
+                  //     );
+                  //     window.open('https://twitter.com/' + twitter);
+                  //   }
+                  // }
+                  size={25}
+                  color={"#1DA1F2"}
+                />
+
+                <MdMail
+                  className="createScreenSocialIcon"
+                  // onClick={() => {
+                  //   mixpanel.track(
+                  //     'Profile Icons Pressed by External Visitor',
+                  //     { 'Profile Icon': 'Email' }
+                  //   );
+                  //   window.open('mailto:' + email);
+                  // }}
+                  // onClick={() =>
+                  //   // window.location.replace("www.instagram.com/" + instagram)
+                  //   window.open("https://instagram.com/" + instagram)
+                  // }
+                  size={25}
+                  color={"#5D4D4A"}
+                />
+
+                <BsLink45Deg
+                  className="createScreenSocialIcon"
+                  // onClick={() => setWildcardLinkModalOpen(true)}
+                  size={25}
+                  color={"#ffae42"}
+                />
+              </div>
+            </div>
           </div>
-          <div className="createScreenProfileTextContainer">
-            <div className="createScreenNameSportTextContainer">
-              <h1 className="createScreenWebsiteUserName">Ishaan Puri</h1>
-              <h2 className="createScreenWebsiteSportPositionText">
-                Basketball - PG
-                {/* {position === '' ? sport : sport + ' - ' + position} */}
-              </h2>
-            </div>
-
-            <div className="createScreenLocationIconTextContainer">
-              <MdLocationOn color={'#EA4335'} size={20} />
-              <h3 className="createScreenLocationText">Seattle, WA</h3>
-            </div>
-
-            <div className="createScreenSocialIconsRow">
-              <FaInstagram
-                className="createScreenSocialIcon"
-                // onClick={() =>
-                //   // window.location.replace("www.instagram.com/" + instagram)
-                //   {
-                //     mixpanel.track(
-                //       'Profile Icons Pressed by External Visitor',
-                //       { 'Profile Icon': 'Instagram' }
-                //     );
-                //     window.open('https://instagram.com/' + instagram);
-                //   }
-                // }
-                size={25}
-                color={'#E1306C'}
-              />
-
-              <FaTwitter
-                className="createScreenSocialIcon"
-                // onClick={() =>
-                //   // window.location.replace("www.instagram.com/" + instagram)
-                //   {
-                //     mixpanel.track(
-                //       'Profile Icons Pressed by External Visitor',
-                //       { 'Profile Icon': 'Twitter' }
-                //     );
-                //     window.open('https://twitter.com/' + twitter);
-                //   }
-                // }
-                size={25}
-                color={'#1DA1F2'}
-              />
-
-              <MdMail
-                className="createScreenSocialIcon"
-                // onClick={() => {
-                //   mixpanel.track(
-                //     'Profile Icons Pressed by External Visitor',
-                //     { 'Profile Icon': 'Email' }
-                //   );
-                //   window.open('mailto:' + email);
-                // }}
-                // onClick={() =>
-                //   // window.location.replace("www.instagram.com/" + instagram)
-                //   window.open("https://instagram.com/" + instagram)
-                // }
-                size={25}
-                color={'#5D4D4A'}
-              />
-
-              <BsLink45Deg
-                className="createScreenSocialIcon"
-                // onClick={() => setWildcardLinkModalOpen(true)}
-                size={25}
-                color={'#ffae42'}
-              />
-            </div>
+          <div>
+            <p></p>
           </div>
-        </div>
-        <div>
-          <p></p>
-        </div>
-        <div className="createScreenBioContainer">
-          <h1>Bio</h1>
+          <div className="createScreenBioContainer">
+            <h1>Bio</h1>
+            <hr
+              className="createScreenComponentHeaderDivider"
+              color="lightgrey"
+              size="1"
+            />
+            <p>This is an empty bio, edit as you see fit.</p>
+          </div>
+        </>
+        <div className="createScreenProfileItemListContainer">
+          <div className="profileItemListHeaderContainer">
+            <h1 className="createScreenProfileItemListHeader">Highlights</h1>
+            <MdAdd className="profileItemListAddIcons" size={25} />
+          </div>
           <hr
             className="createScreenComponentHeaderDivider"
-            color="lightgrey"
             size="1"
+            color="lightgrey"
           />
-          <p>This is an empty bio, edit as you see fit.</p>
+          <ul className="createScreenVideoItemArrayList">
+            {thisMediaArray.map((item) => {
+              if (item.media === "photo") {
+                return <ImageItem url={item.url} />;
+              } else {
+                return <VideoItem url={item.url} />;
+              }
+            })}
+          </ul>
         </div>
-      </>
-      <div className="createScreenProfileItemListContainer">
-        <h1 className="createScreenProfileItemListHeader">Highlights</h1>
-        <hr
-          className="createScreenComponentHeaderDivider"
-          size="1"
-          color="lightgrey"
-        />
-        <ul
-          className="createScreenVideoItemArrayList"
-          // style={{ width: window.innerWidth }}
-        >
-          {/* {thisMediaArray.map((item) => {
-            if (item.media === 'photo') {
-              return <ImageItem url={item.url} />;
-            } else {
-              return <VideoItem url={item.url} />;
-            }
-          })} */}
-        </ul>
-      </div>
-      <div className="createScreenProfileItemListContainer">
-        <h1 className="createScreenProfileItemListHeader" onClick={() => setExperienceModalOpen(true)}>Experiences</h1>
-        <hr className="createScreenComponentHeaderDivider" size="1" color="lightgrey" />
-
-        {/* {ShowMoreShowLess('Experience')}
-          {thisExperienceArray.length < 3 ? (
-            <hr
-              className="componentBottomDivider"
-              size="1"
-              color="lightgrey"
-              style={{ marginBottom: 20 }}
+        <div className="createScreenProfileItemListContainer">
+          <div className="profileItemListHeaderContainer">
+            <h1 className="createScreenProfileItemListHeader">Experiences</h1>
+            <MdAdd
+              className="profileItemListAddIcons"
+              size={25}
+              onClick={() => setExperienceModalOpen(true)}
             />
-          ) : (
-            <hr className="componentBottomDivider" size="1" color="lightgrey" />
-          )} */}
-        {/* {thisExperienceArray.length > 3 ? (
-            <button
-              className={'seeMoreSeeLessItemButton'}
-              onClick={() =>
-                setshowMoreShowLessButtonExperience(
-                  !showMoreShowLessButtonExperience
-                )
-              }
-              type="button"
-            >
-              {showMoreShowLessButtonTextExperience}
-            </button>
-          ) : null} */}
-      </div>
-      )
-      <div className="createScreenProfileItemListContainer">
-        <h1 className="createScreenProfileItemListHeader" onClick={() => setAccomplishmentModalOpen(true)}>Accomplishments</h1>
-        <hr className="createScreenComponentHeaderDivider" size="1" color="lightgrey" />
-
-        {/* {ShowMoreShowLess('Accoplishment')} */}
-        {/* {thisTrophyArray.length < 3 ? (
-            <hr
-              className="componentBottomDivider"
-              size="1"
-              color="lightgrey"
-              style={{ marginBottom: 20 }}
-            />
-          ) : (
-            <hr className="componentBottomDivider" size="1" color="lightgrey" />
-          )} */}
-        {/* {thisTrophyArray.length > 3 ? (
-            <button
-              className={'seeMoreSeeLessItemButton'}
-              onClick={() =>
-                setshowMoreShowLessButtonAccoplishment(
-                  !showMoreShowLessButtonAccoplishment
-                )
-              }
-              type="button"
-            >
-              {showMoreShowLessButtonTextAccoplishment}
-            </button>
-          ) : null} */}
-      </div>
-      <div className="createScreenProfileItemListContainer">
-        <h1 className="createScreenProfileItemListHeader" onClick={() => setMeasurableModalOpen(true)}>Measurables</h1>
-        <hr className="createScreenComponentHeaderDivider" size="1" color="lightgrey" />
-
-        {/* {ShowMoreShowLess('Measurables')} */}
-        {/* {thisMeasurableArray.length < 3 ? (
+          </div>
           <hr
-            className="componentBottomDivider"
+            className="createScreenComponentHeaderDivider"
             size="1"
             color="lightgrey"
-            style={{ marginBottom: 20 }}
           />
-        ) : (
-          <hr className="componentBottomDivider" size="1" color="lightgrey" />
-        )} */}
-        {/* {thisMeasurableArray.length > 3 ? (
-          <button
-            className={'seeMoreSeeLessItemButton'}
-            onClick={() =>
-              setshowMoreShowLessButtonMeasurables(
-                !showMoreShowLessButtonMeasurables
-              )
-            }
-            type="button"
-          >
-            {showMoreShowLessButtonTextMeasurables}
-          </button>
-        ) : null} */}
-      </div>
-      {/* Add Item Modals */}
-      {/* Add Item Modals */}
-      {/* Add Item Modals */}
-      {/* Add Item Modals */}
-      {/* Add Item Modals */}
-      {/* Experience Modal */}
-      <Modal
-        isOpen={experienceModalOpen}
-        onRequestClose={() => setExperienceModalOpen(false)}
-        className="experienceModal"
-        overlayClassName="itemAddModalOverlay"
-      >
-        <div className="expModalContainer">
-          <div className="modalHeaderContainer">
-            <p>Add Experience</p>
-            <MdClose
-              style={{ cursor: 'pointer' }}
-              onClick={() => setExperienceModalOpen(false)}
-              size={20}
-              color={'grey'}
-            />
-          </div>
-          <div>
-            <form>
-              <p className="textInputHeaders">Title</p>
-              <input
-                required
-                className="modalTextInputItems"
-                type="text"
-                maxLength="100"
+          <ul>
+            {thisExperienceArray.map((item) => (
+              <EditableProfileItem
+                iconName="crown"
+                color="#ffbb48"
+                title={item.title}
+                team={item.team}
+                time={item.duration}
+                description={item.description}
+                idNum={item.idNum}
+                userUID={userUID}
               />
-              <p className="textInputHeaders">Team</p>
-              <input
-                required
-                className="modalTextInputItems"
-                type="text"
-                maxLength="100"
-              />
-              <div className="modalDatePickerContainer">
-                <div className="expModalDatePickerItemContainer">
-                  <p className="textInputHeaders">Start Date</p>
-                  <div className="datePickerRow">
-                    <select className="modalDatePicker" required name={'Month'}>
-                      <option selected hidden>
-                        Month
-                      </option>
-                      <option>January</option>
-                      <option>February</option>
-                      <option>March</option>
-                      <option>April</option>
-                      <option>May</option>
-                      <option>June</option>
-                      <option>July</option>
-                      <option>August</option>
-                      <option>September</option>
-                      <option>October</option>
-                      <option>November</option>
-                      <option>December</option>
-                    </select>
-                    {/* <div style={{width: '0.5%'}}></div> */}
-                    <div className="datePickerRowMiddleDivider"></div>
-                    <select className="modalDatePicker" required name={'Year'}>
-                      <option selected hidden>
-                        Year
-                      </option>
-                      <option>2021</option>
-                      <option>2020</option>
-                      <option>2019</option>
-                      <option>2018</option>
-                      <option>2017</option>
-                      <option>2016</option>
-                      <option>2015</option>
-                      <option>2014</option>
-                      <option>2013</option>
-                      <option>2012</option>
-                      <option>2011</option>
-                      <option>2010</option>
-                      <option>2009</option>
-                      <option>2008</option>
-                      <option>2007</option>
-                      <option>2006</option>
-                      <option>2005</option>
-                      <option>2004</option>
-                      <option>2003</option>
-                      <option>2002</option>
-                      <option>2001</option>
-                      <option>2000</option>
-                    </select>
-                  </div>
-                </div>
-                <div style={{ width: 20 }}></div>
-                <div className="expModalDatePickerItemContainer">
-                  <p className="textInputHeaders">End Date</p>
-                  <div className="datePickerRow">
-                    <select className="modalDatePicker" required name={'Month'}>
-                      <option selected hidden>
-                        {currentMonth}
-                      </option>
-                      <option>January</option>
-                      <option>February</option>
-                      <option>March</option>
-                      <option>April</option>
-                      <option>May</option>
-                      <option>June</option>
-                      <option>July</option>
-                      <option>August</option>
-                      <option>September</option>
-                      <option>October</option>
-                      <option>November</option>
-                      <option>December</option>
-                    </select>
-                    <div className="datePickerRowMiddleDivider"></div>
-                    <select className="modalDatePicker" required name={'Year'}>
-                      <option selected hidden>
-                        {currentYear}
-                      </option>
-                      <option>2021</option>
-                      <option>2020</option>
-                      <option>2019</option>
-                      <option>2018</option>
-                      <option>2017</option>
-                      <option>2016</option>
-                      <option>2015</option>
-                      <option>2014</option>
-                      <option>2013</option>
-                      <option>2012</option>
-                      <option>2011</option>
-                      <option>2010</option>
-                      <option>2009</option>
-                      <option>2008</option>
-                      <option>2007</option>
-                      <option>2006</option>
-                      <option>2005</option>
-                      <option>2004</option>
-                      <option>2003</option>
-                      <option>2002</option>
-                      <option>2001</option>
-                      <option>2000</option>
-                    </select>
-                  </div>
-                  {/* <p className="presentTimeText">
-                    Currently doing this?{" "}
-                    <span onClick={() => getCurrentDate()}>Click here.</span>
-                  </p> */}
-                </div>
-              </div>
-              <p className="textInputHeaders">Description</p>
-              <textarea
-                style={{ resize: 'none' }}
-                className="modalTextInputItems"
-                rows={5}
-                name={'description'}
-              />
-            </form>
-          </div>
-          <div>
-            <button className="addEditItemModalButton" type={'button'}>
-              Create
-            </button>
-          </div>
+            ))}
+          </ul>
         </div>
-      </Modal>
-      {/* Experience Modal */}
-      {/* Accomplishment Modal */}
-      <Modal
-        isOpen={accomplishmentModalOpen}
-        onRequestClose={() => setAccomplishmentModalOpen(false)}
-        className="accomplishmentModal"
-        overlayClassName="itemAddModalOverlay"
-      >
-        <div>
-          <div className="modalHeaderContainer">
-            <p>Add Accomplishment</p>
-            <MdClose
-              style={{ cursor: 'pointer' }}
-              onClick={() => setAccomplishmentModalOpen(false)}
-              size={20}
-              color={'grey'}
+        <div className="createScreenProfileItemListContainer">
+          <div className="profileItemListHeaderContainer">
+            <h1 className="createScreenProfileItemListHeader">
+              Accomplishments
+            </h1>
+            <MdAdd
+              className="profileItemListAddIcons"
+              size={25}
+              onClick={() => setAccomplishmentModalOpen(true)}
             />
           </div>
-          <div>
-            <form>
-              <p className="textInputHeaders">Title</p>
-              <input
-                placeholder="Ex: MVP, State Title, Help me "
-                required
-                className="modalTextInputItems"
-                type="text"
-                maxLength="100"
+          <hr
+            className="createScreenComponentHeaderDivider"
+            size="1"
+            color="lightgrey"
+          />
+          <ul>
+            {thisAccomplishmentArray.map((item) => (
+              <EditableProfileItem
+                iconName="trophy"
+                color="#A08864"
+                title={item.title}
+                time={item.duration}
+                description={item.description}
+                idNum={item.idNum}
+                userUID={userUID}
               />
-              <div className="modalDatePickerContainer">
-                <div className="accomplishmentMeasurableDatePickerItemContainer">
-                  <p className="textInputHeaders">Date Received</p>
-                  <div className="datePickerRow">
-                    <select className="modalDatePicker" required name={'Month'}>
-                      <option selected hidden>
-                        Month
-                      </option>
-                      <option>January</option>
-                      <option>February</option>
-                      <option>March</option>
-                      <option>April</option>
-                      <option>May</option>
-                      <option>June</option>
-                      <option>July</option>
-                      <option>August</option>
-                      <option>September</option>
-                      <option>October</option>
-                      <option>November</option>
-                      <option>December</option>
-                    </select>
-                    {/* <div style={{width: '0.5%'}}></div> */}
-                    <div className="datePickerRowMiddleDivider"></div>
-                    <select className="modalDatePicker" required name={'Year'}>
-                      <option selected hidden>
-                        Year
-                      </option>
-                      <option>2021</option>
-                      <option>2020</option>
-                      <option>2019</option>
-                      <option>2018</option>
-                      <option>2017</option>
-                      <option>2016</option>
-                      <option>2015</option>
-                      <option>2014</option>
-                      <option>2013</option>
-                      <option>2012</option>
-                      <option>2011</option>
-                      <option>2010</option>
-                      <option>2009</option>
-                      <option>2008</option>
-                      <option>2007</option>
-                      <option>2006</option>
-                      <option>2005</option>
-                      <option>2004</option>
-                      <option>2003</option>
-                      <option>2002</option>
-                      <option>2001</option>
-                      <option>2000</option>
-                    </select>
+            ))}
+          </ul>
+        </div>
+        <div className="createScreenProfileItemListContainer">
+          <div className="profileItemListHeaderContainer">
+            <h1 className="createScreenProfileItemListHeader">Measurables</h1>
+            <MdAdd
+              className="profileItemListAddIcons"
+              size={25}
+              onClick={() => setMeasurableModalOpen(true)}
+            />
+          </div>
+          <hr
+            className="createScreenComponentHeaderDivider"
+            size="1"
+            color="lightgrey"
+          />
+          <ul>
+            {thisMeasurableArray.map((item) => (
+              <EditableProfileItem
+                iconName="rocket-launch"
+                color="dodgerblue"
+                title={item.title}
+                time={item.value}
+                idNum={item.idNum}
+                userUID={userUID}
+              />
+            ))}
+          </ul>
+        </div>
+        {/* Add Item Modals */}
+        {/* Add Item Modals */}
+        {/* Add Item Modals */}
+        {/* Add Item Modals */}
+        {/* Add Item Modals */}
+        {/* Experience Modal */}
+        <Modal
+          isOpen={experienceModalOpen}
+          onRequestClose={() => {
+            setExperienceModalOpen(false);
+            setExperienceTitleText("");
+            setExperienceTeamText("");
+            setExperienceStartMonth("");
+            setExperienceStartYear("");
+            setExperienceEndMonth("");
+            setExperienceEndYear("");
+            setExperienceDescriptionText("");
+            setInvalidExperienceTitle(false);
+            setInvalidExperienceTeam(false);
+            setInvalidExperienceStartDate(false);
+            setInvalidExperienceEndDate(false);
+          }}
+          className="experienceModal"
+          overlayClassName="itemAddModalOverlay"
+        >
+          <div className="expModalContainer">
+            <div className="modalHeaderContainer">
+              <p>Add Experience</p>
+              <MdClose
+                style={{ cursor: "pointer" }}
+                onClick={() => {
+                  setExperienceModalOpen(false);
+                  setExperienceTitleText("");
+                  setExperienceTeamText("");
+                  setExperienceStartMonth("");
+                  setExperienceStartYear("");
+                  setExperienceEndMonth("");
+                  setExperienceEndYear("");
+                  setExperienceDescriptionText("");
+                  setInvalidExperienceTitle(false);
+                  setInvalidExperienceTeam(false);
+                  setInvalidExperienceStartDate(false);
+                  setInvalidExperienceEndDate(false);
+                }}
+                size={20}
+                color={"grey"}
+              />
+            </div>
+            <div>
+              <form>
+                <p className="textInputHeaders">Title</p>
+                <input
+                  required
+                  className="modalTextInputItems"
+                  type="text"
+                  maxLength="100"
+                  onChange={(text) => {
+                    setExperienceTitleText(text.target.value);
+                    setInvalidExperienceTitle(false);
+                  }}
+                />
+                {invalidExperienceTitle && (
+                  <h1 className="invalidText">Title is required</h1>
+                )}
+                <p className="textInputHeaders">Team</p>
+                <input
+                  required
+                  className="modalTextInputItems"
+                  type="text"
+                  maxLength="100"
+                  onChange={(text) => {
+                    setExperienceTeamText(text.target.value);
+                    setInvalidExperienceTeam(false);
+                  }}
+                />
+                {invalidExperienceTeam && (
+                  <h1 className="invalidText">Team is required</h1>
+                )}
+                <div className="modalDatePickerContainer">
+                  <div className="expModalDatePickerItemContainer">
+                    <p className="textInputHeaders">Start Date</p>
+                    <div className="datePickerRow">
+                      <select
+                        className="modalDatePicker"
+                        required
+                        name={"Month"}
+                        onChange={(event) => {
+                          setInvalidExperienceStartDate(false);
+                          setExperienceStartMonth(event.target.value);
+                        }}
+                      >
+                        <option selected hidden>
+                          Month
+                        </option>
+                        <option>January</option>
+                        <option>February</option>
+                        <option>March</option>
+                        <option>April</option>
+                        <option>May</option>
+                        <option>June</option>
+                        <option>July</option>
+                        <option>August</option>
+                        <option>September</option>
+                        <option>October</option>
+                        <option>November</option>
+                        <option>December</option>
+                      </select>
+                      {/* <div style={{width: '0.5%'}}></div> */}
+                      <div className="datePickerRowMiddleDivider"></div>
+                      <select
+                        className="modalDatePicker"
+                        required
+                        name={"Year"}
+                        onChange={(event) => {
+                          setInvalidExperienceStartDate(false);
+                          setExperienceStartYear(event.target.value);
+                        }}
+                      >
+                        <option selected hidden>
+                          Year
+                        </option>
+                        <option>2021</option>
+                        <option>2020</option>
+                        <option>2019</option>
+                        <option>2018</option>
+                        <option>2017</option>
+                        <option>2016</option>
+                        <option>2015</option>
+                        <option>2014</option>
+                        <option>2013</option>
+                        <option>2012</option>
+                        <option>2011</option>
+                        <option>2010</option>
+                        <option>2009</option>
+                        <option>2008</option>
+                        <option>2007</option>
+                        <option>2006</option>
+                        <option>2005</option>
+                        <option>2004</option>
+                        <option>2003</option>
+                        <option>2002</option>
+                        <option>2001</option>
+                        <option>2000</option>
+                      </select>
+                    </div>
+                    {invalidExperienceStartDate && (
+                      <h1 className="invalidText">
+                        Start month and year is required
+                      </h1>
+                    )}
                   </div>
-                  {/* <p className="presentTimeText">
+                  <div style={{ width: 20 }}></div>
+                  <div className="expModalDatePickerItemContainer">
+                    <p className="textInputHeaders">End Date</p>
+                    <div className="datePickerRow">
+                      {!currentExperience ? (
+                        <>
+                          <select
+                            className="modalDatePicker"
+                            required
+                            name={"Month"}
+                            onChange={(event) => {
+                              setInvalidExperienceEndDate(false);
+                              setExperienceEndMonth(event.target.value);
+                            }}
+                          >
+                            <option selected hidden>
+                              Month
+                            </option>
+                            <option>January</option>
+                            <option>February</option>
+                            <option>March</option>
+                            <option>April</option>
+                            <option>May</option>
+                            <option>June</option>
+                            <option>July</option>
+                            <option>August</option>
+                            <option>September</option>
+                            <option>October</option>
+                            <option>November</option>
+                            <option>December</option>
+                          </select>
+                          <div className="datePickerRowMiddleDivider"></div>
+                          <select
+                            className="modalDatePicker"
+                            required
+                            name={"Year"}
+                            onChange={(event) => {
+                              setInvalidExperienceEndDate(false);
+                              setExperienceEndYear(event.target.value);
+                            }}
+                          >
+                            <option selected hidden>
+                              Year
+                            </option>
+                            <option>2021</option>
+                            <option>2020</option>
+                            <option>2019</option>
+                            <option>2018</option>
+                            <option>2017</option>
+                            <option>2016</option>
+                            <option>2015</option>
+                            <option>2014</option>
+                            <option>2013</option>
+                            <option>2012</option>
+                            <option>2011</option>
+                            <option>2010</option>
+                            <option>2009</option>
+                            <option>2008</option>
+                            <option>2007</option>
+                            <option>2006</option>
+                            <option>2005</option>
+                            <option>2004</option>
+                            <option>2003</option>
+                            <option>2002</option>
+                            <option>2001</option>
+                            <option>2000</option>
+                          </select>
+                        </>
+                      ) : (
+                        <>
+                          <input
+                            value="Month"
+                            readOnly={true}
+                            className="modalDatePicker"
+                            style={{
+                              outline: "none",
+                              borderStyle: "solid",
+                              boxShadow: "none",
+                              borderColor: "#ededed",
+                              backgroundColor: "#00000014",
+                              borderRadius: 2,
+                              paddingLeft: 5,
+                              color: "#0000004D",
+                            }}
+                          />
+                          <div className="datePickerRowMiddleDivider"></div>
+                          <input
+                            value="Year"
+                            readOnly={true}
+                            className="modalDatePicker"
+                            style={{
+                              outline: "none",
+                              // border: 'none',
+                              borderStyle: "solid",
+                              boxShadow: "none",
+                              borderColor: "#ededed",
+                              backgroundColor: "#00000014",
+                              borderRadius: 2,
+                              paddingLeft: 5,
+                              color: "#0000004D",
+                            }}
+                          />
+                        </>
+                      )}
+                    </div>
+                    {invalidExperienceEndDate && (
+                      <h1 className="invalidText" style={{ marginBottom: 5 }}>
+                        End month and year is required
+                      </h1>
+                    )}
+                    <p className="presentTimeText">
+                      {currentExperienceText}{" "}
+                      <span
+                        onClick={() => {
+                          setInvalidExperienceEndDate(false);
+                          setCurrentExperience(!currentExperience);
+                          toggleCurrentExperienceText();
+                        }}
+                      >
+                        Click here.
+                      </span>
+                    </p>
+                  </div>
+                </div>
+                <p className="textInputHeaders">Description</p>
+                <textarea
+                  style={{ resize: "none" }}
+                  className="modalTextInputItems"
+                  rows={5}
+                  name={"description"}
+                  onChange={(text) => {
+                    setExperienceDescriptionText(text.target.value);
+                  }}
+                />
+              </form>
+            </div>
+            <div>
+              <button
+                className="addEditItemModalButton"
+                type={"button"}
+                onClick={() => checkValidExperience()}
+              >
+                Create
+              </button>
+            </div>
+          </div>
+        </Modal>
+        {/* Experience Modal */}
+        {/* Accomplishment Modal */}
+        <Modal
+          isOpen={accomplishmentModalOpen}
+          onRequestClose={() => {
+            setAccomplishmentModalOpen(false);
+            setAccomplishmentTitleText("");
+            setAccomplishmentDescriptionText("");
+            setAccomplishmentMonthReceived("");
+            setAccomplishmentYearReceived("");
+            setInvalidAccomplishmentTitle(false);
+            setInvalidAccomplishmentDateReceived(false);
+          }}
+          className="accomplishmentModal"
+          overlayClassName="itemAddModalOverlay"
+        >
+          <div>
+            <div className="modalHeaderContainer">
+              <p>Add Accomplishment</p>
+              <MdClose
+                style={{ cursor: "pointer" }}
+                onClick={() => {
+                  setAccomplishmentModalOpen(false);
+                  setAccomplishmentTitleText("");
+                  setAccomplishmentDescriptionText("");
+                  setAccomplishmentMonthReceived("");
+                  setAccomplishmentYearReceived("");
+                  setInvalidAccomplishmentTitle(false);
+                  setInvalidAccomplishmentDateReceived(false);
+                }}
+                size={20}
+                color={"grey"}
+              />
+            </div>
+            <div>
+              <form>
+                <p className="textInputHeaders">Title</p>
+                <input
+                  placeholder="Ex: MVP, State Title, Help me "
+                  required
+                  className="modalTextInputItems"
+                  type="text"
+                  maxLength="100"
+                  onChange={(text) => {
+                    setAccomplishmentTitleText(text.target.value);
+                    setInvalidAccomplishmentTitle(false);
+                  }}
+                />
+                {invalidAccomplishmentTitle && (
+                  <h1 className="invalidText">Title is required</h1>
+                )}
+                <div className="modalDatePickerContainer">
+                  <div className="accomplishmentMeasurableDatePickerItemContainer">
+                    <p className="textInputHeaders">Date Received</p>
+                    <div className="datePickerRow">
+                      <select
+                        className="modalDatePicker"
+                        required
+                        name={"Month"}
+                        onChange={(event) => {
+                          setInvalidAccomplishmentDateReceived(false);
+                          setAccomplishmentMonthReceived(event.target.value);
+                        }}
+                      >
+                        <option selected hidden>
+                          Month
+                        </option>
+                        <option>January</option>
+                        <option>February</option>
+                        <option>March</option>
+                        <option>April</option>
+                        <option>May</option>
+                        <option>June</option>
+                        <option>July</option>
+                        <option>August</option>
+                        <option>September</option>
+                        <option>October</option>
+                        <option>November</option>
+                        <option>December</option>
+                      </select>
+                      {/* <div style={{width: '0.5%'}}></div> */}
+                      <div className="datePickerRowMiddleDivider"></div>
+                      <select
+                        className="modalDatePicker"
+                        required
+                        name={"Year"}
+                        onChange={(event) => {
+                          setInvalidAccomplishmentDateReceived(false);
+                          setAccomplishmentYearReceived(event.target.value);
+                        }}
+                      >
+                        <option selected hidden>
+                          Year
+                        </option>
+                        <option>2021</option>
+                        <option>2020</option>
+                        <option>2019</option>
+                        <option>2018</option>
+                        <option>2017</option>
+                        <option>2016</option>
+                        <option>2015</option>
+                        <option>2014</option>
+                        <option>2013</option>
+                        <option>2012</option>
+                        <option>2011</option>
+                        <option>2010</option>
+                        <option>2009</option>
+                        <option>2008</option>
+                        <option>2007</option>
+                        <option>2006</option>
+                        <option>2005</option>
+                        <option>2004</option>
+                        <option>2003</option>
+                        <option>2002</option>
+                        <option>2001</option>
+                        <option>2000</option>
+                      </select>
+                    </div>
+                    {invalidAccomplishmentDateReceived && (
+                      <h1 className="invalidText">
+                        Month and year received is required
+                      </h1>
+                    )}
+                    {/* <p className="presentTimeText">
                     Currently doing this? <span span onClick={() => getCurrentDate()}>Click here.</span>
                   </p> */}
+                  </div>
                 </div>
-              </div>
-              <p className="textInputHeaders">Description</p>
-              <textarea
-                style={{ resize: 'none' }}
-                className="modalTextInputItems"
-                rows={5}
-                name={'description'}
-              />
-            </form>
+                <p className="textInputHeaders">Description</p>
+                <textarea
+                  style={{ resize: "none" }}
+                  className="modalTextInputItems"
+                  rows={5}
+                  name={"description"}
+                  onChange={(text) => {
+                    setAccomplishmentDescriptionText(text.target.value);
+                  }}
+                />
+              </form>
+            </div>
+            <div>
+              <button
+                className="addEditItemModalButton"
+                type={"button"}
+                onClick={() => checkValidAccomplishment()}
+              >
+                Create
+              </button>
+            </div>
           </div>
+        </Modal>
+        {/* Accomplishment Modal */}
+        {/* Measurable Modal */}
+        <Modal
+          isOpen={measurableModalOpen}
+          onRequestClose={() => {
+            setMeasurableModalOpen(false);
+            setMeasurableTitleText("");
+            setMeasurableValueText("");
+            setInvalidMeasurableTitle(false);
+            setInvalidMeasurableValue(false);
+          }}
+          className="measurableModal"
+          overlayClassName="itemAddModalOverlay"
+        >
           <div>
-            <button className="addEditItemModalButton" type={'button'}>
-              Create
-            </button>
-          </div>
-        </div>
-      </Modal>
-      {/* Accomplishment Modal */}
-      {/* Measurable Modal */}
-      <Modal
-        isOpen={measurableModalOpen}
-        onRequestClose={() => setMeasurableModalOpen(false)}
-        className="measurableModal"
-        overlayClassName="itemAddModalOverlay"
-      >
-        <div>
-          <div className="modalHeaderContainer">
-            <p>Add Measurable</p>
-            <MdClose
-              style={{ cursor: 'pointer' }}
-              onClick={() => setMeasurableModalOpen(false)}
-              size={20}
-              color={'grey'}
-            />
-          </div>
-          <div>
-            <form>
-              <p className="textInputHeaders">Title</p>
-              <input
-                required
-                placeholder="Ex: 40 time, Height, GPA"
-                className="modalTextInputItems"
-                type="text"
-                maxLength="100"
+            <div className="modalHeaderContainer">
+              <p>Add Measurable</p>
+              <MdClose
+                style={{ cursor: "pointer" }}
+                onClick={() => {
+                  setMeasurableModalOpen(false);
+                  setMeasurableTitleText("");
+                  setMeasurableValueText("");
+                  setInvalidMeasurableTitle(false);
+                  setInvalidMeasurableValue(false);
+                }}
+                size={20}
+                color={"grey"}
               />
-              <p className="textInputHeaders">Value</p>
-              <input
-                placeholder="Ex: 4.50, 6'1, 3.5"
-                className="modalTextInputItems"
-                rows={5}
-                name={'value'}
-              />
-            </form>
+            </div>
+            <div>
+              <form>
+                <p className="textInputHeaders">Title</p>
+                <input
+                  required
+                  placeholder="Ex: 40 time, Height, GPA"
+                  className="modalTextInputItems"
+                  type="text"
+                  maxLength="100"
+                  onChange={(text) => {
+                    setMeasurableTitleText(text.target.value);
+                    setInvalidMeasurableTitle(false);
+                  }}
+                />
+                {invalidMeasurableTitle && (
+                  <h1 className="invalidText">Title is required</h1>
+                )}
+                <p className="textInputHeaders">Value</p>
+                <input
+                  placeholder="Ex: 4.52, 6'1, 3.50"
+                  className="modalTextInputItems"
+                  rows={5}
+                  name={"value"}
+                  onChange={(text) => {
+                    setMeasurableValueText(text.target.value);
+                    setInvalidMeasurableValue(false);
+                  }}
+                />
+                {invalidMeasurableValue && (
+                  <h1 className="invalidText">Value is required</h1>
+                )}
+              </form>
+            </div>
+            <div>
+              <button
+                className="addEditItemModalButton"
+                type={"button"}
+                onClick={() => checkValidMeasurable()}
+              >
+                Create
+              </button>
+            </div>
           </div>
-          <div>
-            <button className="addEditItemModalButton" type={'button'}>
-              Create
-            </button>
+        </Modal>
+        {/* Measurable Modal */}
+        {/* Loading Modal */}
+        <Modal
+          isOpen={showLoadingModal}
+          className="loadingModal"
+          overlayClassName="itemAddModalOverlay"
+        >
+          <div
+            style={{ width: "100%", height: "100%", backgroundColor: "white" }}
+          >
+            <h1>LOADING MODAL</h1>
           </div>
-        </div>
-      </Modal>
-      {/* Measurable Modal */}
-      {/* Add Item Modals */}
-      {/* Add Item Modals */}
-      {/* Add Item Modals */}
-      {/* Add Item Modals */}
-      {/* Add Item Modals */}
-      {/* Add Item Modals */}
-
-      <button style={{marginTop: 20}} type="button" onClick={() => logout()}>
+        </Modal>
+        {/* Loading Modal */}
+        {/* Add Item Modals */}
+        {/* Add Item Modals */}
+        {/* Add Item Modals */}
+        {/* Add Item Modals */}
+        {/* Add Item Modals */}
+        {/* Add Item Modals */}
+        <button
+          style={{ marginTop: 20 }}
+          type="button"
+          onClick={() => logout()}
+        >
+          Logout
+        </button>
+      </div>
     </div>
   );
 };

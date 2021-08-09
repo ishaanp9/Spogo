@@ -1,3 +1,19 @@
+.loadingModal {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100vh;
+  /* width: 100vw; */
+}
+
+.invalidText {
+  font-family: "Montserrat", sans-serif;
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
 @media screen and (max-width: 600px) {
   .experienceModal {
     background-color: white;
@@ -80,6 +96,7 @@
   .modalTextInputItems:focus {
     border-width: 2px;
     border-color: #3eb489;
+    border-style: solid;
   }
 
   .modalDatePickerContainer {
@@ -231,6 +248,7 @@
   .modalTextInputItems:focus {
     border-width: 2px;
     border-color: #3eb489;
+    border-style: solid;
   }
 
   .modalDatePickerContainer {
@@ -302,13 +320,18 @@
 
 @media screen and (min-width: 1200px) {
 
-  .ProfileScreenContainer {
+  .profileScreenContainer {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     width: 100%;
     background-color: whitesmoke;
     overflow-x: hidden;
     height: 100vh;
+    align-items: center;
+  }
+
+  .profileContentContainer {
+    width: 60%;
   }
 
   .profileScrollBarContainer {
@@ -474,11 +497,22 @@
     width: 100%;
   }
 
+  .profileItemListHeaderContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
   .createScreenProfileItemListHeader {
     font-family: 'Montserrat', sans-serif;
     font-size: 16px;
     font-weight: bold;
     margin: 20px 0px;
+  }
+
+  .profileItemListAddIcons {
+    margin: 15px 0px;
   }
 
   .createScreenProfileItemListContainer {
@@ -762,7 +796,8 @@
 
   .modalTextInputItems:focus {
     border-width: 2px;
-    border-color: #3eb489;
+    border-color: #3eb489 ;
+    border-style: solid;
   }
 
   .modalDatePickerContainer {

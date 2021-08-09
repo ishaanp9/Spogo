@@ -1,0 +1,224 @@
+@media screen and (max-width: 600px) {
+    .Container {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      align-self: center;
+      align-items: center;
+      overflow-x: hidden;
+      padding-top: 20px;
+      overflow-y: hidden;
+      /* border-style: none none solid none;
+      border-bottom-width: 1;
+      border-color: lightgrey; */
+    }
+  
+    .itemIconContainer {
+      /* border: solid; */
+      /* width: 0%; */
+      padding-bottom: 20px;
+      display: flex;
+      margin-right: 5%;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      /* margin-top: 7px; */
+    }
+  
+    .Link {
+      text-decoration: none;
+    }
+  
+    .TextContainer {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-self: center;
+      justify-content: flex-start;
+      /* border-bottom: solid;
+      border-bottom-color: lightgrey; */
+      /* padding: 2% 0%; */
+      /* border-bottom-width: 2px; */
+    }
+  
+    .TextContainer > h1 {
+      font-size: 16px;
+      font-weight: 500;
+      color: black;
+    }
+  
+    .TextContainer > h2 {
+      font-size: 14px;
+      font-weight: 500;
+      color: grey;
+      margin-top: 2px;
+    }
+  
+    .TextContainer > h3 {
+      font-size: 12px;
+      font-weight: 400;
+      color: grey;
+      margin-top: 2px;
+    }
+  
+    .TextContainer > h4 {
+      display: none;
+    }
+  
+    .Divider {
+      margin-top: 20px;
+      /* margin-left: 10%; */
+    }
+  }
+  
+  @media screen and (max-width: 1200px) and (min-width: 600px) {
+    .Container {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      align-self: center;
+      align-items: center;
+      overflow-x: hidden;
+      padding-top: 20px;
+      overflow-y: hidden;
+      /* border-style: none none solid none;
+      border-bottom-width: 1;
+      border-color: lightgrey; */
+    }
+  
+    .itemIconContainer {
+      /* border: solid; */
+      /* width: 0%; */
+      padding-bottom: 20px;
+      display: flex;
+      margin-right: 3%;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      /* margin-top: 7px; */
+    }
+  
+    .Link {
+      text-decoration: none;
+    }
+  
+    .TextContainer {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-self: center;
+      justify-content: flex-start;
+      /* border-bottom: solid;
+      border-bottom-color: lightgrey; */
+      /* padding: 2% 0%; */
+      /* border-bottom-width: 2px; */
+    }
+  
+    .TextContainer > h1 {
+      font-size: 16px;
+      font-weight: 500;
+      color: black;
+    }
+  
+    .TextContainer > h2 {
+      font-size: 14px;
+      font-weight: 500;
+      color: grey;
+      margin-top: 2px;
+    }
+  
+    .TextContainer > h3 {
+      font-size: 12px;
+      font-weight: 400;
+      color: grey;
+      margin-top: 2px;
+    }
+  
+    .TextContainer > h4 {
+      font-size: 14px;
+      font-weight: 400;
+      color: black;
+      margin-top: 10px;
+    }
+    .Divider {
+      margin-top: 20px;
+      /* margin-left: 10%; */
+    }
+  }
+  
+  @media screen and (min-width: 1200px) {
+    .Container {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      align-self: center;
+      align-items: center;
+      overflow-x: hidden;
+      padding-top: 20px;
+      overflow-y: hidden;
+      /* border-style: none none solid none;
+      border-bottom-width: 1;
+      border-color: lightgrey; */
+    }
+  
+    .itemIconContainer {
+      /* border: solid; */
+      /* width: 0%; */
+      padding-bottom: 20px;
+      display: flex;
+      margin-right: 3%;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      /* margin-top: 7px; */
+    }
+  
+    .Link {
+      text-decoration: none;
+    }
+  
+    .TextContainer {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-self: center;
+      justify-content: flex-start;
+      /* border-bottom: solid;
+      border-bottom-color: lightgrey; */
+      /* padding: 2% 0%; */
+      /* border-bottom-width: 2px; */
+    }
+  
+    .TextContainer > h1 {
+      font-size: 16px;
+      font-weight: 500;
+      color: black;
+    }
+  
+    .TextContainer > h2 {
+      font-size: 14px;
+      font-weight: 500;
+      color: grey;
+      margin-top: 2px;
+    }
+  
+    .TextContainer > h3 {
+      font-size: 12px;
+      font-weight: 400;
+      color: grey;
+      margin-top: 2px;
+    }
+  
+    .TextContainer > h4 {
+      font-size: 14px;
+      font-weight: 400;
+      color: black;
+      margin-top: 10px;
+    }
+  
+    .Divider {
+      margin-top: 20px;
+      /* margin-left: 10%; */
+    }
+  }
+  

@@ -4,8 +4,6 @@ import CrownIcon from 'mdi-react/CrownIcon';
 import TrophyIcon from 'mdi-react/TrophyIcon';
 import RocketLaunchIcon from 'mdi-react/RocketLaunchIcon';
 import { Link, BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import DescriptionScreen from '../../screens/DescriptionScreen/DescriptionScreen';
-import { useHistory } from 'react-router-dom';
 import { MixpanelConsumer } from 'react-mixpanel';
 import {
   getExperienceArray,
@@ -209,7 +207,7 @@ const Item = (props) => {
                 <ItemIcon iconType={icon} />
               </div>
               <div className="TextContainer">
-                <h1 onClick={console.log(specificItemArray.length)}>{title}</h1>
+                <h1>{title}</h1>
                 {team != undefined && team != null && team != '' && (
                   <h2>{team}</h2>
                 )}
