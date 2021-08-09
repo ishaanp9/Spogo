@@ -78,6 +78,10 @@ const CreateProfile = (props) => {
   const [experienceEndYear, setExperienceEndYear] = useState("");
   const [experienceDescriptionText, setExperienceDescriptionText] =
     useState("");
+  const [currentExperienceText, setCurrentExperienceText] = useState(
+    "Currently doing this?"
+  );
+  const [currentExperience, setCurrentExperience] = useState(false);
 
   // Accomplishment States
   const [accomplishmentModalOpen, setAccomplishmentModalOpen] = useState(false);
@@ -94,12 +98,6 @@ const CreateProfile = (props) => {
   const [measurableTitleText, setMeasurableTitleText] = useState("");
   const [measurableValueText, setMeasurableValueText] = useState("");
 
-  const [currentMonth, setCurrentMonth] = useState("");
-  const [currentYear, setCurrentYear] = useState("");
-  const [currentExperienceText, setCurrentExperienceText] = useState(
-    "Currently doing this?"
-  );
-  const [currentExperience, setCurrentExperience] = useState(false);
   const [name, setName] = useState(getUserInfo("name"));
   const [sport, setSport] = useState(getUserInfo("sport"));
   const [position, setPosition] = useState(getUserInfo("position"));
@@ -111,7 +109,6 @@ const CreateProfile = (props) => {
   const [thisMediaArray, setThisMediaArray] = useState([]);
 
   useEffect(() => {
-    getCurrentDate();
     getDBUserInfo();
   }, []);
 
@@ -239,26 +236,6 @@ const CreateProfile = (props) => {
     copy(`spogo.us/${userUrl}`);
   };
 
-  const getCurrentDate = () => {
-    let monthNumber = new Date().getMonth();
-    setCurrentYear(new Date().getFullYear());
-    let monthNames = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
-    ];
-    setCurrentMonth(monthNames[monthNumber]);
-  };
-
   const [image, setImage] = React.useState("");
   const imageRef = React.useRef(null);
   const [address, setAddress] = React.useState("");
@@ -337,8 +314,8 @@ const CreateProfile = (props) => {
         setExperienceEndYear("");
         setExperienceDescriptionText("");
         setCurrentExperienceText("Currently doing this?");
-        setThisExperienceArray(getExperienceArray());
-        console.log(thisExperienceArray);
+        setCurrentExperience(false)
+        setThisExperienceArray([...getExperienceArray()]);
       }
     } else {
       if (experienceTitleText === "") {
@@ -390,7 +367,7 @@ const CreateProfile = (props) => {
       setAccomplishmentYearReceived("");
       setInvalidAccomplishmentTitle(false);
       setInvalidAccomplishmentDateReceived(false);
-      setThisAccomplishmentArray(getAccomplishmentArray());
+      setThisAccomplishmentArray([...getAccomplishmentArray()]);
     } else {
       if (accomplishmentTitleText === "") {
         setInvalidAccomplishmentTitle(true);
@@ -423,7 +400,7 @@ const CreateProfile = (props) => {
       setMeasurableValueText("");
       setInvalidMeasurableTitle(false);
       setInvalidMeasurableValue(false);
-      setThisMeasurableArray(getMeasurableArray());
+      setThisMeasurableArray([...getMeasurableArray()]);
     } else {
       if (measurableTitleText === "") {
         setInvalidMeasurableTitle(true);
@@ -432,6 +409,20 @@ const CreateProfile = (props) => {
         setInvalidMeasurableValue(true);
       }
     }
+  };
+  // Sets the experience array to re-render the measurable list for updated changes
+  const reloadExperienceArray = () => {
+    setThisExperienceArray([...getExperienceArray()]);
+  };
+
+  // Sets the accomplishment array to re-render the measurable list for updated changes
+  const reloadAccomplishmentArray = () => {
+    setThisAccomplishmentArray([...getAccomplishmentArray()]);
+  };
+
+  // Sets the measurable array to re-render the measurable list for updated changes
+  const reloadMeasurableArray = () => {
+    setThisMeasurableArray([...getMeasurableArray()]);
   };
 
   const profileImageUploadClick = () => {
@@ -484,9 +475,17 @@ const CreateProfile = (props) => {
                   setImage(e.target.files[0]);
                   uploader(e);
                 }}
-                style={{ display: "none" }}
+                style={{ display: "none", outline: "none", border: "none" }}
               />
-              <button type="button" onClick={profileImageUploadClick}>
+              <button
+                type="button"
+                onClick={profileImageUploadClick}
+                style={{
+                  outline: "none",
+                  border: "none",
+                  backgroundColor: "whitesmoke",
+                }}
+              >
                 {result ? (
                   <img
                     className="createScreenProfileImage"
@@ -643,9 +642,11 @@ const CreateProfile = (props) => {
                 description={item.description}
                 idNum={item.idNum}
                 userUID={userUID}
+                callbackReloadList={reloadExperienceArray}
               />
             ))}
           </ul>
+          <hr className="componentBottomDivider" size="1" color="lightgrey" />
         </div>
         <div className="createScreenProfileItemListContainer">
           <div className="profileItemListHeaderContainer">
@@ -673,11 +674,16 @@ const CreateProfile = (props) => {
                 description={item.description}
                 idNum={item.idNum}
                 userUID={userUID}
+                callbackReloadList={reloadAccomplishmentArray}
               />
             ))}
           </ul>
+          <hr className="componentBottomDivider" size="1" color="lightgrey" />
         </div>
-        <div className="createScreenProfileItemListContainer">
+        <div
+          className="createScreenProfileItemListContainer"
+          style={{ marginBottom: 80 }}
+        >
           <div className="profileItemListHeaderContainer">
             <h1 className="createScreenProfileItemListHeader">Measurables</h1>
             <MdAdd
@@ -700,9 +706,11 @@ const CreateProfile = (props) => {
                 time={item.value}
                 idNum={item.idNum}
                 userUID={userUID}
+                callbackReloadList={reloadMeasurableArray}
               />
             ))}
           </ul>
+          <hr className="componentBottomDivider" size="1" color="lightgrey" />
         </div>
 
         {/* Add Item Modals */}
@@ -932,6 +940,8 @@ const CreateProfile = (props) => {
             setInvalidExperienceTeam(false);
             setInvalidExperienceStartDate(false);
             setInvalidExperienceEndDate(false);
+            setCurrentExperienceText("Currently doing this?");
+            setCurrentExperience(false)
           }}
           className="experienceModal"
           overlayClassName="itemAddModalOverlay"
@@ -954,6 +964,8 @@ const CreateProfile = (props) => {
                   setInvalidExperienceTeam(false);
                   setInvalidExperienceStartDate(false);
                   setInvalidExperienceEndDate(false);
+                  setCurrentExperienceText("Currently doing this?");
+                  setCurrentExperience(false)
                 }}
                 size={20}
                 color={"grey"}
@@ -999,7 +1011,7 @@ const CreateProfile = (props) => {
                         name={"Month"}
                         onChange={(event) => {
                           setInvalidExperienceStartDate(false);
-                          setExperienceStartMonth(event.target.value);
+                          setExperienceStartMonth(event.target.options[event.target.selectedIndex].text);
                         }}
                       >
                         <option selected hidden>
@@ -1026,7 +1038,7 @@ const CreateProfile = (props) => {
                         name={"Year"}
                         onChange={(event) => {
                           setInvalidExperienceStartDate(false);
-                          setExperienceStartYear(event.target.value);
+                          setExperienceStartYear(event.target.options[event.target.selectedIndex].text);
                         }}
                       >
                         <option selected hidden>
@@ -1074,7 +1086,7 @@ const CreateProfile = (props) => {
                             name={"Month"}
                             onChange={(event) => {
                               setInvalidExperienceEndDate(false);
-                              setExperienceEndMonth(event.target.value);
+                              setExperienceEndMonth(event.target.options[event.target.selectedIndex].text);
                             }}
                           >
                             <option selected hidden>
@@ -1100,7 +1112,7 @@ const CreateProfile = (props) => {
                             name={"Year"}
                             onChange={(event) => {
                               setInvalidExperienceEndDate(false);
-                              setExperienceEndYear(event.target.value);
+                              setExperienceEndYear(event.target.options[event.target.selectedIndex].text);
                             }}
                           >
                             <option selected hidden>
@@ -1247,7 +1259,7 @@ const CreateProfile = (props) => {
               <form>
                 <p className="textInputHeaders">Title</p>
                 <input
-                  placeholder="Ex: MVP, State Title, Help me "
+                  placeholder="Ex: MVP, State Title"
                   required
                   className="modalTextInputItems"
                   type="text"
@@ -1270,7 +1282,7 @@ const CreateProfile = (props) => {
                         name={"Month"}
                         onChange={(event) => {
                           setInvalidAccomplishmentDateReceived(false);
-                          setAccomplishmentMonthReceived(event.target.value);
+                          setAccomplishmentMonthReceived(event.target.options[event.target.selectedIndex].text);
                         }}
                       >
                         <option selected hidden>
@@ -1297,7 +1309,7 @@ const CreateProfile = (props) => {
                         name={"Year"}
                         onChange={(event) => {
                           setInvalidAccomplishmentDateReceived(false);
-                          setAccomplishmentYearReceived(event.target.value);
+                          setAccomplishmentYearReceived(event.target.options[event.target.selectedIndex].text);
                         }}
                       >
                         <option selected hidden>
