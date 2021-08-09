@@ -39,7 +39,7 @@
     outline: none;
   }
 
-  .measurableModal{
+  .measurableModal {
     background-color: white;
     position: absolute;
     top: 25%;
@@ -73,7 +73,7 @@
   }
 
   .modalHeaderContainer > p {
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-weight: bold;
     font-size: large;
     color: #3eb489;
@@ -83,13 +83,13 @@
     font-size: 12px;
     margin-top: 2%;
     margin-bottom: 5px;
-    font-family: "Open Sans", sans-serif;
+    font-family: 'Open Sans', sans-serif;
   }
 
   .modalTextInputItems {
     width: 100%;
     padding: 8px;
-    font-family: "Open Sans", sans-serif;
+    font-family: 'Open Sans', sans-serif;
     outline: none;
   }
 
@@ -110,7 +110,7 @@
     width: 100%;
   }
 
-  .accomplishmentMeasurableDatePickerItemContainer{
+  .accomplishmentMeasurableDatePickerItemContainer {
     width: 100%;
   }
 
@@ -138,7 +138,7 @@
     border: none;
     font-weight: bold;
     font-size: 16px;
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Montserrat', sans-serif;
     margin-top: 2%;
   }
 
@@ -151,7 +151,7 @@
 
   .presentTimeText {
     font-size: 11px;
-    font-family: "Open Sans", sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-weight: 500;
     margin-top: 2px;
     margin-left: 1px;
@@ -226,7 +226,7 @@
   }
 
   .modalHeaderContainer > p {
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-weight: bold;
     font-size: large;
   }
@@ -235,13 +235,13 @@
     font-size: 14px;
     margin-top: 2%;
     margin-bottom: 5px;
-    font-family: "Open Sans", sans-serif;
+    font-family: 'Open Sans', sans-serif;
   }
 
   .modalTextInputItems {
     width: 100%;
     padding: 8px;
-    font-family: "Open Sans", sans-serif;
+    font-family: 'Open Sans', sans-serif;
     outline: none;
   }
 
@@ -261,7 +261,7 @@
   .expModalDatePickerItemContainer {
     width: 100%;
   }
-  .accomplishmentMeasurableDatePickerItemContainer{
+  .accomplishmentMeasurableDatePickerItemContainer {
     width: 100%;
   }
 
@@ -289,7 +289,7 @@
     border: none;
     font-weight: bold;
     font-size: 16px;
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Montserrat', sans-serif;
     margin-top: 2%;
   }
 
@@ -302,7 +302,7 @@
 
   .presentTimeText {
     font-size: 11px;
-    font-family: "Open Sans", sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-weight: 500;
     margin-top: 2px;
     margin-left: 1px;
@@ -319,7 +319,6 @@
 }
 
 @media screen and (min-width: 1200px) {
-
   .profileScreenContainer {
     display: flex;
     flex-direction: column;
@@ -399,8 +398,9 @@
   .createScreenProfileImage {
     border-radius: 1000px;
     border: 3px solid white;
-    object-fit: contain;
+    object-fit: cover;
     width: 120px;
+    height: 120px;
   }
 
   .createScreenProfileTextContainer {
@@ -409,7 +409,7 @@
     width: 100%;
     margin-top: 5px;
   }
-  
+
   .createScreenNameSportTextContainer {
     display: flex;
     flex-direction: column;
@@ -559,7 +559,6 @@
     margin-top: -1px;
   }
 
-
   .spogoLogo {
     display: flex;
     /* width: 100%; */
@@ -662,7 +661,7 @@
   }
 
   .errorHeaderText {
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-weight: bold;
     font-size: 30px;
     margin-bottom: 2%;
@@ -670,7 +669,7 @@
   }
 
   .errorHeadlineText {
-    font-family: "Open Sans", sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-size: 16px;
   }
 
@@ -712,17 +711,11 @@
     cursor: pointer;
   }
 
-
-
-
   .experienceModal {
     background-color: white;
     position: absolute;
-    top: 15%;
-    /* top: auto; */
     left: 25%;
     right: 25%;
-    bottom: auto;
     /* bottom: 15%; */
     padding: 2% 2%;
     border-radius: 10px;
@@ -732,22 +725,44 @@
   .accomplishmentModal {
     background-color: white;
     position: absolute;
-    top: 20%;
     left: 25%;
     right: 25%;
-    bottom: auto;
     padding: 2% 2%;
     border-radius: 10px;
     outline: none;
   }
 
-  .measurableModal{
+  .measurableModal {
     background-color: white;
     position: absolute;
-    top: 25%;
     left: 25%;
     right: 25%;
-    bottom: auto;
+    padding: 2% 2%;
+    border-radius: 10px;
+    outline: none;
+  }
+
+  .editModal {
+    background-color: white;
+    position: absolute;
+    top: 5%;
+    max-width: calc(100vw - 2rem);
+    max-height: calc(100vh - 2rem);
+    box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.25);
+    overflow-y: auto;
+    left: 20%;
+    right: 20%;
+    bottom: 5%;
+    padding: 2% 2%;
+    border-radius: 10px;
+    outline: none;
+  }
+
+  .copyUrlModal {
+    background-color: white;
+    position: absolute;
+    left: 30%;
+    right: 30%;
     padding: 2% 2%;
     border-radius: 10px;
     outline: none;
@@ -760,6 +775,11 @@
     right: 0;
     bottom: 0;
     background-color: rgba(34, 31, 31, 0.8);
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .expModalContainer {
@@ -775,7 +795,7 @@
   }
 
   .modalHeaderContainer > p {
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-weight: bold;
     font-size: large;
   }
@@ -784,14 +804,19 @@
     font-size: 14px;
     margin-top: 2%;
     margin-bottom: 5px;
-    font-family: "Open Sans", sans-serif;
+    font-family: 'Open Sans', sans-serif;
   }
 
   .modalTextInputItems {
     width: 100%;
     padding: 8px;
-    font-family: "Open Sans", sans-serif;
+    font-family: 'Open Sans', sans-serif;
     outline: none;
+  }
+
+  .modalTextInputItems:hover {
+    border-width: 2px;
+    border-color: #3eb489;
   }
 
   .modalTextInputItems:focus {
@@ -822,6 +847,16 @@
     padding-left: 2px;
   }
 
+  .modalDatePicker:hover {
+    border-width: 2px;
+    border-color: #3eb489;
+  }
+
+  .modalDatePicker:focus {
+    border-width: 2px;
+    border-color: #3eb489;
+  }
+
   .datePickerRow {
     display: flex;
   }
@@ -838,7 +873,7 @@
     border: none;
     font-weight: bold;
     font-size: 16px;
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Montserrat', sans-serif;
     margin-top: 2%;
   }
 
@@ -851,7 +886,7 @@
 
   .presentTimeText {
     font-size: 11px;
-    font-family: "Open Sans", sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-weight: 500;
     margin-top: 2px;
     margin-left: 1px;
@@ -863,6 +898,106 @@
   }
 
   .presentTimeText > span:hover {
+    cursor: pointer;
+  }
+
+  .editModalSportPositionRowContainer {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 1%;
+  }
+
+  .editModalSportPositionRowItemsContainer {
+    display: flex;
+    flex-direction: column;
+    width: 48%;
+  }
+
+  .copyUrlModalTaglineText {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .copyUrlModalTextInputItem {
+    width: 100%;
+    border-radius: 10px;
+    height: 70px;
+    /* padding: 8px 15px; */
+    padding-left: 20%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-right: 8px;
+    font-family: 'Open Sans', sans-serif;
+    outline: none;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .copyUrlSpogoText {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    position: absolute;
+    top: 48.5%;
+    margin-left: 8px;
+  }
+
+  .copyUrlModalTextInputItem:hover {
+    border-width: 2px;
+    border-color: #3eb489;
+  }
+
+  .copyUrlModalTextInputItem:focus {
+    border-width: 2px;
+    border-color: #3eb489;
+  }
+
+  .topRightIconsContainer {
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    margin-right: 10%;
+  }
+
+  .settingsModal {
+    background-color: white;
+    position: absolute;
+    top: 10%;
+    right: 5%;
+    padding: 2% 2%;
+    border-radius: 10px;
+    outline: none;
+    background-color: whitesmoke;
+  }
+
+  .settingsItems {
+    cursor: pointer;
+    font-family: 'Open Sans', sans-serif;
+    width: 100%;
+    color: #3eb489;
+  }
+
+  .settingsItemAddModalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: transparent;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .topRightIconItem {
+    margin-left: 5px;
     cursor: pointer;
   }
 }

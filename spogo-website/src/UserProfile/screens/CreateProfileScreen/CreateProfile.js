@@ -3,12 +3,28 @@ import "./CreateProfile.css";
 import Modal from "react-modal";
 import WebFont from "webfontloader";
 import { FaInstagram, FaTwitter } from "react-icons/fa";
-import { MdEmail, MdMail, MdAdd, MdLocationOn, MdClose } from "react-icons/md";
+import {
+  MdEmail,
+  MdMail,
+  MdStar,
+  MdLocationOn,
+  MdClose,
+  MdContentCopy,
+  MdSettings,
+  MdAdd,
+} from 'react-icons/md';
+import { HiOutlinePencil, HiChevronDown } from 'react-icons/hi';
 import { BsLink45Deg } from "react-icons/bs";
 import BlankProfile from "../ProfileScreen/blank_profile.png";
 import { MixpanelConsumer } from "react-mixpanel";
 import { AuthContext } from "../../../AuthProvider";
+import copy from 'copy-to-clipboard';
 import { useHistory } from "react-router-dom";
+
+import PlacesAutocomplete, {
+  geocodeByAddress,
+  getLatLng,
+} from 'react-places-autocomplete';
 
 import {
   getExperienceArray,
@@ -42,7 +58,17 @@ const CreateProfile = (props) => {
   let userUID = props.userUID;
   let history = useHistory();
 
+const CreateProfile = () => {
   const { logout } = useContext(AuthContext);
+  const inputFile = React.useRef(null);
+  const highlightFile = React.useRef(null);
+  const [userUrl, setUserUrl] = useState('');
+  const [copyCustomUrlButtonText, setCopyCustomUrlButtonText] =
+    useState('Copy Custom Url');
+  const [profileImageShown, setProfileImageShown] = useState(false);
+  const [settingsModalOpen, setSettingsModalOpen] = useState(false);
+  const [copyUrlModalOpen, setCopyUrlModalOpen] = useState(false);
+  const [editModalOpen, setEditModalOpen] = useState(false);
 
   // Experience States
   const [experienceModalOpen, setExperienceModalOpen] = useState(false);
@@ -135,7 +161,6 @@ const CreateProfile = (props) => {
         if (doc.exists) {
           setExperienceArray(doc.data());
         } else {
-          // doc.data() will be undefined in this case
           console.log("Exp Array doc not found!");
         }
       })
@@ -149,7 +174,6 @@ const CreateProfile = (props) => {
         if (doc.exists) {
           setAccomplishmentArray(doc.data());
         } else {
-          // doc.data() will be undefined in this case
           console.log("Trophy Array doc not found!");
         }
       })
@@ -163,7 +187,6 @@ const CreateProfile = (props) => {
         if (doc.exists) {
           setMeasurableArray(doc.data());
         } else {
-          // doc.data() will be undefined in this case
           console.log("Measurable Array doc not found!");
         }
       })
@@ -177,7 +200,6 @@ const CreateProfile = (props) => {
         if (doc.exists) {
           setMediaArray(doc.data());
         } else {
-          // doc.data() will be undefined in this case
           console.log("Media Array doc not found!");
         }
       })
@@ -211,6 +233,14 @@ const CreateProfile = (props) => {
     setVideoImageID();
   };
 
+  const handleCopyText = (e) => {
+    setUserUrl(e.target.value);
+  };
+
+  const copyToClipboard = () => {
+    copy(`spogo.us/${userUrl}`);
+  };
+
   const getCurrentDate = () => {
     let monthNumber = new Date().getMonth();
     setCurrentYear(new Date().getFullYear());
@@ -229,6 +259,34 @@ const CreateProfile = (props) => {
       "December",
     ];
     setCurrentMonth(monthNames[monthNumber]);
+  };
+    
+  const [image, setImage] = React.useState('');
+  const imageRef = React.useRef(null);
+  const [address, setAddress] = React.useState('');
+
+  function useDisplayImage() {
+    const [result, setResult] = React.useState('');
+
+    function uploader(e) {
+      const imageFile = e.target.files[0];
+
+      const reader = new FileReader();
+      reader.addEventListener('load', (e) => {
+        setResult(e.target.result);
+      });
+
+      reader.readAsDataURL(imageFile);
+    }
+
+    return { result, uploader };
+  }
+
+  const { result, uploader } = useDisplayImage();
+
+  const handleSelect = async (value) => {
+    const results = await geocodeByAddress(value);
+    setAddress(value);
   };
 
   //Method that checks whether a experience submission is valid
@@ -377,19 +435,70 @@ const CreateProfile = (props) => {
       }
     }
   };
+  
+  const profileImageUploadClick = () => {
+    inputFile.current.click();
+  };
+
+  const highlightUploadClick = () => {
+    highlightFile.current.click();
+  };
 
   return (
     <div className="profileScreenContainer">
       <div className="profileContentContainer">
         <>
           <div className="createScreenProfileHeader">
+            <div className="topRightIconsContainer">
+            <HiOutlinePencil
+              className="topRightIconItem"
+              onClick={() => setEditModalOpen(true)}
+              size={25}
+              color={'black'}
+            />
+            <MdContentCopy
+              className="topRightIconItem"
+              onClick={() => setCopyUrlModalOpen(true)}
+              size={25}
+              color={'black'}
+            />
+            <MdSettings
+              className="topRightIconItem"
+              onClick={() => setSettingsModalOpen(true)}
+              size={25}
+              color={'black'}
+            />
+            <HiChevronDown
+              // className="topRightIconItem"
+              style={{ marginLeft: -2, cursor: 'pointer' }}
+              onClick={() => setSettingsModalOpen(true)}
+              size={15}
+              color={'black'}
+            />
+          </div>
             <div className="createScreenProfileImageContainer">
-              <img className="createScreenProfileImage" src={BlankProfile} />
-              {/* {profileImage === '' || profileImage === undefined ? (
-              <img className="profileImage" src={BlankProfile} />
-            ) : (
-              <img className="profileImage" src={profileImage} />
-            )} */}
+              <input
+              type="file"
+              accept="image/*"
+              id="target"
+              ref={inputFile}
+              onChange={(e) => {
+                setImage(e.target.files[0]);
+                uploader(e);
+              }}
+              style={{ display: 'none' }}
+            />
+              <button type="button" onClick={profileImageUploadClick}>
+              {result ? (
+                <img
+                  className="createScreenProfileImage"
+                  ref={imageRef}
+                  src={result}
+                />
+              ) : (
+                <img className="createScreenProfileImage" src={BlankProfile} />
+              )}
+            </button>
             </div>
             <div className="createScreenProfileTextContainer">
               <div className="createScreenNameSportTextContainer">
@@ -477,9 +586,17 @@ const CreateProfile = (props) => {
           </div>
         </>
         <div className="createScreenProfileItemListContainer">
+          <input
+          type="file"
+          accept="image/*, video/*"
+          id="target"
+          ref={highlightFile}
+          // onChange={onImageChange}
+          style={{ display: 'none' }}
+        />
           <div className="profileItemListHeaderContainer">
             <h1 className="createScreenProfileItemListHeader">Highlights</h1>
-            <MdAdd className="profileItemListAddIcons" size={25} />
+            <MdAdd className="profileItemListAddIcons" size={25} onClick={() => highlightUploadClick}/>
           </div>
           <hr
             className="createScreenComponentHeaderDivider"
@@ -582,11 +699,220 @@ const CreateProfile = (props) => {
             ))}
           </ul>
         </div>
+
+            
         {/* Add Item Modals */}
         {/* Add Item Modals */}
         {/* Add Item Modals */}
         {/* Add Item Modals */}
         {/* Add Item Modals */}
+
+        {/* Settings Modal */}
+      <Modal
+        isOpen={settingsModalOpen}
+        onRequestClose={() => setSettingsModalOpen(false)}
+        className="settingsModal"
+        overlayClassName="settingsItemAddModalOverlay"
+      >
+        <p
+          className="settingsItems"
+          // style={{ cursor: 'pointer' }}
+          onClick={() => logout()}
+        >
+          Sign Out
+        </p>
+      </Modal>
+        {/* Settings Modal */}
+
+
+      {/* Copy Url Modal */}
+      <Modal
+        isOpen={copyUrlModalOpen}
+        onRequestClose={() => setCopyUrlModalOpen(false)}
+        className="copyUrlModal"
+        overlayClassName="itemAddModalOverlay"
+      >
+        <div className="modalHeaderContainer">
+          <p style={{ textAlign: 'center', width: '100%' }}>
+            Congrats on Creating Your Spogo Profile!
+          </p>
+          <MdClose
+            style={{ cursor: 'pointer' }}
+            onClick={() => setCopyUrlModalOpen(false)}
+            size={20}
+            color={'grey'}
+          />
+        </div>
+        <p className="copyUrlModalTaglineText">Choose your custom url below.</p>
+        <input
+          required
+          className="copyUrlModalTextInputItem"
+          type="name"
+          maxLength="100"
+          value={userUrl}
+          onChange={handleCopyText}
+        />
+        <p className="copyUrlSpogoText">spogo.us/</p>
+        <div>
+          <button
+            onClick={() => {
+              copyToClipboard();
+              setCopyCustomUrlButtonText('Link has been copied!');
+            }}
+            className="addEditItemModalButton"
+            type={'button'}
+          >
+            {copyCustomUrlButtonText}
+          </button>
+        </div>
+      </Modal>
+            {/* Copy Url Modal */}
+
+
+      {/* Profile Edit Modal */}
+      <Modal
+        isOpen={editModalOpen}
+        onRequestClose={() => setEditModalOpen(false)}
+        className="editModal"
+        overlayClassName="itemAddModalOverlay"
+      >
+        <div className="modalHeaderContainer">
+          <p>Edit Profile</p>
+          <MdClose
+            style={{ cursor: 'pointer' }}
+            onClick={() => setEditModalOpen(false)}
+            size={20}
+            color={'grey'}
+          />
+        </div>
+        <div>
+          <p className="textInputHeaders">Name</p>
+          <input
+            required
+            className="modalTextInputItems"
+            type="name"
+            maxLength="100"
+          />
+          <div className="editModalSportPositionRowContainer">
+            <div className="editModalSportPositionRowItemsContainer">
+              <p className="textInputHeaders">Sport</p>
+              <select className="modalTextInputItems">
+                <option>Sport</option>
+                <option>Football</option>
+                <option>Basketball</option>
+                <option>Soccer</option>
+                <option>Baseball</option>
+                <option>Lacrosse</option>
+                <option>Tennis</option>
+                <option>Swimming</option>
+                <option>Softball</option>
+                <option>Track and Field</option>
+                <option>Hockey</option>
+                <option>Golf</option>
+                <option>Rowing</option>
+                <option>Volleyball</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div className="editModalSportPositionRowItemsContainer">
+              <p className="textInputHeaders">Position</p>
+              <input
+                required
+                className="modalTextInputItems"
+                placeholder="Ex: QB, PG, CM"
+                type="position"
+                maxLength="100"
+              />
+            </div>
+          </div>
+          <p className="textInputHeaders">Location</p>
+          <PlacesAutocomplete
+            value={address}
+            onChange={setAddress}
+            onSelect={handleSelect}
+            searchOptions={{ types: ['(cities)'] }}
+          >
+            {({
+              getInputProps,
+              suggestions,
+              getSuggestionItemProps,
+              loading,
+            }) => (
+              <div>
+                <input
+                  {...getInputProps({
+                    className: 'modalTextInputItems',
+                    placeholder: 'Ex: Seattle, WA',
+                  })}
+                />
+
+                <div>
+                  {suggestions.map((suggestion) => {
+                    const style = {
+                      backgroundColor: suggestion.active ? '#3eb489' : '#fff',
+                      cursor: 'pointer',
+                      marginBottom: 5,
+                      fontSize: 12,
+                      fontFamily: 'Open Sans',
+                      marginTop: 2,
+                      marginLeft: 3,
+                    };
+
+                    return (
+                      <div {...getSuggestionItemProps(suggestion, { style })}>
+                        {suggestion.description}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+          </PlacesAutocomplete>
+          <p className="textInputHeaders">Instagram</p>
+          <input
+            required
+            className="modalTextInputItems"
+            type="instagram"
+            maxLength="100"
+          />
+          <p className="textInputHeaders">Twitter</p>
+          <input
+            required
+            className="modalTextInputItems"
+            type="twitter"
+            maxLength="100"
+          />
+          <p className="textInputHeaders">Email</p>
+          <input
+            required
+            className="modalTextInputItems"
+            type="email"
+            maxLength="100"
+          />
+          <p className="textInputHeaders">Link</p>
+          <input
+            required
+            className="modalTextInputItems"
+            type="link"
+            maxLength="100"
+          />
+          <p className="textInputHeaders">Bio</p>
+          <textarea
+            style={{ resize: 'none' }}
+            className="modalTextInputItems"
+            rows={5}
+            name={'description'}
+          />
+        </div>
+        <div>
+          <button className="addEditItemModalButton" type={'button'}>
+            Confirm
+          </button>
+        </div>
+      </Modal>
+      {/* Profile Edit Modal */}
+
+
         {/* Experience Modal */}
         <Modal
           isOpen={experienceModalOpen}
@@ -1117,22 +1443,15 @@ const CreateProfile = (props) => {
           >
             <h1>LOADING MODAL</h1>
           </div>
-        </Modal>
-        {/* Loading Modal */}
-        {/* Add Item Modals */}
-        {/* Add Item Modals */}
-        {/* Add Item Modals */}
-        {/* Add Item Modals */}
-        {/* Add Item Modals */}
-        {/* Add Item Modals */}
-        <button
-          style={{ marginTop: 20 }}
-          type="button"
-          onClick={() => logout()}
-        >
-          Logout
-        </button>
-      </div>
+        </div>
+      </Modal>
+      {/* Measurable Modal */}
+      {/* Add Item Modals */}
+      {/* Add Item Modals */}
+      {/* Add Item Modals */}
+      {/* Add Item Modals */}
+      {/* Add Item Modals */}
+      {/* Add Item Modals */}
     </div>
   );
 };

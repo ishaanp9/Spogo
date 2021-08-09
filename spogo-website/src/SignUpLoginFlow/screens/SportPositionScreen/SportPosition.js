@@ -5,6 +5,10 @@ import { Link, useHistory } from "react-router-dom";
 import { BsPlus } from "react-icons/bs";
 import { BiMinus } from "react-icons/bi";
 import { getUserDict, addUserInfo, getUserInfo, setUserDict } from "../../../UserData";
+import PlacesAutocomplete, {
+  geocodeByAddress,
+  getLatLng,
+} from 'react-places-autocomplete';
 import firebase from "../../../firebase";
 
 const SportPosition = (props) => {
@@ -105,6 +109,25 @@ const SportPosition = (props) => {
   if (signUpFinished === true) {
     history.push('/create')
   }
+  
+  const [address, setAddress] = React.useState('');
+
+  
+  const handleSelect = async (value) => {
+    const results = await geocodeByAddress(value);
+    setAddress(value);
+  };
+  
+  //use this to store in database - by the second comma, suggestion.description.substring(0, nthIndex(suggestion.description, ',', 2))
+  function nthIndex(str, pat, n) {
+    var L = str.length,
+      i = -1;
+    while (n-- && i++ < L) {
+      i = str.indexOf(pat, i);
+      if (i < 0) break;
+    }
+    return i;
+  }
 
   return (
     <div className="sportPositionScreenContainer">
@@ -125,6 +148,45 @@ const SportPosition = (props) => {
             >
               Sport
             </p>
+            <PlacesAutocomplete
+              value={address}
+              onChange={setAddress}
+              onSelect={handleSelect}
+              searchOptions={{ types: ['(cities)'] }}
+            >
+              {({
+                getInputProps,
+                suggestions,
+                getSuggestionItemProps,
+                loading,
+              }) => (
+                <div>
+                  <input
+                    {...getInputProps({ className: 'sportPositionTextInput' })}
+                  />
+
+                  <div>
+                    {/* {loading ? <div>Loading...</div> : null} */}
+
+                    {suggestions.map((suggestion) => {
+                      const style = {
+                        backgroundColor: suggestion.active ? '#3eb489' : '#fff',
+                        cursor: 'pointer',
+                        marginBottom: 5,
+                        fontSize: 12,
+                        fontFamily: "Open Sans"
+                      };
+
+                      return (
+                        <div {...getSuggestionItemProps(suggestion, { style })}>
+                          {suggestion.description}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+            </PlacesAutocomplete>
             <select
               className="sportPositionTextInput"
               onChange={(event) => {
@@ -148,11 +210,20 @@ const SportPosition = (props) => {
               <option>Golf</option>
               <option>Rowing</option>
               <option>Volleyball</option>
-              <option>Other</option>
+              <option value='Other'>Other</option>
             </select>
             {invalidSport && (
               <h1 className="invalidText">Please select a sport</h1>
             )}
+            {/* If other is pressed this code executes */}
+            {/* <p className="sportPositionTextInputHeader">Sport</p>
+            <input
+              className="sportPositionTextInput"
+              required
+              placeholder={'What Sport do you play?'}
+              type="text"
+              id="OtherSport"
+            /> */}
             <div
               style={{
                 display: "flex",
@@ -164,7 +235,7 @@ const SportPosition = (props) => {
               <div style={{ display: "flex", alignItems: "center" }}>
                 <p
                   className="sportPositionTextInputHeader"
-                  style={{ fontWeight: "bold" }}
+                  style={{ fontWeight: 'bold', cursor: 'pointer' }}
                   onClick={() => {
                     onIconPressed();
                   }}
@@ -226,10 +297,6 @@ const SportPosition = (props) => {
             {positionIcon === "BsPlus" ? (
               <p className="sportsNoPositionText">I don't have a position.</p>
             ) : null}
-            {/* <Link
-              to={"/auth/sign-up/socials"}
-              className="sportPositionNextButton"
-            > */}
             <button
               onClick={() => {
                 handleSubmission();
@@ -239,7 +306,6 @@ const SportPosition = (props) => {
             >
               Next
             </button>
-            {/* </Link> */}
           </div>
         </form>
       </div>
