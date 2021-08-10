@@ -15,167 +15,316 @@
 }
 
 @media screen and (max-width: 600px) {
-  .experienceModal {
-    background-color: white;
-    position: absolute;
-    top: 15%;
-    left: 2%;
-    right: 2%;
-    bottom: auto;
-    padding: 2% 2%;
-    border-radius: 10px;
-    outline: none;
+    .profileScreenContainer {
+      align-items: center;
+      width: 100%;
+      overflow-x: hidden;
+      background-color: whitesmoke;
+      height: 100vh;
   }
 
-  .accomplishmentModal {
-    background-color: white;
-    position: absolute;
-    top: 20%;
-    left: 2%;
-    right: 2%;
-    bottom: auto;
-    padding: 2% 2%;
-    border-radius: 10px;
-    outline: none;
-  }
+  .profileContentContainer {
+    width: 100%;
+    }
 
-  .measurableModal {
-    background-color: white;
-    position: absolute;
-    top: 25%;
-    left: 2%;
-    right: 2%;
-    bottom: auto;
-    padding: 2% 2%;
-    border-radius: 10px;
-    outline: none;
-  }
-
-  .itemAddModalOverlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(34, 31, 31, 0.8);
-  }
-
-  .expModalContainer {
-    height: 70%;
-  }
-
-  .modalHeaderContainer {
+  .createScreenProfileHeader {
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+    background-color: #3eb489;
     display: flex;
+    flex-direction: column;
     align-items: center;
+  }
+
+  .createScreenProfileImage {
+    border-radius: 1000px;
+    border: 3px solid white;
+    object-fit: cover;
+    width: 131.25px;
+    height: 131.25px;
+    margin-top: 10%;
+  }
+
+  .createScreenProfileTextContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 5px;
+  }
+
+  .createScreenNameSportTextContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: flex-start;
+    align-items: center;
+    /* margin-bottom: 1%; */
+  }
+
+  .createScreenWebsiteUserName {
+    font-size: 20px;
+    color: black;
+    font-weight: 500;
+  }
+
+  .createScreenWebsiteSportPositionText {
+    font-size: 16px;
+    color: black;
+    font-weight: 480;
+    margin-top: 5px;
+  }
+
+  .createScreenLocationIconTextContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    margin-top: 5px;
+  }
+
+  .createScreenLocationText {
+    font-size: 14px;
+    color: black;
+    font-weight: 400;
+    margin-left: 5px;
+    /* text-align: center; */
+  }
+
+  .createScreenSocialIconsRow {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+    margin-top: 2px;
+    margin-bottom: 2%;
+
+    /* justify-content: flex-start; */
+  }
+
+  .createScreenSocialIcon {
+    margin-left: 2%;
+    margin-right: 2%;
+  }
+
+  .createScreenSocialIcon:hover {
+    /* margin-right: 5%; */
+    cursor: pointer;
+  }
+
+  .createScreenBioContainer {
+    margin-top: 20px;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 5%;
+    padding: 0% 3%;
+    background-color: white;
+    border-radius: 10px;
+  }
+
+  .createScreenBioContainer > h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 20px 0px;
+  }
+
+  .createScreenBioContainer > p {
+    font-size: 14px;
+    font-weight: 400;
+    margin: 20px 0px;
+  }
+
+  .createScreenComponentHeaderDivider {
+    width: 100%;
+  }
+
+  .profileItemListHeaderContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .createScreenProfileItemListHeader {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 20px 0px;
+  }
+
+  .profileItemListAddIcons {
+    margin: 15px 0px;
+  }
+
+  .createScreenProfileItemListContainer {
+    margin-top: 20px;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    margin-left: 5%;
+    border-radius: 10px;
+    padding: 0% 3%;
+  }
+
+  .seeLessButton:hover {
+    cursor: pointer;
+  }
+
+  .seeMoreButton:hover {
+    cursor: pointer;
+  }
+
+  .seeMoreSeeLessItemButton {
+    border: none;
+    background-color: transparent;
+    width: 106.5%;
+    margin-top: -20px;
+    /* margin: 0% -20%; */
+    align-self: center;
+    height: 60px;
+    /* margin: 20px 0px; */
+    color: #3eb489;
+    font-size: 15px;
+    font-weight: 500;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .seeMoreSeeLessItemButton:hover {
+    cursor: pointer;
+    background-color: aliceblue;
+  }
+
+  .componentBottomDivider {
+    width: 100%;
+    margin-bottom: 20px;
+    margin-top: -1px;
+  }
+
+  .spogoLogo {
+    display: flex;
+    /* width: 100%; */
+    /* align-self: center;
+          align-items: center; */
+  }
+
+  .spogoLogo > img {
+    display: block;
+    object-fit: contain;
+    margin: 50px auto;
+    width: 30%;
+  }
+
+  .spogoLogo > img:hover {
+    cursor: pointer;
+  }
+
+  .createScreenVideoItemArrayList {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .userNotFoundErrorContainer {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .errorMessageContainer {
+    display: flex;
     width: 100%;
     justify-content: space-between;
-    margin-bottom: 5%;
+    margin-bottom: 2%;
+    /* justify-content: center; */
   }
 
-  .modalHeaderContainer > p {
+  .errorMessageTextContainer {
+    border: 1px solid transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    width: 40%;
+    height: auto;
+    box-shadow: 0 4px 8px 0 rgba(66, 65, 65, 0.203),
+      0 6px 20px 0 rgba(161, 155, 155, 0.59);
+    transition: 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+    /* margin-left: 5%; */
+    /* margin-top: 7%; */
+    margin-left: 5%;
+    padding: 4% 3%;
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+  }
+
+  .errorHeaderText {
     font-family: 'Montserrat', sans-serif;
     font-weight: bold;
-    font-size: large;
+    font-size: 30px;
+    margin-bottom: 2%;
     color: #3eb489;
   }
 
-  .textInputHeaders {
-    font-size: 12px;
-    margin-top: 2%;
-    margin-bottom: 5px;
+  .errorHeadlineText {
     font-family: 'Open Sans', sans-serif;
-  }
-
-  .modalTextInputItems {
-    width: 100%;
-    padding: 8px;
-    font-family: 'Open Sans', sans-serif;
-    outline: none;
-  }
-
-  .modalTextInputItems:focus {
-    border-width: 2px;
-    border-color: #3eb489;
-    border-style: solid;
-  }
-
-  .modalDatePickerContainer {
-    display: flex;
-    flex-direction: column;
-    margin-top: 2%;
-    justify-content: space-between;
-  }
-
-  .expModalDatePickerItemContainer {
-    width: 100%;
-  }
-
-  .accomplishmentMeasurableDatePickerItemContainer {
-    width: 100%;
-  }
-
-  .modalDatePicker {
-    /* padding-right: 89.9px; */
-    width: 48%;
-    padding-top: 8px;
-    padding-bottom: 8px;
-    padding-left: 2px;
-  }
-
-  .datePickerRow {
-    display: flex;
-  }
-
-  .datePickerRowMiddleDivider {
-    width: 4%;
-  }
-
-  .addEditItemModalButton {
-    background-color: #3eb489;
-    width: 100%;
-    height: 50px;
-    border-radius: 12px;
-    border: none;
-    font-weight: bold;
     font-size: 16px;
-    font-family: 'Montserrat', sans-serif;
-    margin-top: 2%;
   }
 
-  .addEditItemModalButton:hover {
-    cursor: pointer;
-    background-color: #22d694;
-    color: #000;
-    transition: 0.5s ease-in-out;
-  }
-
-  .presentTimeText {
-    font-size: 11px;
-    font-family: 'Open Sans', sans-serif;
+  .returnHomeText {
     font-weight: 500;
-    margin-top: 2px;
-    margin-left: 1px;
-  }
-
-  .presentTimeText > span {
     text-decoration: underline;
-    font-weight: 600;
-  }
-
-  .presentTimeText > span:hover {
+    color: #3eb489;
     cursor: pointer;
   }
-}
 
-@media screen and (max-width: 1200px) and (min-width: 600px) {
+  .errorImageContainer {
+    display: flex;
+    width: 50%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .errorImage {
+    object-fit: contain;
+    height: 600px;
+    margin-left: 10%;
+    /* margin-top: 10%; */
+  }
+
+  .userNotFoundSpogoLogo {
+    display: flex;
+    width: 100%;
+  }
+
+  .userNotFoundSpogoLogo > img {
+    display: block;
+    object-fit: contain;
+    margin: 0px auto;
+    width: 50%;
+  }
+
+  .userNotFoundSpogoLogo > img:hover {
+    cursor: pointer;
+  }
+
   .experienceModal {
     background-color: white;
     position: absolute;
-    top: 15%;
-    left: 18%;
-    right: 18%;
-    bottom: auto;
-    padding: 2% 2%;
+    left: 5%;
+    right: 5%;
+    /* bottom: 15%; */
+    padding: 3% 2%;
     border-radius: 10px;
     outline: none;
   }
@@ -183,11 +332,9 @@
   .accomplishmentModal {
     background-color: white;
     position: absolute;
-    top: 20%;
-    left: 18%;
-    right: 18%;
-    bottom: auto;
-    padding: 2% 2%;
+    left: 5%;
+    right: 5%;
+    padding: 3% 2%;
     border-radius: 10px;
     outline: none;
   }
@@ -195,11 +342,35 @@
   .measurableModal {
     background-color: white;
     position: absolute;
-    top: 25%;
-    left: 18%;
-    right: 18%;
-    bottom: auto;
+    left: 5%;
+    right: 5%;
+    padding: 3% 2%;
+    border-radius: 10px;
+    outline: none;
+  }
+
+  .editModal {
+    background-color: white;
+    position: absolute;
+    top: 5%;
+    max-width: calc(100vw - 2rem);
+    max-height: calc(100vh - 2rem);
+    box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.25);
+    overflow-y: auto;
+    left: 5%;
+    right: 5%;
+    bottom: 5%;
     padding: 2% 2%;
+    border-radius: 10px;
+    outline: none;
+  }
+
+  .copyUrlModal {
+    background-color: white;
+    position: absolute;
+    left: 5%;
+    right: 5%;
+    padding: 3% 2%;
     border-radius: 10px;
     outline: none;
   }
@@ -211,6 +382,11 @@
     right: 0;
     bottom: 0;
     background-color: rgba(34, 31, 31, 0.8);
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .expModalContainer {
@@ -245,9 +421,14 @@
     outline: none;
   }
 
-  .modalTextInputItems:focus {
+  .modalTextInputItems:hover {
     border-width: 2px;
     border-color: #3eb489;
+  }
+
+  .modalTextInputItems:focus {
+    border-width: 2px;
+    border-color: #3eb489 ;
     border-style: solid;
   }
 
@@ -261,6 +442,7 @@
   .expModalDatePickerItemContainer {
     width: 100%;
   }
+
   .accomplishmentMeasurableDatePickerItemContainer {
     width: 100%;
   }
@@ -271,6 +453,16 @@
     padding-top: 8px;
     padding-bottom: 8px;
     padding-left: 2px;
+  }
+
+  .modalDatePicker:hover {
+    border-width: 2px;
+    border-color: #3eb489;
+  }
+
+  .modalDatePicker:focus {
+    border-width: 2px;
+    border-color: #3eb489;
   }
 
   .datePickerRow {
@@ -314,6 +506,701 @@
   }
 
   .presentTimeText > span:hover {
+    cursor: pointer;
+  }
+
+  .editModalSportPositionRowContainer {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 1%;
+  }
+
+  .editModalSportPositionRowItemsContainer {
+    display: flex;
+    flex-direction: column;
+    width: 48%;
+  }
+
+  .copyUrlModalTaglineText {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .copyUrlModalTextInputItem {
+    width: 100%;
+    border-radius: 10px;
+    height: 70px;
+    /* padding: 8px 15px; */
+    padding-left: 20%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-right: 8px;
+    font-family: 'Open Sans', sans-serif;
+    outline: none;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .copyUrlSpogoText {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    position: absolute;
+    top: 48.5%;
+    margin-left: 8px;
+  }
+
+  .copyUrlModalTextInputItem:hover {
+    border-width: 2px;
+    border-color: #3eb489;
+  }
+
+  .copyUrlModalTextInputItem:focus {
+    border-width: 2px;
+    border-color: #3eb489;
+  }
+
+  .topRightIconsContainer {
+    display: flex;
+    flex-direction: row;
+    position: fixed;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    margin-right: 2%;
+    margin-top: 10%;
+  }
+
+  .settingsModal {
+    background-color: white;
+    position: absolute;
+    top: 10%;
+    right: 2%;
+    padding: 2% 2%;
+    border-radius: 10px;
+    outline: none;
+  }
+
+  .settingsItems {
+    cursor: pointer;
+    font-family: 'Open Sans', sans-serif;
+    width: 100%;
+    color: #3eb489;
+  }
+
+  .settingsItemAddModalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: transparent;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .topRightIconItem {
+    margin-left: 5px;
+    cursor: pointer;
+  }
+}
+
+@media screen and (max-width: 1200px) and (min-width: 600px) {
+  .profileScreenContainer {
+      align-items: center;
+      width: 100%;
+      overflow-x: hidden;
+      background-color: whitesmoke;
+      height: 100vh;
+  }
+
+  .profileContentContainer {
+    width: 100%;
+    }
+
+  .createScreenProfileHeader {
+   margin-top: 25px;
+   border-top-left-radius: 10px;
+   border-top-right-radius: 10px;
+   width: 100%;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+  }
+
+  .createScreenProfileImage {
+    border-radius: 1000px;
+    border: 3px solid white;
+    object-fit: cover;
+    width: 120px;
+    height: 120px;
+  }
+
+  .createScreenProfileTextContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 5px;
+  }
+
+  .createScreenNameSportTextContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: flex-start;
+    align-items: center;
+    /* margin-bottom: 1%; */
+  }
+
+  .createScreenWebsiteUserName {
+    font-size: 20px;
+    color: black;
+    font-weight: 500;
+  }
+
+  .createScreenWebsiteSportPositionText {
+    font-size: 16px;
+    color: black;
+    font-weight: 480;
+    margin-top: 5px;
+  }
+
+  .createScreenLocationIconTextContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    margin-top: 5px;
+  }
+
+  .createScreenLocationText {
+    font-size: 14px;
+    color: black;
+    font-weight: 400;
+    margin-left: 5px;
+    /* text-align: center; */
+  }
+
+  .createScreenSocialIconsRow {
+    display: flex;
+    flex-direction: row;
+    width: 250px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 20px;
+
+    /* justify-content: flex-start; */
+  }
+
+  .createScreenSocialIcon {
+    margin: 0px 5px;
+  }
+
+  .createScreenSocialIcon:hover {
+    /* margin-right: 5%; */
+    cursor: pointer;
+  }
+
+  .createScreenBioContainer {
+    margin-top: 20px;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 5%;
+    padding: 0% 3%;
+    background-color: white;
+    border-radius: 10px;
+  }
+
+  .createScreenBioContainer > h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 20px 0px;
+  }
+
+  .createScreenBioContainer > p {
+    font-size: 14px;
+    font-weight: 400;
+    margin: 20px 0px;
+  }
+
+  .createScreenComponentHeaderDivider {
+    width: 100%;
+  }
+
+  .profileItemListHeaderContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .createScreenProfileItemListHeader {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 20px 0px;
+  }
+
+  .profileItemListAddIcons {
+    margin: 15px 0px;
+  }
+
+  .createScreenProfileItemListContainer {
+    margin-top: 20px;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    margin-left: 5%;
+    border-radius: 10px;
+    padding: 0% 3%;
+  }
+
+  .seeLessButton:hover {
+    cursor: pointer;
+  }
+
+  .seeMoreButton:hover {
+    cursor: pointer;
+  }
+
+  .seeMoreSeeLessItemButton {
+    border: none;
+    background-color: transparent;
+    width: 106.5%;
+    margin-top: -20px;
+    /* margin: 0% -20%; */
+    align-self: center;
+    height: 60px;
+    /* margin: 20px 0px; */
+    color: #3eb489;
+    font-size: 15px;
+    font-weight: 500;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .seeMoreSeeLessItemButton:hover {
+    cursor: pointer;
+    background-color: aliceblue;
+  }
+
+  .componentBottomDivider {
+    width: 100%;
+    margin-bottom: 20px;
+    margin-top: -1px;
+  }
+
+  .spogoLogo {
+    display: flex;
+    /* width: 100%; */
+    /* align-self: center;
+          align-items: center; */
+  }
+
+  .spogoLogo > img {
+    display: block;
+    object-fit: contain;
+    margin: 50px auto;
+    width: 30%;
+  }
+
+  .spogoLogo > img:hover {
+    cursor: pointer;
+  }
+
+  .createScreenVideoItemArrayList {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+
+  .userNotFoundErrorContainer {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .errorMessageContainer {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 2%;
+    /* justify-content: center; */
+  }
+
+  .errorMessageTextContainer {
+    border: 1px solid transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    width: 40%;
+    height: auto;
+    box-shadow: 0 4px 8px 0 rgba(66, 65, 65, 0.203),
+      0 6px 20px 0 rgba(161, 155, 155, 0.59);
+    transition: 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+    /* margin-left: 5%; */
+    /* margin-top: 7%; */
+    margin-left: 5%;
+    padding: 4% 3%;
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+  }
+
+  .errorHeaderText {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    font-size: 30px;
+    margin-bottom: 2%;
+    color: #3eb489;
+  }
+
+  .errorHeadlineText {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+  }
+
+  .returnHomeText {
+    font-weight: 500;
+    text-decoration: underline;
+    color: #3eb489;
+    cursor: pointer;
+  }
+
+  .errorImageContainer {
+    display: flex;
+    width: 50%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .errorImage {
+    object-fit: contain;
+    height: 600px;
+    margin-left: 10%;
+    /* margin-top: 10%; */
+  }
+
+  .userNotFoundSpogoLogo {
+    display: flex;
+    width: 100%;
+  }
+
+  .userNotFoundSpogoLogo > img {
+    display: block;
+    object-fit: contain;
+    margin: 0px auto;
+    width: 50%;
+  }
+
+  .userNotFoundSpogoLogo > img:hover {
+    cursor: pointer;
+  }
+
+  .experienceModal {
+    background-color: white;
+    position: absolute;
+    left: 5%;
+    right: 5%;
+    /* bottom: 15%; */
+    padding: 3% 2%;
+    border-radius: 10px;
+    outline: none;
+  }
+
+  .accomplishmentModal {
+    background-color: white;
+    position: absolute;
+    left: 5%;
+    right: 5%;
+    padding: 3% 2%;
+    border-radius: 10px;
+    outline: none;
+  }
+
+  .measurableModal {
+    background-color: white;
+    position: absolute;
+    left: 5%;
+    right: 5%;
+    padding: 3% 2%;
+    border-radius: 10px;
+    outline: none;
+  }
+
+  .editModal {
+    background-color: white;
+    position: absolute;
+    max-width: calc(100vw - 2rem);
+    max-height: calc(100vh - 2rem);
+    box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.25);
+    overflow-y: auto;
+    left: 5%;
+    right: 5%;
+    padding: 2% 2%;
+    border-radius: 10px;
+    outline: none;
+  }
+
+  .copyUrlModal {
+    background-color: white;
+    position: absolute;
+    left: 30%;
+    right: 30%;
+    padding: 2% 2%;
+    border-radius: 10px;
+    outline: none;
+  }
+
+  .itemAddModalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(34, 31, 31, 0.8);
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .expModalContainer {
+    height: 70%;
+  }
+
+  .modalHeaderContainer {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 5%;
+  }
+
+  .modalHeaderContainer > p {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    font-size: large;
+  }
+
+  .textInputHeaders {
+    font-size: 14px;
+    margin-top: 2%;
+    margin-bottom: 5px;
+    font-family: 'Open Sans', sans-serif;
+  }
+
+  .modalTextInputItems {
+    width: 100%;
+    padding: 8px;
+    font-family: 'Open Sans', sans-serif;
+    outline: none;
+  }
+
+  .modalTextInputItems:hover {
+    border-width: 2px;
+    border-color: #3eb489;
+  }
+
+  .modalTextInputItems:focus {
+    border-width: 2px;
+    border-color: #3eb489 ;
+    border-style: solid;
+  }
+
+  .modalDatePickerContainer {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2%;
+    justify-content: space-between;
+  }
+
+  .expModalDatePickerItemContainer {
+    width: 100%;
+  }
+
+  .accomplishmentMeasurableDatePickerItemContainer {
+    width: 100%;
+  }
+
+  .modalDatePicker {
+    /* padding-right: 89.9px; */
+    width: 48%;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 2px;
+  }
+
+  .modalDatePicker:hover {
+    border-width: 2px;
+    border-color: #3eb489;
+  }
+
+  .modalDatePicker:focus {
+    border-width: 2px;
+    border-color: #3eb489;
+  }
+
+  .datePickerRow {
+    display: flex;
+  }
+
+  .datePickerRowMiddleDivider {
+    width: 4%;
+  }
+
+  .addEditItemModalButton {
+    background-color: #3eb489;
+    width: 100%;
+    height: 50px;
+    border-radius: 12px;
+    border: none;
+    font-weight: bold;
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+    margin-top: 2%;
+  }
+
+  .addEditItemModalButton:hover {
+    cursor: pointer;
+    background-color: #22d694;
+    color: #000;
+    transition: 0.5s ease-in-out;
+  }
+
+  .presentTimeText {
+    font-size: 11px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 500;
+    margin-top: 2px;
+    margin-left: 1px;
+  }
+
+  .presentTimeText > span {
+    text-decoration: underline;
+    font-weight: 600;
+  }
+
+  .presentTimeText > span:hover {
+    cursor: pointer;
+  }
+
+  .editModalSportPositionRowContainer {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 1%;
+  }
+
+  .editModalSportPositionRowItemsContainer {
+    display: flex;
+    flex-direction: column;
+    width: 48%;
+  }
+
+  .copyUrlModalTaglineText {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .copyUrlModalTextInputItem {
+    width: 100%;
+    border-radius: 10px;
+    height: 70px;
+    /* padding: 8px 15px; */
+    padding-left: 20%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-right: 8px;
+    font-family: 'Open Sans', sans-serif;
+    outline: none;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .copyUrlSpogoText {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    position: absolute;
+    top: 48.5%;
+    margin-left: 8px;
+  }
+
+  .copyUrlModalTextInputItem:hover {
+    border-width: 2px;
+    border-color: #3eb489;
+  }
+
+  .copyUrlModalTextInputItem:focus {
+    border-width: 2px;
+    border-color: #3eb489;
+  }
+
+  .topRightIconsContainer {
+    display: flex;
+    flex-direction: row;
+    position: fixed;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    margin-right: 5%;
+  }
+
+  .settingsModal {
+    background-color: white;
+    position: absolute;
+    top: 10%;
+    right: 2%;
+    padding: 2% 2%;
+    border-radius: 10px;
+    outline: none;
+  }
+
+  .settingsItems {
+    cursor: pointer;
+    font-family: 'Open Sans', sans-serif;
+    width: 100%;
+    color: #3eb489;
+  }
+
+  .settingsItemAddModalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: transparent;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .topRightIconItem {
+    margin-left: 5px;
     cursor: pointer;
   }
 }
@@ -587,42 +1474,7 @@
     margin-bottom: 20px;
   }
 
-  .wildcardLinkModalContentContainer > h1 {
-    margin: 4% 0%;
-    font-size: 20px;
-  }
-
-  .wildcardLinkModalContentContainer > p {
-    margin: 2% 0%;
-  }
-
-  .wildcardLinkModalContainer {
-    background-color: white;
-    padding: 3% 5%;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    margin: 100px 35%;
-  }
-
-  .wildcardLinkModalButtonsContainer {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    margin-top: 5%;
-  }
-
-  .wildcardLinkModalButton {
-    flex: 0.5;
-    margin: 0% 2%;
-    border: none;
-    background-color: #3eb489;
-    color: black;
-    padding: 5% 0%;
-    border-radius: 5px;
-  }
+  
 
   .userNotFoundErrorContainer {
     height: 100vh;
@@ -957,22 +1809,21 @@
   .topRightIconsContainer {
     display: flex;
     flex-direction: row;
-    position: absolute;
+    position: fixed;
     align-items: center;
     justify-content: flex-end;
     width: 100%;
-    margin-right: 10%;
+    margin-right: 40%;
   }
 
   .settingsModal {
     background-color: white;
     position: absolute;
     top: 10%;
-    right: 5%;
+    right: 20%;
     padding: 2% 2%;
     border-radius: 10px;
     outline: none;
-    background-color: whitesmoke;
   }
 
   .settingsItems {
@@ -997,7 +1848,7 @@
   }
 
   .topRightIconItem {
-    margin-left: 5px;
+    margin-left: 15px;
     cursor: pointer;
   }
 }

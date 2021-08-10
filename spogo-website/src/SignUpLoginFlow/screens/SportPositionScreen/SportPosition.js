@@ -1,55 +1,63 @@
-import React, { useEffect, useState } from "react";
-import WebFont from "webfontloader";
-import "./SportPosition.css";
-import { Link, useHistory } from "react-router-dom";
-import { BsPlus } from "react-icons/bs";
-import { BiMinus } from "react-icons/bi";
-import { getUserDict, addUserInfo, getUserInfo, setUserDict } from "../../../UserData";
+import React, { useEffect, useState } from 'react';
+import WebFont from 'webfontloader';
+import './SportPosition.css';
+import { Link, useHistory } from 'react-router-dom';
+import { BsPlus } from 'react-icons/bs';
+import { BiMinus } from 'react-icons/bi';
+import {
+  getUserDict,
+  addUserInfo,
+  getUserInfo,
+  setUserDict,
+} from '../../../UserData';
 import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from 'react-places-autocomplete';
-import firebase from "../../../firebase";
+import firebase from '../../../firebase';
 
 const SportPosition = (props) => {
   let userUID = props.userUID;
-  const [userName, setUserName] = useState(getUserInfo("name"));
-  const [signUpFinished, setSignUpFinished] = useState(getUserInfo("sign-up-finished"));
-  const [sport, setSport] = useState("");
-  const [invalidSport, setInvalidSport] = useState("");
-  const [positionOne, setPositionOne] = useState("");
-  const [positionTwo, setPositionTwo] = useState("");
+  const [userName, setUserName] = useState(getUserInfo('name'));
+  const [signUpFinished, setSignUpFinished] = useState(
+    getUserInfo('sign-up-finished')
+  );
+  const [sport, setSport] = useState('');
+  const [otherSport, setOtherSport] = useState('');
+  const [invalidSport, setInvalidSport] = useState('');
+  const [positionOne, setPositionOne] = useState('');
+  const [positionTwo, setPositionTwo] = useState('');
   // const [positionText, setPositionText] = useState("");
-  const [invalidPosition, setInvalidPosition] = useState("");
+  const [invalidPosition, setInvalidPosition] = useState('');
   let history = useHistory();
 
   useEffect(async () => {
     WebFont.load({
       google: {
-        families: ["Montserrat", "Open Sans", "Public Sans"],
+        families: ['Montserrat', 'Open Sans', 'Public Sans'],
       },
     });
     if (
-      getUserInfo("name") === null ||
-      getUserInfo("name") === undefined ||
-      getUserInfo("email") === null ||
-      getUserInfo("email") === undefined
+      getUserInfo('name') === null ||
+      getUserInfo('name') === undefined ||
+      getUserInfo('email') === null ||
+      getUserInfo('email') === undefined
     ) {
       await getUserInfoDictFromDB();
-      setUserName(getUserInfo("name"))
-      setSignUpFinished(getUserInfo("sign-up-finished"))
-      console.log(getUserInfo("name"))
-      console.log(getUserInfo("email"))
+      setUserName(getUserInfo('name'));
+      setSignUpFinished(getUserInfo('sign-up-finished'));
+      console.log(getUserInfo('name'));
+      console.log(getUserInfo('email'));
     }
   }, []);
 
   const getUserInfoDictFromDB = async () => {
     let dbPath = firebase
       .firestore()
-      .collection("Users")
+      .collection('Users')
       .doc(userUID)
-      .collection("User Info");
-    let profileData = dbPath.doc("Profile Data");
+      .collection('User Info');
+    let profileData = dbPath.doc('Profile Data');
     await profileData
       .get()
       .then(async (doc) => {
@@ -60,64 +68,68 @@ const SportPosition = (props) => {
         }
       })
       .catch((error) => {
-        console.log("Error getting user info document:", error);
+        console.log('Error getting user info document:', error);
       });
   };
 
-  const [positionIcon, setPositionIcon] = useState("BsPlus");
-  const [positionIconText, setPositionIconText] = useState("Add a Position");
+  const [positionIcon, setPositionIcon] = useState('BsPlus');
+  const [positionIconText, setPositionIconText] = useState('Add a Position');
 
   const onIconPressed = () => {
-    if (positionIcon === "BsPlus") {
-      setPositionIcon("BsMinus");
-      setPositionIconText("Remove a Position");
+    if (positionIcon === 'BsPlus') {
+      setPositionIcon('BsMinus');
+      setPositionIconText('Remove a Position');
     }
-    if (positionIcon === "BsMinus") {
-      setPositionIcon("BsPlus");
-      setPositionIconText("Add a Position");
+    if (positionIcon === 'BsMinus') {
+      setPositionIcon('BsPlus');
+      setPositionIconText('Add a Position');
     }
   };
 
   const handleSubmission = () => {
     let validSubmission = true;
     let positionText;
-    if (sport === "") {
+    if (sport === '') {
       setInvalidSport(true);
       validSubmission = false;
     } else {
     }
-    if (positionOne === "" && positionTwo === "") {
+    if (positionOne === '' && positionTwo === '') {
       setInvalidPosition(true);
       validSubmission = false;
     } else {
-      if (positionOne != "" && positionTwo === "") {
+      if (positionOne != '' && positionTwo === '') {
         positionText = positionOne;
-      } else if (positionOne === "" && positionTwo != "") {
+      } else if (positionOne === '' && positionTwo != '') {
         positionText = positionTwo;
       } else {
-        positionText = positionOne + ", " + positionTwo;
+        positionText = positionOne + ', ' + positionTwo;
       }
     }
     if (validSubmission) {
-      addUserInfo("sport", sport);
-      addUserInfo("position", positionText);
+      if (sport === 'Other') {
+        addUserInfo('sport', sport)
+      } else {
+        addUserInfo('sport', sport);
+      }
+
+      addUserInfo('position', positionText);
       console.log(getUserDict());
-      history.push("/auth/sign-up/socials");
+      history.push('/auth/sign-up/socials');
     }
   };
 
   if (signUpFinished === true) {
-    history.push('/create')
+    history.push('/create');
   }
-  
+
   const [address, setAddress] = React.useState('');
 
-  
   const handleSelect = async (value) => {
     const results = await geocodeByAddress(value);
     setAddress(value);
   };
-  
+
   //use this to store in database - by the second comma, suggestion.description.substring(0, nthIndex(suggestion.description, ',', 2))
   function nthIndex(str, pat, n) {
     var L = str.length,
@@ -134,8 +146,7 @@ const SportPosition = (props) => {
       <div className="sportPositionContainer">
         <p className="sportPositionFormHeader">
           Hello
-          {userName != null ? " " + userName : null}
-          ! Welcome to Spogo!
+          {userName != null ? ' ' + userName : null}! Welcome to Spogo!
         </p>
         <p className="sportPositionHeadlineHeader">
           Let's start creating your athletic profile.
@@ -144,9 +155,9 @@ const SportPosition = (props) => {
           <div className="sportPositionInputForms">
             <p
               className="sportPositionTextInputHeader"
-              style={{ marginTop: "8%" }}
+              style={{ marginTop: '8%' }}
             >
-              Sport
+              Location
             </p>
             <PlacesAutocomplete
               value={address}
@@ -174,7 +185,7 @@ const SportPosition = (props) => {
                         cursor: 'pointer',
                         marginBottom: 5,
                         fontSize: 12,
-                        fontFamily: "Open Sans"
+                        fontFamily: 'Open Sans',
                       };
 
                       return (
@@ -187,6 +198,7 @@ const SportPosition = (props) => {
                 </div>
               )}
             </PlacesAutocomplete>
+            <p className="sportPositionTextInputHeader">Sport</p>
             <select
               className="sportPositionTextInput"
               onChange={(event) => {
@@ -210,29 +222,34 @@ const SportPosition = (props) => {
               <option>Golf</option>
               <option>Rowing</option>
               <option>Volleyball</option>
-              <option value='Other'>Other</option>
+              <option>Other</option>
             </select>
             {invalidSport && (
               <h1 className="invalidText">Please select a sport</h1>
             )}
             {/* If other is pressed this code executes */}
-            {/* <p className="sportPositionTextInputHeader">Sport</p>
-            <input
-              className="sportPositionTextInput"
-              required
-              placeholder={'What Sport do you play?'}
-              type="text"
-              id="OtherSport"
-            /> */}
+            {sport ==='Other' ? <>
+              <p className="sportPositionTextInputHeader">Sport</p>
+              <input
+                className="sportPositionTextInput"
+                required
+                placeholder={'What Sport do you play?'}
+                onChange={(text) => {
+                  setOtherSport(text.target.value);
+                }}
+                type="text"
+                id="OtherSport"
+              />
+            </>: null}
             <div
               style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
               }}
             >
               <p className="sportPositionTextInputHeader">Position</p>
-              <div style={{ display: "flex", alignItems: "center" }}>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
                 <p
                   className="sportPositionTextInputHeader"
                   style={{ fontWeight: 'bold', cursor: 'pointer' }}
@@ -242,15 +259,15 @@ const SportPosition = (props) => {
                 >
                   {positionIconText}
                 </p>
-                {positionIcon === "BsMinus" ? (
+                {positionIcon === 'BsMinus' ? (
                   <BiMinus
                     onClick={() => {
                       // setPositionIcon("BsPlus");
                       onIconPressed();
                     }}
-                    style={{ marginBottom: 5, cursor: "pointer" }}
+                    style={{ marginBottom: 5, cursor: 'pointer' }}
                     size={20}
-                    color={"black"}
+                    color={'black'}
                   />
                 ) : (
                   <BsPlus
@@ -258,16 +275,16 @@ const SportPosition = (props) => {
                       // setPositionIcon("BiMinus");
                       onIconPressed();
                     }}
-                    style={{ marginBottom: 5, cursor: "pointer" }}
+                    style={{ marginBottom: 5, cursor: 'pointer' }}
                     size={20}
-                    color={"black"}
+                    color={'black'}
                   />
                 )}
               </div>
             </div>
             <input
               className="sportPositionTextInput"
-              placeholder={"Ex: Quarterback, Point Guard, Midfielder"}
+              placeholder={'Ex: Quarterback, Point Guard, Midfielder'}
               type="text"
               id="Position"
               value={positionOne}
@@ -276,10 +293,10 @@ const SportPosition = (props) => {
                 setInvalidPosition(false);
               }}
             />
-            {positionIcon === "BsMinus" ? (
+            {positionIcon === 'BsMinus' ? (
               <input
                 className="sportPositionTextInput"
-                placeholder={"Ex: Linebacker, Shooting Guard, Striker"}
+                placeholder={'Ex: Linebacker, Shooting Guard, Striker'}
                 type="text"
                 id="Position"
                 value={positionTwo}
@@ -294,7 +311,7 @@ const SportPosition = (props) => {
                 Please enter a position or choose "I don't have a position"
               </h1>
             )}
-            {positionIcon === "BsPlus" ? (
+            {positionIcon === 'BsPlus' ? (
               <p className="sportsNoPositionText">I don't have a position.</p>
             ) : null}
             <button
