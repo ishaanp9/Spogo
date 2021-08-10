@@ -109,7 +109,9 @@ const CreateProfile = (props) => {
   const [thisMediaArray, setThisMediaArray] = useState([]);
 
   useEffect(() => {
-    getDBUserInfo();
+    setTimeout(() => {
+      getDBUserInfo();
+    }, 2000)
   }, []);
 
   useEffect(() => {
@@ -209,6 +211,7 @@ const CreateProfile = (props) => {
     setThisAccomplishmentArray(getAccomplishmentArray());
     setThisMeasurableArray(getMeasurableArray());
     setShowLoadingModal(false);
+    console.log(getUserInfo("sign-up-finished"))
     if (userUID === "noUser") {
       console.log("should go to auth");
       history.push("/auth");

@@ -59,7 +59,7 @@ const SocialsScreen = (props) => {
           addUserInfo("preferred-email", preferredEmail);
         }
         addUserInfo("wildcard", wildcardLink);
-        history.push('/create')
+        addUserInfo("sign-up-finished", true)
         console.log(getUserDict())
         await addUserInfoDictToDB()
       }
@@ -77,6 +77,7 @@ const SocialsScreen = (props) => {
         userArray: getUserDict(),
       })
       .then(() => {
+        history.push('/create')
         console.log("User added!");
       });
   };

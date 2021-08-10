@@ -6,6 +6,18 @@
   margin-bottom: 15px;
 }
 
+.signUpFailedAlert {
+  background-color: #FFD2DA;
+  margin-top: 4%;
+  margin-bottom: -4%;
+  padding: 15px 20px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: left;
+}
+
 @media screen and (max-width: 600px) {
   .signUpContainer {
     margin-top: 10%;
@@ -157,7 +169,8 @@
     display: flex;
     width: 100%;
     justify-content: center;
-    margin-bottom: 2%;
+    align-items: center;
+    height: 100vh;
   }
   
   .signUpDesign1 {
@@ -177,7 +190,6 @@
       0 6px 20px 0 rgba(161, 155, 155, 0.59);
     transition: 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
     padding: 4% 3%;
-    margin-top: 70px;
     display: flex;
     flex-direction: column;
     z-index: 1;
@@ -312,7 +324,8 @@
     display: flex;
     width: 100%;
     justify-content: center;
-    margin-bottom: 2%;
+    align-items: center;
+    height: 100vh;
     /* height: 100%;
     background-color: #3eb489; */
   }
@@ -335,7 +348,7 @@
     transition: 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
     /* margin-left: 5%; */
     /* margin-top: 7%; */
-    margin-top: 70px;
+    /* margin-top: 70px; */
     margin-right: 5%;
     padding: 4% 2.5%;
     display: flex;

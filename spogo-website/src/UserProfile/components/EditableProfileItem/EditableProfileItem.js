@@ -550,22 +550,26 @@ const EditableProfileItem = (props) => {
                 setCurrentExperience(true);
                 setCurrentExperienceText("Not currently doing this?");
               } else {
-                setExperienceEndMonth(
-                  expEndDateText.substring(0, expEndDateText.indexOf(","))
-                );
-                setExperienceEndYear(
-                  expEndDateText.substring(expEndDateText.indexOf(",") + 2)
-                );
-                let expEndMonthIndex = getMonthIndex(
-                  expEndDateText.substring(0, expEndDateText.indexOf(","))
-                );
-                let expEndYearIndex = getYearIndex(
-                  expEndDateText.substring(expEndDateText.indexOf(",") + 2)
-                );
-                document.getElementById("experienceEndMonthSelector").value =
-                  expEndMonthIndex + 1;
-                document.getElementById("experienceEndYearSelector").value =
-                  expEndYearIndex + 1;
+                // try {
+                  setExperienceEndMonth(
+                    expEndDateText.substring(0, expEndDateText.indexOf(","))
+                  );
+                  setExperienceEndYear(
+                    expEndDateText.substring(expEndDateText.indexOf(",") + 2)
+                  );
+                  let expEndMonthIndex = getMonthIndex(
+                    expEndDateText.substring(0, expEndDateText.indexOf(","))
+                  );
+                  let expEndYearIndex = getYearIndex(
+                    expEndDateText.substring(expEndDateText.indexOf(",") + 2)
+                  );
+                  document.getElementById("experienceEndMonthSelector").value =
+                    expEndMonthIndex + 1;
+                  document.getElementById("experienceEndYearSelector").value =
+                    expEndYearIndex + 1;
+                // } catch (e) {
+                //   console.log(e)
+                // }
               }
             }}
             className="experienceModal"
