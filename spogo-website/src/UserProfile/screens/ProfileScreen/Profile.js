@@ -530,6 +530,7 @@ const Profile = (props) => {
             isOpen={wildcardLinkModalOpen}
             onRequestClose={() => setWildcardLinkModalOpen(false)}
             className="wildcardLinkModalContainer"
+            overlayClassName="wildcardModalOverlay"
           >
             <div className="wildcardLinkModalContentContainer">
               <h1>External Link Warning</h1>

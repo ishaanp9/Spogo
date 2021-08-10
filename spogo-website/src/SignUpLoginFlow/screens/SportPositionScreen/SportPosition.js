@@ -23,24 +23,26 @@ const SportPosition = (props) => {
     getUserInfo("sign-up-finished")
   );
   const [sport, setSport] = useState("");
+  const [otherSport, setOtherSport] = useState("");
   const [invalidSport, setInvalidSport] = useState("");
   const [positionOne, setPositionOne] = useState("");
   const [positionTwo, setPositionTwo] = useState("");
   const [invalidPosition, setInvalidPosition] = useState("");
+
   let history = useHistory();
   const [noPosition, setNoPosition] = useState(false);
 
   useEffect(async () => {
     WebFont.load({
       google: {
-        families: ["Montserrat", "Open Sans", "Public Sans"],
+        families: ['Montserrat', 'Open Sans', 'Public Sans'],
       },
     });
     if (
-      getUserInfo("name") === null ||
-      getUserInfo("name") === undefined ||
-      getUserInfo("email") === null ||
-      getUserInfo("email") === undefined
+      getUserInfo('name') === null ||
+      getUserInfo('name') === undefined ||
+      getUserInfo('email') === null ||
+      getUserInfo('email') === undefined
     ) {
       await getUserInfoDictFromDB();
       setUserName(getUserInfo("name"));
@@ -53,10 +55,10 @@ const SportPosition = (props) => {
   const getUserInfoDictFromDB = async () => {
     let dbPath = firebase
       .firestore()
-      .collection("Users")
+      .collection('Users')
       .doc(userUID)
-      .collection("User Info");
-    let profileData = dbPath.doc("Profile Data");
+      .collection('User Info');
+    let profileData = dbPath.doc('Profile Data');
     await profileData
       .get()
       .then(async (doc) => {
@@ -67,49 +69,54 @@ const SportPosition = (props) => {
         }
       })
       .catch((error) => {
-        console.log("Error getting user info document:", error);
+        console.log('Error getting user info document:', error);
       });
   };
 
-  const [positionIcon, setPositionIcon] = useState("BsPlus");
-  const [positionIconText, setPositionIconText] = useState("Add a Position");
+  const [positionIcon, setPositionIcon] = useState('BsPlus');
+  const [positionIconText, setPositionIconText] = useState('Add a Position');
 
   const onIconPressed = () => {
-    if (positionIcon === "BsPlus") {
-      setPositionIcon("BsMinus");
-      setPositionIconText("Remove a Position");
+    if (positionIcon === 'BsPlus') {
+      setPositionIcon('BsMinus');
+      setPositionIconText('Remove a Position');
     }
-    if (positionIcon === "BsMinus") {
-      setPositionIcon("BsPlus");
-      setPositionIconText("Add a Position");
+    if (positionIcon === 'BsMinus') {
+      setPositionIcon('BsPlus');
+      setPositionIconText('Add a Position');
     }
   };
 
   const handleSubmission = () => {
     let validSubmission = true;
     let positionText;
-    if (sport === "") {
+    if (sport === '') {
       setInvalidSport(true);
       validSubmission = false;
     } else {
     }
-    if (positionOne === "" && positionTwo === "") {
+    if (positionOne === '' && positionTwo === '') {
       setInvalidPosition(true);
       validSubmission = false;
     } else {
-      if (positionOne != "" && positionTwo === "") {
+      if (positionOne != '' && positionTwo === '') {
         positionText = positionOne;
-      } else if (positionOne === "" && positionTwo != "") {
+      } else if (positionOne === '' && positionTwo != '') {
         positionText = positionTwo;
       } else {
-        positionText = positionOne + ", " + positionTwo;
+        positionText = positionOne + ', ' + positionTwo;
       }
     }
     if (validSubmission) {
-      addUserInfo("sport", sport);
-      addUserInfo("position", positionText);
+      if (sport === 'Other') {
+        addUserInfo('sport', sport)
+      } else {
+        addUserInfo('sport', sport);
+      }
+
+      addUserInfo('position', positionText);
       console.log(getUserDict());
-      history.push("/auth/sign-up/socials");
+      history.push('/auth/sign-up/socials');
     }
   };
 
@@ -118,7 +125,6 @@ const SportPosition = (props) => {
   }
 
   const [address, setAddress] = React.useState("");
-
   const handleSelect = async (value) => {
     const results = await geocodeByAddress(value);
     setAddress(value);
@@ -151,7 +157,7 @@ const SportPosition = (props) => {
       <div className="sportPositionContainer">
         <p className="sportPositionFormHeader">
           Hello
-          {userName != null ? " " + userName : null}! Welcome to Spogo!
+          {userName != null ? ' ' + userName : null}! Welcome to Spogo!
         </p>
         <p className="sportPositionHeadlineHeader">
           Let's start creating your athletic profile.
@@ -160,9 +166,9 @@ const SportPosition = (props) => {
           <div className="sportPositionInputForms">
             <p
               className="sportPositionTextInputHeader"
-              style={{ marginTop: "8%" }}
+              style={{ marginTop: '8%' }}
             >
-              Sport
+              Location
             </p>
             <PlacesAutocomplete
               value={address}
@@ -190,7 +196,7 @@ const SportPosition = (props) => {
                         cursor: "pointer",
                         marginBottom: 5,
                         fontSize: 12,
-                        fontFamily: "Open Sans",
+                        fontFamily: 'Open Sans',
                       };
 
                       return (
@@ -203,6 +209,7 @@ const SportPosition = (props) => {
                 </div>
               )}
             </PlacesAutocomplete>
+            <p className="sportPositionTextInputHeader">Sport</p>
             <select
               className="sportPositionTextInput"
               onChange={(event) => {
@@ -232,19 +239,24 @@ const SportPosition = (props) => {
               <h1 className="sportPositionLocationInvalidText">Please select a sport</h1>
             )}
             {/* If other is pressed this code executes */}
-            {/* <p className="sportPositionTextInputHeader">Sport</p>
-            <input
-              className="sportPositionTextInput"
-              required
-              placeholder={'What Sport do you play?'}
-              type="text"
-              id="OtherSport"
-            /> */}
+            {sport ==='Other' ? <>
+              <p className="sportPositionTextInputHeader">Sport</p>
+              <input
+                className="sportPositionTextInput"
+                required
+                placeholder={'What Sport do you play?'}
+                onChange={(text) => {
+                  setOtherSport(text.target.value);
+                }}
+                type="text"
+                id="OtherSport"
+              />
+            </>: null}
             <div
               style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
               }}
             >
               <p className="sportPositionTextInputHeader">Position</p>
@@ -260,16 +272,16 @@ const SportPosition = (props) => {
                 >
                   {positionIconText}
                 </p>
-                {positionIcon === "BsMinus" ? (
+                {positionIcon === 'BsMinus' ? (
                   <BiMinus
                     onClick={() => {
                       if (!noPosition) {
                         onIconPressed();
                       }
                     }}
-                    style={{ marginBottom: 5, cursor: "pointer" }}
+                    style={{ marginBottom: 5, cursor: 'pointer' }}
                     size={20}
-                    color={"black"}
+                    color={'black'}
                   />
                 ) : (
                   <BsPlus
@@ -277,9 +289,9 @@ const SportPosition = (props) => {
                       // setPositionIcon("BiMinus");
                       onIconPressed();
                     }}
-                    style={{ marginBottom: 5, cursor: "pointer" }}
+                    style={{ marginBottom: 5, cursor: 'pointer' }}
                     size={20}
-                    color={"black"}
+                    color={'black'}
                   />
                 )}
               </div>}
@@ -315,7 +327,7 @@ const SportPosition = (props) => {
             {positionIcon === "BsMinus" ? (
               <input
                 className="sportPositionTextInput"
-                placeholder={"Ex: Linebacker, Shooting Guard, Striker"}
+                placeholder={'Ex: Linebacker, Shooting Guard, Striker'}
                 type="text"
                 id="Position"
                 value={positionTwo}

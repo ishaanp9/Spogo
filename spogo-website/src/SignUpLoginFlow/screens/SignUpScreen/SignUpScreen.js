@@ -22,7 +22,7 @@ const SignUpScreen = (props) => {
   useEffect(() => {
     WebFont.load({
       google: {
-        families: ["Montserrat", "Open Sans", "Public Sans"],
+        families: ['Montserrat', 'Open Sans', 'Public Sans'],
       },
     });
     if (userUID != "noUser") {
@@ -31,11 +31,11 @@ const SignUpScreen = (props) => {
     }
   }, []);
 
-  let validator = require("email-validator");
+  let validator = require('email-validator');
 
   const validateSignup = () => {
     let validSubmission = true;
-    if (name != "") {
+    if (name != '') {
     } else {
       setInvalidName(true);
       validSubmission = false;
@@ -65,8 +65,6 @@ const SignUpScreen = (props) => {
 
   return (
     <div className="signUpContainer">
-      <div className="signUpDesign1" />
-      <div className="signUpDesign2" />
       <div className="signUpFormContainer">
         <h1 className="signUpFormHeader">Sign Up</h1>
         <p className="signUpHeadlineHeader">
@@ -165,7 +163,7 @@ const SignUpScreen = (props) => {
       {/* <div className="signUpImageContainer">
         <img className="signUpImage" src={SignUpImage} />
       </div> */}
-    </div>
+      </div>
   );
 };
 
