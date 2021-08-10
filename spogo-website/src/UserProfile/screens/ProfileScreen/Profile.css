@@ -195,21 +195,39 @@
   .wildcardLinkModalContentContainer > h1 {
     margin: 4% 0%;
     font-size: 20px;
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
   }
 
   .wildcardLinkModalContentContainer > p {
-    margin: 2% 0%;
+    margin: 5% 0%;
+    font-size: 16px;
+    font-family: 'Open Sans', sans-serif;
+    text-align: center;
+  }
+
+  .wildcardModalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(34, 31, 31, 0.8);
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .wildcardLinkModalContainer {
     background-color: white;
-    padding: 3% 8%;
+    position: absolute;
+    left: 5%;
+    right: 5%;
+    padding: 3% 2%;
     border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    margin: 100px 10%;
+    outline: none;
   }
 
   .wildcardLinkModalButtonsContainer {
@@ -517,21 +535,39 @@
   .wildcardLinkModalContentContainer > h1 {
     margin: 4% 0%;
     font-size: 20px;
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
   }
 
   .wildcardLinkModalContentContainer > p {
     margin: 2% 0%;
+    font-size: 16px;
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+  }
+
+  .wildcardModalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(34, 31, 31, 0.8);
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .wildcardLinkModalContainer {
     background-color: white;
-    padding: 3% 10%;
+    left: 20%;
+    right: 20%;
+    position: absolute;
+    padding: 3% 2%;
     border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    margin: 100px 20%;
+    outline: none;
   }
 
   .wildcardLinkModalButtonsContainer {
@@ -915,21 +951,34 @@
   .wildcardLinkModalContentContainer > h1 {
     margin: 4% 0%;
     font-size: 20px;
+    font-family: 'Montserrat', sans-serif;
   }
 
   .wildcardLinkModalContentContainer > p {
     margin: 2% 0%;
+    font-size: 16px;
+  }
+
+  .wildcardModalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(34, 31, 31, 0.8);
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .wildcardLinkModalContainer {
     background-color: white;
-    padding: 3% 5%;
+    position: absolute;
+    padding: 3% 2%;
     border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    margin: 100px 35%;
+    outline: none;
   }
 
   .wildcardLinkModalButtonsContainer {
@@ -947,6 +996,7 @@
     color: black;
     padding: 5% 0%;
     border-radius: 5px;
+    cursor: pointer;
   }
 
   .userNotFoundErrorContainer {
