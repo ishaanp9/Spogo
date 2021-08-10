@@ -18,7 +18,7 @@ function experienceCardObject(title, team, duration, description, idNum) {
   this.idNum = idNum;
 }
 
-function trophyCardObject(title, duration, description, idNum) {
+function accomplishmentCardObject(title, duration, description, idNum) {
   this.title = title;
   this.duration = duration;
   this.description = description;
@@ -132,7 +132,7 @@ export const setExperienceID = () => {
 //Trophy
 export const addAccomplishmentItem = (title, duration, description, idNum) => {
   if (title != '' && duration != '') {
-    const CardObjectExample = new trophyCardObject(
+    const CardObjectExample = new accomplishmentCardObject(
       title,
       duration,
       description,

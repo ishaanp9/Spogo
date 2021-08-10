@@ -1,35 +1,36 @@
-import React, { useEffect, useState } from 'react';
-import WebFont from 'webfontloader';
-import './SportPosition.css';
-import { Link, useHistory } from 'react-router-dom';
-import { BsPlus } from 'react-icons/bs';
-import { BiMinus } from 'react-icons/bi';
+import React, { useEffect, useState } from "react";
+import WebFont from "webfontloader";
+import "./SportPosition.css";
+import { Link, useHistory } from "react-router-dom";
+import { BsPlus } from "react-icons/bs";
+import { BiMinus } from "react-icons/bi";
 import {
   getUserDict,
   addUserInfo,
   getUserInfo,
   setUserDict,
-} from '../../../UserData';
+} from "../../../UserData";
 import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
-} from 'react-places-autocomplete';
-import firebase from '../../../firebase';
+} from "react-places-autocomplete";
+import firebase from "../../../firebase";
 
 const SportPosition = (props) => {
   let userUID = props.userUID;
-  const [userName, setUserName] = useState(getUserInfo('name'));
+  const [userName, setUserName] = useState(getUserInfo("name"));
   const [signUpFinished, setSignUpFinished] = useState(
-    getUserInfo('sign-up-finished')
+    getUserInfo("sign-up-finished")
   );
-  const [sport, setSport] = useState('');
-  const [otherSport, setOtherSport] = useState('');
-  const [invalidSport, setInvalidSport] = useState('');
-  const [positionOne, setPositionOne] = useState('');
-  const [positionTwo, setPositionTwo] = useState('');
-  // const [positionText, setPositionText] = useState("");
-  const [invalidPosition, setInvalidPosition] = useState('');
+  const [sport, setSport] = useState("");
+  const [otherSport, setOtherSport] = useState("");
+  const [invalidSport, setInvalidSport] = useState("");
+  const [positionOne, setPositionOne] = useState("");
+  const [positionTwo, setPositionTwo] = useState("");
+  const [invalidPosition, setInvalidPosition] = useState("");
+
   let history = useHistory();
+  const [noPosition, setNoPosition] = useState(false);
 
   useEffect(async () => {
     WebFont.load({
@@ -44,10 +45,10 @@ const SportPosition = (props) => {
       getUserInfo('email') === undefined
     ) {
       await getUserInfoDictFromDB();
-      setUserName(getUserInfo('name'));
-      setSignUpFinished(getUserInfo('sign-up-finished'));
-      console.log(getUserInfo('name'));
-      console.log(getUserInfo('email'));
+      setUserName(getUserInfo("name"));
+      setSignUpFinished(getUserInfo("sign-up-finished"));
+      console.log(getUserInfo("name"));
+      console.log(getUserInfo("email"));
     }
   }, []);
 
@@ -120,11 +121,10 @@ const SportPosition = (props) => {
   };
 
   if (signUpFinished === true) {
-    history.push('/create');
+    history.push("/create");
   }
 
-  const [address, setAddress] = React.useState('');
-
+  const [address, setAddress] = React.useState("");
   const handleSelect = async (value) => {
     const results = await geocodeByAddress(value);
     setAddress(value);
@@ -139,6 +139,17 @@ const SportPosition = (props) => {
       if (i < 0) break;
     }
     return i;
+  }
+
+  const [havePositionText, setHavePositionText] = useState("I don't have a position")
+  const handleNoPositionToggle = () => {
+    if (noPosition) {
+      setNoPosition(false)
+      setHavePositionText("I don't have a position")
+    } else {
+      setNoPosition(true)
+      setHavePositionText("I have a position")
+    }
   }
 
   return (
@@ -163,7 +174,7 @@ const SportPosition = (props) => {
               value={address}
               onChange={setAddress}
               onSelect={handleSelect}
-              searchOptions={{ types: ['(cities)'] }}
+              searchOptions={{ types: ["(cities)"] }}
             >
               {({
                 getInputProps,
@@ -173,7 +184,7 @@ const SportPosition = (props) => {
               }) => (
                 <div>
                   <input
-                    {...getInputProps({ className: 'sportPositionTextInput' })}
+                    {...getInputProps({ className: "sportPositionTextInput" })}
                   />
 
                   <div>
@@ -181,8 +192,8 @@ const SportPosition = (props) => {
 
                     {suggestions.map((suggestion) => {
                       const style = {
-                        backgroundColor: suggestion.active ? '#3eb489' : '#fff',
-                        cursor: 'pointer',
+                        backgroundColor: suggestion.active ? "#3eb489" : "#fff",
+                        cursor: "pointer",
                         marginBottom: 5,
                         fontSize: 12,
                         fontFamily: 'Open Sans',
@@ -203,7 +214,7 @@ const SportPosition = (props) => {
               className="sportPositionTextInput"
               onChange={(event) => {
                 setInvalidSport(false);
-                setSport(event.target.value);
+                setSport(event.target.options[event.target.selectedIndex].text);
               }}
             >
               <option selected hidden>
@@ -222,10 +233,10 @@ const SportPosition = (props) => {
               <option>Golf</option>
               <option>Rowing</option>
               <option>Volleyball</option>
-              <option>Other</option>
+              <option value="Other">Other</option>
             </select>
             {invalidSport && (
-              <h1 className="invalidText">Please select a sport</h1>
+              <h1 className="sportPositionLocationInvalidText">Please select a sport</h1>
             )}
             {/* If other is pressed this code executes */}
             {sport ==='Other' ? <>
@@ -249,12 +260,14 @@ const SportPosition = (props) => {
               }}
             >
               <p className="sportPositionTextInputHeader">Position</p>
-              <div style={{ display: 'flex', alignItems: 'center' }}>
+              {!noPosition && <div style={{ display: "flex", alignItems: "center" }}>
                 <p
                   className="sportPositionTextInputHeader"
-                  style={{ fontWeight: 'bold', cursor: 'pointer' }}
+                  style={{ fontWeight: "bold", cursor: "pointer" }}
                   onClick={() => {
-                    onIconPressed();
+                    if (!noPosition) {
+                      onIconPressed();
+                    }
                   }}
                 >
                   {positionIconText}
@@ -262,8 +275,9 @@ const SportPosition = (props) => {
                 {positionIcon === 'BsMinus' ? (
                   <BiMinus
                     onClick={() => {
-                      // setPositionIcon("BsPlus");
-                      onIconPressed();
+                      if (!noPosition) {
+                        onIconPressed();
+                      }
                     }}
                     style={{ marginBottom: 5, cursor: 'pointer' }}
                     size={20}
@@ -280,20 +294,37 @@ const SportPosition = (props) => {
                     color={'black'}
                   />
                 )}
-              </div>
+              </div>}
             </div>
-            <input
-              className="sportPositionTextInput"
-              placeholder={'Ex: Quarterback, Point Guard, Midfielder'}
-              type="text"
-              id="Position"
-              value={positionOne}
-              onChange={(text) => {
-                setPositionOne(text.target.value);
-                setInvalidPosition(false);
-              }}
-            />
-            {positionIcon === 'BsMinus' ? (
+            {noPosition ? (
+              <input
+                readOnly={true}
+                className="sportPositionTextInput"
+                style={{
+                  outline: "none",
+                  borderStyle: "solid",
+                  boxShadow: "none",
+                  borderColor: "#ededed",
+                  backgroundColor: "#00000014",
+                  color: "#0000004D",
+                }}
+                // placeholder={"Ex: Quarterback, Point Guard, Midfielder"}
+                value={"Position"}
+              />
+            ) : (
+              <input
+                className="sportPositionTextInput"
+                placeholder={"Ex: Quarterback, Point Guard, Midfielder"}
+                type="text"
+                id="Position"
+                value={positionOne}
+                onChange={(text) => {
+                  setPositionOne(text.target.value);
+                  setInvalidPosition(false);
+                }}
+              />
+            )}
+            {positionIcon === "BsMinus" ? (
               <input
                 className="sportPositionTextInput"
                 placeholder={'Ex: Linebacker, Shooting Guard, Striker'}
@@ -306,13 +337,14 @@ const SportPosition = (props) => {
                 }}
               />
             ) : null}
+
             {invalidPosition && (
-              <h1 className="invalidText">
+              <h1 className="sportPositionLocationInvalidText">
                 Please enter a position or choose "I don't have a position"
               </h1>
             )}
-            {positionIcon === 'BsPlus' ? (
-              <p className="sportsNoPositionText">I don't have a position.</p>
+            {positionIcon === "BsPlus" ? (
+              <p className="sportsNoPositionText" onClick={() => handleNoPositionToggle()}>{havePositionText}</p>
             ) : null}
             <button
               onClick={() => {

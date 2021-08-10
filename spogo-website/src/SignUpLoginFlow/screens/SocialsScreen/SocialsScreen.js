@@ -59,7 +59,7 @@ const SocialsScreen = (props) => {
           addUserInfo("preferred-email", preferredEmail);
         }
         addUserInfo("wildcard", wildcardLink);
-        history.push('/create')
+        addUserInfo("sign-up-finished", true)
         console.log(getUserDict())
         await addUserInfoDictToDB()
       }
@@ -77,6 +77,7 @@ const SocialsScreen = (props) => {
         userArray: getUserDict(),
       })
       .then(() => {
+        history.push('/create')
         console.log("User added!");
       });
   };
@@ -129,7 +130,7 @@ const SocialsScreen = (props) => {
               }}
             />
           </div>
-          {invalidEmail && <h1 className="invalidText">Invalid email</h1>}
+          {invalidEmail && <h1 className="socialsInvalidText">Invalid email</h1>}
           <div className="socialsTextInputContainer">
             <BsLink45Deg size={25} color={"#3eb489"} />
             <input
@@ -144,7 +145,7 @@ const SocialsScreen = (props) => {
               }}
             />
           </div>
-          {invalidWildcard && <h1 className="invalidText">Link must start with https://</h1>}
+          {invalidWildcard && <h1 className="socialsInvalidText">Link must start with https://</h1>}
           {/* <Link to={"/create"} className="socialsScreenNextButton"> */}
           <button
             className="socialsScreenNextButton"

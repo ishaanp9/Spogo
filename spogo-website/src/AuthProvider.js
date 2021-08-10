@@ -63,7 +63,7 @@ export const AuthProvider = ({ children }) => {
             loginFailedFunction();
           }
         },
-        register: async (email, password, name) => {
+        register: async (email, password, name, signUpFailedFunction) => {
           userAuthenticationType = 'Signup'
           console.log(userAuthenticationType)
           try {
@@ -77,7 +77,12 @@ export const AuthProvider = ({ children }) => {
                 history.push("/auth/sign-up/location-sport-position");
               });
           } catch (e) {
-            console.log(e);
+            console.log(e.message);
+            if (e.message === "The email address is already in use by another account.") {
+              signUpFailedFunction(1)
+            } else {
+              signUpFailedFunction(0)
+            }
           }
         },
         logout: async () => {

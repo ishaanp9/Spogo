@@ -1,224 +1,410 @@
+.editableProfileItemInvalidText {
+  font-family: "Montserrat", sans-serif;
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
 @media screen and (max-width: 600px) {
-    .Container {
-      width: 100%;
-      display: flex;
-      flex-direction: row;
-      align-self: center;
-      align-items: center;
-      overflow-x: hidden;
-      padding-top: 20px;
-      overflow-y: hidden;
-      /* border-style: none none solid none;
+  .Container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    align-items: center;
+    overflow-x: hidden;
+    padding-top: 20px;
+    overflow-y: hidden;
+    /* border-style: none none solid none;
       border-bottom-width: 1;
       border-color: lightgrey; */
-    }
-  
-    .itemIconContainer {
-      /* border: solid; */
-      /* width: 0%; */
-      padding-bottom: 20px;
-      display: flex;
-      margin-right: 5%;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      /* margin-top: 7px; */
-    }
-  
-    .Link {
-      text-decoration: none;
-    }
-  
-    .TextContainer {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-self: center;
-      justify-content: flex-start;
-      /* border-bottom: solid;
-      border-bottom-color: lightgrey; */
-      /* padding: 2% 0%; */
-      /* border-bottom-width: 2px; */
-    }
-  
-    .TextContainer > h1 {
-      font-size: 16px;
-      font-weight: 500;
-      color: black;
-    }
-  
-    .TextContainer > h2 {
-      font-size: 14px;
-      font-weight: 500;
-      color: grey;
-      margin-top: 2px;
-    }
-  
-    .TextContainer > h3 {
-      font-size: 12px;
-      font-weight: 400;
-      color: grey;
-      margin-top: 2px;
-    }
-  
-    .TextContainer > h4 {
-      display: none;
-    }
-  
-    .Divider {
-      margin-top: 20px;
-      /* margin-left: 10%; */
-    }
   }
-  
-  @media screen and (max-width: 1200px) and (min-width: 600px) {
-    .Container {
-      width: 100%;
-      display: flex;
-      flex-direction: row;
-      align-self: center;
-      align-items: center;
-      overflow-x: hidden;
-      padding-top: 20px;
-      overflow-y: hidden;
-      /* border-style: none none solid none;
+
+  .itemIconContainer {
+    /* border: solid; */
+    /* width: 0%; */
+    padding-bottom: 20px;
+    display: flex;
+    margin-right: 5%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* margin-top: 7px; */
+  }
+
+  .Link {
+    text-decoration: none;
+  }
+
+  .TextContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    justify-content: flex-start;
+    /* border-bottom: solid;
+      border-bottom-color: lightgrey; */
+    /* padding: 2% 0%; */
+    /* border-bottom-width: 2px; */
+  }
+
+  .TextContainer > h1 {
+    font-size: 16px;
+    font-weight: 500;
+    color: black;
+  }
+
+  .TextContainer > h2 {
+    font-size: 14px;
+    font-weight: 500;
+    color: grey;
+    margin-top: 2px;
+  }
+
+  .TextContainer > h3 {
+    font-size: 12px;
+    font-weight: 400;
+    color: grey;
+    margin-top: 2px;
+  }
+
+  .TextContainer > h4 {
+    display: none;
+  }
+
+  .Divider {
+    margin-top: 20px;
+    /* margin-left: 10%; */
+  }
+}
+
+@media screen and (max-width: 1200px) and (min-width: 600px) {
+  .Container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    align-items: center;
+    overflow-x: hidden;
+    padding-top: 20px;
+    overflow-y: hidden;
+    /* border-style: none none solid none;
       border-bottom-width: 1;
       border-color: lightgrey; */
-    }
-  
-    .itemIconContainer {
-      /* border: solid; */
-      /* width: 0%; */
-      padding-bottom: 20px;
-      display: flex;
-      margin-right: 3%;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      /* margin-top: 7px; */
-    }
-  
-    .Link {
-      text-decoration: none;
-    }
-  
-    .TextContainer {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-self: center;
-      justify-content: flex-start;
-      /* border-bottom: solid;
-      border-bottom-color: lightgrey; */
-      /* padding: 2% 0%; */
-      /* border-bottom-width: 2px; */
-    }
-  
-    .TextContainer > h1 {
-      font-size: 16px;
-      font-weight: 500;
-      color: black;
-    }
-  
-    .TextContainer > h2 {
-      font-size: 14px;
-      font-weight: 500;
-      color: grey;
-      margin-top: 2px;
-    }
-  
-    .TextContainer > h3 {
-      font-size: 12px;
-      font-weight: 400;
-      color: grey;
-      margin-top: 2px;
-    }
-  
-    .TextContainer > h4 {
-      font-size: 14px;
-      font-weight: 400;
-      color: black;
-      margin-top: 10px;
-    }
-    .Divider {
-      margin-top: 20px;
-      /* margin-left: 10%; */
-    }
   }
-  
-  @media screen and (min-width: 1200px) {
-    .Container {
-      width: 100%;
-      display: flex;
-      flex-direction: row;
-      align-self: center;
-      align-items: center;
-      overflow-x: hidden;
-      padding-top: 20px;
-      overflow-y: hidden;
-      /* border-style: none none solid none;
+
+  .itemIconContainer {
+    /* border: solid; */
+    /* width: 0%; */
+    padding-bottom: 20px;
+    display: flex;
+    margin-right: 3%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* margin-top: 7px; */
+  }
+
+  .Link {
+    text-decoration: none;
+  }
+
+  .TextContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    justify-content: flex-start;
+    /* border-bottom: solid;
+      border-bottom-color: lightgrey; */
+    /* padding: 2% 0%; */
+    /* border-bottom-width: 2px; */
+  }
+
+  .TextContainer > h1 {
+    font-size: 16px;
+    font-weight: 500;
+    color: black;
+  }
+
+  .TextContainer > h2 {
+    font-size: 14px;
+    font-weight: 500;
+    color: grey;
+    margin-top: 2px;
+  }
+
+  .TextContainer > h3 {
+    font-size: 12px;
+    font-weight: 400;
+    color: grey;
+    margin-top: 2px;
+  }
+
+  .TextContainer > h4 {
+    font-size: 14px;
+    font-weight: 400;
+    color: black;
+    margin-top: 10px;
+  }
+  .Divider {
+    margin-top: 20px;
+    /* margin-left: 10%; */
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .Container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    align-items: center;
+    overflow-x: hidden;
+    padding-top: 20px;
+    overflow-y: hidden;
+    /* border: solid; */
+    /* border-style: none none solid none;
       border-bottom-width: 1;
       border-color: lightgrey; */
-    }
-  
-    .itemIconContainer {
-      /* border: solid; */
-      /* width: 0%; */
-      padding-bottom: 20px;
-      display: flex;
-      margin-right: 3%;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      /* margin-top: 7px; */
-    }
-  
-    .Link {
-      text-decoration: none;
-    }
-  
-    .TextContainer {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-self: center;
-      justify-content: flex-start;
-      /* border-bottom: solid;
-      border-bottom-color: lightgrey; */
-      /* padding: 2% 0%; */
-      /* border-bottom-width: 2px; */
-    }
-  
-    .TextContainer > h1 {
-      font-size: 16px;
-      font-weight: 500;
-      color: black;
-    }
-  
-    .TextContainer > h2 {
-      font-size: 14px;
-      font-weight: 500;
-      color: grey;
-      margin-top: 2px;
-    }
-  
-    .TextContainer > h3 {
-      font-size: 12px;
-      font-weight: 400;
-      color: grey;
-      margin-top: 2px;
-    }
-  
-    .TextContainer > h4 {
-      font-size: 14px;
-      font-weight: 400;
-      color: black;
-      margin-top: 10px;
-    }
-  
-    .Divider {
-      margin-top: 20px;
-      /* margin-left: 10%; */
-    }
   }
-  
+
+  .itemIconContainer {
+    padding-bottom: 20px;
+    display: flex;
+    margin-right: 3%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .Link {
+    text-decoration: none;
+  }
+
+  .itemTextButtonsDividerContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .itemTextButtonsContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .TextContainer {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    justify-content: flex-start;
+    /* border-bottom: solid;
+      border-bottom-color: lightgrey; */
+    /* padding: 2% 0%; */
+    /* border-bottom-width: 2px; */
+  }
+
+  .TextContainer > h1 {
+    font-size: 16px;
+    font-weight: 500;
+    color: black;
+  }
+
+  .TextContainer > h2 {
+    font-size: 14px;
+    font-weight: 500;
+    color: grey;
+    margin-top: 2px;
+  }
+
+  .TextContainer > h3 {
+    font-size: 12px;
+    font-weight: 400;
+    color: grey;
+    margin-top: 2px;
+  }
+
+  .TextContainer > h4 {
+    font-size: 14px;
+    font-weight: 400;
+    color: black;
+    margin-top: 10px;
+  }
+
+  .editDeleteButtonsContainer {
+    margin-right: 2%;
+    margin-left: 4%;
+    width: 10%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .editDeleteButton {
+    cursor: pointer;
+  }
+
+  .Divider {
+    margin-top: 20px;
+    /* margin-left: 10%; */
+  }
+
+  /* Modals */
+  .itemAddModalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(34, 31, 31, 0.8);
+  }
+
+  .experienceModal {
+    background-color: white;
+    position: absolute;
+    left: 25%;
+    right: 25%;
+    /* bottom: 15%; */
+    padding: 2% 2%;
+    border-radius: 10px;
+    outline: none;
+  }
+
+  .accomplishmentModal {
+    background-color: white;
+    position: absolute;
+    left: 25%;
+    right: 25%;
+    padding: 2% 2%;
+    border-radius: 10px;
+    outline: none;
+  }
+
+  .measurableModal {
+    background-color: white;
+    position: absolute;
+    left: 25%;
+    right: 25%;
+    padding: 2% 2%;
+    border-radius: 10px;
+    outline: none;
+  }
+
+  .modalHeaderContainer {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 5%;
+  }
+
+  .modalHeaderContainer > p {
+    font-family: "Montserrat", sans-serif;
+    font-weight: bold;
+    font-size: large;
+  }
+
+  .textInputHeaders {
+    font-size: 14px;
+    margin-top: 2%;
+    margin-bottom: 5px;
+    font-family: "Open Sans", sans-serif;
+  }
+
+  .modalTextInputItems {
+    width: 100%;
+    padding: 8px;
+    font-family: "Open Sans", sans-serif;
+    outline: none;
+  }
+
+  .modalTextInputItems:hover {
+    border-width: 2px;
+    border-color: #3eb489;
+  }
+
+  .modalTextInputItems:focus {
+    border-width: 2px;
+    border-color: #3eb489;
+    border-style: solid;
+  }
+
+  .modalDatePickerContainer {
+    display: flex;
+    margin-top: 2%;
+    justify-content: space-between;
+  }
+
+  .expModalDatePickerItemContainer {
+    width: 50%;
+  }
+
+  .accomplishmentMeasurableDatePickerItemContainer {
+    width: 100%;
+  }
+
+  .modalDatePicker {
+    /* padding-right: 89.9px; */
+    width: 48%;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 2px;
+  }
+
+  .modalDatePicker:hover {
+    border-width: 2px;
+    border-color: #3eb489;
+  }
+
+  .modalDatePicker:focus {
+    border-width: 2px;
+    border-color: #3eb489;
+  }
+
+  .datePickerRow {
+    display: flex;
+  }
+
+  .datePickerRowMiddleDivider {
+    width: 4%;
+  }
+
+  .addEditItemModalButton {
+    background-color: #3eb489;
+    width: 100%;
+    height: 50px;
+    border-radius: 12px;
+    border: none;
+    font-weight: bold;
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+    margin-top: 2%;
+  }
+
+  .addEditItemModalButton:hover {
+    cursor: pointer;
+    background-color: #22d694;
+    color: #000;
+    transition: 0.5s ease-in-out;
+  }
+
+  .presentTimeText {
+    font-size: 11px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 500;
+    margin-top: 2px;
+    margin-left: 1px;
+  }
+
+  .presentTimeText > span {
+    text-decoration: underline;
+    font-weight: 600;
+  }
+
+  .presentTimeText > span:hover {
+    cursor: pointer;
+  }
+}

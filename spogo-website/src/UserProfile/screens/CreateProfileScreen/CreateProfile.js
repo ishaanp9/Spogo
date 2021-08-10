@@ -78,6 +78,10 @@ const CreateProfile = (props) => {
   const [experienceEndYear, setExperienceEndYear] = useState('');
   const [experienceDescriptionText, setExperienceDescriptionText] =
     useState('');
+  const [currentExperienceText, setCurrentExperienceText] = useState(
+    "Currently doing this?"
+  );
+  const [currentExperience, setCurrentExperience] = useState(false);
 
   // Accomplishment States
   const [accomplishmentModalOpen, setAccomplishmentModalOpen] = useState(false);
@@ -94,15 +98,10 @@ const CreateProfile = (props) => {
   const [measurableTitleText, setMeasurableTitleText] = useState('');
   const [measurableValueText, setMeasurableValueText] = useState('');
 
-  const [currentMonth, setCurrentMonth] = useState('');
-  const [currentYear, setCurrentYear] = useState('');
-  const [currentExperienceText, setCurrentExperienceText] = useState(
-    'Currently doing this?'
-  );
-  const [currentExperience, setCurrentExperience] = useState(false);
   const [name, setName] = useState(getUserInfo('name'));
   const [sport, setSport] = useState(getUserInfo('sport'));
   const [position, setPosition] = useState(getUserInfo('position'));
+
   const [showLoadingModal, setShowLoadingModal] = useState(true);
 
   const [thisAccomplishmentArray, setThisAccomplishmentArray] = useState([]);
@@ -111,8 +110,9 @@ const CreateProfile = (props) => {
   const [thisMediaArray, setThisMediaArray] = useState([]);
 
   useEffect(() => {
-    getCurrentDate();
-    getDBUserInfo();
+    setTimeout(() => {
+      getDBUserInfo();
+    }, 2000)
   }, []);
 
   useEffect(() => {
@@ -212,9 +212,10 @@ const CreateProfile = (props) => {
     setThisAccomplishmentArray(getAccomplishmentArray());
     setThisMeasurableArray(getMeasurableArray());
     setShowLoadingModal(false);
-    if (userUID === 'noUser') {
-      console.log('should go to auth');
-      history.push('/auth');
+    console.log(getUserInfo("sign-up-finished"))
+    if (userUID === "noUser") {
+      console.log("should go to auth");
+      history.push("/auth");
     }
   };
 
@@ -237,26 +238,6 @@ const CreateProfile = (props) => {
 
   const copyToClipboard = () => {
     copy(`spogo.us/${userUrl}`);
-  };
-
-  const getCurrentDate = () => {
-    let monthNumber = new Date().getMonth();
-    setCurrentYear(new Date().getFullYear());
-    let monthNames = [
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
-      'July',
-      'August',
-      'September',
-      'October',
-      'November',
-      'December',
-    ];
-    setCurrentMonth(monthNames[monthNumber]);
   };
 
   const [image, setImage] = React.useState('');
@@ -329,16 +310,16 @@ const CreateProfile = (props) => {
           experienceDescriptionText,
           getExperienceID()
         );
-        setExperienceTitleText('');
-        setExperienceTeamText('');
-        setExperienceStartMonth('');
-        setExperienceStartYear('');
-        setExperienceEndMonth('');
-        setExperienceEndYear('');
-        setExperienceDescriptionText('');
-        setCurrentExperienceText('Currently doing this?');
-        setThisExperienceArray(getExperienceArray());
-        console.log(thisExperienceArray);
+        setExperienceTitleText("");
+        setExperienceTeamText("");
+        setExperienceStartMonth("");
+        setExperienceStartYear("");
+        setExperienceEndMonth("");
+        setExperienceEndYear("");
+        setExperienceDescriptionText("");
+        setCurrentExperienceText("Currently doing this?");
+        setCurrentExperience(false)
+        setThisExperienceArray([...getExperienceArray()]);
       }
     } else {
       if (experienceTitleText === '') {
@@ -390,7 +371,7 @@ const CreateProfile = (props) => {
       setAccomplishmentYearReceived('');
       setInvalidAccomplishmentTitle(false);
       setInvalidAccomplishmentDateReceived(false);
-      setThisAccomplishmentArray(getAccomplishmentArray());
+      setThisAccomplishmentArray([...getAccomplishmentArray()]);
     } else {
       if (accomplishmentTitleText === '') {
         setInvalidAccomplishmentTitle(true);
@@ -423,7 +404,7 @@ const CreateProfile = (props) => {
       setMeasurableValueText('');
       setInvalidMeasurableTitle(false);
       setInvalidMeasurableValue(false);
-      setThisMeasurableArray(getMeasurableArray());
+      setThisMeasurableArray([...getMeasurableArray()]);
     } else {
       if (measurableTitleText === '') {
         setInvalidMeasurableTitle(true);
@@ -432,6 +413,20 @@ const CreateProfile = (props) => {
         setInvalidMeasurableValue(true);
       }
     }
+  };
+  // Sets the experience array to re-render the measurable list for updated changes
+  const reloadExperienceArray = () => {
+    setThisExperienceArray([...getExperienceArray()]);
+  };
+
+  // Sets the accomplishment array to re-render the measurable list for updated changes
+  const reloadAccomplishmentArray = () => {
+    setThisAccomplishmentArray([...getAccomplishmentArray()]);
+  };
+
+  // Sets the measurable array to re-render the measurable list for updated changes
+  const reloadMeasurableArray = () => {
+    setThisMeasurableArray([...getMeasurableArray()]);
   };
 
   const profileImageUploadClick = () => {
@@ -475,27 +470,38 @@ const CreateProfile = (props) => {
           </div>
           <div className="createScreenProfileImageContainer">
             <input
-              type="file"
-              accept="image/*"
-              id="target"
-              ref={inputFile}
-              onChange={(e) => {
-                setImage(e.target.files[0]);
-                uploader(e);
-              }}
-              style={{ display: 'none' }}
-            />
-            <button type="button" onClick={profileImageUploadClick}>
-              {result ? (
-                <img
-                  className="createScreenProfileImage"
-                  ref={imageRef}
-                  src={result}
-                />
-              ) : (
-                <img className="createScreenProfileImage" src={BlankProfile} />
-              )}
-            </button>
+                type="file"
+                accept="image/*"
+                id="target"
+                ref={inputFile}
+                onChange={(e) => {
+                  setImage(e.target.files[0]);
+                  uploader(e);
+                }}
+                style={{ display: "none", outline: "none", border: "none" }}
+              />
+            <button
+                type="button"
+                onClick={profileImageUploadClick}
+                style={{
+                  outline: "none",
+                  border: "none",
+                  backgroundColor: "whitesmoke",
+                }}
+              >
+                {result ? (
+                  <img
+                    className="createScreenProfileImage"
+                    ref={imageRef}
+                    src={result}
+                  />
+                ) : (
+                  <img
+                    className="createScreenProfileImage"
+                    src={BlankProfile}
+                  />
+                )}
+              </button>
           </div>
           <div className="createScreenProfileTextContainer">
             <div className="createScreenNameSportTextContainer">
@@ -559,7 +565,6 @@ const CreateProfile = (props) => {
                 size={25}
                 color={'#5D4D4A'}
               />
-
               <BsLink45Deg
                 className="createScreenSocialIcon"
                 // onClick={() => setWildcardLinkModalOpen(true)}
@@ -593,6 +598,7 @@ const CreateProfile = (props) => {
           <div className="profileItemListHeaderContainer">
             <h1 className="createScreenProfileItemListHeader">Highlights</h1>
             <MdAdd
+              style={{ cursor: "pointer" }}
               className="profileItemListAddIcons"
               size={25}
               onClick={() => highlightUploadClick}
@@ -617,6 +623,7 @@ const CreateProfile = (props) => {
           <div className="profileItemListHeaderContainer">
             <h1 className="createScreenProfileItemListHeader">Experiences</h1>
             <MdAdd
+              style={{ cursor: "pointer" }}            
               className="profileItemListAddIcons"
               size={25}
               onClick={() => setExperienceModalOpen(true)}
@@ -638,9 +645,11 @@ const CreateProfile = (props) => {
                 description={item.description}
                 idNum={item.idNum}
                 userUID={userUID}
+                callbackReloadList={reloadExperienceArray}
               />
             ))}
           </ul>
+          <hr className="componentBottomDivider" size="1" color="lightgrey" />
         </div>
         <div className="createScreenProfileItemListContainer">
           <div className="profileItemListHeaderContainer">
@@ -648,6 +657,7 @@ const CreateProfile = (props) => {
               Accomplishments
             </h1>
             <MdAdd
+              style={{ cursor: "pointer" }}
               className="profileItemListAddIcons"
               size={25}
               onClick={() => setAccomplishmentModalOpen(true)}
@@ -668,14 +678,20 @@ const CreateProfile = (props) => {
                 description={item.description}
                 idNum={item.idNum}
                 userUID={userUID}
+                callbackReloadList={reloadAccomplishmentArray}
               />
             ))}
           </ul>
+          <hr className="componentBottomDivider" size="1" color="lightgrey" />
         </div>
-        <div className="createScreenProfileItemListContainer">
+        <div
+          className="createScreenProfileItemListContainer"
+          style={{ marginBottom: 80 }}
+        >
           <div className="profileItemListHeaderContainer">
             <h1 className="createScreenProfileItemListHeader">Measurables</h1>
             <MdAdd
+              style={{ cursor: "pointer" }}
               className="profileItemListAddIcons"
               size={25}
               onClick={() => setMeasurableModalOpen(true)}
@@ -695,9 +711,11 @@ const CreateProfile = (props) => {
                 time={item.value}
                 idNum={item.idNum}
                 userUID={userUID}
+                callbackReloadList={reloadMeasurableArray}
               />
             ))}
           </ul>
+          <hr className="componentBottomDivider" size="1" color="lightgrey" />
         </div>
 
         {/* Add Item Modals */}
@@ -927,6 +945,8 @@ const CreateProfile = (props) => {
             setInvalidExperienceTeam(false);
             setInvalidExperienceStartDate(false);
             setInvalidExperienceEndDate(false);
+            setCurrentExperienceText("Currently doing this?");
+            setCurrentExperience(false)
           }}
           className="experienceModal"
           overlayClassName="itemAddModalOverlay"
@@ -949,6 +969,8 @@ const CreateProfile = (props) => {
                   setInvalidExperienceTeam(false);
                   setInvalidExperienceStartDate(false);
                   setInvalidExperienceEndDate(false);
+                  setCurrentExperienceText("Currently doing this?");
+                  setCurrentExperience(false)
                 }}
                 size={20}
                 color={'grey'}
@@ -968,7 +990,7 @@ const CreateProfile = (props) => {
                   }}
                 />
                 {invalidExperienceTitle && (
-                  <h1 className="invalidText">Title is required</h1>
+                  <h1 className="createScreenInvalidText">Title is required</h1>
                 )}
                 <p className="textInputHeaders">Team</p>
                 <input
@@ -982,7 +1004,7 @@ const CreateProfile = (props) => {
                   }}
                 />
                 {invalidExperienceTeam && (
-                  <h1 className="invalidText">Team is required</h1>
+                  <h1 className="createScreenInvalidText">Team is required</h1>
                 )}
                 <div className="modalDatePickerContainer">
                   <div className="expModalDatePickerItemContainer">
@@ -994,7 +1016,7 @@ const CreateProfile = (props) => {
                         name={'Month'}
                         onChange={(event) => {
                           setInvalidExperienceStartDate(false);
-                          setExperienceStartMonth(event.target.value);
+                          setExperienceStartMonth(event.target.options[event.target.selectedIndex].text);
                         }}
                       >
                         <option selected hidden>
@@ -1021,7 +1043,7 @@ const CreateProfile = (props) => {
                         name={'Year'}
                         onChange={(event) => {
                           setInvalidExperienceStartDate(false);
-                          setExperienceStartYear(event.target.value);
+                          setExperienceStartYear(event.target.options[event.target.selectedIndex].text);
                         }}
                       >
                         <option selected hidden>
@@ -1052,7 +1074,7 @@ const CreateProfile = (props) => {
                       </select>
                     </div>
                     {invalidExperienceStartDate && (
-                      <h1 className="invalidText">
+                      <h1 className="createScreenInvalidText">
                         Start month and year is required
                       </h1>
                     )}
@@ -1069,7 +1091,7 @@ const CreateProfile = (props) => {
                             name={'Month'}
                             onChange={(event) => {
                               setInvalidExperienceEndDate(false);
-                              setExperienceEndMonth(event.target.value);
+                              setExperienceEndMonth(event.target.options[event.target.selectedIndex].text);
                             }}
                           >
                             <option selected hidden>
@@ -1095,7 +1117,7 @@ const CreateProfile = (props) => {
                             name={'Year'}
                             onChange={(event) => {
                               setInvalidExperienceEndDate(false);
-                              setExperienceEndYear(event.target.value);
+                              setExperienceEndYear(event.target.options[event.target.selectedIndex].text);
                             }}
                           >
                             <option selected hidden>
@@ -1163,7 +1185,7 @@ const CreateProfile = (props) => {
                       )}
                     </div>
                     {invalidExperienceEndDate && (
-                      <h1 className="invalidText" style={{ marginBottom: 5 }}>
+                      <h1 className="createScreenInvalidText" style={{ marginBottom: 5 }}>
                         End month and year is required
                       </h1>
                     )}
@@ -1242,7 +1264,7 @@ const CreateProfile = (props) => {
               <form>
                 <p className="textInputHeaders">Title</p>
                 <input
-                  placeholder="Ex: MVP, State Title, Help me "
+                  placeholder="Ex: MVP, State Title"
                   required
                   className="modalTextInputItems"
                   type="text"
@@ -1253,7 +1275,7 @@ const CreateProfile = (props) => {
                   }}
                 />
                 {invalidAccomplishmentTitle && (
-                  <h1 className="invalidText">Title is required</h1>
+                  <h1 className="createScreenInvalidText">Title is required</h1>
                 )}
                 <div className="modalDatePickerContainer">
                   <div className="accomplishmentMeasurableDatePickerItemContainer">
@@ -1265,7 +1287,7 @@ const CreateProfile = (props) => {
                         name={'Month'}
                         onChange={(event) => {
                           setInvalidAccomplishmentDateReceived(false);
-                          setAccomplishmentMonthReceived(event.target.value);
+                          setAccomplishmentMonthReceived(event.target.options[event.target.selectedIndex].text);
                         }}
                       >
                         <option selected hidden>
@@ -1292,7 +1314,7 @@ const CreateProfile = (props) => {
                         name={'Year'}
                         onChange={(event) => {
                           setInvalidAccomplishmentDateReceived(false);
-                          setAccomplishmentYearReceived(event.target.value);
+                          setAccomplishmentYearReceived(event.target.options[event.target.selectedIndex].text);
                         }}
                       >
                         <option selected hidden>
@@ -1323,7 +1345,7 @@ const CreateProfile = (props) => {
                       </select>
                     </div>
                     {invalidAccomplishmentDateReceived && (
-                      <h1 className="invalidText">
+                      <h1 className="createScreenInvalidText">
                         Month and year received is required
                       </h1>
                     )}
@@ -1400,7 +1422,7 @@ const CreateProfile = (props) => {
                   }}
                 />
                 {invalidMeasurableTitle && (
-                  <h1 className="invalidText">Title is required</h1>
+                  <h1 className="createScreenInvalidText">Title is required</h1>
                 )}
                 <p className="textInputHeaders">Value</p>
                 <input
@@ -1414,7 +1436,7 @@ const CreateProfile = (props) => {
                   }}
                 />
                 {invalidMeasurableValue && (
-                  <h1 className="invalidText">Value is required</h1>
+                  <h1 className="createScreenInvalidText">Value is required</h1>
                 )}
               </form>
             </div>
