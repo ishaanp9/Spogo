@@ -77,7 +77,7 @@ const SignUpScreen = (props) => {
                 setInvalidName(false);
               }}
             />
-            {invalidName && <h1 className="invalidText">Name is required</h1>}
+            {invalidName && <h1 className="signUpInvalidText">Name is required</h1>}
             <p className="signUpTextInputHeader">Email</p>
             <input
               className="signUpTextInput"
@@ -89,7 +89,7 @@ const SignUpScreen = (props) => {
                 setInvalidEmail(false)
               }}
             />
-            {invalidEmail && <h1 className="invalidText">Invalid Email</h1>}
+            {invalidEmail && <h1 className="signUpInvalidText">Invalid Email</h1>}
             <p className="signUpTextInputHeader">Password</p>
             <input
               className="signUpTextInput"

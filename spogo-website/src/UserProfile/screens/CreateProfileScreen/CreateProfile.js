@@ -597,6 +597,7 @@ const CreateProfile = (props) => {
           <div className="profileItemListHeaderContainer">
             <h1 className="createScreenProfileItemListHeader">Highlights</h1>
             <MdAdd
+              style={{ cursor: "pointer" }}
               className="profileItemListAddIcons"
               size={25}
               onClick={() => highlightUploadClick}
@@ -621,6 +622,7 @@ const CreateProfile = (props) => {
           <div className="profileItemListHeaderContainer">
             <h1 className="createScreenProfileItemListHeader">Experiences</h1>
             <MdAdd
+              style={{ cursor: "pointer" }}            
               className="profileItemListAddIcons"
               size={25}
               onClick={() => setExperienceModalOpen(true)}
@@ -654,6 +656,7 @@ const CreateProfile = (props) => {
               Accomplishments
             </h1>
             <MdAdd
+              style={{ cursor: "pointer" }}
               className="profileItemListAddIcons"
               size={25}
               onClick={() => setAccomplishmentModalOpen(true)}
@@ -687,6 +690,7 @@ const CreateProfile = (props) => {
           <div className="profileItemListHeaderContainer">
             <h1 className="createScreenProfileItemListHeader">Measurables</h1>
             <MdAdd
+              style={{ cursor: "pointer" }}
               className="profileItemListAddIcons"
               size={25}
               onClick={() => setMeasurableModalOpen(true)}
@@ -985,7 +989,7 @@ const CreateProfile = (props) => {
                   }}
                 />
                 {invalidExperienceTitle && (
-                  <h1 className="invalidText">Title is required</h1>
+                  <h1 className="createScreenInvalidText">Title is required</h1>
                 )}
                 <p className="textInputHeaders">Team</p>
                 <input
@@ -999,7 +1003,7 @@ const CreateProfile = (props) => {
                   }}
                 />
                 {invalidExperienceTeam && (
-                  <h1 className="invalidText">Team is required</h1>
+                  <h1 className="createScreenInvalidText">Team is required</h1>
                 )}
                 <div className="modalDatePickerContainer">
                   <div className="expModalDatePickerItemContainer">
@@ -1069,7 +1073,7 @@ const CreateProfile = (props) => {
                       </select>
                     </div>
                     {invalidExperienceStartDate && (
-                      <h1 className="invalidText">
+                      <h1 className="createScreenInvalidText">
                         Start month and year is required
                       </h1>
                     )}
@@ -1180,7 +1184,7 @@ const CreateProfile = (props) => {
                       )}
                     </div>
                     {invalidExperienceEndDate && (
-                      <h1 className="invalidText" style={{ marginBottom: 5 }}>
+                      <h1 className="createScreenInvalidText" style={{ marginBottom: 5 }}>
                         End month and year is required
                       </h1>
                     )}
@@ -1270,7 +1274,7 @@ const CreateProfile = (props) => {
                   }}
                 />
                 {invalidAccomplishmentTitle && (
-                  <h1 className="invalidText">Title is required</h1>
+                  <h1 className="createScreenInvalidText">Title is required</h1>
                 )}
                 <div className="modalDatePickerContainer">
                   <div className="accomplishmentMeasurableDatePickerItemContainer">
@@ -1340,7 +1344,7 @@ const CreateProfile = (props) => {
                       </select>
                     </div>
                     {invalidAccomplishmentDateReceived && (
-                      <h1 className="invalidText">
+                      <h1 className="createScreenInvalidText">
                         Month and year received is required
                       </h1>
                     )}
@@ -1417,7 +1421,7 @@ const CreateProfile = (props) => {
                   }}
                 />
                 {invalidMeasurableTitle && (
-                  <h1 className="invalidText">Title is required</h1>
+                  <h1 className="createScreenInvalidText">Title is required</h1>
                 )}
                 <p className="textInputHeaders">Value</p>
                 <input
@@ -1431,7 +1435,7 @@ const CreateProfile = (props) => {
                   }}
                 />
                 {invalidMeasurableValue && (
-                  <h1 className="invalidText">Value is required</h1>
+                  <h1 className="createScreenInvalidText">Value is required</h1>
                 )}
               </form>
             </div>

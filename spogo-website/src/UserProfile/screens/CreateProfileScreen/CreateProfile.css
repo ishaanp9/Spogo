@@ -7,7 +7,7 @@
   /* width: 100vw; */
 }
 
-.invalidText {
+.createScreenInvalidText {
   font-family: "Montserrat", sans-serif;
   color: red;
   font-size: 12px;
@@ -817,6 +817,7 @@
   .modalTextInputItems:hover {
     border-width: 2px;
     border-color: #3eb489;
+    border-style: solid;
   }
 
   .modalTextInputItems:focus {

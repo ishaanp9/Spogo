@@ -129,7 +129,7 @@ const SocialsScreen = (props) => {
               }}
             />
           </div>
-          {invalidEmail && <h1 className="invalidText">Invalid email</h1>}
+          {invalidEmail && <h1 className="socialsInvalidText">Invalid email</h1>}
           <div className="socialsTextInputContainer">
             <BsLink45Deg size={25} color={"#3eb489"} />
             <input
@@ -144,7 +144,7 @@ const SocialsScreen = (props) => {
               }}
             />
           </div>
-          {invalidWildcard && <h1 className="invalidText">Link must start with https://</h1>}
+          {invalidWildcard && <h1 className="socialsInvalidText">Link must start with https://</h1>}
           {/* <Link to={"/create"} className="socialsScreenNextButton"> */}
           <button
             className="socialsScreenNextButton"

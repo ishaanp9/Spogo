@@ -12,6 +12,9 @@ import {
   getMeasurableArray,
   editAccomplishmentItem,
   editExperienceItem,
+  deleteExperienceItem,
+  deleteAccomplishmentItem,
+  deleteMeasurableItem,
 } from "../../../UserData";
 import WebFont from "webfontloader";
 import Modal from "react-modal";
@@ -337,6 +340,19 @@ const EditableProfileItem = (props) => {
     }
   };
 
+  const handleDeletePress = () => {
+    if (icon === "crown") {
+      deleteExperienceItem(idNum)
+      props.callbackReloadList()
+    } else if (icon === "trophy") {
+      deleteAccomplishmentItem(idNum)
+      props.callbackReloadList()
+    } else {
+      deleteMeasurableItem(idNum)
+      props.callbackReloadList()
+    }
+  }
+
   const getMonthIndex = (month) => {
     let monthNames = [
       "January",
@@ -481,6 +497,7 @@ const EditableProfileItem = (props) => {
                       size={25}
                       color={"darkred"}
                       className="editDeleteButton"
+                      onClick={() => handleDeletePress()}
                     />
                   </div>
                 </div>
@@ -581,7 +598,7 @@ const EditableProfileItem = (props) => {
                     }}
                   />
                   {invalidExperienceTitle && (
-                    <h1 className="invalidText">Title is required</h1>
+                    <h1 className="createScreenInvalidText">Title is required</h1>
                   )}
                   <p className="textInputHeaders">Team</p>
                   <input
@@ -596,7 +613,7 @@ const EditableProfileItem = (props) => {
                     }}
                   />
                   {invalidExperienceTeam && (
-                    <h1 className="invalidText">Team is required</h1>
+                    <h1 className="createScreenInvalidText">Team is required</h1>
                   )}
                   <div className="modalDatePickerContainer">
                     <div className="expModalDatePickerItemContainer">
@@ -667,7 +684,7 @@ const EditableProfileItem = (props) => {
                         </select>
                       </div>
                       {invalidExperienceStartDate && (
-                        <h1 className="invalidText">
+                        <h1 className="createScreenInvalidText">
                           Start month and year is required
                         </h1>
                       )}
@@ -780,7 +797,7 @@ const EditableProfileItem = (props) => {
                         )}
                       </div>
                       {invalidExperienceEndDate && (
-                        <h1 className="invalidText" style={{ marginBottom: 5 }}>
+                        <h1 className="createScreenInvalidText" style={{ marginBottom: 5 }}>
                           End month and year is required
                         </h1>
                       )}
@@ -817,7 +834,7 @@ const EditableProfileItem = (props) => {
                   type={"button"}
                   onClick={() => checkValidExperience()}
                 >
-                  Create
+                  Confirm
                 </button>
               </div>
             </div>
@@ -942,7 +959,7 @@ const EditableProfileItem = (props) => {
                     }}
                   />
                   {invalidAccomplishmentTitle && (
-                    <h1 className="invalidText">Title is required</h1>
+                    <h1 className="createScreenInvalidText">Title is required</h1>
                   )}
                   <div className="modalDatePickerContainer">
                     <div className="accomplishmentMeasurableDatePickerItemContainer">
@@ -1014,7 +1031,7 @@ const EditableProfileItem = (props) => {
                         </select>
                       </div>
                       {invalidAccomplishmentDateReceived && (
-                        <h1 className="invalidText">
+                        <h1 className="createScreenInvalidText">
                           Month and year received is required
                         </h1>
                       )}
@@ -1042,7 +1059,7 @@ const EditableProfileItem = (props) => {
                   type={"button"}
                   onClick={() => checkValidAccomplishment()}
                 >
-                  Create
+                  Confirm
                 </button>
               </div>
             </div>
@@ -1098,7 +1115,7 @@ const EditableProfileItem = (props) => {
                     }}
                   />
                   {invalidMeasurableTitle && (
-                    <h1 className="invalidText">Title is required</h1>
+                    <h1 className="createScreenInvalidText">Title is required</h1>
                   )}
                   <p className="textInputHeaders">Value</p>
                   <input
@@ -1112,7 +1129,7 @@ const EditableProfileItem = (props) => {
                     }}
                   />
                   {invalidMeasurableValue && (
-                    <h1 className="invalidText">Value is required</h1>
+                    <h1 className="createScreenInvalidText">Value is required</h1>
                   )}
                 </form>
               </div>
@@ -1122,7 +1139,7 @@ const EditableProfileItem = (props) => {
                   type={"button"}
                   onClick={() => checkValidMeasurable()}
                 >
-                  Create
+                  Confirm
                 </button>
               </div>
             </div>

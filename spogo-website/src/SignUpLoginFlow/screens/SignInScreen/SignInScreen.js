@@ -82,7 +82,7 @@ const SignInScreen = (props) => {
                   setInvalidEmail(false);
                 }}
               />
-              {invalidEmail && <h1 className="invalidText">Invalid Email</h1>}
+              {invalidEmail && <h1 className="signInInvalidText">Invalid Email</h1>}
               <p className="signInTextInputHeader">Password</p>
               <input
                 className="signInTextInput"
