@@ -13,7 +13,7 @@ const SocialsScreen = (props) => {
   let history = useHistory()
   const [instagramHandle, setInstagramHandle] = useState("");
   const [twitterHandle, setTwitterHandle] = useState("");
-  const [preferredEmail, setPreferredEmail] = useState("");
+  const [preferredEmail, setPreferredEmail] = useState(getUserInfo('email'));
   const [wildcardLink, setWildcardLink] = useState("");
   const [invalidEmail, setInvalidEmail] = useState(false);
   const [invalidWildcard, setInvalidWildcard] = useState(false);
@@ -60,6 +60,7 @@ const SocialsScreen = (props) => {
         }
         addUserInfo("wildcard", wildcardLink);
         addUserInfo("sign-up-finished", true)
+        addUserInfo('bio', '')
         console.log(getUserDict())
         await addUserInfoDictToDB()
       }
