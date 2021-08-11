@@ -20,6 +20,16 @@ import { MixpanelConsumer } from "react-mixpanel";
 import { AuthContext } from "../../../AuthProvider";
 import copy from "copy-to-clipboard";
 import { useHistory } from "react-router-dom";
+import loadingGIF from '../../../loading.gif';
+import spogoLogo from '../../../spogo_logo.png';
+} from 'react-icons/md';
+import { HiOutlinePencil, HiChevronDown } from 'react-icons/hi';
+import { BsLink45Deg } from 'react-icons/bs';
+import BlankProfile from '../ProfileScreen/blank_profile.png';
+import { MixpanelConsumer } from 'react-mixpanel';
+import { AuthContext } from '../../../AuthProvider';
+import copy from 'copy-to-clipboard';
+import { useHistory } from 'react-router-dom';
 
 import PlacesAutocomplete, {
   geocodeByAddress,
@@ -64,7 +74,8 @@ const CreateProfile = (props) => {
   const { logout } = useContext(AuthContext);
   const inputFile = React.useRef(null);
   const highlightFile = React.useRef(null);
-  const [userUrl, setUserUrl] = useState("");
+  const [userUrl, setUserUrl] = useState('');
+  const [showLinkCopiedMessage, setShowLinkCopiedMessage] = useState(false);
   const [copyCustomUrlButtonText, setCopyCustomUrlButtonText] =
     useState("Copy Custom Url");
   const [profileImageShown, setProfileImageShown] = useState(false);
@@ -83,7 +94,7 @@ const CreateProfile = (props) => {
   const [experienceDescriptionText, setExperienceDescriptionText] =
     useState("");
   const [currentExperienceText, setCurrentExperienceText] = useState(
-    "Currently doing this?"
+    'Currently doing this?'
   );
   const [currentExperience, setCurrentExperience] = useState(false);
 
@@ -128,7 +139,6 @@ const CreateProfile = (props) => {
     // setCreateProfileInitialized(true)
     userUID = getUserUID()
     getDBUserInfo();
-
   }, []);
 
   const [createProfileInitialized, setCreateProfileInitialized] = useState(false)
@@ -279,9 +289,9 @@ const CreateProfile = (props) => {
     copy(`spogo.us/${userUrl}`);
   };
 
-  const [image, setImage] = useState("");
-  const imageRef = useRef(null);
-  const [address, setAddress] = useState("");
+  const [image, setImage] = React.useState('');
+  const imageRef = React.useRef(null);
+  const [address, setAddress] = React.useState('');
 
   function useDisplayImage() {
     const [result, setResult] = useState("");
@@ -349,14 +359,14 @@ const CreateProfile = (props) => {
           experienceDescriptionText,
           getExperienceID()
         );
-        setExperienceTitleText("");
-        setExperienceTeamText("");
-        setExperienceStartMonth("");
-        setExperienceStartYear("");
-        setExperienceEndMonth("");
-        setExperienceEndYear("");
-        setExperienceDescriptionText("");
-        setCurrentExperienceText("Currently doing this?");
+        setExperienceTitleText('');
+        setExperienceTeamText('');
+        setExperienceStartMonth('');
+        setExperienceStartYear('');
+        setExperienceEndMonth('');
+        setExperienceEndYear('');
+        setExperienceDescriptionText('');
+        setCurrentExperienceText('Currently doing this?');
         setCurrentExperience(false);
         setThisExperienceArray([...getExperienceArray()]);
       }
@@ -660,15 +670,15 @@ const CreateProfile = (props) => {
                 setImage(e.target.files[0]);
                 uploader(e);
               }}
-              style={{ display: "none", outline: "none", border: "none" }}
+              style={{ display: 'none', outline: 'none', border: 'none' }}
             />
             <button
               type="button"
               onClick={profileImageUploadClick}
               style={{
-                outline: "none",
-                border: "none",
-                backgroundColor: "transparent",
+                outline: 'none',
+                border: 'none',
+                backgroundColor: 'transparent',
               }}
             >
               {result ? (
@@ -696,60 +706,68 @@ const CreateProfile = (props) => {
             </div>
 
             <div className="createScreenSocialIconsRow">
-              <FaInstagram
-                className="createScreenSocialIcon"
-                // onClick={() =>
-                //   // window.location.replace("www.instagram.com/" + instagram)
-                //   {
-                //     mixpanel.track(
-                //       'Profile Icons Pressed by External Visitor',
-                //       { 'Profile Icon': 'Instagram' }
-                //     );
-                //     window.open('https://instagram.com/' + instagram);
-                //   }
-                // }
-                size={25}
-                color={"#E1306C"}
-              />
+              {instagram && (
+                <FaInstagram
+                  className="createScreenSocialIcon"
+                  // onClick={() =>
+                  //   // window.location.replace("www.instagram.com/" + instagram)
+                  //   {
+                  //     mixpanel.track(
+                  //       'Profile Icons Pressed by External Visitor',
+                  //       { 'Profile Icon': 'Instagram' }
+                  //     );
+                  //     window.open('https://instagram.com/' + instagram);
+                  //   }
+                  // }
+                  size={25}
+                  color={'#E1306C'}
+                />
+              )}
 
-              <FaTwitter
-                className="createScreenSocialIcon"
-                // onClick={() =>
-                //   // window.location.replace("www.instagram.com/" + instagram)
-                //   {
-                //     mixpanel.track(
-                //       'Profile Icons Pressed by External Visitor',
-                //       { 'Profile Icon': 'Twitter' }
-                //     );
-                //     window.open('https://twitter.com/' + twitter);
-                //   }
-                // }
-                size={25}
-                color={"#1DA1F2"}
-              />
+              {twitter && (
+                <FaTwitter
+                  className="createScreenSocialIcon"
+                  // onClick={() =>
+                  //   // window.location.replace("www.instagram.com/" + instagram)
+                  //   {
+                  //     mixpanel.track(
+                  //       'Profile Icons Pressed by External Visitor',
+                  //       { 'Profile Icon': 'Twitter' }
+                  //     );
+                  //     window.open('https://twitter.com/' + twitter);
+                  //   }
+                  // }
+                  size={25}
+                  color={'#1DA1F2'}
+                />
+              )}
 
-              <MdMail
-                className="createScreenSocialIcon"
-                // onClick={() => {
-                //   mixpanel.track(
-                //     'Profile Icons Pressed by External Visitor',
-                //     { 'Profile Icon': 'Email' }
-                //   );
-                //   window.open('mailto:' + email);
-                // }}
-                // onClick={() =>
-                //   // window.location.replace("www.instagram.com/" + instagram)
-                //   window.open("https://instagram.com/" + instagram)
-                // }
-                size={25}
-                color={"#5D4D4A"}
-              />
-              <BsLink45Deg
-                className="createScreenSocialIcon"
-                // onClick={() => setWildcardLinkModalOpen(true)}
-                size={25}
-                color={"#ffae42"}
-              />
+              {email && (
+                <MdMail
+                  className="createScreenSocialIcon"
+                  // onClick={() => {
+                  //   mixpanel.track(
+                  //     'Profile Icons Pressed by External Visitor',
+                  //     { 'Profile Icon': 'Email' }
+                  //   );
+                  //   window.open('mailto:' + email);
+                  // }}
+                  // onClick={() =>
+                  //   // window.location.replace("www.instagram.com/" + instagram)
+                  //   window.open("https://instagram.com/" + instagram)
+                  // }
+                  size={25}
+                  color={'#5D4D4A'}
+                />
+              )}
+              {wildcard && (
+                <BsLink45Deg
+                  className="createScreenSocialIcon"
+                  // onClick={() => setWildcardLinkModalOpen(true)}
+                  size={25}
+                  color={'#ffae42'}
+                />
+              )}
             </div>
           </div>
         </div>
@@ -757,7 +775,14 @@ const CreateProfile = (props) => {
           <p></p>
         </div>
         <div className="createScreenBioContainer">
-          <h1>Bio</h1>
+          <h1
+            onClick={() => setShowLinkCopiedMessage(true)}
+            // onClick={setTimeout(function() {
+            //   setShowLinkCopiedMessage(true)
+            // }, 3000)
+          >
+            Bio
+          </h1>
           <hr
             className="createScreenComponentHeaderDivider"
             color="lightgrey"
@@ -777,7 +802,7 @@ const CreateProfile = (props) => {
           <div className="profileItemListHeaderContainer">
             <h1 className="createScreenProfileItemListHeader">Highlights</h1>
             <MdAdd
-              style={{ cursor: "pointer" }}
+              style={{ cursor: 'pointer' }}
               className="profileItemListAddIcons"
               size={25}
               onClick={() => highlightUploadClick}
@@ -802,7 +827,7 @@ const CreateProfile = (props) => {
           <div className="profileItemListHeaderContainer">
             <h1 className="createScreenProfileItemListHeader">Experiences</h1>
             <MdAdd
-              style={{ cursor: "pointer" }}
+              style={{ cursor: 'pointer' }}
               className="profileItemListAddIcons"
               size={25}
               onClick={() => setExperienceModalOpen(true)}
@@ -836,7 +861,7 @@ const CreateProfile = (props) => {
               Accomplishments
             </h1>
             <MdAdd
-              style={{ cursor: "pointer" }}
+              style={{ cursor: 'pointer' }}
               className="profileItemListAddIcons"
               size={25}
               onClick={() => setAccomplishmentModalOpen(true)}
@@ -870,7 +895,7 @@ const CreateProfile = (props) => {
           <div className="profileItemListHeaderContainer">
             <h1 className="createScreenProfileItemListHeader">Measurables</h1>
             <MdAdd
-              style={{ cursor: "pointer" }}
+              style={{ cursor: 'pointer' }}
               className="profileItemListAddIcons"
               size={25}
               onClick={() => setMeasurableModalOpen(true)}
@@ -902,6 +927,23 @@ const CreateProfile = (props) => {
         {/* Add Item Modals */}
         {/* Add Item Modals */}
         {/* Add Item Modals */}
+        {/* Link Copied Modal */}
+        <Modal
+          isOpen={showLinkCopiedMessage}
+          onRequestClose={() => setShowLinkCopiedMessage(false)}
+          className="linkCopiedMessageModal"
+          overlayClassName="linkCopiedItemAddModalOverlay"
+        >
+          <div className="linkCopiedMessageModalContainer">
+            <p>Copied!</p>
+            <MdClose
+              style={{ cursor: 'pointer' }}
+              onClick={() => setShowLinkCopiedMessage(false)}
+              size={20}
+              color={'black'}
+            />
+          </div>
+        </Modal>
 
         {/* Settings Modal */}
         <Modal
@@ -930,12 +972,13 @@ const CreateProfile = (props) => {
           overlayClassName="itemAddModalOverlay"
         >
           <div className="modalHeaderContainer">
-            <p style={{ textAlign: "center", width: "100%" }}>
+            <p className="copyUrlModalTitle">
               Congrats on Creating Your Spogo Profile!
             </p>
             <MdClose
-              style={{ cursor: "pointer" }}
+              className="closeIconCopyModal"
               onClick={() => setCopyUrlModalOpen(false)}
+              style={{ cursor: "pointer" }}
               size={20}
               color={"grey"}
             />
@@ -943,15 +986,17 @@ const CreateProfile = (props) => {
           <p className="copyUrlModalTaglineText">
             Choose your custom url below.
           </p>
-          <input
-            required
-            className="copyUrlModalTextInputItem"
-            type="name"
-            maxLength="100"
-            value={userUrl}
-            onChange={handleCopyText}
-          />
-          <p className="copyUrlSpogoText">spogo.us/</p>
+          <div className="copyUrlTextInputContainer">
+            <p className="copyUrlSpogoText">spogo.us/</p>
+            <input
+              required
+              className="copyUrlModalTextInputItem"
+              type="name"
+              maxLength="100"
+              value={userUrl}
+              onChange={handleCopyText}
+            />
+          </div>
           <div>
             <button
               onClick={() => {
@@ -1110,8 +1155,8 @@ const CreateProfile = (props) => {
                 <div>
                   <input
                     {...getInputProps({
-                      className: "modalTextInputItems",
-                      placeholder: "Ex: Seattle, WA",
+                      className: 'modalTextInputItems',
+                      placeholder: 'Ex: Seattle, WA',
                     })}
                   />
 
@@ -1236,7 +1281,7 @@ const CreateProfile = (props) => {
             setInvalidExperienceTeam(false);
             setInvalidExperienceStartDate(false);
             setInvalidExperienceEndDate(false);
-            setCurrentExperienceText("Currently doing this?");
+            setCurrentExperienceText('Currently doing this?');
             setCurrentExperience(false);
           }}
           className="experienceModal"
@@ -1260,7 +1305,7 @@ const CreateProfile = (props) => {
                   setInvalidExperienceTeam(false);
                   setInvalidExperienceStartDate(false);
                   setInvalidExperienceEndDate(false);
-                  setCurrentExperienceText("Currently doing this?");
+                  setCurrentExperienceText('Currently doing this?');
                   setCurrentExperience(false);
                 }}
                 size={20}
@@ -1774,9 +1819,18 @@ const CreateProfile = (props) => {
           overlayClassName="itemAddModalOverlay"
         >
           <div
-            style={{ width: "100%", height: "100%", backgroundColor: "white" }}
+            style={{
+              width: '100vw',
+              height: '100vh',
+              backgroundColor: 'white',
+              alignItems: 'center',
+              justifyContent: 'center',
+              display: 'flex',
+              flexDirection: 'column',
+            }}
           >
-            <h1>LOADING MODAL</h1>
+            {/* <img className='loadingSpogoLogo' src={spogoLogo}/> */}
+            <img src={loadingGIF} />
           </div>
         </Modal>
       </div>
