@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import WebFont from "webfontloader";
 import "./SportPosition.css";
 import { Link, useHistory } from "react-router-dom";
@@ -16,9 +16,11 @@ import PlacesAutocomplete, {
 } from "react-places-autocomplete";
 import firebase from "../../../firebase";
 import { MdAirlineSeatLegroomNormal } from "react-icons/md";
+import { UserDataContext } from "../../../App";
 
 const SportPosition = (props) => {
-  let userUID = props.userUID;
+  const { getUserUID } = useContext(UserDataContext);
+  let userUID;
   const [userName, setUserName] = useState(getUserInfo("name"));
   const [signUpFinished, setSignUpFinished] = useState(
     getUserInfo("sign-up-finished")
@@ -40,6 +42,8 @@ const SportPosition = (props) => {
         families: ['Montserrat', 'Open Sans', 'Public Sans'],
       },
     });
+    userUID = getUserUID();
+    console.log(userUID)
     if (
       getUserInfo('name') === null ||
       getUserInfo('name') === undefined ||

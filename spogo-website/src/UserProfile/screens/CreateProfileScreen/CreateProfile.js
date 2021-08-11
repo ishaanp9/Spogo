@@ -55,9 +55,11 @@ import firebase from "../../../firebase";
 import EditableProfileItem from "../../components/EditableProfileItem/EditableProfileItem";
 import { ImageItem } from "../../components/VideoItem/VideoItem";
 import { VideoItem } from "../../components/VideoItem/VideoItem";
+import { UserDataContext } from "../../../App";
 
 const CreateProfile = (props) => {
-  let userUID = props.userUID;
+  const { getUserUID, isUserListenerFinished } = useContext(UserDataContext);
+  let userUID;
   let history = useHistory();
   const { logout } = useContext(AuthContext);
   const inputFile = React.useRef(null);
@@ -123,8 +125,22 @@ const CreateProfile = (props) => {
     // setTimeout(() => {
     //   getDBUserInfo();
     // }, 2000);
+    // setCreateProfileInitialized(true)
+    userUID = getUserUID()
     getDBUserInfo();
+
   }, []);
+
+  const [createProfileInitialized, setCreateProfileInitialized] = useState(false)
+
+  //Listens to see whether firebase onAuthStateChanged is finished, then performs the database call
+  // if (isUserListenerFinished() && createProfileInitialized === true) {
+  //   // console.log('Set UID')
+  //   setTimeout(() => {
+  //     userUID = getUserUID()
+  //     getDBUserInfo()
+  //   }, 2000)
+  // }
 
   useEffect(() => {
     WebFont.load({
@@ -223,7 +239,6 @@ const CreateProfile = (props) => {
     setUserInfo();
     setArrayID();
     setThisMediaArray(getMediaArray());
-    console.log(getUserDict());
     setThisExperienceArray(getExperienceArray());
     setThisAccomplishmentArray(getAccomplishmentArray());
     setThisMeasurableArray(getMeasurableArray());

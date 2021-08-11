@@ -5,9 +5,11 @@ import WebFont from "webfontloader";
 import SignInImage from "../../assets/signUpImage.png";
 import { AuthContext } from "../../../AuthProvider";
 import Google from '../SignUpScreen/google.png';
+import { UserDataContext } from "../../../App";
 
 const SignInScreen = (props) => {
-  let userUID = props.userUID
+  const { getUserUID } = useContext(UserDataContext)
+  let userUID;
   let history = useHistory()
   const { login } = useContext(AuthContext);
   const [email, setEmail] = useState('');
@@ -16,6 +18,7 @@ const SignInScreen = (props) => {
   const [loginFailed, setLoginFailed] = useState(false);
 
   useEffect(() => {
+    userUID = getUserUID()
     WebFont.load({
       google: {
         families: ['Montserrat', 'Open Sans', 'Public Sans'],

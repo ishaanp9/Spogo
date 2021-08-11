@@ -22,19 +22,19 @@ const UserAuthCreateNavigation = (props) => {
           <Redirect to="auth/sign-in" />
         </Route>
         <Route path={"/auth/sign-in"}>
-          <SignInScreen userUID={userUID}/>
+          <SignInScreen />
         </Route>
         <Route exact path={"/auth/sign-up"}>
-          <SignUpScreen userUID={userUID}/>
+          <SignUpScreen />
         </Route>
         <Route exact path={"/auth/sign-up/location-sport-position"}>
-          <SportPositionScreen userUID={userUID}/>
+          <SportPositionScreen />
         </Route>
         <Route exact path={"/auth/sign-up/socials"}>
-          <SocialsScreen userUID={userUID}/>
+          <SocialsScreen />
         </Route>
         <Route path="/create/">
-          <CreateProfileScreen userUID={userUID} />
+          <CreateProfileScreen />
         </Route>
       </AuthProvider>
     </Router>
