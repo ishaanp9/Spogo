@@ -20,6 +20,8 @@ import { MixpanelConsumer } from 'react-mixpanel';
 import { AuthContext } from '../../../AuthProvider';
 import copy from 'copy-to-clipboard';
 import { useHistory } from 'react-router-dom';
+import loadingGIF from '../../../loading.gif';
+import spogoLogo from '../../../spogo_logo.png';
 
 import PlacesAutocomplete, {
   geocodeByAddress,
@@ -61,6 +63,7 @@ const CreateProfile = (props) => {
   const inputFile = React.useRef(null);
   const highlightFile = React.useRef(null);
   const [userUrl, setUserUrl] = useState('');
+  const [showLinkCopiedMessage, setShowLinkCopiedMessage] = useState(false);
   const [copyCustomUrlButtonText, setCopyCustomUrlButtonText] =
     useState('Copy Custom Url');
   const [profileImageShown, setProfileImageShown] = useState(false);
@@ -79,7 +82,7 @@ const CreateProfile = (props) => {
   const [experienceDescriptionText, setExperienceDescriptionText] =
     useState('');
   const [currentExperienceText, setCurrentExperienceText] = useState(
-    "Currently doing this?"
+    'Currently doing this?'
   );
   const [currentExperience, setCurrentExperience] = useState(false);
 
@@ -101,6 +104,10 @@ const CreateProfile = (props) => {
   const [name, setName] = useState(getUserInfo('name'));
   const [sport, setSport] = useState(getUserInfo('sport'));
   const [position, setPosition] = useState(getUserInfo('position'));
+  const [instagram, setInstagram] = useState(getUserInfo('instagram-handle'));
+  const [twitter, setTwitter] = useState(getUserInfo('twitter-handle'));
+  const [email, setEmail] = useState(getUserInfo('preferred-email'));
+  const [wildcard, setWildcard] = useState(getUserInfo('wildcard'));
 
   const [showLoadingModal, setShowLoadingModal] = useState(true);
 
@@ -112,7 +119,7 @@ const CreateProfile = (props) => {
   useEffect(() => {
     setTimeout(() => {
       getDBUserInfo();
-    }, 2000)
+    }, 2000);
   }, []);
 
   useEffect(() => {
@@ -212,10 +219,10 @@ const CreateProfile = (props) => {
     setThisAccomplishmentArray(getAccomplishmentArray());
     setThisMeasurableArray(getMeasurableArray());
     setShowLoadingModal(false);
-    console.log(getUserInfo("sign-up-finished"))
-    if (userUID === "noUser") {
-      console.log("should go to auth");
-      history.push("/auth");
+    console.log(getUserInfo('sign-up-finished'));
+    if (userUID === 'noUser') {
+      console.log('should go to auth');
+      history.push('/auth');
     }
   };
 
@@ -239,6 +246,7 @@ const CreateProfile = (props) => {
   const copyToClipboard = () => {
     copy(`spogo.us/${userUrl}`);
   };
+
 
   const [image, setImage] = React.useState('');
   const imageRef = React.useRef(null);
@@ -310,15 +318,15 @@ const CreateProfile = (props) => {
           experienceDescriptionText,
           getExperienceID()
         );
-        setExperienceTitleText("");
-        setExperienceTeamText("");
-        setExperienceStartMonth("");
-        setExperienceStartYear("");
-        setExperienceEndMonth("");
-        setExperienceEndYear("");
-        setExperienceDescriptionText("");
-        setCurrentExperienceText("Currently doing this?");
-        setCurrentExperience(false)
+        setExperienceTitleText('');
+        setExperienceTeamText('');
+        setExperienceStartMonth('');
+        setExperienceStartYear('');
+        setExperienceEndMonth('');
+        setExperienceEndYear('');
+        setExperienceDescriptionText('');
+        setCurrentExperienceText('Currently doing this?');
+        setCurrentExperience(false);
         setThisExperienceArray([...getExperienceArray()]);
       }
     } else {
@@ -470,38 +478,35 @@ const CreateProfile = (props) => {
           </div>
           <div className="createScreenProfileImageContainer">
             <input
-                type="file"
-                accept="image/*"
-                id="target"
-                ref={inputFile}
-                onChange={(e) => {
-                  setImage(e.target.files[0]);
-                  uploader(e);
-                }}
-                style={{ display: "none", outline: "none", border: "none" }}
-              />
+              type="file"
+              accept="image/*"
+              id="target"
+              ref={inputFile}
+              onChange={(e) => {
+                setImage(e.target.files[0]);
+                uploader(e);
+              }}
+              style={{ display: 'none', outline: 'none', border: 'none' }}
+            />
             <button
-                type="button"
-                onClick={profileImageUploadClick}
-                style={{
-                  outline: "none",
-                  border: "none",
-                  backgroundColor: "whitesmoke",
-                }}
-              >
-                {result ? (
-                  <img
-                    className="createScreenProfileImage"
-                    ref={imageRef}
-                    src={result}
-                  />
-                ) : (
-                  <img
-                    className="createScreenProfileImage"
-                    src={BlankProfile}
-                  />
-                )}
-              </button>
+              type="button"
+              onClick={profileImageUploadClick}
+              style={{
+                outline: 'none',
+                border: 'none',
+                backgroundColor: 'whitesmoke',
+              }}
+            >
+              {result ? (
+                <img
+                  className="createScreenProfileImage"
+                  ref={imageRef}
+                  src={result}
+                />
+              ) : (
+                <img className="createScreenProfileImage" src={BlankProfile} />
+              )}
+            </button>
           </div>
           <div className="createScreenProfileTextContainer">
             <div className="createScreenNameSportTextContainer">
@@ -517,60 +522,68 @@ const CreateProfile = (props) => {
             </div>
 
             <div className="createScreenSocialIconsRow">
-              <FaInstagram
-                className="createScreenSocialIcon"
-                // onClick={() =>
-                //   // window.location.replace("www.instagram.com/" + instagram)
-                //   {
-                //     mixpanel.track(
-                //       'Profile Icons Pressed by External Visitor',
-                //       { 'Profile Icon': 'Instagram' }
-                //     );
-                //     window.open('https://instagram.com/' + instagram);
-                //   }
-                // }
-                size={25}
-                color={'#E1306C'}
-              />
+              {instagram && (
+                <FaInstagram
+                  className="createScreenSocialIcon"
+                  // onClick={() =>
+                  //   // window.location.replace("www.instagram.com/" + instagram)
+                  //   {
+                  //     mixpanel.track(
+                  //       'Profile Icons Pressed by External Visitor',
+                  //       { 'Profile Icon': 'Instagram' }
+                  //     );
+                  //     window.open('https://instagram.com/' + instagram);
+                  //   }
+                  // }
+                  size={25}
+                  color={'#E1306C'}
+                />
+              )}
 
-              <FaTwitter
-                className="createScreenSocialIcon"
-                // onClick={() =>
-                //   // window.location.replace("www.instagram.com/" + instagram)
-                //   {
-                //     mixpanel.track(
-                //       'Profile Icons Pressed by External Visitor',
-                //       { 'Profile Icon': 'Twitter' }
-                //     );
-                //     window.open('https://twitter.com/' + twitter);
-                //   }
-                // }
-                size={25}
-                color={'#1DA1F2'}
-              />
+              {twitter && (
+                <FaTwitter
+                  className="createScreenSocialIcon"
+                  // onClick={() =>
+                  //   // window.location.replace("www.instagram.com/" + instagram)
+                  //   {
+                  //     mixpanel.track(
+                  //       'Profile Icons Pressed by External Visitor',
+                  //       { 'Profile Icon': 'Twitter' }
+                  //     );
+                  //     window.open('https://twitter.com/' + twitter);
+                  //   }
+                  // }
+                  size={25}
+                  color={'#1DA1F2'}
+                />
+              )}
 
-              <MdMail
-                className="createScreenSocialIcon"
-                // onClick={() => {
-                //   mixpanel.track(
-                //     'Profile Icons Pressed by External Visitor',
-                //     { 'Profile Icon': 'Email' }
-                //   );
-                //   window.open('mailto:' + email);
-                // }}
-                // onClick={() =>
-                //   // window.location.replace("www.instagram.com/" + instagram)
-                //   window.open("https://instagram.com/" + instagram)
-                // }
-                size={25}
-                color={'#5D4D4A'}
-              />
-              <BsLink45Deg
-                className="createScreenSocialIcon"
-                // onClick={() => setWildcardLinkModalOpen(true)}
-                size={25}
-                color={'#ffae42'}
-              />
+              {email && (
+                <MdMail
+                  className="createScreenSocialIcon"
+                  // onClick={() => {
+                  //   mixpanel.track(
+                  //     'Profile Icons Pressed by External Visitor',
+                  //     { 'Profile Icon': 'Email' }
+                  //   );
+                  //   window.open('mailto:' + email);
+                  // }}
+                  // onClick={() =>
+                  //   // window.location.replace("www.instagram.com/" + instagram)
+                  //   window.open("https://instagram.com/" + instagram)
+                  // }
+                  size={25}
+                  color={'#5D4D4A'}
+                />
+              )}
+              {wildcard && (
+                <BsLink45Deg
+                  className="createScreenSocialIcon"
+                  // onClick={() => setWildcardLinkModalOpen(true)}
+                  size={25}
+                  color={'#ffae42'}
+                />
+              )}
             </div>
           </div>
         </div>
@@ -578,7 +591,14 @@ const CreateProfile = (props) => {
           <p></p>
         </div>
         <div className="createScreenBioContainer">
-          <h1>Bio</h1>
+          <h1
+            onClick={() => setShowLinkCopiedMessage(true)}
+            // onClick={setTimeout(function() {
+            //   setShowLinkCopiedMessage(true)
+            // }, 3000)
+          >
+            Bio
+          </h1>
           <hr
             className="createScreenComponentHeaderDivider"
             color="lightgrey"
@@ -598,7 +618,7 @@ const CreateProfile = (props) => {
           <div className="profileItemListHeaderContainer">
             <h1 className="createScreenProfileItemListHeader">Highlights</h1>
             <MdAdd
-              style={{ cursor: "pointer" }}
+              style={{ cursor: 'pointer' }}
               className="profileItemListAddIcons"
               size={25}
               onClick={() => highlightUploadClick}
@@ -623,7 +643,7 @@ const CreateProfile = (props) => {
           <div className="profileItemListHeaderContainer">
             <h1 className="createScreenProfileItemListHeader">Experiences</h1>
             <MdAdd
-              style={{ cursor: "pointer" }}            
+              style={{ cursor: 'pointer' }}
               className="profileItemListAddIcons"
               size={25}
               onClick={() => setExperienceModalOpen(true)}
@@ -657,7 +677,7 @@ const CreateProfile = (props) => {
               Accomplishments
             </h1>
             <MdAdd
-              style={{ cursor: "pointer" }}
+              style={{ cursor: 'pointer' }}
               className="profileItemListAddIcons"
               size={25}
               onClick={() => setAccomplishmentModalOpen(true)}
@@ -691,7 +711,7 @@ const CreateProfile = (props) => {
           <div className="profileItemListHeaderContainer">
             <h1 className="createScreenProfileItemListHeader">Measurables</h1>
             <MdAdd
-              style={{ cursor: "pointer" }}
+              style={{ cursor: 'pointer' }}
               className="profileItemListAddIcons"
               size={25}
               onClick={() => setMeasurableModalOpen(true)}
@@ -723,6 +743,23 @@ const CreateProfile = (props) => {
         {/* Add Item Modals */}
         {/* Add Item Modals */}
         {/* Add Item Modals */}
+        {/* Link Copied Modal */}
+        <Modal
+          isOpen={showLinkCopiedMessage}
+          onRequestClose={() => setShowLinkCopiedMessage(false)}
+          className="linkCopiedMessageModal"
+          overlayClassName="linkCopiedItemAddModalOverlay"
+        >
+          <div className="linkCopiedMessageModalContainer">
+            <p>Copied!</p>
+            <MdClose
+              style={{ cursor: 'pointer' }}
+              onClick={() => setShowLinkCopiedMessage(false)}
+              size={20}
+              color={'black'}
+            />
+          </div>
+        </Modal>
 
         {/* Settings Modal */}
         <Modal
@@ -749,11 +786,11 @@ const CreateProfile = (props) => {
           overlayClassName="itemAddModalOverlay"
         >
           <div className="modalHeaderContainer">
-            <p style={{ textAlign: 'center', width: '100%' }}>
+            <p className="copyUrlModalTitle">
               Congrats on Creating Your Spogo Profile!
             </p>
             <MdClose
-              style={{ cursor: 'pointer' }}
+              className="closeIconCopyModal"
               onClick={() => setCopyUrlModalOpen(false)}
               size={20}
               color={'grey'}
@@ -762,15 +799,17 @@ const CreateProfile = (props) => {
           <p className="copyUrlModalTaglineText">
             Choose your custom url below.
           </p>
-          <input
-            required
-            className="copyUrlModalTextInputItem"
-            type="name"
-            maxLength="100"
-            value={userUrl}
-            onChange={handleCopyText}
-          />
-          <p className="copyUrlSpogoText">spogo.us/</p>
+          <div className="copyUrlTextInputContainer">
+            <p className="copyUrlSpogoText">spogo.us/</p>
+            <input
+              required
+              className="copyUrlModalTextInputItem"
+              type="name"
+              maxLength="100"
+              value={userUrl}
+              onChange={handleCopyText}
+            />
+          </div>
           <div>
             <button
               onClick={() => {
@@ -813,7 +852,9 @@ const CreateProfile = (props) => {
             <div className="editModalSportPositionRowContainer">
               <div className="editModalSportPositionRowItemsContainer">
                 <p className="textInputHeaders">Sport</p>
-                <select className="modalTextInputItems">
+                <select
+                  className="modalTextInputItems"
+                >
                   <option>Sport</option>
                   <option>Football</option>
                   <option>Basketball</option>
@@ -860,6 +901,7 @@ const CreateProfile = (props) => {
                     {...getInputProps({
                       className: 'modalTextInputItems',
                       placeholder: 'Ex: Seattle, WA',
+                      // defaultValue: {location},
                     })}
                   />
 
@@ -922,7 +964,10 @@ const CreateProfile = (props) => {
             />
           </div>
           <div>
-            <button className="addEditItemModalButton" type={'button'}>
+            <button
+              className="addEditItemModalButton"
+              type={'button'}
+            >
               Confirm
             </button>
           </div>
@@ -945,8 +990,8 @@ const CreateProfile = (props) => {
             setInvalidExperienceTeam(false);
             setInvalidExperienceStartDate(false);
             setInvalidExperienceEndDate(false);
-            setCurrentExperienceText("Currently doing this?");
-            setCurrentExperience(false)
+            setCurrentExperienceText('Currently doing this?');
+            setCurrentExperience(false);
           }}
           className="experienceModal"
           overlayClassName="itemAddModalOverlay"
@@ -969,8 +1014,8 @@ const CreateProfile = (props) => {
                   setInvalidExperienceTeam(false);
                   setInvalidExperienceStartDate(false);
                   setInvalidExperienceEndDate(false);
-                  setCurrentExperienceText("Currently doing this?");
-                  setCurrentExperience(false)
+                  setCurrentExperienceText('Currently doing this?');
+                  setCurrentExperience(false);
                 }}
                 size={20}
                 color={'grey'}
@@ -1016,7 +1061,10 @@ const CreateProfile = (props) => {
                         name={'Month'}
                         onChange={(event) => {
                           setInvalidExperienceStartDate(false);
-                          setExperienceStartMonth(event.target.options[event.target.selectedIndex].text);
+                          setExperienceStartMonth(
+                            event.target.options[event.target.selectedIndex]
+                              .text
+                          );
                         }}
                       >
                         <option selected hidden>
@@ -1043,7 +1091,10 @@ const CreateProfile = (props) => {
                         name={'Year'}
                         onChange={(event) => {
                           setInvalidExperienceStartDate(false);
-                          setExperienceStartYear(event.target.options[event.target.selectedIndex].text);
+                          setExperienceStartYear(
+                            event.target.options[event.target.selectedIndex]
+                              .text
+                          );
                         }}
                       >
                         <option selected hidden>
@@ -1091,7 +1142,10 @@ const CreateProfile = (props) => {
                             name={'Month'}
                             onChange={(event) => {
                               setInvalidExperienceEndDate(false);
-                              setExperienceEndMonth(event.target.options[event.target.selectedIndex].text);
+                              setExperienceEndMonth(
+                                event.target.options[event.target.selectedIndex]
+                                  .text
+                              );
                             }}
                           >
                             <option selected hidden>
@@ -1117,7 +1171,10 @@ const CreateProfile = (props) => {
                             name={'Year'}
                             onChange={(event) => {
                               setInvalidExperienceEndDate(false);
-                              setExperienceEndYear(event.target.options[event.target.selectedIndex].text);
+                              setExperienceEndYear(
+                                event.target.options[event.target.selectedIndex]
+                                  .text
+                              );
                             }}
                           >
                             <option selected hidden>
@@ -1185,7 +1242,10 @@ const CreateProfile = (props) => {
                       )}
                     </div>
                     {invalidExperienceEndDate && (
-                      <h1 className="createScreenInvalidText" style={{ marginBottom: 5 }}>
+                      <h1
+                        className="createScreenInvalidText"
+                        style={{ marginBottom: 5 }}
+                      >
                         End month and year is required
                       </h1>
                     )}
@@ -1287,7 +1347,10 @@ const CreateProfile = (props) => {
                         name={'Month'}
                         onChange={(event) => {
                           setInvalidAccomplishmentDateReceived(false);
-                          setAccomplishmentMonthReceived(event.target.options[event.target.selectedIndex].text);
+                          setAccomplishmentMonthReceived(
+                            event.target.options[event.target.selectedIndex]
+                              .text
+                          );
                         }}
                       >
                         <option selected hidden>
@@ -1314,7 +1377,10 @@ const CreateProfile = (props) => {
                         name={'Year'}
                         onChange={(event) => {
                           setInvalidAccomplishmentDateReceived(false);
-                          setAccomplishmentYearReceived(event.target.options[event.target.selectedIndex].text);
+                          setAccomplishmentYearReceived(
+                            event.target.options[event.target.selectedIndex]
+                              .text
+                          );
                         }}
                       >
                         <option selected hidden>
@@ -1453,15 +1519,20 @@ const CreateProfile = (props) => {
         </Modal>
         {/* Measurable Modal */}
         {/* Loading Modal */}
-        <Modal
-          isOpen={showLoadingModal}
-          className="loadingModal"
-          overlayClassName="itemAddModalOverlay"
-        >
+        <Modal isOpen={showLoadingModal} className="loadingModal">
           <div
-            style={{ width: '100%', height: '100%', backgroundColor: 'white' }}
+            style={{
+              width: '100vw',
+              height: '100vh',
+              backgroundColor: 'white',
+              alignItems: 'center',
+              justifyContent: 'center',
+              display: 'flex',
+              flexDirection: 'column',
+            }}
           >
-            <h1>LOADING MODAL</h1>
+            {/* <img className='loadingSpogoLogo' src={spogoLogo}/> */}
+            <img src={loadingGIF} />
           </div>
         </Modal>
       </div>

@@ -21,7 +21,7 @@ const LandingPageAbout = () => {
 
   return (
     <>
-      <Header />
+      <Header onClick={window.scrollTo(0,0)} />
       <div className="body">
         <div className="topImageWithTextOnIt">
           <h1>We're looking to empower every athlete of any age and level.</h1>
@@ -108,7 +108,7 @@ const LandingPageAbout = () => {
           </div>
         </div>
       </div>
-      <Footer />
+      <Footer onClick={window.scrollTo(0,0)} />
     </>
   );
 };

@@ -52,7 +52,7 @@ const LandingPageFAQ = () => {
 
   return (
     <>
-      <Header />
+      <Header onClick={window.scrollTo(0,0)} />
       <div className="TitleContainer">
         <h1 className>FAQ</h1>
       </div>
@@ -114,7 +114,7 @@ const LandingPageFAQ = () => {
           answer="Through your generated URL, anyone can view your profile!"
         />
       </div>
-      <Footer />
+      <Footer onClick={window.scrollTo(0,0)} />
     </>
   );
 };

@@ -4,28 +4,38 @@
   right: 0;
   bottom: 0;
   height: 100vh;
-  /* width: 100vw; */
+  width: 100vw;
+  outline: none;
+  border: none;
+}
+
+.loadingSpogoLogo {
+  object-fit: contain;
+  width: 25%;
+  margin-bottom: -10%;
+  display: flex;
+  z-index: 1000;
 }
 
 .createScreenInvalidText {
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   color: red;
   font-size: 12px;
   margin-top: 5px;
 }
 
 @media screen and (max-width: 600px) {
-    .profileScreenContainer {
-      align-items: center;
-      width: 100%;
-      overflow-x: hidden;
-      background-color: whitesmoke;
-      height: 100vh;
+  .profileScreenContainer {
+    align-items: center;
+    width: 100%;
+    overflow-x: hidden;
+    background-color: whitesmoke;
+    height: 100vh;
   }
 
   .profileContentContainer {
     width: 100%;
-    }
+  }
 
   .createScreenProfileHeader {
     border-bottom-left-radius: 50px;
@@ -428,7 +438,7 @@
 
   .modalTextInputItems:focus {
     border-width: 2px;
-    border-color: #3eb489 ;
+    border-color: #3eb489;
     border-style: solid;
   }
 
@@ -520,6 +530,11 @@
     display: flex;
     flex-direction: column;
     width: 48%;
+  } 
+
+  .copyUrlModalTitle {
+    text-align: center;
+    width: 100%;
   }
 
   .copyUrlModalTaglineText {
@@ -527,29 +542,38 @@
     margin-bottom: 20px;
   }
 
+  .copyUrlTextInputContainer {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .closeIconCopyModal {
+    cursor: pointer;
+    display: none;
+  }
+
   .copyUrlModalTextInputItem {
     width: 100%;
-    border-radius: 10px;
     height: 70px;
+    border: none;
+    border-bottom: 2px solid black;
     /* padding: 8px 15px; */
-    padding-left: 20%;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    padding-right: 8px;
+    padding-bottom: 2px;
+    padding-left: 5px;
+    padding-right: 5px;
     font-family: 'Open Sans', sans-serif;
     outline: none;
     font-size: 20px;
     font-weight: 600;
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
   }
 
   .copyUrlSpogoText {
     font-family: 'Open Sans', sans-serif;
     font-size: 20px;
     font-weight: 600;
-    position: absolute;
-    top: 48.5%;
-    margin-left: 8px;
+    padding-bottom: 5px;
   }
 
   .copyUrlModalTextInputItem:hover {
@@ -612,25 +636,25 @@
 
 @media screen and (max-width: 1200px) and (min-width: 600px) {
   .profileScreenContainer {
-      align-items: center;
-      width: 100%;
-      overflow-x: hidden;
-      background-color: whitesmoke;
-      height: 100vh;
+    align-items: center;
+    width: 100%;
+    overflow-x: hidden;
+    background-color: whitesmoke;
+    height: 100vh;
   }
 
   .profileContentContainer {
     width: 100%;
-    }
+  }
 
   .createScreenProfileHeader {
-   margin-top: 25px;
-   border-top-left-radius: 10px;
-   border-top-right-radius: 10px;
-   width: 100%;
-   display: flex;
-   flex-direction: column;
-   align-items: center;
+    margin-top: 25px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .createScreenProfileImage {
@@ -828,7 +852,6 @@
     margin-bottom: 20px;
   }
 
-
   .userNotFoundErrorContainer {
     height: 100vh;
     display: flex;
@@ -1024,7 +1047,7 @@
 
   .modalTextInputItems:focus {
     border-width: 2px;
-    border-color: #3eb489 ;
+    border-color: #3eb489;
     border-style: solid;
   }
 
@@ -1118,34 +1141,46 @@
     width: 48%;
   }
 
+  .copyUrlModalTitle {
+    text-align: center;
+    width: 100%;
+  }
+
+  .closeIconCopyModal {
+    cursor: pointer;
+  }
   .copyUrlModalTaglineText {
     text-align: center;
     margin-bottom: 20px;
   }
 
+  .copyUrlTextInputContainer {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
   .copyUrlModalTextInputItem {
     width: 100%;
-    border-radius: 10px;
     height: 70px;
+    border: none;
+    border-bottom: 2px solid black;
     /* padding: 8px 15px; */
-    padding-left: 20%;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    padding-right: 8px;
+    padding-bottom: 2px;
+    padding-left: 5px;
+    padding-right: 5px;
     font-family: 'Open Sans', sans-serif;
     outline: none;
     font-size: 20px;
     font-weight: 600;
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
   }
 
   .copyUrlSpogoText {
     font-family: 'Open Sans', sans-serif;
     font-size: 20px;
     font-weight: 600;
-    position: absolute;
-    top: 48.5%;
-    margin-left: 8px;
+    padding-bottom: 5px;
   }
 
   .copyUrlModalTextInputItem:hover {
@@ -1474,8 +1509,6 @@
     margin-bottom: 20px;
   }
 
-  
-
   .userNotFoundErrorContainer {
     height: 100vh;
     display: flex;
@@ -1674,7 +1707,7 @@
 
   .modalTextInputItems:focus {
     border-width: 2px;
-    border-color: #3eb489 ;
+    border-color: #3eb489;
     border-style: solid;
   }
 
@@ -1767,34 +1800,47 @@
     width: 48%;
   }
 
+  .copyUrlModalTitle {
+    text-align: center;
+    width: 100%;
+  }
+
   .copyUrlModalTaglineText {
     text-align: center;
     margin-bottom: 20px;
   }
 
+  .closeIconCopyModal {
+    cursor: pointer;
+  }
+
+  .copyUrlTextInputContainer {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
   .copyUrlModalTextInputItem {
     width: 100%;
-    border-radius: 10px;
     height: 70px;
+    border: none;
+    border-bottom: 2px solid black;
     /* padding: 8px 15px; */
-    padding-left: 20%;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    padding-right: 8px;
+    padding-bottom: 2px;
+    padding-left: 5px;
+    padding-right: 5px;
     font-family: 'Open Sans', sans-serif;
     outline: none;
     font-size: 20px;
     font-weight: 600;
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
   }
 
   .copyUrlSpogoText {
     font-family: 'Open Sans', sans-serif;
     font-size: 20px;
     font-weight: 600;
-    position: absolute;
-    top: 48.5%;
-    margin-left: 8px;
+    padding-bottom: 5px;
   }
 
   .copyUrlModalTextInputItem:hover {
@@ -1851,5 +1897,43 @@
   .topRightIconItem {
     margin-left: 15px;
     cursor: pointer;
+  }
+
+  .linkCopiedMessageModal {
+    background-color: #3eb489;
+    position: absolute;
+    bottom: 2%;
+    left: 2%;
+    padding: 1% 1%;
+    outline: none;
+    border-radius: 5px;
+  }
+  .linkCopiedItemAddModalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: transparent;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .linkCopiedMessageModalContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 80px;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+  }
+
+  .linkCopiedMessageModalContainer > p {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
   }
 }

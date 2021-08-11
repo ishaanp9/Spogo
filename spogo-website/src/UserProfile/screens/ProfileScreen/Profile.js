@@ -7,7 +7,7 @@ import { FaInstagram, FaTwitter } from "react-icons/fa";
 import { MdEmail, MdMail, MdStar, MdLocationOn, MdClose } from "react-icons/md";
 import { BsLink45Deg } from "react-icons/bs";
 import BlankProfile from "./blank_profile.png";
-import SpogoLogo from "./spogo_logo.png";
+import SpogoLogo from '../../../spogo_logo.png'
 import Modal from "react-modal";
 import ShowMoreText from "react-show-more-text";
 import { Link } from "react-router-dom";

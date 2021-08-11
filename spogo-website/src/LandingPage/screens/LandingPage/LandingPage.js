@@ -75,7 +75,7 @@ const LandingPage = () => {
   };
   return (
     <>
-      <Header />
+      <Header onClick={window.scrollTo(0,0)}/>
       <div className="landingPageBody">
         <div className="topLandingPageContentBannerContainer">
           <div className="landingPageWaitlistContentContainer">
@@ -221,7 +221,7 @@ const LandingPage = () => {
           </div>
         </div> */}
         {/* Bottom Part */}
-        <Footer />
+        <Footer onClick={window.scrollTo(0,0)} />
       </div>
     </>
   );
