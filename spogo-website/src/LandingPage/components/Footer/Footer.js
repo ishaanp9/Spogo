@@ -21,7 +21,7 @@ const Footer = () => {
   return (
     <MixpanelConsumer>
       {(mixpanel) => (
-        <div className="footer">
+        <div className="footer" >
           <div className="logoAndWebLinksContainer">
             <div className="footerLogoContainer">
               <img
