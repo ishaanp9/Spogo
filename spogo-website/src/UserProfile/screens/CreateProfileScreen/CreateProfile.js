@@ -22,14 +22,6 @@ import copy from "copy-to-clipboard";
 import { useHistory } from "react-router-dom";
 import loadingGIF from '../../../loading.gif';
 import spogoLogo from '../../../spogo_logo.png';
-} from 'react-icons/md';
-import { HiOutlinePencil, HiChevronDown } from 'react-icons/hi';
-import { BsLink45Deg } from 'react-icons/bs';
-import BlankProfile from '../ProfileScreen/blank_profile.png';
-import { MixpanelConsumer } from 'react-mixpanel';
-import { AuthContext } from '../../../AuthProvider';
-import copy from 'copy-to-clipboard';
-import { useHistory } from 'react-router-dom';
 
 import PlacesAutocomplete, {
   geocodeByAddress,
@@ -742,7 +734,7 @@ const CreateProfile = (props) => {
                 />
               )}
 
-              {email && (
+              {preferredEmail && (
                 <MdMail
                   className="createScreenSocialIcon"
                   // onClick={() => {
