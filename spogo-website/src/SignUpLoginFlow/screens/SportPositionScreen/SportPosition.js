@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import WebFont from "webfontloader";
 import "./SportPosition.css";
 import { Link, useHistory } from "react-router-dom";
@@ -15,9 +15,12 @@ import PlacesAutocomplete, {
   getLatLng,
 } from "react-places-autocomplete";
 import firebase from "../../../firebase";
+import { MdAirlineSeatLegroomNormal } from "react-icons/md";
+import { UserDataContext } from "../../../App";
 
 const SportPosition = (props) => {
-  let userUID = props.userUID;
+  const { getUserUID } = useContext(UserDataContext);
+  let userUID;
   const [userName, setUserName] = useState(getUserInfo("name"));
   const [signUpFinished, setSignUpFinished] = useState(
     getUserInfo("sign-up-finished")
@@ -25,6 +28,7 @@ const SportPosition = (props) => {
   const [sport, setSport] = useState("");
   const [otherSport, setOtherSport] = useState("");
   const [invalidSport, setInvalidSport] = useState("");
+  const [invalidOtherSport, setInvalidOtherSport] = useState("")
   const [positionOne, setPositionOne] = useState("");
   const [positionTwo, setPositionTwo] = useState("");
   const [invalidPosition, setInvalidPosition] = useState("");
@@ -38,6 +42,8 @@ const SportPosition = (props) => {
         families: ['Montserrat', 'Open Sans', 'Public Sans'],
       },
     });
+    userUID = getUserUID();
+    console.log(userUID)
     if (
       getUserInfo('name') === null ||
       getUserInfo('name') === undefined ||
@@ -90,31 +96,48 @@ const SportPosition = (props) => {
   const handleSubmission = () => {
     let validSubmission = true;
     let positionText;
+    if (location === '') {
+      setInvalidLocation(true);
+      validSubmission = false;
+    }
     if (sport === '') {
       setInvalidSport(true);
       validSubmission = false;
     } else {
-    }
-    if (positionOne === '' && positionTwo === '') {
-      setInvalidPosition(true);
-      validSubmission = false;
-    } else {
-      if (positionOne != '' && positionTwo === '') {
-        positionText = positionOne;
-      } else if (positionOne === '' && positionTwo != '') {
-        positionText = positionTwo;
-      } else {
-        positionText = positionOne + ', ' + positionTwo;
+      if (sport === 'Other') {
+        if (otherSport === '') {
+          setInvalidOtherSport(true)
+          validSubmission = false;
+        }
       }
     }
+    if (!noPosition) {
+      if (positionOne === '' && positionTwo === '') {
+        setInvalidPosition(true);
+        validSubmission = false;
+      } else {
+        if (positionOne != '' && positionTwo === '') {
+          positionText = positionOne;
+        } else if (positionOne === '' && positionTwo != '') {
+          positionText = positionTwo;
+        } else {
+          positionText = positionOne + ', ' + positionTwo;
+        }
+      }
+    }
+    
     if (validSubmission) {
+      addUserInfo('location', location.substring(0, nthIndex(location, ',', 2)))
       if (sport === 'Other') {
-        addUserInfo('sport', sport)
+        addUserInfo('sport', otherSport)
       } else {
         addUserInfo('sport', sport);
       }
-
-      addUserInfo('position', positionText);
+      if (noPosition) {
+        addUserInfo('position', '');
+      } else {
+        addUserInfo('position', positionText);
+      }
       console.log(getUserDict());
       history.push('/auth/sign-up/socials');
     }
@@ -124,13 +147,15 @@ const SportPosition = (props) => {
     history.push("/create");
   }
 
-  const [address, setAddress] = React.useState("");
+  const [location, setLocation] = useState("");
+  const [invalidLocation, setInvalidLocation] = useState(false);
   const handleSelect = async (value) => {
     const results = await geocodeByAddress(value);
-    setAddress(value);
+    setInvalidLocation(false);
+    setLocation(value);
   };
 
-  //use this to store in database - by the second comma, suggestion.description.substring(0, nthIndex(suggestion.description, ',', 2))
+  //Finds the index of the second occurence of a character in a string
   function nthIndex(str, pat, n) {
     var L = str.length,
       i = -1;
@@ -138,7 +163,11 @@ const SportPosition = (props) => {
       i = str.indexOf(pat, i);
       if (i < 0) break;
     }
-    return i;
+    if (i === -1) {
+      return str.length
+    } else {
+      return i;
+    }
   }
 
   const [havePositionText, setHavePositionText] = useState("I don't have a position")
@@ -166,13 +195,13 @@ const SportPosition = (props) => {
           <div className="sportPositionInputForms">
             <p
               className="sportPositionTextInputHeader"
-              style={{ marginTop: '8%' }}
+              style={{ marginTop: '7%' }}
             >
               Location
             </p>
             <PlacesAutocomplete
-              value={address}
-              onChange={setAddress}
+              value={location}
+              onChange={setLocation}
               onSelect={handleSelect}
               searchOptions={{ types: ["(cities)"] }}
             >
@@ -186,21 +215,19 @@ const SportPosition = (props) => {
                   <input
                     {...getInputProps({ className: "sportPositionTextInput" })}
                   />
-
                   <div>
-                    {/* {loading ? <div>Loading...</div> : null} */}
-
                     {suggestions.map((suggestion) => {
                       const style = {
-                        backgroundColor: suggestion.active ? "#3eb489" : "#fff",
+                        // backgroundColor: suggestion.active ? "#3eb489" : "#fff",
+                        fontWeight: suggestion.active ? 'bold' : '400',
                         cursor: "pointer",
-                        marginBottom: 5,
-                        fontSize: 12,
+                        fontSize: suggestion.active ? 13.5 : 13,
                         fontFamily: 'Open Sans',
+                        marginBottom: 15,
+                        marginLeft: 5,
                       };
-
                       return (
-                        <div {...getSuggestionItemProps(suggestion, { style })}>
+                        <div {...getSuggestionItemProps(suggestion, { style })} >
                           {suggestion.description}
                         </div>
                       );
@@ -209,11 +236,13 @@ const SportPosition = (props) => {
                 </div>
               )}
             </PlacesAutocomplete>
+            {invalidLocation && <h1 className="sportPositionLocationInvalidText">Location is required</h1>}
             <p className="sportPositionTextInputHeader">Sport</p>
             <select
               className="sportPositionTextInput"
               onChange={(event) => {
                 setInvalidSport(false);
+                setInvalidOtherSport(false);
                 setSport(event.target.options[event.target.selectedIndex].text);
               }}
             >
@@ -239,7 +268,8 @@ const SportPosition = (props) => {
               <h1 className="sportPositionLocationInvalidText">Please select a sport</h1>
             )}
             {/* If other is pressed this code executes */}
-            {sport ==='Other' ? <>
+            {sport === 'Other' ? 
+            <>
               <p className="sportPositionTextInputHeader">Sport</p>
               <input
                 className="sportPositionTextInput"
@@ -247,11 +277,14 @@ const SportPosition = (props) => {
                 placeholder={'What Sport do you play?'}
                 onChange={(text) => {
                   setOtherSport(text.target.value);
+                  setInvalidOtherSport(false)
                 }}
                 type="text"
                 id="OtherSport"
               />
-            </>: null}
+              {invalidOtherSport && (<h1 className="sportPositionLocationInvalidText">Please enter your other sport or pick a sport</h1>)}
+            </>
+            : null}
             <div
               style={{
                 display: 'flex',
@@ -286,7 +319,6 @@ const SportPosition = (props) => {
                 ) : (
                   <BsPlus
                     onClick={() => {
-                      // setPositionIcon("BiMinus");
                       onIconPressed();
                     }}
                     style={{ marginBottom: 5, cursor: 'pointer' }}

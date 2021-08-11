@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "./SocialsScreen.css";
 import { useHistory } from "react-router-dom";
 import { FaInstagram, FaTwitter } from "react-icons/fa";
@@ -7,18 +7,21 @@ import { BsLink45Deg } from "react-icons/bs";
 import WebFont from "webfontloader";
 import { addUserInfo, getUserDict, getUserInfo} from "../../../UserData";
 import firebase from '../../../firebase';
+import { UserDataContext } from "../../../App";
 
 const SocialsScreen = (props) => {
-  let userUID = props.userUID
+  const { getUserUID } = useContext(UserDataContext);
+  let userUID;
   let history = useHistory()
   const [instagramHandle, setInstagramHandle] = useState("");
   const [twitterHandle, setTwitterHandle] = useState("");
-  const [preferredEmail, setPreferredEmail] = useState("");
+  const [preferredEmail, setPreferredEmail] = useState(getUserInfo('email'));
   const [wildcardLink, setWildcardLink] = useState("");
   const [invalidEmail, setInvalidEmail] = useState(false);
   const [invalidWildcard, setInvalidWildcard] = useState(false);
 
   useEffect(() => {
+    userUID = getUserUID()
     WebFont.load({
       google: {
         families: ["Montserrat", "Open Sans", "Public Sans"],
@@ -60,6 +63,7 @@ const SocialsScreen = (props) => {
         }
         addUserInfo("wildcard", wildcardLink);
         addUserInfo("sign-up-finished", true)
+        addUserInfo('bio', '')
         console.log(getUserDict())
         await addUserInfoDictToDB()
       }

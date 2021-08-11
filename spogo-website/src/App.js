@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, createContext } from "react";
 import "./App.css";
 import ProfileNavigator from "./navigation/ProfileNavigator";
 import LandingNavigator from "./navigation/LandingNavigator";
@@ -28,10 +28,13 @@ import firebase from "./firebase";
 //npm run bundle
 //firebase deploy
 
-const App = () => {
-  let path = window.location.href;
+export const UserDataContext = createContext();
 
+export const UserProvider = ({children}) => {
   const [user, setUser] = useState(null);
+
+  //This variable determines whether firebase on state changed has finished its call
+  const [userListenerFinished, setUserListenerFinished] = useState(null);
 
   useEffect(() => {
     const subscriber = firebase.auth().onAuthStateChanged(onAuthStateChanged);
@@ -40,36 +43,39 @@ const App = () => {
 
   // Handle user state changes
   const onAuthStateChanged = async (user) => {
-    console.log(user)
+    setUserListenerFinished(true)
     if (user) {
       setUser(user);
     }
   };
 
-  const getDBUserInfoDict = async (user) => {
-    let dbPath = firebase
-      .firestore()
-      .collection("Users")
-      .doc(user.uid)
-      .collection("User Info");
-    let profileData = dbPath.doc("Profile Data");
-    await profileData
-      .get()
-      .then( async (doc) => {
-        if (doc.exists) {
-          console.log('Got user data')
-          // setUserDict(doc.data());
-          console.log(getUserDict())
-        } else {
-          console.log("Doc doesn't exist")
-          // await addUserInfoDict()
-        }
-      })
-      .catch((error) => {
-        console.log("Error getting user info document:", error);
-      });
-    // setUserInfoDictHolder(getUserDict());
-  };
+  return (
+    <UserDataContext.Provider
+      value={{
+        user,
+        setUser,
+        getUserUID: () => {
+          console.log(user)
+          if (user === null) {
+            return "noUser"
+          } else {
+            return user.uid
+          }
+        },
+        isUserListenerFinished: () => {
+          console.log('listened')
+          console.log(userListenerFinished)
+          return userListenerFinished
+        },
+      }}
+    >
+      {children}
+    </UserDataContext.Provider>
+  )
+}
+
+const App = () => {
+  let path = window.location.href;
 
   useEffect(() => {
     path = window.location.href;
@@ -79,7 +85,7 @@ const App = () => {
     if (path.includes("users") || path.includes("descriptions")) {
       return <ProfileNavigator url={path} />;
     } else if (path.includes("auth") || path.includes("create")) {
-      return <UserAuthCreateNavigation uid={ (user === null) ? 'noUser' : user.uid} />;
+      return <UserAuthCreateNavigation />;
       // return <UserAuthCreateNavigation uid={ (user === null) ? 'noUser' : user.uid} />;
     } else {
       return <LandingNavigator />;
@@ -89,7 +95,9 @@ const App = () => {
   return (
     <div className="app">
       <AuthProvider>
-        <DetermineNavigatorPath />
+        <UserProvider>
+          <DetermineNavigatorPath />
+        </UserProvider>
       </AuthProvider>
 
       {/* {path.includes('users') || path.includes('descriptions') ? <ProfileNavigator url={path}/> : <LandingNavigator />} */}

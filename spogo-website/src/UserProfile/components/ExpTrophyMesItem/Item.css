@@ -8,14 +8,9 @@
     overflow-x: hidden;
     padding-top: 20px;
     overflow-y: hidden;
-    /* border-style: none none solid none;
-    border-bottom-width: 1;
-    border-color: lightgrey; */
   }
 
   .itemIconContainer {
-    /* border: solid; */
-    /* width: 0%; */
     padding-bottom: 20px;
     display: flex;
     margin-right: 5%;
@@ -156,14 +151,9 @@
     overflow-x: hidden;
     padding-top: 20px;
     overflow-y: hidden;
-    /* border-style: none none solid none;
-    border-bottom-width: 1;
-    border-color: lightgrey; */
   }
 
   .itemIconContainer {
-    /* border: solid; */
-    /* width: 0%; */
     padding-bottom: 20px;
     display: flex;
     margin-right: 3%;

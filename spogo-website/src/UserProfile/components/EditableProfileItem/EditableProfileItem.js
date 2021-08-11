@@ -4,7 +4,7 @@ import CrownIcon from "mdi-react/CrownIcon";
 import TrophyIcon from "mdi-react/TrophyIcon";
 import { MdEdit, MdDelete, MdClose } from "react-icons/md";
 import RocketLaunchIcon from "mdi-react/RocketLaunchIcon";
-import { Link, BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { MixpanelConsumer } from "react-mixpanel";
 import {
   getExperienceArray,
@@ -82,33 +82,42 @@ const EditableProfileItem = (props) => {
         families: ["Montserrat", "Poppins"],
       },
     });
+    setIconType();
   }, []);
+
+  function setIconType() {
+    if (icon === "trophy") {
+      setIconToHeaderName("Accomplishment");
+    } else if (icon === "crown") {
+      setIconToHeaderName("Experience");
+    } else {
+      setIconToHeaderName("Measurable");
+    }
+  }
 
   useEffect(() => {
     findSize();
     getSpecificArray();
   }, []);
 
-  let ItemIcon = (props) => {
+  const ItemIcon = (props) => {
     let iconType = props.iconType;
     if (iconType === "trophy") {
-      setIconToHeaderName("Accomplishment");
-      return <TrophyIcon color={color} size={iconSize} />;
+      // setIconToHeaderName("Accomplishment");
+      return <TrophyIcon color={color} size={23} />;
     } else if (iconType === "crown") {
-      setIconToHeaderName("Experience");
-      return <CrownIcon color={color} size={iconSize} />;
+      // setIconToHeaderName("Experience");
+      return <CrownIcon color={color} size={23} />;
     } else {
-      setIconToHeaderName("Measurable");
-      return <RocketLaunchIcon color={color} size={iconSize} />;
+      // setIconToHeaderName("Measurable");
+      return <RocketLaunchIcon color={color} size={23} />;
     }
   };
 
   const [iconSize, setIconSize] = useState(20);
 
   const findSize = () => {
-    if (window.innerWidth < 600) {
-      setIconSize(20);
-    } else if (window.innerWidth < 1200) {
+    if (window.innerWidth < 1200) {
       setIconSize(22);
     } else {
       setIconSize(25);
@@ -155,8 +164,8 @@ const EditableProfileItem = (props) => {
           experienceTeamText,
           experienceDurationText,
           experienceDescriptionText,
-          idNum,
-        )
+          idNum
+        );
         setExperienceTitleText("");
         setExperienceTeamText("");
         setExperienceStartMonth("");
@@ -165,7 +174,7 @@ const EditableProfileItem = (props) => {
         setExperienceEndYear("");
         setExperienceDescriptionText("");
         setCurrentExperienceText("Currently doing this?");
-        setCurrentExperience(false)
+        setCurrentExperience(false);
         props.callbackReloadList();
       }
     } else {
@@ -298,10 +307,10 @@ const EditableProfileItem = (props) => {
         );
       }
     } else {
-      if (text.length <= 500) {
+      if (text.length <= 350) {
         return text;
       }
-      if (text.length > 500 && showMore) {
+      if (text.length > 350 && showMore) {
         return (
           <div className="seeLessBio">
             <p>{text}</p>
@@ -314,11 +323,11 @@ const EditableProfileItem = (props) => {
           </div>
         );
       }
-      if (text.length > 500) {
+      if (text.length > 350) {
         return (
           <div className="seeMoreBio">
             <p>
-              {text.slice(0, 500)}
+              {text.slice(0, 350)}
               <span className="seeMoreButton" onClick={() => setShowMore(true)}>
                 {" "}
                 ...See More
@@ -342,16 +351,16 @@ const EditableProfileItem = (props) => {
 
   const handleDeletePress = () => {
     if (icon === "crown") {
-      deleteExperienceItem(idNum)
-      props.callbackReloadList()
+      deleteExperienceItem(idNum);
+      props.callbackReloadList();
     } else if (icon === "trophy") {
-      deleteAccomplishmentItem(idNum)
-      props.callbackReloadList()
+      deleteAccomplishmentItem(idNum);
+      props.callbackReloadList();
     } else {
-      deleteMeasurableItem(idNum)
-      props.callbackReloadList()
+      deleteMeasurableItem(idNum);
+      props.callbackReloadList();
     }
-  }
+  };
 
   const getMonthIndex = (month) => {
     let monthNames = [
@@ -416,44 +425,63 @@ const EditableProfileItem = (props) => {
       {(mixpanel) => (
         <>
           {window.innerWidth < 600 ? (
-            <Link
-              onClick={() =>
-                mixpanel.track("Specific Item Type Pressed", {
-                  Item: iconToHeaderName,
-                })
-              }
-              to={
-                icon != "rocket-launch"
-                  ? {
-                      pathname: `/descriptions/${UID}`,
-                      state: {
-                        icon: icon,
-                      },
-                    }
-                  : `/users/${UID}`
-              }
-              className="Link"
-            >
-              <div className="Container">
+            // <Link
+            //   onClick={() =>
+            //     mixpanel.track("Specific Item Type Pressed", {
+            //       Item: iconToHeaderName,
+            //     })
+            //   }
+            //   to={
+            //     icon != "rocket-launch"
+            //       ? {
+            //           pathname: `/descriptions/${UID}`,
+            //           state: {
+            //             icon: icon,
+            //           },
+            //         }
+            //       : `/users/${UID}`
+            //   }
+            //   className="Link"
+            // >
+              <div className="editableItemContainer">
                 <div className="itemIconContainer">
                   <ItemIcon iconType={icon} />
                 </div>
-                <div className="TextContainer">
-                  <h1>{title}</h1>
-                  {team != undefined && team != null && team != "" && (
-                    <h2>{team}</h2>
-                  )}
-                  <h3>{time}</h3>
-                  <h4>{description}</h4>
-                  {(idNum === 0 && specificItemArray.length === 1) ||
+                <div className="itemTextButtonsDividerContainer">
+                  <div className="itemTextButtonsContainer">
+                    <div className="TextContainer">
+                      <h1>{title}</h1>
+                      {team != undefined && team != null && team != "" && (
+                        <h2>{team}</h2>
+                      )}
+                      <h3>{time}</h3>
+                      <h4>{description}</h4>
+                      {/* {(idNum === 0 && specificItemArray.length === 1) ||
                   idNum === specificItemArray.length - 1 ? (
                     <hr size="1" color="white" className="Divider" />
                   ) : (
                     <hr size="1" color="lightgrey" className="Divider" />
-                  )}
+                  )} */}
+                    </div>
+                    <div className="editDeleteButtonsContainer">
+                      <MdEdit
+                        size={25}
+                        color={"#FDB600"}
+                        className="editDeleteButton"
+                        onClick={() => handleEditPress()}
+                      />
+                      <MdDelete
+                        size={25}
+                        color={"darkred"}
+                        className="editDeleteButton"
+                        onClick={() => handleDeletePress()}
+                      />
+                    </div>
+                  </div>
+                  <hr size="1" color="lightgrey" className="Divider" />
                 </div>
               </div>
-            </Link>
+            // </Link>
           ) : (
             <div
               className="Container"
@@ -479,12 +507,6 @@ const EditableProfileItem = (props) => {
                         {descriptionSeeMoreSeeLess(description, "website")}
                       </h4>
                     ) : null}
-                    {/* {(idNum === 0 && specificItemArray.length === 1) ||
-                  idNum === specificItemArray.length - 1 ? (
-                    <hr size="1" color="white" className="Divider" />
-                  ) :  (
-                    <hr size="1" color="lightgrey" className="Divider" />
-                  )} */}
                   </div>
                   <div className="editDeleteButtonsContainer">
                     <MdEdit
@@ -512,7 +534,7 @@ const EditableProfileItem = (props) => {
 
           {/* Experience Modal */}
           <Modal
-            appElement={document.getElementById('root') || undefined}
+            appElement={document.getElementById("root") || undefined}
             isOpen={experienceModalOpen}
             onRequestClose={() => {
               setExperienceModalOpen(false);
@@ -521,7 +543,7 @@ const EditableProfileItem = (props) => {
               //Handles all text inputs and selects when the edit modal is opened
               setExperienceTitleText(experienceArray[idNum].title);
               setExperienceTeamText(experienceArray[idNum].team);
-              setExperienceDescriptionText(experienceArray[idNum].description)
+              setExperienceDescriptionText(experienceArray[idNum].description);
               let experienceDurationText = experienceArray[idNum].duration;
               let expStartDateText = experienceDurationText.substring(
                 0,
@@ -551,22 +573,22 @@ const EditableProfileItem = (props) => {
                 setCurrentExperienceText("Not currently doing this?");
               } else {
                 // try {
-                  setExperienceEndMonth(
-                    expEndDateText.substring(0, expEndDateText.indexOf(","))
-                  );
-                  setExperienceEndYear(
-                    expEndDateText.substring(expEndDateText.indexOf(",") + 2)
-                  );
-                  let expEndMonthIndex = getMonthIndex(
-                    expEndDateText.substring(0, expEndDateText.indexOf(","))
-                  );
-                  let expEndYearIndex = getYearIndex(
-                    expEndDateText.substring(expEndDateText.indexOf(",") + 2)
-                  );
-                  document.getElementById("experienceEndMonthSelector").value =
-                    expEndMonthIndex + 1;
-                  document.getElementById("experienceEndYearSelector").value =
-                    expEndYearIndex + 1;
+                setExperienceEndMonth(
+                  expEndDateText.substring(0, expEndDateText.indexOf(","))
+                );
+                setExperienceEndYear(
+                  expEndDateText.substring(expEndDateText.indexOf(",") + 2)
+                );
+                let expEndMonthIndex = getMonthIndex(
+                  expEndDateText.substring(0, expEndDateText.indexOf(","))
+                );
+                let expEndYearIndex = getYearIndex(
+                  expEndDateText.substring(expEndDateText.indexOf(",") + 2)
+                );
+                document.getElementById("experienceEndMonthSelector").value =
+                  expEndMonthIndex + 1;
+                document.getElementById("experienceEndYearSelector").value =
+                  expEndYearIndex + 1;
                 // } catch (e) {
                 //   console.log(e)
                 // }
@@ -602,7 +624,9 @@ const EditableProfileItem = (props) => {
                     }}
                   />
                   {invalidExperienceTitle && (
-                    <h1 className="createScreenInvalidText">Title is required</h1>
+                    <h1 className="createScreenInvalidText">
+                      Title is required
+                    </h1>
                   )}
                   <p className="textInputHeaders">Team</p>
                   <input
@@ -617,7 +641,9 @@ const EditableProfileItem = (props) => {
                     }}
                   />
                   {invalidExperienceTeam && (
-                    <h1 className="createScreenInvalidText">Team is required</h1>
+                    <h1 className="createScreenInvalidText">
+                      Team is required
+                    </h1>
                   )}
                   <div className="modalDatePickerContainer">
                     <div className="expModalDatePickerItemContainer">
@@ -630,7 +656,10 @@ const EditableProfileItem = (props) => {
                           name={"experienceStartMonthSelector"}
                           onChange={(event) => {
                             setInvalidExperienceStartDate(false);
-                            setExperienceStartMonth(event.target.options[event.target.selectedIndex].text);
+                            setExperienceStartMonth(
+                              event.target.options[event.target.selectedIndex]
+                                .text
+                            );
                           }}
                         >
                           <option value="0" selected hidden>
@@ -657,7 +686,10 @@ const EditableProfileItem = (props) => {
                           name={"experienceStartYearSelector"}
                           onChange={(event) => {
                             setInvalidExperienceStartDate(false);
-                            setExperienceStartYear(event.target.options[event.target.selectedIndex].text);
+                            setExperienceStartYear(
+                              event.target.options[event.target.selectedIndex]
+                                .text
+                            );
                           }}
                         >
                           <option selected hidden value="0">
@@ -706,7 +738,11 @@ const EditableProfileItem = (props) => {
                               name={"experienceEndMonthSelector"}
                               onChange={(event) => {
                                 setInvalidExperienceEndDate(false);
-                                setExperienceEndMonth(event.target.options[event.target.selectedIndex].text);
+                                setExperienceEndMonth(
+                                  event.target.options[
+                                    event.target.selectedIndex
+                                  ].text
+                                );
                               }}
                             >
                               <option value="0" selected hidden>
@@ -733,7 +769,11 @@ const EditableProfileItem = (props) => {
                               name={"experienceEndYearSelector"}
                               onChange={(event) => {
                                 setInvalidExperienceEndDate(false);
-                                setExperienceEndYear(event.target.options[event.target.selectedIndex].text);
+                                setExperienceEndYear(
+                                  event.target.options[
+                                    event.target.selectedIndex
+                                  ].text
+                                );
                               }}
                             >
                               <option selected hidden value="0">
@@ -801,7 +841,10 @@ const EditableProfileItem = (props) => {
                         )}
                       </div>
                       {invalidExperienceEndDate && (
-                        <h1 className="createScreenInvalidText" style={{ marginBottom: 5 }}>
+                        <h1
+                          className="createScreenInvalidText"
+                          style={{ marginBottom: 5 }}
+                        >
                           End month and year is required
                         </h1>
                       )}
@@ -847,6 +890,7 @@ const EditableProfileItem = (props) => {
 
           {/* Accomplishment Modal */}
           <Modal
+            appElement={document.getElementById("root") || undefined}
             isOpen={accomplishmentModalOpen}
             onRequestClose={() => {
               setAccomplishmentModalOpen(false);
@@ -963,7 +1007,9 @@ const EditableProfileItem = (props) => {
                     }}
                   />
                   {invalidAccomplishmentTitle && (
-                    <h1 className="createScreenInvalidText">Title is required</h1>
+                    <h1 className="createScreenInvalidText">
+                      Title is required
+                    </h1>
                   )}
                   <div className="modalDatePickerContainer">
                     <div className="accomplishmentMeasurableDatePickerItemContainer">
@@ -976,7 +1022,10 @@ const EditableProfileItem = (props) => {
                           name={"accomplishmentMonthSelector"}
                           onChange={(event) => {
                             setInvalidAccomplishmentDateReceived(false);
-                            setAccomplishmentMonthReceived(event.target.options[event.target.selectedIndex].text);
+                            setAccomplishmentMonthReceived(
+                              event.target.options[event.target.selectedIndex]
+                                .text
+                            );
                           }}
                         >
                           <option value="0" selected hidden>
@@ -1004,7 +1053,10 @@ const EditableProfileItem = (props) => {
                           name={"accomplishmentYearSelector"}
                           onChange={(event) => {
                             setInvalidAccomplishmentDateReceived(false);
-                            setAccomplishmentYearReceived(event.target.options[event.target.selectedIndex].text);
+                            setAccomplishmentYearReceived(
+                              event.target.options[event.target.selectedIndex]
+                                .text
+                            );
                           }}
                         >
                           <option selected hidden value="0">
@@ -1071,6 +1123,7 @@ const EditableProfileItem = (props) => {
           {/* Accomplishment Modal */}
           {/* Measurable Modal */}
           <Modal
+            appElement={document.getElementById("root") || undefined}
             isOpen={measurableModalOpen}
             onRequestClose={() => {
               setMeasurableModalOpen(false);
@@ -1119,7 +1172,9 @@ const EditableProfileItem = (props) => {
                     }}
                   />
                   {invalidMeasurableTitle && (
-                    <h1 className="createScreenInvalidText">Title is required</h1>
+                    <h1 className="createScreenInvalidText">
+                      Title is required
+                    </h1>
                   )}
                   <p className="textInputHeaders">Value</p>
                   <input
@@ -1133,7 +1188,9 @@ const EditableProfileItem = (props) => {
                     }}
                   />
                   {invalidMeasurableValue && (
-                    <h1 className="createScreenInvalidText">Value is required</h1>
+                    <h1 className="createScreenInvalidText">
+                      Value is required
+                    </h1>
                   )}
                 </form>
               </div>
