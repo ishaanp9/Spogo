@@ -9,8 +9,6 @@ import { BsLink45Deg } from "react-icons/bs";
 import BlankProfile from "./blank_profile.png";
 import SpogoLogo from '../../../spogo_logo.png'
 import Modal from "react-modal";
-import ShowMoreText from "react-show-more-text";
-import { Link } from "react-router-dom";
 import { MixpanelConsumer } from "react-mixpanel";
 import WebFont from "webfontloader";
 import userErrorImage from "../../../SignUpLoginFlow/assets/signUpImage.png";
@@ -19,23 +17,18 @@ import {
   addUserInfo,
   setUserDict,
   setExperienceArray,
-  setTrophyArray,
   setMeasurableArray,
   setMediaArray,
   getUserInfo,
-  setExperienceID,
-  setTrophyID,
-  setMeasurableID,
-  setVideoImageID,
   getExperienceArray,
-  getTrophyArray,
+  getAccomplishmentArray,
   getMeasurableArray,
   getUserDict,
   getMediaArray,
   setUserDataCollected,
   getUserDataCollected,
+  setAccomplishmentArray,
 } from "../../../ProfileData";
-import ProfileWaitlistComponent from "../../components/ProfileWaitlistComponent/ProfileWaitlistComponent";
 
 const Profile = (props) => {
   let path = props.url;
@@ -85,7 +78,7 @@ const Profile = (props) => {
     //Checks if user data has already been retrieved from the database, other retreives data
     if (getUserDataCollected()) {
       setThisUserInfoDict(getUserDict());
-      setThisTrophyArray(getTrophyArray());
+      setThisTrophyArray(getAccomplishmentArray());
       setThisExperienceArray(getExperienceArray());
       setThisMeasurableArray(getMeasurableArray());
       setThisMediaArray(getMediaArray());
@@ -143,12 +136,12 @@ const Profile = (props) => {
         .catch((error) => {
           console.log("Error getting exp array document:", error);
         });
-      let trophyArray = dbPath.doc("Trophy Array");
+      let trophyArray = dbPath.doc("Accomplishment Array");
       await trophyArray
         .get()
         .then((doc) => {
           if (doc.exists) {
-            setTrophyArray(doc.data());
+            setAccomplishmentArray(doc.data());
           } else {
             // doc.data() will be undefined in this case
             console.log("Trophy Array doc not found!");
@@ -191,7 +184,7 @@ const Profile = (props) => {
     }
     //Sets all the user info for the profile screen based on Profile Data
     setThisUserInfoDict(getUserDict());
-    setThisTrophyArray(getTrophyArray());
+    setThisTrophyArray(getAccomplishmentArray());
     setThisExperienceArray(getExperienceArray());
     setThisMeasurableArray(getMeasurableArray());
     setThisMediaArray(getMediaArray());
@@ -599,7 +592,7 @@ const Profile = (props) => {
                   className="profileSideBarItem"
                   onClick={executeAccoplishmentsScroll}
                 >
-                  Accoplishments
+                  Accomplishments
                 </p>
               ) : null}
               {thisMeasurableArray.length > 0 ? (

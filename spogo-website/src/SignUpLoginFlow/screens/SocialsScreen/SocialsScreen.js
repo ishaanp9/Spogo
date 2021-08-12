@@ -11,7 +11,7 @@ import { UserDataContext } from "../../../App";
 
 const SocialsScreen = (props) => {
   const { getUserUID } = useContext(UserDataContext);
-  let userUID;
+  let userUID = getUserUID();
   let history = useHistory()
   const [instagramHandle, setInstagramHandle] = useState("");
   const [twitterHandle, setTwitterHandle] = useState("");
@@ -64,6 +64,7 @@ const SocialsScreen = (props) => {
         addUserInfo("wildcard", wildcardLink);
         addUserInfo("sign-up-finished", true)
         addUserInfo('bio', '')
+        addUserInfo('profile-image', 'blank_profile.png')
         console.log(getUserDict())
         await addUserInfoDictToDB()
       }
@@ -82,7 +83,6 @@ const SocialsScreen = (props) => {
       })
       .then(() => {
         history.push('/create')
-        console.log("User added!");
       });
   };
 

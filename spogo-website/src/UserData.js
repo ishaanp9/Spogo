@@ -4,8 +4,8 @@ let userInfoDict = {};
 let videoItemArray = [];
 let experienceItemArray = [];
 let experienceItemCurrentId = 0;
-let trophyItemArray = [];
-let trophyItemCurrentId = 0;
+let accomplishmentItemArray = [];
+let accomplishmentItemCurrentId = 0;
 let measurableItemArray = [];
 let measurableItemCurrentId = 0;
 let videoImageCurrentId = 0;
@@ -33,12 +33,12 @@ function MeasurableCardObject(title, value, idNum) {
 
 export const clearAllData = () => {
   experienceItemCurrentId = 0;
-  trophyItemCurrentId = 0;
+  accomplishmentItemCurrentId = 0;
   measurableItemCurrentId = 0;
   videoImageCurrentId = 0;
   userInfoDict = {};
   experienceItemArray = [];
-  trophyItemArray = [];
+  accomplishmentItemArray = [];
   measurableItemArray = [];
   videoItemArray = [];
 };
@@ -82,7 +82,7 @@ export const addExperienceItem = (title, team, duration, description, idNum) => 
       description,
       idNum,
     );
-    experienceItemArray.push(CardObjectExample);
+    experienceItemArray.push({...CardObjectExample});
     experienceItemCurrentId++;
   }
 };
@@ -138,48 +138,48 @@ export const addAccomplishmentItem = (title, duration, description, idNum) => {
       description,
       idNum,
     );
-    trophyItemArray.push(CardObjectExample);
-    trophyItemCurrentId++;
+    accomplishmentItemArray.push({...CardObjectExample});
+    accomplishmentItemCurrentId++;
   }
 };
 
 export const getAccomplishmentArray = () => {
-  return trophyItemArray;
+  return accomplishmentItemArray;
 };
 
 export const deleteAccomplishmentItem = index => {
-  trophyItemArray.splice(index, 1);
-  for (let i = index; i < trophyItemArray.length; i++) {
-    trophyItemArray[i].idNum = trophyItemArray[i].idNum - 1;
+  accomplishmentItemArray.splice(index, 1);
+  for (let i = index; i < accomplishmentItemArray.length; i++) {
+    accomplishmentItemArray[i].idNum = accomplishmentItemArray[i].idNum - 1;
   }
-  if (trophyItemCurrentId > 0) {
-    trophyItemCurrentId--;
+  if (accomplishmentItemCurrentId > 0) {
+    accomplishmentItemCurrentId--;
   }
 };
 
 export const editAccomplishmentItem = (title, duration, description, index) => {
-  trophyItemArray[index].title = title;
-  trophyItemArray[index].duration = duration;
-  trophyItemArray[index].description = description;
+  accomplishmentItemArray[index].title = title;
+  accomplishmentItemArray[index].duration = duration;
+  accomplishmentItemArray[index].description = description;
 };
 
 export const addAccomplishmentID = () => {
-  trophyItemCurrentId++;
+  accomplishmentItemCurrentId++;
 };
 
 export const getAccomplishmentID = () => {
-  return trophyItemCurrentId;
+  return accomplishmentItemCurrentId;
 };
 
-export const setAccomplishmentArray = trophyArray => {
-  trophyItemArray = trophyArray;
-  trophyItemArray = trophyItemArray['trophyArray'];
+export const setAccomplishmentArray = accomplishmentArray => {
+  accomplishmentItemArray = accomplishmentArray;
+  accomplishmentItemArray = accomplishmentItemArray['accomplishmentArray'];
 };
 
 export const setAccomplishmentID = () => {
-  trophyItemCurrentId = 0;
-  for (let i = 0; i < trophyItemArray.length; i++) {
-    trophyItemCurrentId++;
+  accomplishmentItemCurrentId = 0;
+  for (let i = 0; i < accomplishmentItemArray.length; i++) {
+    accomplishmentItemCurrentId++;
   }
 };
 //Trophy
@@ -188,7 +188,7 @@ export const setAccomplishmentID = () => {
 export const addMeasurableItem = (title, value, idNum) => {
   if (title != '' && value != '') {
     const CardObjectExample = new MeasurableCardObject(title, value, idNum);
-    measurableItemArray.push(CardObjectExample);
+    measurableItemArray.push({...CardObjectExample});
     measurableItemCurrentId++;
   }
 };

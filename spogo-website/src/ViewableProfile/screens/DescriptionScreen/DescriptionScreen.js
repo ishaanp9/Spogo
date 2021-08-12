@@ -11,7 +11,7 @@ import {
 import { IoChevronBack } from "react-icons/io5";
 import {
   getExperienceArray,
-  getTrophyArray,
+  getAccomplishmentArray,
   getUserDataCollected,
 } from "../../../ProfileData";
 import CrownIcon from "mdi-react/CrownIcon";
@@ -39,7 +39,7 @@ const DescriptionScreen = (props) => {
     //Based on icon type, determines what header to show
     if (icon.icon === "trophy") {
       setHeaderName("Accomplishments");
-      setItemArray(getTrophyArray());
+      setItemArray(getAccomplishmentArray());
     } else {
       setHeaderName("Experiences");
       setItemArray(getExperienceArray());

@@ -15,12 +15,15 @@ import {
   deleteExperienceItem,
   deleteAccomplishmentItem,
   deleteMeasurableItem,
-} from '../../../UserData';
-import WebFont from 'webfontloader';
-import Modal from 'react-modal';
-import { editMeasurableItem } from '../../../UserData';
+} from "../../../UserData";
+import WebFont from "webfontloader";
+import Modal from "react-modal";
+import { editMeasurableItem } from "../../../UserData";
+import firebase from "../../../firebase";
+import { UserDataContext } from "../../../App";
 
 const EditableProfileItem = (props) => {
+  const { getUserUID } = useContext(UserDataContext);
   let icon = props.iconName;
   let color = props.color;
   let title = props.title;
@@ -28,7 +31,7 @@ const EditableProfileItem = (props) => {
   let time = props.time;
   let description = props.description;
   let idNum = props.idNum;
-  let UID = props.userUID;
+  let userUID = getUserUID();
 
   const [iconToHeaderName, setIconToHeaderName] = useState('');
   const [specificItemArray, setSpecificArray] = useState([]);
@@ -176,6 +179,7 @@ const EditableProfileItem = (props) => {
         setCurrentExperienceText('Currently doing this?');
         setCurrentExperience(false);
         props.callbackReloadList();
+        await setExperienceArrayDB();
       }
     } else {
       if (experienceTitleText === '') {
@@ -215,6 +219,7 @@ const EditableProfileItem = (props) => {
   ] = useState(false);
 
   const checkValidAccomplishment = async () => {
+    console.log("Got Here");
     if (
       accomplishmentTitleText != '' &&
       accomplishmentMonthReceived != '' &&
@@ -236,6 +241,7 @@ const EditableProfileItem = (props) => {
       setInvalidAccomplishmentTitle(false);
       setInvalidAccomplishmentDateReceived(false);
       props.callbackReloadList();
+      await setAccomplishmentArrayDB();
     } else {
       if (accomplishmentTitleText === '') {
         setInvalidAccomplishmentTitle(true);
@@ -264,6 +270,7 @@ const EditableProfileItem = (props) => {
       setInvalidMeasurableTitle(false);
       setInvalidMeasurableValue(false);
       props.callbackReloadList();
+      await setMeasurableArrayDB();
     } else {
       if (measurableTitleText === '') {
         setInvalidMeasurableTitle(true);
@@ -272,6 +279,52 @@ const EditableProfileItem = (props) => {
         setInvalidMeasurableValue(true);
       }
     }
+  };
+
+  //Firebase DB Setter Calls
+  const setExperienceArrayDB = async () => {
+    await firebase
+      .firestore()
+      .collection("Users")
+      .doc(userUID)
+      .collection("User Info")
+      .doc("Experience Array")
+      .set({
+        experienceArray: getExperienceArray(),
+      })
+      .then(() => {
+        console.warn("Exp Array Updated");
+      });
+  };
+
+  const setAccomplishmentArrayDB = async () => {
+    await firebase
+      .firestore()
+      .collection("Users")
+      .doc(userUID)
+      .collection("User Info")
+      .doc("Accomplishment Array")
+      .set({
+        accomplishmentArray: getAccomplishmentArray(),
+      })
+      .then(() => {
+        console.warn("Accomplishment Array Updated");
+      });
+  };
+
+  const setMeasurableArrayDB = async () => {
+    await firebase
+      .firestore()
+      .collection("Users")
+      .doc(userUID)
+      .collection("User Info")
+      .doc("Measurable Array")
+      .set({
+        measurableArray: getMeasurableArray(),
+      })
+      .then(() => {
+        console.warn("Measurable Array Updated");
+      });
   };
 
   const [showMore, setShowMore] = useState(false);
@@ -349,8 +402,6 @@ const EditableProfileItem = (props) => {
     }
   };
 
-
-
   const handleDeletePress = () => {
     if (
       window.confirm(
@@ -360,12 +411,15 @@ const EditableProfileItem = (props) => {
       if (icon === 'crown') {
         deleteExperienceItem(idNum);
         props.callbackReloadList();
+        await setExperienceArrayDB();
       } else if (icon === 'trophy') {
         deleteAccomplishmentItem(idNum);
         props.callbackReloadList();
+        await setAccomplishmentArrayDB();
       } else {
         deleteMeasurableItem(idNum);
         props.callbackReloadList();
+        await setMeasurableArrayDB();
       }
     } else {
       //nothing
@@ -941,11 +995,9 @@ const EditableProfileItem = (props) => {
                 )
               );
               setAccomplishmentYearReceived(
-                getYearIndex(
                   accomplishmentDurationText.substring(
                     accomplishmentDurationText.indexOf(',') + 2
                   )
-                )
               );
               let monthIndex = getMonthIndex(
                 accomplishmentDurationText.substring(
@@ -1054,7 +1106,6 @@ const EditableProfileItem = (props) => {
                           <option value="11">November</option>
                           <option value="12">December</option>
                         </select>
-                        {/* <div style={{width: '0.5%'}}></div> */}
                         <div className="datePickerRowMiddleDivider"></div>
                         <select
                           className="modalDatePicker"
