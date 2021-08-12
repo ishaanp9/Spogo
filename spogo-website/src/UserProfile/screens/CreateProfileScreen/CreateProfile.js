@@ -14,7 +14,6 @@ import {
 } from 'react-icons/md';
 import { HiOutlinePencil, HiChevronDown } from 'react-icons/hi';
 import { BsLink45Deg } from 'react-icons/bs';
-import BlankProfile from '../ProfileScreen/blank_profile.png';
 import { MixpanelConsumer } from 'react-mixpanel';
 import { AuthContext } from '../../../AuthProvider';
 import copy from 'copy-to-clipboard';
@@ -1789,7 +1788,6 @@ const CreateProfile = (props) => {
                         Month and year received is required
                       </h1>
                     )}
-                  </p> */}
                   </div>
                 </div>
                 <p className="textInputHeaders">Description</p>

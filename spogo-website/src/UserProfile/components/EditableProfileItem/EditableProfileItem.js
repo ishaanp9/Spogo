@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import './EditableProfileItem.css';
 import CrownIcon from 'mdi-react/CrownIcon';
 import TrophyIcon from 'mdi-react/TrophyIcon';
@@ -402,7 +402,7 @@ const EditableProfileItem = (props) => {
     }
   };
 
-  const handleDeletePress = () => {
+  const handleDeletePress = async () => {
     if (
       window.confirm(
         'Are you sure you want to delete this item? You cannot undo this.'
