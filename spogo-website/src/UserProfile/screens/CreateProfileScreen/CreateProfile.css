@@ -135,7 +135,7 @@
   }
 
   .createScreenBioContainer > h1 {
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 16px;
     font-weight: bold;
     margin: 20px 0px;
@@ -159,7 +159,7 @@
   }
 
   .createScreenProfileItemListHeader {
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 16px;
     font-weight: bold;
     margin: 20px 0px;
@@ -200,7 +200,7 @@
     color: #3eb489;
     font-size: 15px;
     font-weight: 500;
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Montserrat', sans-serif;
   }
 
   .seeMoreSeeLessItemButton:hover {
@@ -279,7 +279,7 @@
   }
 
   .errorHeaderText {
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-weight: bold;
     font-size: 30px;
     margin-bottom: 2%;
@@ -287,7 +287,7 @@
   }
 
   .errorHeadlineText {
-    font-family: "Open Sans", sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-size: 16px;
   }
 
@@ -413,7 +413,7 @@
   }
 
   .modalHeaderContainer > p {
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-weight: bold;
     font-size: large;
   }
@@ -422,13 +422,13 @@
     font-size: 14px;
     margin-top: 10px;
     margin-bottom: 5px;
-    font-family: "Open Sans", sans-serif;
+    font-family: 'Open Sans', sans-serif;
   }
 
   .modalTextInputItems {
     width: 100%;
     padding: 8px;
-    font-family: "Open Sans", sans-serif;
+    font-family: 'Open Sans', sans-serif;
     outline: none;
   }
 
@@ -492,7 +492,7 @@
     border: none;
     font-weight: bold;
     font-size: 16px;
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Montserrat', sans-serif;
     margin-top: 20px;
   }
 
@@ -505,7 +505,7 @@
 
   .presentTimeText {
     font-size: 11px;
-    font-family: "Open Sans", sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-weight: 500;
     margin-top: 2px;
     margin-left: 1px;
@@ -532,7 +532,7 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-  } 
+  }
 
   .copyUrlModalTitle {
     text-align: center;
@@ -572,7 +572,7 @@
   }
 
   .copyUrlSpogoText {
-    font-family: "Open Sans", sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-size: 20px;
     font-weight: 600;
     padding-bottom: 5px;
@@ -601,6 +601,10 @@
   .topRightIconItem {
     margin-left: 5px;
     cursor: pointer;
+    transition: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  .topRightIconItem:hover {
+    transform: scale(1.05);
   }
 
   .settingsModal {
@@ -615,7 +619,7 @@
 
   .settingsItems {
     cursor: pointer;
-    font-family: "Open Sans", sans-serif;
+    font-family: 'Open Sans', sans-serif;
     width: 100%;
     color: #3eb489;
   }
@@ -632,6 +636,28 @@
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  .linkCopiedMessage {
+    position: absolute;
+    bottom: 2%;
+    left: 2%;
+    outline: none;
+    border-radius: 5px;
+    width: 125px;
+    display: flex;
+    justify-content: space-between;
+    background-color: #04aa6d;
+    padding: 1% 2%;
+    align-items: center;
+    box-shadow: 0 4px 8px 0 rgba(66, 65, 65, 0.203),
+      0 6px 20px 0 rgba(161, 155, 155, 0.59);
+    transition: 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+  }
+
+  .linkCopiedMessage > p {
+    font-family: 'Open Sans', sans-serif;
+    font-family: 14px;
   }
 }
 
@@ -747,7 +773,7 @@
   }
 
   .createScreenBioContainer > h1 {
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 16px;
     font-weight: bold;
     margin: 20px 0px;
@@ -771,7 +797,7 @@
   }
 
   .createScreenProfileItemListHeader {
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 16px;
     font-weight: bold;
     margin: 20px 0px;
@@ -812,7 +838,7 @@
     color: #3eb489;
     font-size: 15px;
     font-weight: 500;
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Montserrat', sans-serif;
   }
 
   .seeMoreSeeLessItemButton:hover {
@@ -889,7 +915,7 @@
   }
 
   .errorHeaderText {
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-weight: bold;
     font-size: 30px;
     margin-bottom: 2%;
@@ -897,7 +923,7 @@
   }
 
   .errorHeadlineText {
-    font-family: "Open Sans", sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-size: 16px;
   }
 
@@ -1021,7 +1047,7 @@
   }
 
   .modalHeaderContainer > p {
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-weight: bold;
     font-size: large;
   }
@@ -1030,13 +1056,13 @@
     font-size: 14px;
     margin-top: 2%;
     margin-bottom: 5px;
-    font-family: "Open Sans", sans-serif;
+    font-family: 'Open Sans', sans-serif;
   }
 
   .modalTextInputItems {
     width: 100%;
     padding: 8px;
-    font-family: "Open Sans", sans-serif;
+    font-family: 'Open Sans', sans-serif;
     outline: none;
   }
 
@@ -1100,7 +1126,7 @@
     border: none;
     font-weight: bold;
     font-size: 16px;
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Montserrat', sans-serif;
     margin-top: 2%;
   }
 
@@ -1113,7 +1139,7 @@
 
   .presentTimeText {
     font-size: 11px;
-    font-family: "Open Sans", sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-weight: 500;
     margin-top: 2px;
     margin-left: 1px;
@@ -1177,7 +1203,7 @@
   }
 
   .copyUrlSpogoText {
-    font-family: "Open Sans", sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-size: 20px;
     font-weight: 600;
     padding-bottom: 5px;
@@ -1205,6 +1231,10 @@
   .topRightIconItem {
     margin-left: 10px;
     cursor: pointer;
+    transition: cubic-bezier(0.19, 1, 0.22, 1);
+  }
+  .topRightIconItem:hover {
+    transform: scale(1.05);
   }
 
   .settingsModal {
@@ -1219,7 +1249,7 @@
 
   .settingsItems {
     cursor: pointer;
-    font-family: "Open Sans", sans-serif;
+    font-family: 'Open Sans', sans-serif;
     width: 100%;
     color: #3eb489;
   }
@@ -1236,6 +1266,28 @@
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  .linkCopiedMessage {
+    position: absolute;
+    bottom: 2%;
+    left: 2%;
+    outline: none;
+    border-radius: 5px;
+    width: 150px;
+    display: flex;
+    justify-content: space-between;
+    background-color: #04aa6d;
+    padding: 1% 1%;
+    align-items: center;
+    box-shadow: 0 4px 8px 0 rgba(66, 65, 65, 0.203),
+      0 6px 20px 0 rgba(161, 155, 155, 0.59);
+    transition: 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+  }
+
+  .linkCopiedMessage > p {
+    font-family: 'Open Sans', sans-serif;
+    font-family: 14px;
   }
 }
 
@@ -1403,7 +1455,7 @@
   }
 
   .createScreenBioContainer > h1 {
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 16px;
     font-weight: bold;
     margin: 20px 0px;
@@ -1427,7 +1479,7 @@
   }
 
   .createScreenProfileItemListHeader {
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 16px;
     font-weight: bold;
     margin: 20px 0px;
@@ -1467,7 +1519,7 @@
     color: #3eb489;
     font-size: 15px;
     font-weight: 500;
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Montserrat', sans-serif;
   }
 
   .seeMoreSeeLessItemButton:hover {
@@ -1546,7 +1598,7 @@
   }
 
   .errorHeaderText {
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-weight: bold;
     font-size: 30px;
     margin-bottom: 2%;
@@ -1554,7 +1606,7 @@
   }
 
   .errorHeadlineText {
-    font-family: "Open Sans", sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-size: 16px;
   }
 
@@ -1680,7 +1732,7 @@
   }
 
   .modalHeaderContainer > p {
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-weight: bold;
     font-size: large;
   }
@@ -1689,13 +1741,13 @@
     font-size: 14px;
     margin-top: 2%;
     margin-bottom: 5px;
-    font-family: "Open Sans", sans-serif;
+    font-family: 'Open Sans', sans-serif;
   }
 
   .modalTextInputItems {
     width: 100%;
     padding: 8px;
-    font-family: "Open Sans", sans-serif;
+    font-family: 'Open Sans', sans-serif;
     outline: none;
   }
 
@@ -1759,7 +1811,7 @@
     border: none;
     font-weight: bold;
     font-size: 16px;
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Montserrat', sans-serif;
     margin-top: 2%;
   }
 
@@ -1772,7 +1824,7 @@
 
   .presentTimeText {
     font-size: 11px;
-    font-family: "Open Sans", sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-weight: 500;
     margin-top: 2px;
     margin-left: 1px;
@@ -1838,7 +1890,7 @@
   }
 
   .copyUrlSpogoText {
-    font-family: "Open Sans", sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-size: 20px;
     font-weight: 600;
     padding-bottom: 5px;
@@ -1865,6 +1917,11 @@
   .topRightIconItem {
     margin-left: 13px;
     cursor: pointer;
+    transition: cubic-bezier(0.19, 1, 0.22, 1);
+  }
+
+  .topRightIconItem:hover {
+    transform: scale(1.05);
   }
 
   .settingsModal {
@@ -1879,7 +1936,7 @@
 
   .settingsItems {
     cursor: pointer;
-    font-family: "Open Sans", sans-serif;
+    font-family: 'Open Sans', sans-serif;
     width: 100%;
     color: #3eb489;
   }
@@ -1897,8 +1954,8 @@
     align-items: center;
     justify-content: center;
   }
-  
-  .linkCopiedMessageModal {
+
+  /* .linkCopiedMessageModal {
     background-color: #3eb489;
     position: absolute;
     bottom: 2%;
@@ -1934,5 +1991,27 @@
     font-family: 'Open Sans', sans-serif;
     font-size: 16px;
     font-weight: 500;
+  } */
+
+  .linkCopiedMessage {
+    position: absolute;
+    bottom: 2%;
+    left: 2%;
+    outline: none;
+    border-radius: 5px;
+    width: 200px;
+    display: flex;
+    justify-content: space-between;
+    background-color: #04aa6d;
+    padding: 1% 1%;
+    align-items: center;
+    box-shadow: 0 4px 8px 0 rgba(66, 65, 65, 0.203),
+      0 6px 20px 0 rgba(161, 155, 155, 0.59);
+    transition: 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+  }
+
+  .linkCopiedMessage > p {
+    font-family: 'Open Sans', sans-serif;
+    font-family: 14px;
   }
 }
