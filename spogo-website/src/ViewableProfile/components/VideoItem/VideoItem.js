@@ -4,8 +4,6 @@ import ReactPlayer from 'react-player';
 import firebase from '../../../firebase';
 import Modal from 'react-modal';
 import { MdClose } from 'react-icons/md';
-import { black } from 'jest-matcher-utils/node_modules/chalk';
-import { nonEmptyArray } from 'check-types';
 
 export const VideoItem = (props) => {
   const [paused, setPaused] = useState(true);

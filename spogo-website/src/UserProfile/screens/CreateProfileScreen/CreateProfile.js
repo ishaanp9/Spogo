@@ -6,7 +6,6 @@ import { FaInstagram, FaTwitter } from "react-icons/fa";
 import {
   MdEmail,
   MdMail,
-  MdStar,
   MdLocationOn,
   MdClose,
   MdContentCopy,
@@ -15,19 +14,15 @@ import {
 } from "react-icons/md";
 import { HiOutlinePencil, HiChevronDown } from "react-icons/hi";
 import { BsLink45Deg } from "react-icons/bs";
-import BlankProfile from "../ProfileScreen/blank_profile.png";
 import { MixpanelConsumer } from "react-mixpanel";
 import { AuthContext } from "../../../AuthProvider";
 import copy from "copy-to-clipboard";
 import { useHistory } from "react-router-dom";
 import loadingGIF from "../../../loading.gif";
-import spogoLogo from "../../../spogo_logo.png";
-
 import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from "react-places-autocomplete";
-
 import {
   getExperienceArray,
   getMeasurableArray,
@@ -53,10 +48,9 @@ import {
   addUserInfo,
 } from "../../../UserData";
 import firebase from "../../../firebase";
-
 import EditableProfileItem from "../../components/EditableProfileItem/EditableProfileItem";
-import { ImageItem } from "../../components/VideoItem/VideoItem";
-import { VideoItem } from "../../components/VideoItem/VideoItem";
+import {EditableImageItem} from '../../components/EditableMediaItem/EditableMediaItem';
+import {EditableVideoItem} from '../../components/EditableMediaItem/EditableMediaItem';
 import { UserDataContext } from "../../../App";
 
 const CreateProfile = (props) => {
@@ -919,9 +913,9 @@ const CreateProfile = (props) => {
           <ul className="createScreenVideoItemArrayList">
             {thisMediaArray.map((item) => {
               if (item.media === "photo") {
-                return <ImageItem url={item.url} />;
+                return <EditableImageItem url={item.url} />;
               } else {
-                return <VideoItem url={item.url} />;
+                return <EditableVideoItem url={item.url} />;
               }
             })}
           </ul>

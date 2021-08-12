@@ -9,7 +9,7 @@ import SignInScreen from "./SignUpLoginFlow/screens/SignInScreen/SignInScreen";
 import CreateProfile from "./UserProfile/screens/CreateProfileScreen/CreateProfile";
 import SportPosition from "./SignUpLoginFlow/screens/SportPositionScreen/SportPosition";
 import SocialsScreen from "./SignUpLoginFlow/screens/SocialsScreen/SocialsScreen";
-import Profile from "./UserProfile/screens/ProfileScreen/Profile";
+import Profile from "./ViewableProfile/screens/ProfileScreen/Profile";
 import { AuthProvider } from "./AuthProvider";
 import { getUserDict, setUserDict } from "./UserData";
 import firebase from "./firebase";
