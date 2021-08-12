@@ -20,7 +20,7 @@ import { UserDataContext } from "../../../App";
 
 const SportPosition = (props) => {
   const { getUserUID } = useContext(UserDataContext);
-  let userUID;
+  let userUID = getUserUID();
   const [userName, setUserName] = useState(getUserInfo("name"));
   const [signUpFinished, setSignUpFinished] = useState(
     getUserInfo("sign-up-finished")

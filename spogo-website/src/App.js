@@ -55,7 +55,6 @@ export const UserProvider = ({children}) => {
         user,
         setUser,
         getUserUID: () => {
-          console.log(user)
           if (user === null) {
             return "noUser"
           } else {

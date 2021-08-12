@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "./EditableProfileItem.css";
 import CrownIcon from "mdi-react/CrownIcon";
 import TrophyIcon from "mdi-react/TrophyIcon";
@@ -19,8 +19,11 @@ import {
 import WebFont from "webfontloader";
 import Modal from "react-modal";
 import { editMeasurableItem } from "../../../UserData";
+import firebase from "../../../firebase";
+import { UserDataContext } from "../../../App";
 
 const EditableProfileItem = (props) => {
+  const { getUserUID } = useContext(UserDataContext);
   let icon = props.iconName;
   let color = props.color;
   let title = props.title;
@@ -28,7 +31,7 @@ const EditableProfileItem = (props) => {
   let time = props.time;
   let description = props.description;
   let idNum = props.idNum;
-  let UID = props.userUID;
+  let userUID = getUserUID();
 
   const [iconToHeaderName, setIconToHeaderName] = useState("");
   const [specificItemArray, setSpecificArray] = useState([]);
@@ -176,6 +179,7 @@ const EditableProfileItem = (props) => {
         setCurrentExperienceText("Currently doing this?");
         setCurrentExperience(false);
         props.callbackReloadList();
+        await setExperienceArrayDB();
       }
     } else {
       if (experienceTitleText === "") {
@@ -215,6 +219,7 @@ const EditableProfileItem = (props) => {
   ] = useState(false);
 
   const checkValidAccomplishment = async () => {
+    console.log("Got Here");
     if (
       accomplishmentTitleText != "" &&
       accomplishmentMonthReceived != "" &&
@@ -236,7 +241,13 @@ const EditableProfileItem = (props) => {
       setInvalidAccomplishmentTitle(false);
       setInvalidAccomplishmentDateReceived(false);
       props.callbackReloadList();
+      await setAccomplishmentArrayDB();
     } else {
+      console.log("Failed");
+      console.log(accomplishmentTitleText);
+      console.log(accomplishmentMonthReceived);
+      console.log(accomplishmentYearReceived);
+
       if (accomplishmentTitleText === "") {
         setInvalidAccomplishmentTitle(true);
       }
@@ -264,6 +275,7 @@ const EditableProfileItem = (props) => {
       setInvalidMeasurableTitle(false);
       setInvalidMeasurableValue(false);
       props.callbackReloadList();
+      await setMeasurableArrayDB();
     } else {
       if (measurableTitleText === "") {
         setInvalidMeasurableTitle(true);
@@ -272,6 +284,52 @@ const EditableProfileItem = (props) => {
         setInvalidMeasurableValue(true);
       }
     }
+  };
+
+  //Firebase DB Setter Calls
+  const setExperienceArrayDB = async () => {
+    await firebase
+      .firestore()
+      .collection("Users")
+      .doc(userUID)
+      .collection("User Info")
+      .doc("Experience Array")
+      .set({
+        experienceArray: getExperienceArray(),
+      })
+      .then(() => {
+        console.warn("Exp Array Updated");
+      });
+  };
+
+  const setAccomplishmentArrayDB = async () => {
+    await firebase
+      .firestore()
+      .collection("Users")
+      .doc(userUID)
+      .collection("User Info")
+      .doc("Accomplishment Array")
+      .set({
+        accomplishmentArray: getAccomplishmentArray(),
+      })
+      .then(() => {
+        console.warn("Accomplishment Array Updated");
+      });
+  };
+
+  const setMeasurableArrayDB = async () => {
+    await firebase
+      .firestore()
+      .collection("Users")
+      .doc(userUID)
+      .collection("User Info")
+      .doc("Measurable Array")
+      .set({
+        measurableArray: getMeasurableArray(),
+      })
+      .then(() => {
+        console.warn("Measurable Array Updated");
+      });
   };
 
   const [showMore, setShowMore] = useState(false);
@@ -349,16 +407,19 @@ const EditableProfileItem = (props) => {
     }
   };
 
-  const handleDeletePress = () => {
+  const handleDeletePress = async () => {
     if (icon === "crown") {
       deleteExperienceItem(idNum);
       props.callbackReloadList();
+      await setExperienceArrayDB()
     } else if (icon === "trophy") {
       deleteAccomplishmentItem(idNum);
       props.callbackReloadList();
+      await setAccomplishmentArrayDB()
     } else {
       deleteMeasurableItem(idNum);
       props.callbackReloadList();
+      setMeasurableArrayDB()
     }
   };
 
@@ -443,46 +504,46 @@ const EditableProfileItem = (props) => {
             //   }
             //   className="Link"
             // >
-              <div className="editableItemContainer">
-                <div className="itemIconContainer">
-                  <ItemIcon iconType={icon} />
-                </div>
-                <div className="itemTextButtonsDividerContainer">
-                  <div className="itemTextButtonsContainer">
-                    <div className="TextContainer">
-                      <h1>{title}</h1>
-                      {team != undefined && team != null && team != "" && (
-                        <h2>{team}</h2>
-                      )}
-                      <h3>{time}</h3>
-                      <h4>{description}</h4>
-                      {/* {(idNum === 0 && specificItemArray.length === 1) ||
+            <div className="editableItemContainer">
+              <div className="itemIconContainer">
+                <ItemIcon iconType={icon} />
+              </div>
+              <div className="itemTextButtonsDividerContainer">
+                <div className="itemTextButtonsContainer">
+                  <div className="TextContainer">
+                    <h1>{title}</h1>
+                    {team != undefined && team != null && team != "" && (
+                      <h2>{team}</h2>
+                    )}
+                    <h3>{time}</h3>
+                    <h4>{description}</h4>
+                    {/* {(idNum === 0 && specificItemArray.length === 1) ||
                   idNum === specificItemArray.length - 1 ? (
                     <hr size="1" color="white" className="Divider" />
                   ) : (
                     <hr size="1" color="lightgrey" className="Divider" />
                   )} */}
-                    </div>
-                    <div className="editDeleteButtonsContainer">
-                      <MdEdit
-                        size={25}
-                        color={"#FDB600"}
-                        className="editDeleteButton"
-                        onClick={() => handleEditPress()}
-                      />
-                      <MdDelete
-                        size={25}
-                        color={"darkred"}
-                        className="editDeleteButton"
-                        onClick={() => handleDeletePress()}
-                      />
-                    </div>
                   </div>
-                  <hr size="1" color="lightgrey" className="Divider" />
+                  <div className="editDeleteButtonsContainer">
+                    <MdEdit
+                      size={25}
+                      color={"#FDB600"}
+                      className="editDeleteButton"
+                      onClick={() => handleEditPress()}
+                    />
+                    <MdDelete
+                      size={25}
+                      color={"darkred"}
+                      className="editDeleteButton"
+                      onClick={() => handleDeletePress()}
+                    />
+                  </div>
                 </div>
+                <hr size="1" color="lightgrey" className="Divider" />
               </div>
-            // </Link>
+            </div>
           ) : (
+            // </Link>
             <div
               className="Container"
               onClick={() =>
@@ -907,10 +968,8 @@ const EditableProfileItem = (props) => {
                 )
               );
               setAccomplishmentYearReceived(
-                getYearIndex(
-                  accomplishmentDurationText.substring(
-                    accomplishmentDurationText.indexOf(",") + 2
-                  )
+                accomplishmentDurationText.substring(
+                  accomplishmentDurationText.indexOf(",") + 2
                 )
               );
               setInvalidAccomplishmentTitle(false);
@@ -931,10 +990,8 @@ const EditableProfileItem = (props) => {
                 )
               );
               setAccomplishmentYearReceived(
-                getYearIndex(
-                  accomplishmentDurationText.substring(
-                    accomplishmentDurationText.indexOf(",") + 2
-                  )
+                accomplishmentDurationText.substring(
+                  accomplishmentDurationText.indexOf(",") + 2
                 )
               );
               let monthIndex = getMonthIndex(

@@ -7,7 +7,7 @@ import { Link, BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { MixpanelConsumer } from 'react-mixpanel';
 import {
   getExperienceArray,
-  getTrophyArray,
+  getAccomplishmentArray,
   getMeasurableArray,
 } from '../../../ProfileData';
 import WebFont from 'webfontloader';
@@ -31,7 +31,7 @@ const Item = (props) => {
     if (icon === 'crown') {
       setSpecificArray(getExperienceArray());
     } else if (icon === 'trophy') {
-      setSpecificArray(getTrophyArray());
+      setSpecificArray(getAccomplishmentArray());
     } else {
       setSpecificArray(getMeasurableArray());
     }

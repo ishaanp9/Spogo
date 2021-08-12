@@ -20,8 +20,8 @@ import { MixpanelConsumer } from "react-mixpanel";
 import { AuthContext } from "../../../AuthProvider";
 import copy from "copy-to-clipboard";
 import { useHistory } from "react-router-dom";
-import loadingGIF from '../../../loading.gif';
-import spogoLogo from '../../../spogo_logo.png';
+import loadingGIF from "../../../loading.gif";
+import spogoLogo from "../../../spogo_logo.png";
 
 import PlacesAutocomplete, {
   geocodeByAddress,
@@ -61,12 +61,13 @@ import { UserDataContext } from "../../../App";
 
 const CreateProfile = (props) => {
   const { getUserUID, isUserListenerFinished } = useContext(UserDataContext);
-  let userUID;
+  let userUID = getUserUID();
   let history = useHistory();
   const { logout } = useContext(AuthContext);
   const inputFile = React.useRef(null);
   const highlightFile = React.useRef(null);
-  const [userUrl, setUserUrl] = useState('');
+  // const [userUrl, setUserUrl] = useState('');
+  let userUrl = "";
   const [showLinkCopiedMessage, setShowLinkCopiedMessage] = useState(false);
   const [copyCustomUrlButtonText, setCopyCustomUrlButtonText] =
     useState("Copy Custom Url");
@@ -86,7 +87,7 @@ const CreateProfile = (props) => {
   const [experienceDescriptionText, setExperienceDescriptionText] =
     useState("");
   const [currentExperienceText, setCurrentExperienceText] = useState(
-    'Currently doing this?'
+    "Currently doing this?"
   );
   const [currentExperience, setCurrentExperience] = useState(false);
 
@@ -105,6 +106,7 @@ const CreateProfile = (props) => {
   const [measurableTitleText, setMeasurableTitleText] = useState("");
   const [measurableValueText, setMeasurableValueText] = useState("");
 
+  const [profileImage, setProfileImage] = useState(getUserInfo("name"));
   const [name, setName] = useState(getUserInfo("name"));
   const [sport, setSport] = useState(getUserInfo("sport"));
   const [position, setPosition] = useState(getUserInfo("position"));
@@ -129,11 +131,13 @@ const CreateProfile = (props) => {
     //   getDBUserInfo();
     // }, 2000);
     // setCreateProfileInitialized(true)
-    userUID = getUserUID()
+    userUID = getUserUID();
+    console.log(userUID);
     getDBUserInfo();
   }, []);
 
-  const [createProfileInitialized, setCreateProfileInitialized] = useState(false)
+  const [createProfileInitialized, setCreateProfileInitialized] =
+    useState(false);
 
   //Listens to see whether firebase onAuthStateChanged is finished, then performs the database call
   // if (isUserListenerFinished() && createProfileInitialized === true) {
@@ -194,8 +198,8 @@ const CreateProfile = (props) => {
       .catch((error) => {
         console.log("Error getting exp array document:", error);
       });
-    let trophyArray = dbPath.doc("Trophy Array");
-    await trophyArray
+    let accomplishmentArray = dbPath.doc("Accomplishment Array");
+    await accomplishmentArray
       .get()
       .then((doc) => {
         if (doc.exists) {
@@ -254,7 +258,14 @@ const CreateProfile = (props) => {
     }
   };
 
-  const setUserInfo = () => {
+  const setUserInfo = async () => {
+    try {
+      const profileImageUri = await firebase.storage().ref(getUserInfo('profile-image'));
+      const downloadableURL = await profileImageUri.getDownloadURL();
+      setProfileImage(downloadableURL);
+    } catch (e) {
+      console.log(e)
+    }
     setName(getUserInfo("name"));
     setSport(getUserInfo("sport"));
     setPosition(getUserInfo("position"));
@@ -273,22 +284,17 @@ const CreateProfile = (props) => {
     setVideoImageID();
   };
 
-  const handleCopyText = (e) => {
-    setUserUrl(e.target.value);
-  };
-
   const copyToClipboard = () => {
     copy(`spogo.us/${userUrl}`);
   };
 
-  const [image, setImage] = React.useState('');
-  const imageRef = React.useRef(null);
-  const [address, setAddress] = React.useState('');
+  const [transferred, setTransferred] = useState(0);
+  const [uploading, setUploading] = useState(false);
 
-  function useDisplayImage() {
+  function useDisplayImage ()  {
     const [result, setResult] = useState("");
 
-    function uploader(e) {
+    async function uploader(e) {
       const imageFile = e.target.files[0];
 
       const reader = new FileReader();
@@ -296,9 +302,51 @@ const CreateProfile = (props) => {
         setResult(e.target.result);
       });
 
-      reader.readAsDataURL(imageFile);
-    }
+      if(e.target.files[0]){
+        reader.readAsDataURL(imageFile);
+      }
 
+      setUploading(true);
+      setTransferred(0);
+      let profileImageTimeUploaded = new Date().getTime()
+      let oldProfileImage = getUserInfo('profile-image')
+
+      const task = firebase
+        .storage()
+        .ref(imageFile.name + '-' + profileImageTimeUploaded) 
+        .put(e.target.files[0])
+        .then(() => {
+          console.log("Storage Upload Succeeded");
+        });
+
+      //Code to make a progress bar or upload animation
+      // task.on('state_changed', snapshot => {
+      //   setTransferred(
+      //     Math.round(snapshot.bytesTransferred / snapshot.totalBytes) * 10000,
+      //   );
+      // });
+
+      try {
+        await task;
+        setTransferred(0);
+        setUploading(false);
+        addUserInfo('profile-image', imageFile.name + '-' + profileImageTimeUploaded)
+        await updateUserInfoDictInDB()
+        await deleteFileFromFBStorage(oldProfileImage)
+      } catch (e) {
+        console.log(e)
+      }
+
+
+      try {
+        const profileImageUri = await firebase.storage().ref(getUserInfo('profile-image'));
+        const downloadableURL = await profileImageUri.getDownloadURL();
+        setProfileImage(downloadableURL);
+      } catch (e) {
+        console.log(e)
+      }
+      console.log('Profile Upload Operation Finished')
+    }
     return { result, uploader };
   }
 
@@ -308,6 +356,19 @@ const CreateProfile = (props) => {
     const results = await geocodeByAddress(value);
     setLocationHolder(value);
   };
+
+  //Method that takes a reference and deletes the firebase storage file named to that reference
+  const deleteFileFromFBStorage = async (deleteRef) => {
+    if (deleteRef != 'blank_profile.png') {
+      let mediaName = firebase.storage().ref(deleteRef);
+      await mediaName
+        .delete()
+        .then(() => {
+          console.log(`${mediaName}has been deleted successfully.`);
+        })
+        .catch(e => console.log(e));
+    } 
+  }
 
   //Method that checks whether a experience submission is valid
   //If so, adds experience item to arrays
@@ -351,16 +412,17 @@ const CreateProfile = (props) => {
           experienceDescriptionText,
           getExperienceID()
         );
-        setExperienceTitleText('');
-        setExperienceTeamText('');
-        setExperienceStartMonth('');
-        setExperienceStartYear('');
-        setExperienceEndMonth('');
-        setExperienceEndYear('');
-        setExperienceDescriptionText('');
-        setCurrentExperienceText('Currently doing this?');
+        setExperienceTitleText("");
+        setExperienceTeamText("");
+        setExperienceStartMonth("");
+        setExperienceStartYear("");
+        setExperienceEndMonth("");
+        setExperienceEndYear("");
+        setExperienceDescriptionText("");
+        setCurrentExperienceText("Currently doing this?");
         setCurrentExperience(false);
         setThisExperienceArray([...getExperienceArray()]);
+        setExperienceArrayDB();
       }
     } else {
       if (experienceTitleText === "") {
@@ -413,6 +475,7 @@ const CreateProfile = (props) => {
       setInvalidAccomplishmentTitle(false);
       setInvalidAccomplishmentDateReceived(false);
       setThisAccomplishmentArray([...getAccomplishmentArray()]);
+      setAccomplishmentArrayDB();
     } else {
       if (accomplishmentTitleText === "") {
         setInvalidAccomplishmentTitle(true);
@@ -446,6 +509,7 @@ const CreateProfile = (props) => {
       setInvalidMeasurableTitle(false);
       setInvalidMeasurableValue(false);
       setThisMeasurableArray([...getMeasurableArray()]);
+      await setMeasurableArrayDB();
     } else {
       if (measurableTitleText === "") {
         setInvalidMeasurableTitle(true);
@@ -592,6 +656,23 @@ const CreateProfile = (props) => {
     }
   };
 
+  //Finds the index of the second occurence of a character in a string
+  function nthIndex(str, pat, n) {
+    var L = str.length,
+      i = -1;
+    while (n-- && i++ < L) {
+      i = str.indexOf(pat, i);
+      if (i < 0) break;
+    }
+    if (i === -1) {
+      return str.length;
+    } else {
+      return i;
+    }
+  }
+
+  //Firebase DB Setter Calls
+
   const updateUserInfoDictInDB = async () => {
     await firebase
       .firestore()
@@ -607,20 +688,50 @@ const CreateProfile = (props) => {
       });
   };
 
-  //Finds the index of the second occurence of a character in a string
-  function nthIndex(str, pat, n) {
-    var L = str.length,
-      i = -1;
-    while (n-- && i++ < L) {
-      i = str.indexOf(pat, i);
-      if (i < 0) break;
-    }
-    if (i === -1) {
-      return str.length;
-    } else {
-      return i;
-    }
-  }
+  const setExperienceArrayDB = async () => {
+    await firebase
+      .firestore()
+      .collection("Users")
+      .doc(userUID)
+      .collection("User Info")
+      .doc("Experience Array")
+      .set({
+        experienceArray: getExperienceArray(),
+      })
+      .then(() => {
+        console.warn("Exp Array Updated");
+      });
+  };
+
+  const setAccomplishmentArrayDB = async () => {
+    await firebase
+      .firestore()
+      .collection("Users")
+      .doc(userUID)
+      .collection("User Info")
+      .doc("Accomplishment Array")
+      .set({
+        accomplishmentArray: getAccomplishmentArray(),
+      })
+      .then(() => {
+        console.warn("Accomplishment Array Updated");
+      });
+  };
+
+  const setMeasurableArrayDB = async () => {
+    await firebase
+      .firestore()
+      .collection("Users")
+      .doc(userUID)
+      .collection("User Info")
+      .doc("Measurable Array")
+      .set({
+        measurableArray: getMeasurableArray(),
+      })
+      .then(() => {
+        console.warn("Measurable Array Updated");
+      });
+  };
 
   return (
     <div className="profileScreenContainer">
@@ -659,21 +770,21 @@ const CreateProfile = (props) => {
               id="target"
               ref={inputFile}
               onChange={(e) => {
-                setImage(e.target.files[0]);
                 uploader(e);
               }}
-              style={{ display: 'none', outline: 'none', border: 'none' }}
+              style={{ display: "none", outline: "none", border: "none" }}
             />
             <button
               type="button"
               onClick={profileImageUploadClick}
               style={{
-                outline: 'none',
-                border: 'none',
-                backgroundColor: 'transparent',
+                outline: "none",
+                border: "none",
+                backgroundColor: "transparent",
               }}
             >
-              {result ? (
+              <img className="createScreenProfileImage" src={profileImage} alt={"Unable to load profile image"}/>
+              {/* {result ? (
                 <img
                   className="createScreenProfileImage"
                   ref={imageRef}
@@ -681,7 +792,7 @@ const CreateProfile = (props) => {
                 />
               ) : (
                 <img className="createScreenProfileImage" src={BlankProfile} />
-              )}
+              )} */}
             </button>
           </div>
           <div className="createScreenProfileTextContainer">
@@ -712,7 +823,7 @@ const CreateProfile = (props) => {
                   //   }
                   // }
                   size={25}
-                  color={'#E1306C'}
+                  color={"#E1306C"}
                 />
               )}
 
@@ -730,7 +841,7 @@ const CreateProfile = (props) => {
                   //   }
                   // }
                   size={25}
-                  color={'#1DA1F2'}
+                  color={"#1DA1F2"}
                 />
               )}
 
@@ -749,7 +860,7 @@ const CreateProfile = (props) => {
                   //   window.open("https://instagram.com/" + instagram)
                   // }
                   size={25}
-                  color={'#5D4D4A'}
+                  color={"#5D4D4A"}
                 />
               )}
               {wildcard && (
@@ -757,7 +868,7 @@ const CreateProfile = (props) => {
                   className="createScreenSocialIcon"
                   // onClick={() => setWildcardLinkModalOpen(true)}
                   size={25}
-                  color={'#ffae42'}
+                  color={"#ffae42"}
                 />
               )}
             </div>
@@ -794,10 +905,10 @@ const CreateProfile = (props) => {
           <div className="profileItemListHeaderContainer">
             <h1 className="createScreenProfileItemListHeader">Highlights</h1>
             <MdAdd
-              style={{ cursor: 'pointer' }}
+              style={{ cursor: "pointer" }}
               className="profileItemListAddIcons"
               size={25}
-              onClick={() => highlightUploadClick}
+              onClick={() => highlightUploadClick()}
             />
           </div>
           <hr
@@ -819,7 +930,7 @@ const CreateProfile = (props) => {
           <div className="profileItemListHeaderContainer">
             <h1 className="createScreenProfileItemListHeader">Experiences</h1>
             <MdAdd
-              style={{ cursor: 'pointer' }}
+              style={{ cursor: "pointer" }}
               className="profileItemListAddIcons"
               size={25}
               onClick={() => setExperienceModalOpen(true)}
@@ -853,7 +964,7 @@ const CreateProfile = (props) => {
               Accomplishments
             </h1>
             <MdAdd
-              style={{ cursor: 'pointer' }}
+              style={{ cursor: "pointer" }}
               className="profileItemListAddIcons"
               size={25}
               onClick={() => setAccomplishmentModalOpen(true)}
@@ -887,7 +998,7 @@ const CreateProfile = (props) => {
           <div className="profileItemListHeaderContainer">
             <h1 className="createScreenProfileItemListHeader">Measurables</h1>
             <MdAdd
-              style={{ cursor: 'pointer' }}
+              style={{ cursor: "pointer" }}
               className="profileItemListAddIcons"
               size={25}
               onClick={() => setMeasurableModalOpen(true)}
@@ -929,10 +1040,10 @@ const CreateProfile = (props) => {
           <div className="linkCopiedMessageModalContainer">
             <p>Copied!</p>
             <MdClose
-              style={{ cursor: 'pointer' }}
+              style={{ cursor: "pointer" }}
               onClick={() => setShowLinkCopiedMessage(false)}
               size={20}
-              color={'black'}
+              color={"black"}
             />
           </div>
         </Modal>
@@ -985,8 +1096,10 @@ const CreateProfile = (props) => {
               className="copyUrlModalTextInputItem"
               type="name"
               maxLength="100"
-              value={userUrl}
-              onChange={handleCopyText}
+              // value={userUrl}
+              onChange={(text) => {
+                userUrl = text.target.value;
+              }}
             />
           </div>
           <div>
@@ -1147,8 +1260,8 @@ const CreateProfile = (props) => {
                 <div>
                   <input
                     {...getInputProps({
-                      className: 'modalTextInputItems',
-                      placeholder: 'Ex: Seattle, WA',
+                      className: "modalTextInputItems",
+                      placeholder: "Ex: Seattle, WA",
                     })}
                   />
 
@@ -1273,7 +1386,7 @@ const CreateProfile = (props) => {
             setInvalidExperienceTeam(false);
             setInvalidExperienceStartDate(false);
             setInvalidExperienceEndDate(false);
-            setCurrentExperienceText('Currently doing this?');
+            setCurrentExperienceText("Currently doing this?");
             setCurrentExperience(false);
           }}
           className="experienceModal"
@@ -1297,7 +1410,7 @@ const CreateProfile = (props) => {
                   setInvalidExperienceTeam(false);
                   setInvalidExperienceStartDate(false);
                   setInvalidExperienceEndDate(false);
-                  setCurrentExperienceText('Currently doing this?');
+                  setCurrentExperienceText("Currently doing this?");
                   setCurrentExperience(false);
                 }}
                 size={20}
@@ -1812,13 +1925,13 @@ const CreateProfile = (props) => {
         >
           <div
             style={{
-              width: '100vw',
-              height: '100vh',
-              backgroundColor: 'white',
-              alignItems: 'center',
-              justifyContent: 'center',
-              display: 'flex',
-              flexDirection: 'column',
+              width: "100vw",
+              height: "100vh",
+              backgroundColor: "white",
+              alignItems: "center",
+              justifyContent: "center",
+              display: "flex",
+              flexDirection: "column",
             }}
           >
             {/* <img className='loadingSpogoLogo' src={spogoLogo}/> */}
