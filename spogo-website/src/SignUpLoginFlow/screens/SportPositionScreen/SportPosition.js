@@ -224,7 +224,7 @@ const SportPosition = (props) => {
                         fontSize: suggestion.active ? 13.5 : 13,
                         fontFamily: 'Open Sans',
                         marginBottom: 15,
-                        marginLeft: 5,
+                        marginLeft: 5.5,
                       };
                       return (
                         <div {...getSuggestionItemProps(suggestion, { style })} >
