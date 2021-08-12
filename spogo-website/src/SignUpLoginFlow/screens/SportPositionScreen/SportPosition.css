@@ -22,7 +22,6 @@
     height: auto;
     /* box-shadow: 0 4px 8px 0 rgba(66, 65, 65, 0.203),
       0 6px 20px 0 rgba(161, 155, 155, 0.59); */
-    transition: 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
     margin-top: 4%;
     padding: 4% 3%;
     display: flex;

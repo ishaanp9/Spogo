@@ -1,16 +1,17 @@
-import React, { useEffect, useContext, useState } from "react";
-import "./SignInScreen.css";
-import {Link, useHistory} from 'react-router-dom';
-import WebFont from "webfontloader";
-import SignInImage from "../../assets/signUpImage.png";
-import { AuthContext } from "../../../AuthProvider";
+import React, { useEffect, useContext, useState } from 'react';
+import './SignInScreen.css';
+import { Link, useHistory } from 'react-router-dom';
+import WebFont from 'webfontloader';
+import SignInImage from '../../assets/signUpImage.png';
+import { AuthContext } from '../../../AuthProvider';
 import Google from '../SignUpScreen/google.png';
-import { UserDataContext } from "../../../App";
+import { UserDataContext } from '../../../App';
+import firebase from 'firebase';
 
 const SignInScreen = (props) => {
-  const { getUserUID } = useContext(UserDataContext)
+  const { getUserUID } = useContext(UserDataContext);
   let userUID;
-  let history = useHistory()
+  let history = useHistory();
   const { login } = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -18,15 +19,15 @@ const SignInScreen = (props) => {
   const [loginFailed, setLoginFailed] = useState(false);
 
   useEffect(() => {
-    userUID = getUserUID()
+    userUID = getUserUID();
     WebFont.load({
       google: {
         families: ['Montserrat', 'Open Sans', 'Public Sans'],
       },
     });
     if (userUID != 'noUser') {
-      console.log(userUID)
-      history.push('/create')
+      console.log(userUID);
+      history.push('/create');
     }
   }, []);
 
@@ -85,7 +86,9 @@ const SignInScreen = (props) => {
                   setInvalidEmail(false);
                 }}
               />
-              {invalidEmail && <h1 className="signInInvalidText">Invalid Email</h1>}
+              {invalidEmail && (
+                <h1 className="signInInvalidText">Invalid Email</h1>
+              )}
               <p className="signInTextInputHeader">Password</p>
               <input
                 className="signInTextInput"
@@ -121,14 +124,20 @@ const SignInScreen = (props) => {
               <p style={{ fontSize: 14, marginTop: 20 }}>or</p>
               <hr style={{ marginTop: 20, width: '45%' }} />
             </div>
-            <div className="googleSignInContainer">
+            <div
+              onClick={() => {
+                const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
+                firebase.auth().signInWithPopup(googleAuthProvider);
+              }}
+              className="googleSignInContainer"
+            >
               <img className="googleImageSignIn" src={Google} />
               <p className="googleTextSignIn">Sign In with Google</p>
             </div>
             <p className="signInHaveAccountText">
-              Don't have an Account?{" "}
-              <Link className="signInHaveAccountTextSpan" to={"/auth/sign-up"}>
-                <span >Sign Up</span>
+              Don't have an Account?{' '}
+              <Link className="signInHaveAccountTextSpan" to={'/auth/sign-up'}>
+                <span>Sign Up</span>
               </Link>
             </p>
           </form>
