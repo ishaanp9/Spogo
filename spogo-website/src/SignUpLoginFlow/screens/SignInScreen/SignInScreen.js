@@ -31,9 +31,12 @@ const SignInScreen = (props) => {
     }
   }, []);
 
+  
+
   const loginFailedFunction = () => {
     setLoginFailed(true);
   };
+
 
   let validator = require('email-validator');
 
@@ -112,6 +115,7 @@ const SignInScreen = (props) => {
             >
               Sign in
             </button>
+
             <div
               style={{
                 display: 'flex',
@@ -126,7 +130,8 @@ const SignInScreen = (props) => {
             </div>
             <div
               onClick={() => {
-                const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
+                const googleAuthProvider =
+                  new firebase.auth.GoogleAuthProvider();
                 firebase.auth().signInWithPopup(googleAuthProvider);
               }}
               className="googleSignInContainer"

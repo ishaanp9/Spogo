@@ -4,7 +4,7 @@ import CrownIcon from 'mdi-react/CrownIcon';
 import TrophyIcon from 'mdi-react/TrophyIcon';
 import { MdEdit, MdDelete, MdClose } from 'react-icons/md';
 import RocketLaunchIcon from 'mdi-react/RocketLaunchIcon';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { MixpanelConsumer } from 'react-mixpanel';
 import {
   getExperienceArray,
@@ -15,12 +15,12 @@ import {
   deleteExperienceItem,
   deleteAccomplishmentItem,
   deleteMeasurableItem,
-} from "../../../UserData";
-import WebFont from "webfontloader";
-import Modal from "react-modal";
-import { editMeasurableItem } from "../../../UserData";
-import firebase from "../../../firebase";
-import { UserDataContext } from "../../../App";
+} from '../../../UserData';
+import WebFont from 'webfontloader';
+import Modal from 'react-modal';
+import { editMeasurableItem } from '../../../UserData';
+import firebase from '../../../firebase';
+import { UserDataContext } from '../../../App';
 
 const EditableProfileItem = (props) => {
   const { getUserUID } = useContext(UserDataContext);
@@ -32,6 +32,8 @@ const EditableProfileItem = (props) => {
   let description = props.description;
   let idNum = props.idNum;
   let userUID = getUserUID();
+
+  let history = useHistory();
 
   const [iconToHeaderName, setIconToHeaderName] = useState('');
   const [specificItemArray, setSpecificArray] = useState([]);
@@ -219,7 +221,7 @@ const EditableProfileItem = (props) => {
   ] = useState(false);
 
   const checkValidAccomplishment = async () => {
-    console.log("Got Here");
+    console.log('Got Here');
     if (
       accomplishmentTitleText != '' &&
       accomplishmentMonthReceived != '' &&
@@ -285,45 +287,45 @@ const EditableProfileItem = (props) => {
   const setExperienceArrayDB = async () => {
     await firebase
       .firestore()
-      .collection("Users")
+      .collection('Users')
       .doc(userUID)
-      .collection("User Info")
-      .doc("Experience Array")
+      .collection('User Info')
+      .doc('Experience Array')
       .set({
         experienceArray: getExperienceArray(),
       })
       .then(() => {
-        console.warn("Exp Array Updated");
+        console.warn('Exp Array Updated');
       });
   };
 
   const setAccomplishmentArrayDB = async () => {
     await firebase
       .firestore()
-      .collection("Users")
+      .collection('Users')
       .doc(userUID)
-      .collection("User Info")
-      .doc("Accomplishment Array")
+      .collection('User Info')
+      .doc('Accomplishment Array')
       .set({
         accomplishmentArray: getAccomplishmentArray(),
       })
       .then(() => {
-        console.warn("Accomplishment Array Updated");
+        console.warn('Accomplishment Array Updated');
       });
   };
 
   const setMeasurableArrayDB = async () => {
     await firebase
       .firestore()
-      .collection("Users")
+      .collection('Users')
       .doc(userUID)
-      .collection("User Info")
-      .doc("Measurable Array")
+      .collection('User Info')
+      .doc('Measurable Array')
       .set({
         measurableArray: getMeasurableArray(),
       })
       .then(() => {
-        console.warn("Measurable Array Updated");
+        console.warn('Measurable Array Updated');
       });
   };
 
@@ -513,6 +515,24 @@ const EditableProfileItem = (props) => {
               </div>
               <div className="itemTextButtonsDividerContainer">
                 <div className="itemTextButtonsContainer">
+                  {/* <Link
+                    onClick={() =>
+                      mixpanel.track('Specific Item Type Pressed', {
+                        Item: iconToHeaderName,
+                      })
+                    }
+                    to={
+                      icon != 'rocket-launch'
+                        ? {
+                            pathname: `/create/description`,
+                            state: {
+                              icon: icon,
+                            },
+                          }
+                        : `/create`
+                    }
+                    className="Link"
+                  > */}
                   <div className="TextContainer">
                     <h1>{title}</h1>
                     {team != undefined && team != null && team != '' && (
@@ -521,12 +541,13 @@ const EditableProfileItem = (props) => {
                     <h3>{time}</h3>
                     <h4>{description}</h4>
                     {/* {(idNum === 0 && specificItemArray.length === 1) ||
-                  idNum === specificItemArray.length - 1 ? (
-                    <hr size="1" color="white" className="Divider" />
-                  ) : (
-                    <hr size="1" color="lightgrey" className="Divider" />
-                  )} */}
+          idNum === specificItemArray.length - 1 ? (
+            <hr size="1" color="white" className="Divider" />
+          ) : (
+            <hr size="1" color="lightgrey" className="Divider" />
+          )} */}
                   </div>
+                  {/* </Link> */}
                   <div className="editDeleteButtonsContainer">
                     <MdEdit
                       size={25}
@@ -680,6 +701,7 @@ const EditableProfileItem = (props) => {
                     required
                     className="modalTextInputItems"
                     type="text"
+                    placeholder="Ex. Your Position, Student Athlete, etc"
                     maxLength="100"
                     value={experienceTitleText}
                     onChange={(text) => {
@@ -995,9 +1017,9 @@ const EditableProfileItem = (props) => {
                 )
               );
               setAccomplishmentYearReceived(
-                  accomplishmentDurationText.substring(
-                    accomplishmentDurationText.indexOf(',') + 2
-                  )
+                accomplishmentDurationText.substring(
+                  accomplishmentDurationText.indexOf(',') + 2
+                )
               );
               let monthIndex = getMonthIndex(
                 accomplishmentDurationText.substring(
@@ -1057,7 +1079,7 @@ const EditableProfileItem = (props) => {
                 <form>
                   <p className="textInputHeaders">Title</p>
                   <input
-                    placeholder="Ex: MVP, State Title, Help me "
+                    placeholder="Ex: MVP, State Title, Student Athlete Award"
                     required
                     className="modalTextInputItems"
                     type="text"
