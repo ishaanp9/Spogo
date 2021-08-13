@@ -1,8 +1,7 @@
 import React, { createContext, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import firebase from "./firebase";
-import { addUserInfo, getUserDict } from "./UserData";
-import SportPositionScreen from "./SignUpLoginFlow/screens/SportPositionScreen/SportPosition";
+import { addUserInfo, getUserDict, setUserDataCollected } from "./UserData";
 
 export const AuthContext = createContext();
 
@@ -58,6 +57,7 @@ export const AuthProvider = ({ children }) => {
                 history.push("/create");
               });
             console.log("Successfully Logged In");
+          
           } catch (e) {
             console.log(e);
             loginFailedFunction();

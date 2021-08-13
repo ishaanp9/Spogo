@@ -9,8 +9,12 @@ import { UserDataContext } from "../../../App";
 
 const SignUpScreen = (props) => {
   const { getUserUID } = useContext(UserDataContext);
-  let userUID;
+  let userUID = getUserUID();
   let history = useHistory();
+  if (userUID != "noUser") {
+    console.log(userUID);
+    history.push("/create");
+  }
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -22,16 +26,12 @@ const SignUpScreen = (props) => {
   const { register } = useContext(AuthContext);
 
   useEffect(() => {
-    userUID = getUserUID();
     WebFont.load({
       google: {
         families: ['Montserrat', 'Open Sans', 'Public Sans'],
       },
     });
-    if (userUID != "noUser") {
-      console.log(userUID);
-      history.push("/create");
-    }
+    
   }, []);
 
   let validator = require('email-validator');

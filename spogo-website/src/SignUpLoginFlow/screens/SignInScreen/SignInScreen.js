@@ -8,10 +8,14 @@ import Google from '../SignUpScreen/google.png';
 import { UserDataContext } from '../../../App';
 import firebase from 'firebase';
 
-const SignInScreen = (props) => {
+const SignInScreen = () => {
   const { getUserUID } = useContext(UserDataContext);
-  let userUID;
+  let userUID = getUserUID();
   let history = useHistory();
+  if (userUID != 'noUser') {
+    console.log(userUID);
+    history.push('/create');
+  }
   const { login } = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -19,24 +23,16 @@ const SignInScreen = (props) => {
   const [loginFailed, setLoginFailed] = useState(false);
 
   useEffect(() => {
-    userUID = getUserUID();
     WebFont.load({
       google: {
         families: ['Montserrat', 'Open Sans', 'Public Sans'],
       },
     });
-    if (userUID != 'noUser') {
-      console.log(userUID);
-      history.push('/create');
-    }
   }, []);
-
-  
 
   const loginFailedFunction = () => {
     setLoginFailed(true);
   };
-
 
   let validator = require('email-validator');
 
@@ -103,9 +99,6 @@ const SignInScreen = (props) => {
               />
             </div>
             <p className="signInForgotPassword">Forgot Password?</p>
-            {/* <button className="signInCreateAccountButton" onClick={() => login('johnsmith21@gmail.com', 'password')}>
-              Sign in
-            </button> */}
             <button
               className="signInCreateAccountButton"
               type="button"
@@ -147,9 +140,6 @@ const SignInScreen = (props) => {
             </p>
           </form>
         </div>
-        {/* <div className="signInImageContainer">
-          <img className="signInImage" src={SignInImage} />
-        </div> */}
       </div>
     </div>
   );

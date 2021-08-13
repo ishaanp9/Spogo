@@ -52,6 +52,21 @@ export const setUsername = (text) => {
 export const getUsername = () => {
   return username;
 }
+
+let userDataCollected = false;
+let userDataCollectedSetCounter = 0;
+
+export const getUserDataCollected = () => {
+    return userDataCollected
+}
+
+//Temp Solution: handles double set scenario when loading profile screen
+export const setUserDataCollected = () => {
+  userDataCollectedSetCounter ++;
+  if (userDataCollectedSetCounter > 1) {
+    userDataCollected = true;
+  }
+}
  
 export const addUserInfo = (key, value) => {
   userInfoDict[key] = value;

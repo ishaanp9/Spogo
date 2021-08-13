@@ -13,7 +13,7 @@ import {
   getExperienceArray,
   getAccomplishmentArray,
   getUserDataCollected,
-} from '../../../ProfileData';
+} from '../../../UserData';
 import CrownIcon from "mdi-react/CrownIcon";
 import TrophyIcon from "mdi-react/TrophyIcon";
 import WebFont from 'webfontloader';
@@ -106,11 +106,16 @@ const CreateDescriptionScreen = (props) => {
   };
 
   {
-    if (true) {
+    if (getUserDataCollected()) {
       return (
         <div>
           <div className="descriptionScreenHeader">
-            <Link to={`/create`}>
+            <Link to={{
+                  pathname: "/create",
+                  state: {
+                    fromDescriptionScreen: true,
+                  },
+                }}>
               <IoChevronBack
                 size={iconSize}
                 color="blue"
@@ -173,16 +178,6 @@ const CreateDescriptionScreen = (props) => {
               })}
             </ul>
           </div>
-        </div>
-      );
-    } else if (
-      path === "spogo.us/create/description" ||
-      path === "http://spogo.us/create/description" ||
-      path === "http://localhost:3000/create/description"
-    ) {
-      return (
-        <div>
-          <h1>Please try navigating to a user first</h1>
         </div>
       );
     } else {
