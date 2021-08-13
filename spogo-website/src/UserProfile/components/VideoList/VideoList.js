@@ -52,12 +52,18 @@ const VideoList = (props) => {
 
       if (e.target.files[0]) {
         reader.readAsDataURL(imageFile);
-        if (e.target.files[0].type.match("image.*")) {
-          console.log(e.target.files[0]);
-          uploadFileToStorage(imageFile.name, e.target.files[0], "photo");
-        } else if (e.target.files[0].type.match("video.*")) {
-          console.log(e.target.files[0]);
-          uploadFileToStorage(imageFile.name, e.target.files[0], "video");
+        if (e.target.files[0].size < 50000000) {
+          if (e.target.files[0].type.match("image.*")) {
+            console.log(e.target.files[0]);
+            uploadFileToStorage(imageFile.name, e.target.files[0], "photo");
+          } else if (e.target.files[0].type.match("video.*")) {
+            console.log(e.target.files[0]);
+            uploadFileToStorage(imageFile.name, e.target.files[0], "video");
+          }
+        } else {
+          window.confirm(
+            "Maximum upload size is 50mb."
+          )
         }
       }
     }
@@ -81,6 +87,11 @@ const VideoList = (props) => {
       .put(mediaFile)
       .then(() => {
         console.log("Storage Upload Succeeded");
+      })
+      .catch(() => {
+        window.confirm(
+          "Something went wrong. Please make sure your maximum upload size is 50mb and try again."
+        )
       });
 
     try {

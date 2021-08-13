@@ -35,10 +35,10 @@ const UserAuthCreateNavigation = (props) => {
         <Route exact path={"/auth/sign-up/socials"}>
           <SocialsScreen />
         </Route>
-        <Route path="/create/">
+        <Route exact path="/create/">
           <CreateProfileScreen />
         </Route>
-        <Route exact path={'/create/description'}>
+        <Route exact path={'/create/view-items'}>
           <CreateDescriptionScreen/>
         </Route>
       </AuthProvider>
