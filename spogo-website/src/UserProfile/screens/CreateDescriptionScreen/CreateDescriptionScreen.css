@@ -1,0 +1,156 @@
+.descriptionScreenHeader {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .descriptionScreenHeader > h2 {
+    color: white;
+  }
+  
+  .descriptionScreenHeaderDivider {
+    margin-top: 3%;
+  }
+  
+  .descriptionScreenItemContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    align-items: center;
+    overflow-x: hidden;
+    padding-left: 10px;
+  }
+  
+  .seeMoreButton {
+    border: none;
+      background-color: white;
+      font-size: 12px;
+      font-weight: 600;
+      color: grey;
+  }
+  
+  .seeLessButton {
+    border: none;
+    background-color: white;
+    font-size: 12px;
+    font-weight: 600;
+    color: grey;
+    margin-top: 5px;
+  }
+  
+  .itemBottomDivider {
+    margin-top: 20px;
+  }
+  
+  .descriptionScreenHeader {
+    padding: 0% 5%;
+  }
+  
+  .descriptionScreenHeader > h1 {
+    margin-top: 10px;
+    /* margin-left: 20%; */
+    font-size: 19px;
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  .BackIcon {
+    margin-top: 15px;
+    padding-right: 25%;
+  }
+  
+  .descriptionItemIconContainer {
+    margin-right: 5%;
+  }
+  
+  .itemTextContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    justify-content: flex-start;
+    margin-top: 20px;
+  }
+  
+  .itemTextContainer > h1 {
+    font-size: 16px;
+    font-weight: 500;
+    color: black;
+    margin-right: 5px;
+  }
+  
+  .itemTextContainer > h2 {
+    font-size: 14px;
+    font-weight: 500;
+    color: grey;
+    margin-top: 2px;
+    margin-right: 5px;
+    /* margin-bottom: 2%; */
+  }
+  
+  .itemTextContainer > h3 {
+    font-size: 12px;
+    font-weight: 400;
+    color: grey;
+    margin-top: 2px;
+    margin-right: 5px;
+    /* margin-bottom: 2%; */
+  }
+  
+  .itemTextContainer > h4 {
+    font-size: 14px;
+    font-weight: 400;
+    color: black;
+    margin-top: 10px;
+    margin-right: 5px;
+    /* margin-bottom: 2%; */
+  }
+  
+  /* @media screen and (max-width: 600px) and (min-width: 400px) {
+    .descriptionScreenHeader > h1 {
+      margin-top: 12px;
+      display: flex;
+      justify-self: center;
+      font-size: 20px;
+    }
+  
+    .BackIcon {
+      margin-top: 17px;
+    }
+  
+    .itemTextContainer {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-self: center;
+      justify-content: flex-start;
+      margin-top: 2%;
+      margin-left: 5%;
+      margin-bottom: 2%;
+    }
+  
+    .itemTextContainer > h1 {
+      font-size: 18px;
+      font-weight: bold;
+      color: black;
+      margin-bottom: 3%;
+      margin-top: 3%;
+    }
+  
+    .itemTextContainer > h2 {
+      font-size: 16px;
+      font-weight: 300;
+      color: black;
+      margin-bottom: 2%;
+    }
+  
+    .itemTextContainer > h3 {
+      font-size: 16px;
+      font-weight: 300;
+      color: black;
+      margin-bottom: 2%;
+    }
+  } */
+  
