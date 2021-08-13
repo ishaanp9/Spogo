@@ -13,11 +13,10 @@ import {
   getExperienceArray,
   getAccomplishmentArray,
   getUserDataCollected,
-} from '../../../UserData';
+} from "../../../UserData";
 import CrownIcon from "mdi-react/CrownIcon";
 import TrophyIcon from "mdi-react/TrophyIcon";
-import WebFont from 'webfontloader';
-
+import WebFont from "webfontloader";
 
 const CreateDescriptionScreen = (props) => {
   let path = props.url;
@@ -49,7 +48,7 @@ const CreateDescriptionScreen = (props) => {
   useEffect(() => {
     WebFont.load({
       google: {
-        families: ['Montserrat', 'Open Sans', 'Public Sans'],
+        families: ["Montserrat", "Open Sans", "Public Sans"],
       },
     });
   }, []);
@@ -58,7 +57,7 @@ const CreateDescriptionScreen = (props) => {
 
   //Determines what size icons should be based on screen width
   const determineIconSize = () => {
-    setIconSize(25)
+    setIconSize(25);
   };
 
   //Based on icon type, displays either crown or trophy icons
@@ -110,12 +109,14 @@ const CreateDescriptionScreen = (props) => {
       return (
         <div>
           <div className="descriptionScreenHeader">
-            <Link to={{
-                  pathname: "/create",
-                  state: {
-                    fromDescriptionScreen: true,
-                  },
-                }}>
+            <Link
+              to={{
+                pathname: "/create",
+                state: {
+                  fromDescriptionScreen: true,
+                },
+              }}
+            >
               <IoChevronBack
                 size={iconSize}
                 color="blue"
@@ -178,6 +179,7 @@ const CreateDescriptionScreen = (props) => {
               })}
             </ul>
           </div>
+          <hr size="1" color="lightgrey" className="descriptionScreenBottomDivider"/>
         </div>
       );
     } else {
