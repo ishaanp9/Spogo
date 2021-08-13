@@ -65,6 +65,7 @@ const SocialsScreen = (props) => {
         addUserInfo("sign-up-finished", true)
         addUserInfo('bio', '')
         addUserInfo('profile-image', 'blank_profile.png')
+        addUserInfo('custom-url-created', false)
         console.log(getUserDict())
         await addUserInfoDictToDB()
       }

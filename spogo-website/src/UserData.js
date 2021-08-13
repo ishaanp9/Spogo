@@ -43,14 +43,16 @@ export const clearAllData = () => {
   videoItemArray = [];
 };
 
-// let userUID = ""
+let username = ''
 
-// export const setUserUID = (userUID) => {
-//   userUID = this.userUID
-// }
+export const setUsername = (text) => {
+  username = text;
+}
 
-// export const getUserUID =;
-
+export const getUsername = () => {
+  return username;
+}
+ 
 export const addUserInfo = (key, value) => {
   userInfoDict[key] = value;
 };
@@ -243,7 +245,7 @@ function VideoItemObject(idNum, url, media) {
 export const addVideoItem = (id, url, media) => {
   const VideoObject = new VideoItemObject(id, url, media);
   if (videoItemArray.length < 3) {
-    videoItemArray.push(VideoObject);
+    videoItemArray.push({...VideoObject});
   }
 };
 
