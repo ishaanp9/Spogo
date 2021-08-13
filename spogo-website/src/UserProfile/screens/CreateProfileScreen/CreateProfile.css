@@ -232,16 +232,6 @@
     cursor: pointer;
   }
 
-  .createScreenVideoItemArrayList {
-    display: flex;
-    flex-direction: row;
-    overflow-x: auto;
-    overflow-y: hidden;
-    white-space: nowrap;
-    width: 100%;
-    margin-bottom: 20px;
-  }
-
   .userNotFoundErrorContainer {
     height: 100vh;
     display: flex;
@@ -868,16 +858,6 @@
 
   .spogoLogo > img:hover {
     cursor: pointer;
-  }
-
-  .createScreenVideoItemArrayList {
-    display: flex;
-    flex-direction: row;
-    overflow-x: auto;
-    overflow-y: hidden;
-    white-space: nowrap;
-    width: 100%;
-    margin-bottom: 20px;
   }
 
   .userNotFoundErrorContainer {
@@ -1549,16 +1529,6 @@
 
   .spogoLogo > img:hover {
     cursor: pointer;
-  }
-
-  .createScreenVideoItemArrayList {
-    display: flex;
-    flex-direction: row;
-    overflow-x: auto;
-    overflow-y: hidden;
-    white-space: nowrap;
-    width: 100%;
-    margin-bottom: 20px;
   }
 
   .userNotFoundErrorContainer {

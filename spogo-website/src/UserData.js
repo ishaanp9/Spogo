@@ -243,7 +243,7 @@ function VideoItemObject(idNum, url, media) {
 export const addVideoItem = (id, url, media) => {
   const VideoObject = new VideoItemObject(id, url, media);
   if (videoItemArray.length < 3) {
-    videoItemArray.push(VideoObject);
+    videoItemArray.push({...VideoObject});
   }
 };
 

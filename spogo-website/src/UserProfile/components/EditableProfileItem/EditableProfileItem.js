@@ -489,24 +489,6 @@ const EditableProfileItem = (props) => {
       {(mixpanel) => (
         <>
           {window.innerWidth < 600 ? (
-            // <Link
-            //   onClick={() =>
-            //     mixpanel.track("Specific Item Type Pressed", {
-            //       Item: iconToHeaderName,
-            //     })
-            //   }
-            //   to={
-            //     icon != "rocket-launch"
-            //       ? {
-            //           pathname: `/descriptions/${UID}`,
-            //           state: {
-            //             icon: icon,
-            //           },
-            //         }
-            //       : `/users/${UID}`
-            //   }
-            //   className="Link"
-            // >
             <div className="editableItemContainer">
               <div className="itemIconContainer">
                 <ItemIcon iconType={icon} />
