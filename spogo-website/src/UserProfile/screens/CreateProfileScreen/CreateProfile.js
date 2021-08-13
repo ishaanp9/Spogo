@@ -306,8 +306,9 @@ const CreateProfile = (props) => {
   const copyToClipboard = async () => {
     console.log(getUserInfo("custom-url-created"));
     if (getUserInfo("custom-url-created")) {
-      console.log(`spogo.us/users/${username}`);
-      copy(`spogo.us/users/${username}`);
+      console.log(`spogo.us/me/${username}`);
+      copy(`spogo.us/me/${username}`);
+      setShowLinkCopiedMessage(true)
     } else {
       //Checks whether the username entered has been taken
       await firebase
@@ -325,6 +326,7 @@ const CreateProfile = (props) => {
         .catch((error) => {
           console.log("Error getting documents: ", error);
         });
+      copy(`spogo.us/me/${username}`);
     }
   };
 

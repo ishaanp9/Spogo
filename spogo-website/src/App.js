@@ -81,7 +81,7 @@ const App = () => {
   }, []);
 
   const DetermineNavigatorPath = () => {
-    if (path.includes("users") || path.includes("descriptions")) {
+    if (path.includes("me") || path.includes("descriptions")) {
       return <ProfileNavigator url={path} />;
     } else if (path.includes("auth") || path.includes("create")) {
       return <UserAuthCreateNavigation />;

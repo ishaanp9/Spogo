@@ -170,7 +170,7 @@ const Item = (props) => {
                         icon: icon,
                       },
                     }
-                  : `/users/${UID}`
+                  : `/me/${UID}`
               }
               className="Link"
             >
