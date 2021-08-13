@@ -51,8 +51,9 @@
     border-radius: 1000px;
     margin-top: 10%;
     border: 2px solid white;
-    object-fit: contain;
-    width: 35%;
+    object-fit: cover;
+    width: 131.25px;
+    height: 131.25px;
   }
 
   .socialIconsRow {
@@ -413,8 +414,9 @@
   .profileImage {
     border-radius: 1000px;
     border: 3px solid white;
-    object-fit: contain;
+    object-fit: cover;
     width: 120px;
+    height: 120px
   }
 
   .locationIconTextContainer {
@@ -816,8 +818,9 @@
   .profileImage {
     border-radius: 1000px;
     border: 3px solid white;
-    object-fit: contain;
+    object-fit: cover;
     width: 120px;
+    height: 120px;
   }
 
   .socialIconsRow {
