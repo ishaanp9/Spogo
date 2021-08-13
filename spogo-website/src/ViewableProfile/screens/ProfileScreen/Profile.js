@@ -297,9 +297,9 @@ const Profile = (props) => {
 
   const [showMore, setShowMore] = useState(false);
   //See more see less for the bio
-  const getBioSeeMoreSeeLess = (text, platform) => {
+  const getBioSeeMoreSeeLess = (text) => {
     if (text != null) {
-      if (platform === "phone") {
+      if (window.innerWidth < 600) {
         if (text.length <= 151) {
           return text;
         }
@@ -742,7 +742,7 @@ const Profile = (props) => {
                       color="lightgrey"
                       size="1"
                     />
-                    <p>{getBioSeeMoreSeeLess(bio, "website")}</p>
+                    <p style={{ whiteSpace: 'pre-wrap' }}>{getBioSeeMoreSeeLess(bio)}</p>
                   </div>
                 )}
               </>
@@ -848,7 +848,7 @@ const Profile = (props) => {
                       color="lightgrey"
                       size="1"
                     />
-                    <p>{getBioSeeMoreSeeLess(bio, "phone")}</p>
+                    <p style={{ whiteSpace: 'pre-wrap' }}>{getBioSeeMoreSeeLess(bio)}</p>
                   </div>
                 )}
               </>
