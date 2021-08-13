@@ -111,7 +111,7 @@ const DescriptionScreen = (props) => {
       return (
         <div>
           <div className="descriptionScreenHeader">
-            <Link to={`/users/${UID}`}>
+            <Link to={`/me/${UID}`}>
               <IoChevronBack
                 size={iconSize}
                 color="blue"
@@ -189,7 +189,7 @@ const DescriptionScreen = (props) => {
     } else {
       return (
         <>
-          <Redirect to={`/users/${UID}`} />
+          <Redirect to={`/me/${UID}`} />
         </>
       );
     }
