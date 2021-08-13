@@ -102,6 +102,7 @@ const Profile = (props) => {
     });
   }, []);
 
+  //Based on the username, determines if UID tied to the username. If the username can't be found, instead sets userFound to false
   const getUsernameQuery = async () => {
     console.log(usernameEntered);
     await firebase

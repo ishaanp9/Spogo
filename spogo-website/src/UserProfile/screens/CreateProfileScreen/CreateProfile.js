@@ -131,9 +131,6 @@ const CreateProfile = (props) => {
     getDBUserInfo();
   }, []);
 
-  const [createProfileInitialized, setCreateProfileInitialized] =
-    useState(false);
-
   //Listens to see whether firebase onAuthStateChanged is finished, then performs the database call
   // if (isUserListenerFinished() && createProfileInitialized === true) {
   //   // console.log('Set UID')
@@ -254,6 +251,7 @@ const CreateProfile = (props) => {
   //Key used to refresh the video list
   const [refreshKey, setRefreshKey] = useState(0);
 
+  //Sets UserData based on information fetched from database
   const setProfileBasedOnDBFetch = () => {
     setUserInfo();
     setArrayID();
@@ -273,6 +271,7 @@ const CreateProfile = (props) => {
     }
   };
 
+  //Sets user information based on the UserInfoDict
   const setUserInfo = async () => {
     try {
       const profileImageUri = await firebase
@@ -310,6 +309,7 @@ const CreateProfile = (props) => {
       console.log(`spogo.us/users/${username}`);
       copy(`spogo.us/users/${username}`);
     } else {
+      //Checks whether the username entered has been taken
       await firebase
         .firestore()
         .collection("Users")
