@@ -2,12 +2,13 @@ import React, { useEffect, useState, useRef } from "react";
 import Item from "../../components/ExpTrophyMesItem/Item";
 import { VideoItem, ImageItem } from "../../components/VideoItem/VideoItem";
 import "./Profile.css";
-import firebase from "../../../firebase";
+import firebase from "firebase/app";
+import "firebase/firestore";
 import { FaInstagram, FaTwitter } from "react-icons/fa";
 import { MdEmail, MdMail, MdStar, MdLocationOn, MdClose } from "react-icons/md";
 import { BsLink45Deg } from "react-icons/bs";
 import BlankProfile from "./blank_profile.png";
-import SpogoLogo from '../../../spogo_logo.png'
+import SpogoLogo from "../../../spogo_logo.png";
 import Modal from "react-modal";
 import { MixpanelConsumer } from "react-mixpanel";
 import WebFont from "webfontloader";
@@ -32,7 +33,8 @@ import {
 
 const Profile = (props) => {
   let path = props.url;
-  let UID = path.substring(path.lastIndexOf("/") + 1);
+  let UID = "";
+  let usernameEntered = path.substring(path.lastIndexOf("/") + 1);
   const [thisUserInfoDict, setThisUserInfoDict] = useState({});
   const [thisTrophyArray, setThisTrophyArray] = useState([]);
   const [thisExperienceArray, setThisExperienceArray] = useState([]);
@@ -87,7 +89,8 @@ const Profile = (props) => {
       setSocialIcons();
       determineIconSize();
     } else {
-      await getDBUserInfo();
+      await getUsernameQuery();
+      // await getDBUserInfo();
     }
   }, []);
 
@@ -98,6 +101,30 @@ const Profile = (props) => {
       },
     });
   }, []);
+
+  const getUsernameQuery = async () => {
+    console.log(usernameEntered);
+    await firebase
+      .firestore()
+      .collection("Users")
+      .where("username", "==", usernameEntered)
+      .get()
+      .then(async (querySnapshot) => {
+        if (querySnapshot.empty) {
+          setUserExists(false);
+        } else {
+          querySnapshot.forEach((doc) => {
+            // doc.data() is never undefined for query doc snapshots
+            console.log(doc.id, " => ", doc.data());
+            UID = doc.id;
+          });
+        }
+        await getDBUserInfo();
+      })
+      .catch((error) => {
+        console.log("Error getting documents: ", error);
+      });
+  };
 
   const getDBUserInfo = async () => {
     try {
@@ -209,7 +236,7 @@ const Profile = (props) => {
   }
 
   //Sets the user profile info from Profile Data
-  function setUserInfo() {
+  const setUserInfo = () => {
     setEmail(getUserInfo("preferred-email"));
     console.log(email);
     setName(getUserInfo("name"));
@@ -220,7 +247,7 @@ const Profile = (props) => {
     setTwitter(getUserInfo("twitter-handle"));
     setWildcard(getUserInfo("wildcard"));
     setBio(getUserInfo("bio"));
-  }
+  };
 
   //Determines which social icosn the profile screen should show based on wether the user has entered the social link
   function setSocialIcons() {
@@ -270,79 +297,86 @@ const Profile = (props) => {
   const [showMore, setShowMore] = useState(false);
   //See more see less for the bio
   const getBioSeeMoreSeeLess = (text, platform) => {
-    if (platform === "phone") {
-      if (text.length <= 151) {
-        return text;
-      }
-      if (text.length > 151 && showMore) {
-        return (
-          <div className="seeLessBio">
-            <p>{text}</p>
-            <button
-              className="seeLessButton"
-              onClick={() => setShowMore(false)}
-            >
-              See Less
-            </button>
-          </div>
-        );
-      }
-      if (text.length > 151) {
-        return (
-          <div className="seeMoreBio">
-            <p>
-              {text.slice(0, 151)}
-              <span className="seeMoreButton" onClick={() => setShowMore(true)}>
-                {" "}
-                ...See More
-              </span>
-            </p>
-            {/* <button
-              className='seeMoreLessButton'
-              onClick={() => setShowMore(true)}>
-              See More
-            </button> */}
-          </div>
-        );
-      }
-    } else {
-      if (text.length <= 500) {
-        return text;
-      }
-      if (text.length > 500 && showMore) {
-        return (
-          <div className="seeLessBio">
-            <p>{text}</p>
-            <button
-              className="seeLessButton"
-              onClick={() => setShowMore(false)}
-            >
-              See Less
-            </button>
-          </div>
-        );
-      }
-      if (text.length > 500) {
-        return (
-          <div className="seeMoreBio">
-            <p>
-              {text.slice(0, 500)}
-              <span className="seeMoreButton" onClick={() => setShowMore(true)}>
-                {" "}
-                ...See More
-              </span>
-            </p>
-            {/* <button
-              className='seeMoreLessButton'
-              onClick={() => setShowMore(true)}>
-              See More
-            </button> */}
-          </div>
-        );
+    if (text != null) {
+      if (platform === "phone") {
+        if (text.length <= 151) {
+          return text;
+        }
+        if (text.length > 151 && showMore) {
+          return (
+            <div className="seeLessBio">
+              <p>{text}</p>
+              <button
+                className="seeLessButton"
+                onClick={() => setShowMore(false)}
+              >
+                See Less
+              </button>
+            </div>
+          );
+        }
+        if (text.length > 151) {
+          return (
+            <div className="seeMoreBio">
+              <p>
+                {text.slice(0, 151)}
+                <span
+                  className="seeMoreButton"
+                  onClick={() => setShowMore(true)}
+                >
+                  {" "}
+                  ...See More
+                </span>
+              </p>
+              {/* <button
+                className='seeMoreLessButton'
+                onClick={() => setShowMore(true)}>
+                See More
+              </button> */}
+            </div>
+          );
+        }
+      } else {
+        if (text.length <= 500) {
+          return text;
+        }
+        if (text.length > 500 && showMore) {
+          return (
+            <div className="seeLessBio">
+              <p>{text}</p>
+              <button
+                className="seeLessButton"
+                onClick={() => setShowMore(false)}
+              >
+                See Less
+              </button>
+            </div>
+          );
+        }
+        if (text.length > 500) {
+          return (
+            <div className="seeMoreBio">
+              <p>
+                {text.slice(0, 500)}
+                <span
+                  className="seeMoreButton"
+                  onClick={() => setShowMore(true)}
+                >
+                  {" "}
+                  ...See More
+                </span>
+              </p>
+              {/* <button
+                className='seeMoreLessButton'
+                onClick={() => setShowMore(true)}>
+                See More
+              </button> */}
+            </div>
+          );
+        }
       }
     }
   };
-  //Show More / Show Less Button for Items
 
   const [
     showMoreShowLessButtonExperience,

@@ -47,6 +47,8 @@ import {
   getMeasurableID,
   getUserDict,
   addUserInfo,
+  setUsername,
+  getUsername,
 } from "../../../UserData";
 import firebase from "../../../firebase";
 import EditableProfileItem from "../../components/EditableProfileItem/EditableProfileItem";
@@ -59,7 +61,7 @@ const CreateProfile = (props) => {
   let history = useHistory();
   const { logout } = useContext(AuthContext);
   const inputFile = React.useRef(null);
-  let userUrl = "";
+  let username = getUsername();
   const [showLinkCopiedMessage, setShowLinkCopiedMessage] = useState(false);
   const [copyCustomUrlButtonText, setCopyCustomUrlButtonText] =
     useState("Copy Custom Url");
@@ -167,7 +169,7 @@ const CreateProfile = (props) => {
       .get()
       .then(async (doc) => {
         if (doc.exists) {
-          console.log(doc.data().username);
+          setUsername(doc.data().username);
         } else {
           console.log("Doc doesn't exist");
         }
@@ -261,6 +263,7 @@ const CreateProfile = (props) => {
     setThisMediaArray(getMediaArray());
     setShowLoadingModal(false);
     setRefreshKey((prev) => prev + 1);
+    username = getUsername();
     if (getUserInfo("sign-up-finished") === false) {
       history.push("/auth/sign-up/location-sport-position");
     }
@@ -298,24 +301,48 @@ const CreateProfile = (props) => {
     setVideoImageID();
   };
 
+  const [invalidUsername, setInvalidUsername] = useState(false);
+
+  //Method that handles what to do when the user clicks the copy to clipboard icon
   const copyToClipboard = async () => {
+    console.log(getUserInfo("custom-url-created"));
     if (getUserInfo("custom-url-created")) {
-      copy(`spogo.us/${userUrl}`);
+      console.log(`spogo.us/users/${username}`);
+      copy(`spogo.us/users/${username}`);
     } else {
-      addUserInfo("custom-url-created", true);
-      await updateUserInfoDictInDB();
       await firebase
         .firestore()
         .collection("Users")
-        .doc(userUID)
-        .set({
-          username: userUrl,
+        .where("username", "==", username)
+        .get()
+        .then(async (querySnapshot) => {
+          if (querySnapshot.empty) {
+            addUsernameToDB();
+          } else {
+            setInvalidUsername(true);
+          }
         })
-        .then(() => {
-          console.warn("Added Username to DB");
-        })
-        .catch((e) => console.log(e));
+        .catch((error) => {
+          console.log("Error getting documents: ", error);
+        });
     }
+  };
+
+  //Method that adds a user's username to the database
+  const addUsernameToDB = async () => {
+    addUserInfo("custom-url-created", true);
+    await updateUserInfoDictInDB();
+    await firebase
+      .firestore()
+      .collection("Users")
+      .doc(userUID)
+      .set({
+        username: username,
+      })
+      .then(() => {
+        console.warn("Added Username to DB");
+      })
+      .catch((e) => console.log(e));
     setCopyUrlModalOpen(false);
   };
 
@@ -788,9 +815,15 @@ const CreateProfile = (props) => {
             />
             <MdContentCopy
               className="topRightIconItem"
-              onClick={() => {
-                setCopyUrlModalOpen(true);
-              }}
+              onClick={
+                getUserInfo("custom-url-created")
+                  ? () => {
+                      copyToClipboard();
+                    }
+                  : () => {
+                      setCopyUrlModalOpen(true);
+                    }
+              }
               size={25}
               color={"black"}
             />
@@ -1081,14 +1114,16 @@ const CreateProfile = (props) => {
               type="name"
               maxLength="100"
               onChange={(text) => {
-                userUrl = text.target.value;
+                username = text.target.value;
+                setInvalidUsername(false);
               }}
             />
           </div>
+          {invalidUsername && <h1 className="createScreenInvalidText">Sorry, this username is already taken</h1>}
           <div>
             <button
               onClick={() => {
-                copyToClipboard();
+                copyToClipboard(username);
                 setCopyCustomUrlButtonText("Link has been copied!");
               }}
               className="addEditItemModalButton"

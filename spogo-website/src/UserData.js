@@ -43,14 +43,16 @@ export const clearAllData = () => {
   videoItemArray = [];
 };
 
-// let userUID = ""
+let username = ''
 
-// export const setUserUID = (userUID) => {
-//   userUID = this.userUID
-// }
+export const setUsername = (text) => {
+  username = text;
+}
 
-// export const getUserUID =;
-
+export const getUsername = () => {
+  return username;
+}
+ 
 export const addUserInfo = (key, value) => {
   userInfoDict[key] = value;
 };
