@@ -13,7 +13,7 @@ import Modal from "react-modal";
 import { MixpanelConsumer } from "react-mixpanel";
 import WebFont from "webfontloader";
 import userErrorImage from "../../../SignUpLoginFlow/assets/signUpImage.png";
-
+import loadingGIF from "../../../loading.gif";
 import {
   addUserInfo,
   setUserDict,
@@ -63,6 +63,8 @@ const Profile = (props) => {
   const scrollExperience = useRef(null);
   const scrollAccomplishments = useRef(null);
   const scrollMeasurables = useRef(null);
+
+  const [showLoadingModal, setShowLoadingModal] = useState(true);
 
   //there has to be a better way to do this, using a function didint work.
   const executeBioScroll = () =>
@@ -221,6 +223,7 @@ const Profile = (props) => {
     setSocialIcons();
     determineIconSize();
     setUserDataCollected();
+    setShowLoadingModal(false)
   };
 
   //Gets and displays the profile image from firebase storage and firestore
@@ -329,11 +332,6 @@ const Profile = (props) => {
                   ...See More
                 </span>
               </p>
-              {/* <button
-                className='seeMoreLessButton'
-                onClick={() => setShowMore(true)}>
-                See More
-              </button> */}
             </div>
           );
         }
@@ -367,11 +365,6 @@ const Profile = (props) => {
                   ...See More
                 </span>
               </p>
-              {/* <button
-                className='seeMoreLessButton'
-                onClick={() => setShowMore(true)}>
-                See More
-              </button> */}
             </div>
           );
         }
@@ -404,9 +397,6 @@ const Profile = (props) => {
     setShowMoreShowLessButtonTextMeasurables,
   ] = useState("Show More");
 
-  // const [
-  //   lineShouldShow, setLineShowShow
-  // ] = useState(false)
   let itemLengthDifferenceNumberExperience;
   let itemLengthDifferenceNumberAccoplishment;
   let itemLengthDifferenceNumberMeasurables;
@@ -596,7 +586,28 @@ const Profile = (props) => {
             </div>
           </Modal>
 
-          {/* Experience Modal */}
+          {/* Loading Modal */}
+          <Modal
+            appElement={document.getElementById("root") || undefined}
+            isOpen={showLoadingModal}
+            className="loadingModal"
+            overlayClassName="itemAddModalOverlay"
+          >
+            <div
+              style={{
+                width: "100vw",
+                height: "100vh",
+                backgroundColor: "white",
+                alignItems: "center",
+                justifyContent: "center",
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
+              <img src={loadingGIF} />
+            </div>
+          </Modal>
+          {/* Loading Modal */}
 
           {window.innerWidth > 1200 && (
             // We should use refs so we can scroll to the ref clicked on
@@ -711,10 +722,6 @@ const Profile = (props) => {
                             );
                             window.open("mailto:" + email);
                           }}
-                          // onClick={() =>
-                          //   // window.location.replace("www.instagram.com/" + instagram)
-                          //   window.open("https://instagram.com/" + instagram)
-                          // }
                           size={iconSize}
                           color={"#5D4D4A"}
                         />
@@ -742,7 +749,9 @@ const Profile = (props) => {
                       color="lightgrey"
                       size="1"
                     />
-                    <p style={{ whiteSpace: 'pre-wrap' }}>{getBioSeeMoreSeeLess(bio)}</p>
+                    <p style={{ whiteSpace: "pre-wrap" }}>
+                      {getBioSeeMoreSeeLess(bio)}
+                    </p>
                   </div>
                 )}
               </>
@@ -848,7 +857,9 @@ const Profile = (props) => {
                       color="lightgrey"
                       size="1"
                     />
-                    <p style={{ whiteSpace: 'pre-wrap' }}>{getBioSeeMoreSeeLess(bio)}</p>
+                    <p style={{ whiteSpace: "pre-wrap" }}>
+                      {getBioSeeMoreSeeLess(bio)}
+                    </p>
                   </div>
                 )}
               </>
@@ -1018,21 +1029,6 @@ const Profile = (props) => {
       )}
     </MixpanelConsumer>
   ) : (
-    // <div className="userNotFoundErrorContainer">
-    //   <h1 className="userNotFoundText">User Doesn't Exist</h1>
-    //   <Link className="returnHomeText">
-    //     <h2>Return Home</h2>
-    //   </Link>
-    //   <div className="userNotFoundSpogoLogo">
-    //     <img
-    //       src={SpogoLogo}
-    //       alt="Spogo"
-    //       onClick={() => {
-    //         window.open("https://spogo.us");
-    //       }}
-    //     />
-    //   </div>
-    // </div>
     <div className="userNotFoundErrorContainer">
       <div className="errorMessageContainer">
         <div className="errorMessageTextContainer">

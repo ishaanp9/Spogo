@@ -122,11 +122,11 @@ const SignInScreen = () => {
               <hr style={{ marginTop: 20, width: '45%' }} />
             </div>
             <div
-              onClick={() => {
-                const googleAuthProvider =
-                  new firebase.auth.GoogleAuthProvider();
-                firebase.auth().signInWithPopup(googleAuthProvider);
-              }}
+              // onClick={() => {
+              //   const googleAuthProvider =
+              //     new firebase.auth.GoogleAuthProvider();
+              //   firebase.auth().signInWithPopup(googleAuthProvider);
+              // }}
               className="googleSignInContainer"
             >
               <img className="googleImageSignIn" src={Google} />

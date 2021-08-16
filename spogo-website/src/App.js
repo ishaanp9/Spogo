@@ -23,7 +23,7 @@ import firebase from "./firebase";
 //npm install mixpanel-browser --save
 //npm i react-mixpanel
 //npm i react-places-autocomplete
-
+//npm install --save rc-progress
 
 //npm run bundle
 //firebase deploy

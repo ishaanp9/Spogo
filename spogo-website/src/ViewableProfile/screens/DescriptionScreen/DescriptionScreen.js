@@ -3,8 +3,6 @@ import "./DescriptionScreen.css";
 import {
   Link,
   BrowserRouter as Router,
-  Route,
-  Switch,
   useLocation,
   Redirect,
 } from "react-router-dom";
@@ -18,7 +16,6 @@ import CrownIcon from "mdi-react/CrownIcon";
 import TrophyIcon from "mdi-react/TrophyIcon";
 import WebFont from 'webfontloader';
 
-import SpogoLogo from "./spogo_logo.png";
 
 const DescriptionScreen = (props) => {
   let path = props.url;

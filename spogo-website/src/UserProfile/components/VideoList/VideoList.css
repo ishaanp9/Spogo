@@ -5,8 +5,14 @@
   margin: 20px 0px;
 }
 
+.videoListDeleteIcon {
+  margin: 15px 10px;
+  cursor: pointer;
+}
+
 .videoListAddIcon {
   margin: 15px 0px;
+  cursor: pointer;
 }
 
 .createScreenComponentHeaderDivider {
@@ -21,6 +27,12 @@
   white-space: nowrap;
   width: 100%;
   margin-bottom: 20px;
+}
+
+.videoListHeaderIconContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 @media screen and (max-width: 600px) {
@@ -40,6 +52,30 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+  }
+
+  .uploadProgressModalContainer {
+    position: absolute;
+    bottom: 2%;
+    left: 2%;
+    outline: none;
+    border-radius: 5px;
+    width: 140px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #04aa6d;
+    padding: 1.5% 1%;
+    align-items: center;
+    box-shadow: 0 4px 8px 0 rgba(66, 65, 65, 0.203),
+      0 6px 20px 0 rgba(161, 155, 155, 0.59);
+    transition: 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+  }
+
+  .uploadProgressModalContainer > p {
+    font-family: 'Open Sans', sans-serif;
+    font-family: 14px;
+    margin-bottom: 10px;
   }
 }
 
@@ -61,6 +97,30 @@
     flex-direction: row;
     justify-content: space-between;
   }
+
+  .uploadProgressModalContainer {
+    position: absolute;
+    bottom: 2%;
+    left: 2%;
+    outline: none;
+    border-radius: 5px;
+    width: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #04aa6d;
+    padding: 1.5% 1%;
+    align-items: center;
+    box-shadow: 0 4px 8px 0 rgba(66, 65, 65, 0.203),
+      0 6px 20px 0 rgba(161, 155, 155, 0.59);
+    transition: 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+  }
+
+  .uploadProgressModalContainer > p {
+    font-family: 'Open Sans', sans-serif;
+    font-family: 14px;
+    margin-bottom: 10px;
+  }
 }
 
 @media screen and (min-width: 1200px) {
@@ -79,5 +139,29 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+  }
+
+  .uploadProgressModalContainer {
+    position: absolute;
+    bottom: 2%;
+    left: 2%;
+    outline: none;
+    border-radius: 5px;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #04aa6d;
+    padding: 1.5% 1%;
+    align-items: center;
+    box-shadow: 0 4px 8px 0 rgba(66, 65, 65, 0.203),
+      0 6px 20px 0 rgba(161, 155, 155, 0.59);
+    transition: 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+  }
+
+  .uploadProgressModalContainer > p {
+    font-family: 'Open Sans', sans-serif;
+    font-family: 14px;
+    margin-bottom: 10px;
   }
 }

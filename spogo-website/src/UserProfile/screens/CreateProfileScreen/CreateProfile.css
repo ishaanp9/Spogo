@@ -1925,44 +1925,6 @@
     justify-content: center;
   }
 
-  /* .linkCopiedMessageModal {
-    background-color: #3eb489;
-    position: absolute;
-    bottom: 2%;
-    left: 2%;
-    padding: 1% 1%;
-    outline: none;
-    border-radius: 5px;
-  }
-  .linkCopiedItemAddModalOverlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: transparent;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .linkCopiedMessageModalContainer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 80px;
-    -webkit-transition-duration: 0.4s;
-    transition-duration: 0.4s;
-  }
-
-  .linkCopiedMessageModalContainer > p {
-    font-family: 'Open Sans', sans-serif;
-    font-size: 16px;
-    font-weight: 500;
-  } */
-
   .linkCopiedMessage {
     position: absolute;
     bottom: 2%;

@@ -45,11 +45,12 @@ export const clearAllData = () => {
 
 let username = ''
 
-export const setUsername = (text) => {
+export const setStoredUsername = (text) => {
+  console.log(username)
   username = text;
 }
 
-export const getUsername = () => {
+export const getStoredUsername = () => {
   return username;
 }
 
