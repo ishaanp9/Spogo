@@ -319,6 +319,17 @@
     cursor: pointer;
   }
 
+  .bioModal {
+    background-color: white;
+    position: absolute;
+    left: 5%;
+    right: 5%;
+    /* bottom: 15%; */
+    padding: 3% 2%;
+    border-radius: 10px;
+    outline: none;
+  }
+
   .experienceModal {
     background-color: white;
     position: absolute;
@@ -943,6 +954,17 @@
 
   .userNotFoundSpogoLogo > img:hover {
     cursor: pointer;
+  }
+
+  .bioModal {
+    background-color: white;
+    position: absolute;
+    left: 5%;
+    right: 5%;
+    /* bottom: 15%; */
+    padding: 3% 2%;
+    border-radius: 10px;
+    outline: none;
   }
 
   .experienceModal {
@@ -1616,6 +1638,17 @@
 
   .userNotFoundSpogoLogo > img:hover {
     cursor: pointer;
+  }
+
+  .bioModal {
+    background-color: white;
+    position: absolute;
+    left: 25%;
+    right: 25%;
+    /* bottom: 15%; */
+    padding: 2% 2%;
+    border-radius: 10px;
+    outline: none;
   }
 
   .experienceModal {
