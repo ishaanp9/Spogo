@@ -93,7 +93,7 @@ const SocialsScreen = (props) => {
         <p className="socialScreenFormHeader">
           Enter your Social Media Handles
         </p>
-        <p className="socialScreenHeadlineHeader">Some awsome tagline</p>
+        <p className="socialScreenHeadlineHeader">Gain exposure on all platforms</p>
         <form>
           <div className="socialsTextInputContainer">
             <FaInstagram size={25} color={"#3eb489"} />

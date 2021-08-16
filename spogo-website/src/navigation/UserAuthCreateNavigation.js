@@ -12,8 +12,6 @@ import SocialsScreen from "../SignUpLoginFlow/screens/SocialsScreen/SocialsScree
 import CreateProfileScreen from "../UserProfile/screens/CreateProfileScreen/CreateProfile";
 
 import { AuthProvider } from "../AuthProvider";
-import CreateDescriptionScreen from "../UserProfile/screens/CreateDescriptionScreen/CreateDescriptionScreen";
-
 
 const UserAuthCreateNavigation = (props) => {
   let userUID = props.uid
@@ -37,9 +35,6 @@ const UserAuthCreateNavigation = (props) => {
         </Route>
         <Route exact path="/create/">
           <CreateProfileScreen />
-        </Route>
-        <Route exact path={'/create/view-items'}>
-          <CreateDescriptionScreen/>
         </Route>
       </AuthProvider>
     </Router>

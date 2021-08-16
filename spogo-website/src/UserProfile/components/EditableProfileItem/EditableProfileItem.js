@@ -21,6 +21,7 @@ import Modal from "react-modal";
 import { editMeasurableItem } from "../../../UserData";
 import firebase from "../../../firebase";
 import { UserDataContext } from "../../../App";
+import { ExperienceDescriptionModal, AccomplishmentDescriptionModal } from "../../../UserProfile/screens/CreateDescriptionScreen/CreateDescriptionScreen";
 
 const EditableProfileItem = (props) => {
   const { getUserUID } = useContext(UserDataContext);
@@ -138,6 +139,8 @@ const EditableProfileItem = (props) => {
     useState(false);
   const [invalidExperienceEndDate, setInvalidExperienceEndDate] =
     useState(false);
+  const [endDateBeforeStartDateError, setEndDateBeforeStartDateError] =
+    useState(false);
 
   const checkValidExperience = async () => {
     if (
@@ -149,39 +152,57 @@ const EditableProfileItem = (props) => {
         currentExperienceText === "Not currently doing this?")
     ) {
       {
-        let experienceDurationText;
-        if (currentExperienceText === "Not currently doing this?") {
-          experienceDurationText =
-            experienceStartMonth + ", " + experienceStartYear + " - Present";
-        } else {
-          experienceDurationText =
-            experienceStartMonth +
-            ", " +
-            experienceStartYear +
-            " - " +
-            experienceEndMonth +
-            ", " +
-            experienceEndYear;
+        let startDateValue = 0;
+        let endDateValue = 0;
+        let endDateAfterStartDate = true;
+        if (currentExperienceText != "Not currently doing this?") {
+          startDateValue += parseInt(experienceStartYear, 10);
+          startDateValue += getMonthIndex(experienceStartMonth) / 13;
+          endDateValue += parseInt(experienceEndYear, 10);
+          endDateValue += getMonthIndex(experienceEndMonth) / 13;
+          console.log(startDateValue);
+          console.log(endDateValue);
+          if (endDateValue < startDateValue) {
+            endDateAfterStartDate = false;
+          }
         }
-        setExperienceModalOpen(false);
-        editExperienceItem(
-          experienceTitleText,
-          experienceTeamText,
-          experienceDurationText,
-          experienceDescriptionText,
-          idNum
-        );
-        setExperienceTitleText("");
-        setExperienceTeamText("");
-        setExperienceStartMonth("");
-        setExperienceStartYear("");
-        setExperienceEndMonth("");
-        setExperienceEndYear("");
-        setExperienceDescriptionText("");
-        setCurrentExperienceText("Currently doing this?");
-        setCurrentExperience(false);
-        props.callbackReloadList();
-        await setExperienceArrayDB();
+        if (endDateAfterStartDate) {
+          let experienceDurationText;
+          if (currentExperienceText === "Not currently doing this?") {
+            experienceDurationText =
+              experienceStartMonth + ", " + experienceStartYear + " - Present";
+          } else {
+            experienceDurationText =
+              experienceStartMonth +
+              ", " +
+              experienceStartYear +
+              " - " +
+              experienceEndMonth +
+              ", " +
+              experienceEndYear;
+          }
+          setExperienceModalOpen(false);
+          editExperienceItem(
+            experienceTitleText,
+            experienceTeamText,
+            experienceDurationText,
+            experienceDescriptionText,
+            idNum
+          );
+          setExperienceTitleText("");
+          setExperienceTeamText("");
+          setExperienceStartMonth("");
+          setExperienceStartYear("");
+          setExperienceEndMonth("");
+          setExperienceEndYear("");
+          setExperienceDescriptionText("");
+          setCurrentExperienceText("Currently doing this?");
+          setCurrentExperience(false);
+          props.callbackReloadList();
+          await setExperienceArrayDB();
+        } else {
+          setEndDateBeforeStartDateError(true);
+        }
       }
     } else {
       if (experienceTitleText === "") {
@@ -486,6 +507,27 @@ const EditableProfileItem = (props) => {
     return yearIndexNum;
   };
 
+  const [experienceDescriptionModalOpen, setExperienceDescriptionModalOpen] =
+    useState(false);
+  const [
+    experienceDescriptionModalRefresh,
+    setExperienceDescriptionModalRefresh,
+  ] = useState(false);
+
+  const [accomplishmentDescriptionModalOpen, setAccomplishmentDescriptionModalOpen] = useState(false);
+  const [accomplishmentDescriptionModalRefresh, setAccomplishmentDescriptionModalRefresh] = useState(false);
+
+  const handleItemClick = (iconType) => {
+    console.log(iconType)
+    if (iconType === 'crown') {
+      setExperienceDescriptionModalRefresh(!experienceDescriptionModalRefresh);
+      setExperienceDescriptionModalOpen(true);
+    } else if (iconType === 'trophy') {
+      setAccomplishmentDescriptionModalOpen(true);
+      setAccomplishmentDescriptionModalRefresh(!accomplishmentDescriptionModalRefresh);
+    }
+  }
+
   return (
     <MixpanelConsumer>
       {(mixpanel) => (
@@ -497,38 +539,9 @@ const EditableProfileItem = (props) => {
               </div>
               <div className="itemTextButtonsDividerContainer">
                 <div className="itemTextButtonsContainer">
-                  {/* <Link
-                    onClick={() =>
-                      mixpanel.track('Specific Item Type Pressed', {
-                        Item: iconToHeaderName,
-                      })
-                    }
-                    to={
-                      icon != 'rocket-launch'
-                        ? {
-                            pathname: `/create/view-items`,
-                            state: {
-                              icon: icon,
-                            },
-                          }
-                        : `/create`
-                    }
-                    className="TextContainer"
-                  > */}
-
                   <div
                     className="TextContainer"
-                    onClick={
-                      icon != "rocket-launch"
-                        ? () =>
-                            history.push({
-                              pathname: "/create/view-items",
-                              state: {
-                                icon: icon,
-                              },
-                            })
-                        : null
-                    }
+                    onClick={() => handleItemClick(icon)}
                   >
                     <h1>{title}</h1>
                     {team != undefined && team != null && team != "" && (
@@ -664,9 +677,6 @@ const EditableProfileItem = (props) => {
                   expEndMonthIndex + 1;
                 document.getElementById("experienceEndYearSelector").value =
                   expEndYearIndex + 1;
-                // } catch (e) {
-                //   console.log(e)
-                // }
               }
             }}
             className="experienceModal"
@@ -814,6 +824,7 @@ const EditableProfileItem = (props) => {
                               name={"experienceEndMonthSelector"}
                               onChange={(event) => {
                                 setInvalidExperienceEndDate(false);
+                                setEndDateBeforeStartDateError(false);
                                 setExperienceEndMonth(
                                   event.target.options[
                                     event.target.selectedIndex
@@ -845,6 +856,7 @@ const EditableProfileItem = (props) => {
                               name={"experienceEndYearSelector"}
                               onChange={(event) => {
                                 setInvalidExperienceEndDate(false);
+                                setEndDateBeforeStartDateError(false);
                                 setExperienceEndYear(
                                   event.target.options[
                                     event.target.selectedIndex
@@ -922,6 +934,14 @@ const EditableProfileItem = (props) => {
                           style={{ marginBottom: 5 }}
                         >
                           End month and year is required
+                        </h1>
+                      )}
+                      {endDateBeforeStartDateError && (
+                        <h1
+                          className="createScreenInvalidText"
+                          style={{ marginBottom: 5 }}
+                        >
+                          End date must come after start date
                         </h1>
                       )}
                       <p className="presentTimeText">
@@ -1194,6 +1214,21 @@ const EditableProfileItem = (props) => {
             </div>
           </Modal>
           {/* Accomplishment Modal */}
+
+          {/* Experience Description Modal*/}
+          <ExperienceDescriptionModal
+            modalOpen={experienceDescriptionModalOpen}
+            refresh={experienceDescriptionModalRefresh}
+          />
+          {/* Experience Description Modal*/}
+
+          {/* Accomplishment Description Modal*/}
+          <AccomplishmentDescriptionModal
+            modalOpen={accomplishmentDescriptionModalOpen}
+            refresh={accomplishmentDescriptionModalRefresh}
+          />
+          {/* Accomplishment Description Modal*/}
+
           {/* Measurable Modal */}
           <Modal
             appElement={document.getElementById("root") || undefined}

@@ -1,0 +1,177 @@
+.mediaDeleteIcon {
+  margin-left: -45px;
+  margin-top: 25px;
+  margin-right: 5px;
+  z-index: 1;
+}
+
+.MediaModal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(34, 31, 31, 0.5);
+  z-index: 2;
+}
+.ModalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(34, 31, 31, 0.8);
+  z-index: 2;
+}
+
+@media screen and (max-width: 600px) {
+  .mediaContainer {
+    display: flex;
+    align-self: flex-start;
+  }
+
+  .mediaContainer > img {
+    object-fit: cover;
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-right: 5px;
+    height: 140px;
+    width: 210px;
+  }
+
+  .mediaContainer > video {
+    object-fit: contain;
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-right: 5px;
+    height: 140px;
+    width: 210px;
+  }
+
+  .modalMedia {
+    object-fit: cover;
+    width: 100%;
+    z-index: 2;
+  }
+
+  .modalContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+  }
+
+  .closeIcon {
+    position: absolute;
+    margin-top: 5%;
+    margin-left: 5%;
+  }
+}
+
+@media screen and (max-width: 1200px) and (min-width: 600px) {
+  .mediaContainer {
+    display: flex;
+    align-self: flex-start;
+    margin-top: 1%;
+  }
+
+  .mediaContainer > img {
+    object-fit: cover;
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-right: 5px;
+    height: 200px;
+    width: 300px;
+  }
+
+  .mediaContainer > video {
+    object-fit: contain;
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-right: 5px;
+    height: 200px;
+    width: 300px;
+  }
+
+  .mediaContainer:hover {
+    cursor: pointer;
+  }
+
+  .modalMedia {
+    object-fit: cover;
+    width: 40%;
+    z-index: 2;
+  }
+
+  .modalContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    justify-content: center;
+  }
+
+  .closeIcon {
+    position: absolute;
+    margin-top: 3%;
+    margin-left: 3%;
+  }
+  .closeIcon:hover {
+    cursor: pointer;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .mediaContainer {
+    display: flex;
+    align-self: flex-start;
+    margin-top: 1%;
+  }
+
+  .mediaContainer > img {
+    object-fit: cover;
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-right: 5px;
+    height: 200px;
+    width: 300px;
+  }
+
+  .mediaContainer > video {
+    object-fit: contain;
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-right: 5px;
+    height: 200px;
+    width: 300px;
+  }
+
+  .mediaContainer:hover {
+    cursor: pointer;
+  }
+
+  .modalMedia {
+    object-fit: cover;
+    width: 40%;
+    z-index: 2;
+  }
+
+  .modalContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    justify-content: center;
+  }
+
+  .closeIcon {
+    position: absolute;
+    margin-top: 3%;
+    margin-left: 3%;
+    /* background-color: rgb(51, 45, 45);
+    border-radius: 50px; */
+  }
+  .closeIcon:hover {
+    cursor: pointer;
+  }
+}
