@@ -1,4 +1,3 @@
-
 .navbar {
   background: white;
   height: 80px;
@@ -99,6 +98,27 @@
   transition: 0.5s ease-in-out;
 }
 
+.loginHeaderButton > button {
+  background-color: white;
+  width: 200px;
+  height: 48px;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 16px;
+  font-family: 'DM Sans', sans-serif;
+  margin-left: 20px;
+  font-family: 'Montserrat', sans-serif;
+  border: 2px solid #3eb489;
+}
+
+.loginHeaderButton > button:hover {
+  cursor: pointer;
+  background-color: #3eb489;
+  color: #000;
+  transition: 0.5s ease-in-out;
+  
+}
+
 .fa-bars {
   color: #fff;
 }
@@ -108,6 +128,10 @@
 }
 
 .waitlistLinkBtn {
+  text-decoration: none;
+}
+
+.loginLinkButton {
   text-decoration: none;
 }
 
@@ -190,6 +214,35 @@
     height: 120px;
     text-decoration: none;
     margin-left: -20px;
+  }
+
+  .loginHeaderButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 250px;
+    height: 120px;
+    text-decoration: none;
+    margin-left: -20px;
+    margin-bottom: -50px;
+  }
+
+  .loginHeaderButton > button {
+    background-color: white;
+    width: 250px;
+    height: 48px;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+    border: 2px solid #3eb489;
+  }
+
+  .loginHeaderButton > button:hover {
+    cursor: pointer;
+    background-color: #3eb489;
+    color: #000;
+    transition: 0.5s ease-in-out;
   }
 
   .headerButton > button {

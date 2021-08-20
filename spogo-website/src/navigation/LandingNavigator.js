@@ -10,6 +10,7 @@ import LandingPageAbout from '../LandingPage/screens/LandingPageAbout/LandingPag
 import LandingPageBlog from '../LandingPage/screens/LandingPageBlog/LandingPageBlog';
 import LandingPageFAQ from '../LandingPage/screens/LandingPageFAQ/LandingPageFAQ';
 import BlogArticleScreen from '../LandingPage/screens/BlogArticleScreen/BlogArticleScreen';
+import SignInScreen from '../SignUpLoginFlow/screens/SignInScreen/SignInScreen';
 
 
 const LandingNavigator = (props) => {
@@ -33,6 +34,9 @@ const LandingNavigator = (props) => {
       </Route> */}
       <Route path={'/blog/article'}>
         <BlogArticleScreen/>
+      </Route>
+      <Route path ={'/auth'}>
+        <SignInScreen/>
       </Route>
     </Router>
   );

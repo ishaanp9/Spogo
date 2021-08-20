@@ -1,24 +1,23 @@
-import React, { useState, useEffect } from "react";
-import "./LandingPage.css";
-import Header from "../../components/Header/Header";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import Mockup from "./mockup.png";
-import ExampleImage from "./top.PNG";
-import SpogoTopGraphic from "./spogotopgraphic.png";
-import GirlWithTrophyGraphic from "./girlwithtrophy.png";
-import ShowcaseYourselfGraphic from "./showcaseyourselfbaseballplayer.png";
-import SocialMediaIntegrationGraphic from "./socialmediaintegration.png";
-import TailoredCustomizationGraphic from "./tailoredcustomization.png";
-import LinkInBioGraphic from "./linkinbio.png";
-import firebase from "../../../firebase";
-import { MixpanelConsumer } from "react-mixpanel";
-import Footer from "../../components/Footer/Footer";
-import WebFont from "webfontloader";
-
+import React, { useState, useEffect } from 'react';
+import './LandingPage.css';
+import Header from '../../components/Header/Header';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import Mockup from './mockup.png';
+import ExampleImage from './top.PNG';
+import SpogoTopGraphic from './spogotopgraphic.png';
+import GirlWithTrophyGraphic from './girlwithtrophy.png';
+import ShowcaseYourselfGraphic from './showcaseyourselfbaseballplayer.png';
+import SocialMediaIntegrationGraphic from './socialmediaintegration.png';
+import TailoredCustomizationGraphic from './tailoredcustomization.png';
+import LinkInBioGraphic from './linkinbio.png';
+import firebase from '../../../firebase';
+import { MixpanelConsumer } from 'react-mixpanel';
+import Footer from '../../components/Footer/Footer';
+import WebFont from 'webfontloader';
 
 const LandingPage = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
   const [waitlistInputValid, setWaitlistInputValid] = useState(false);
   const [invalidInput, setInvalidInput] = useState(false);
   const [waitlistAddSuccessful, setWaitlistAddSuccessful] = useState(false);
@@ -26,19 +25,20 @@ const LandingPage = () => {
   useEffect(() => {
     WebFont.load({
       google: {
-        families: ['Montserrat', 'Open Sans', 'Public Sans']
-      }
+        families: ['Montserrat', 'Open Sans', 'Public Sans'],
+      },
     });
-   }, []);
+  }, []);
 
   const addUserToWaitlist = async () => {
-    await firebase.app('secondary')
+    await firebase
+      .app('secondary')
       .auth()
-      .createUserWithEmailAndPassword(email, "password")
+      .createUserWithEmailAndPassword(email, 'password')
       .catch((error) => {
-        console.log("Error:", error);
+        console.log('Error:', error);
       });
-      // await firebase
+    // await firebase
     //   .firestore()
     //   .collection("Waitlist")
     //   .add({
@@ -60,13 +60,13 @@ const LandingPage = () => {
     // });
   };
 
-  let validator = require("email-validator");
+  let validator = require('email-validator');
 
   const validateEmail = () => {
     if (validator.validate(email)) {
       addUserToWaitlist();
       <MixpanelConsumer>
-        {(mixpanel) => mixpanel.track("Waitlist User Added")}
+        {(mixpanel) => mixpanel.track('Waitlist User Added')}
       </MixpanelConsumer>;
       setWaitlistAddSuccessful(true);
     } else {
@@ -75,7 +75,7 @@ const LandingPage = () => {
   };
   return (
     <>
-      <Header onClick={window.scrollTo(0,0)}/>
+      <Header onClick={window.scrollTo(0, 0)} />
       <div className="landingPageBody">
         <div className="topLandingPageContentBannerContainer">
           <div className="landingPageWaitlistContentContainer">
@@ -84,7 +84,39 @@ const LandingPage = () => {
               Is Here.
             </h1>
             <p>Find Out More.</p>
-            {!waitlistAddSuccessful ? (
+            <div style={{flexDirection: 'row', display: 'flex', width: '100%'}}>
+              <Link className="waitlistButton">
+                <button
+                  type="button"
+                  onClick={
+                    () => validateEmail()
+                    // ? addUserToWaitlist() : null
+                  }
+                  style={{ marginBottom: '2%' }}
+                >
+                  Start building your Profile
+                </button>
+              </Link>
+              <div className="waitlistButton">
+                <button type="button">Thank You!</button>
+              </div>
+            </div>
+            {/* <div
+              style={{
+                marginBottom: '2%',
+                flexDirection: 'row',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+              }}
+            >
+              {window.innerWidth > 600 ? <hr style={{ width: '10%' }} /> : null}
+              <p style={{ fontSize: 14, textAlign: 'center' }}>
+                and be notified when new features come out (marketplace, feed)
+              </p>
+              {window.innerWidth > 600 ? <hr style={{ width: '10%' }} /> : null}
+            </div> */}
+            {/* {!waitlistAddSuccessful ? (
               <form onsubmit="return false">
                 <div className="waitlistInputContainer">
                   <input
@@ -97,7 +129,7 @@ const LandingPage = () => {
                   />
                   <input
                     style={
-                      invalidInput ? { borderWidth: 2, borderColor: "red" } : {}
+                      invalidInput ? { borderWidth: 2, borderColor: 'red' } : {}
                     }
                     maxLength={100}
                     type="email"
@@ -131,7 +163,7 @@ const LandingPage = () => {
               <div className="waitlistButton">
                 <button type="button">Thank You!</button>
               </div>
-            )}
+            )} */}
           </div>
           <div className="landingPageTopImageMockupContainer">
             <img src={Mockup} alt="Phone Mockup" />
@@ -144,7 +176,7 @@ const LandingPage = () => {
             image, and likeness. Whether it is finding opportunities or sharing
             content, every athlete has something to do on Spogo. So as you
             continue along your athletic journey, Spogo will be right there with
-            you.{" "}
+            you.{' '}
           </p>
           <img
             className="mainProductHeaderImage"
@@ -194,12 +226,12 @@ const LandingPage = () => {
             <h1>Get Noticed</h1>
             <h2>
               Spogo provides a unique way to generate exposure and grow your
-              brand through an innovative public, private, and trending feed concept.
-              Since the public feed is the first feed you see, you can generate impressions
-              with your athletic content and find people you never knew existed. With the
-              private feed, catch up and interact with those you know best. On
-              our trending page, explore what’s going viral. With Spogo, it
-              could even be you!
+              brand through an innovative public, private, and trending feed
+              concept. Since the public feed is the first feed you see, you can
+              generate impressions with your athletic content and find people
+              you never knew existed. With the private feed, catch up and
+              interact with those you know best. On our trending page, explore
+              what’s going viral. With Spogo, it could even be you!
             </h2>
           </div>
           <div className="productDescription">
@@ -221,7 +253,7 @@ const LandingPage = () => {
           </div>
         </div> */}
         {/* Bottom Part */}
-        <Footer onClick={window.scrollTo(0,0)} />
+        <Footer onClick={window.scrollTo(0, 0)} />
       </div>
     </>
   );
