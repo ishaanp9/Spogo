@@ -349,6 +349,7 @@ const SportPosition = (props) => {
                 placeholder={"Ex: Quarterback, Point Guard, Midfielder"}
                 type="text"
                 id="Position"
+                autoCapitalize='none'
                 value={positionOne}
                 onChange={(text) => {
                   setPositionOne(text.target.value);
@@ -362,6 +363,7 @@ const SportPosition = (props) => {
                 placeholder={'Ex: Linebacker, Shooting Guard, Striker'}
                 type="text"
                 id="Position"
+                autoCapitalize='none'
                 value={positionTwo}
                 onChange={(text) => {
                   setPositionTwo(text.target.value);

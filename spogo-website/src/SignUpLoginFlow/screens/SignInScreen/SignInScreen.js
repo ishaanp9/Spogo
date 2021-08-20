@@ -77,7 +77,8 @@ const SignInScreen = () => {
               <input
                 className="signInTextInput"
                 required
-                type="text"
+                type="email"
+                autoCapitalize='none'
                 id="Email"
                 value={email}
                 onChange={(text) => {
@@ -92,6 +93,7 @@ const SignInScreen = () => {
               <input
                 className="signInTextInput"
                 required
+                autoCapitalize='none'
                 type="password"
                 id="Password"
                 value={password}

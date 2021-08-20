@@ -102,6 +102,7 @@ const SocialsScreen = (props) => {
               placeholder="Enter Instagram Handle"
               type="text"
               id="Instagram"
+              autoCapitalize='none'
               value={instagramHandle}
               onChange={(text) => {
                 setInstagramHandle(text.target.value);
@@ -114,6 +115,7 @@ const SocialsScreen = (props) => {
               className="socialScreenTextInput"
               placeholder="Enter Twitter Handle"
               type="text"
+              autoCapitalize='none'
               id="Twitter"
               value={twitterHandle}
               onChange={(text) => {
@@ -128,6 +130,7 @@ const SocialsScreen = (props) => {
               placeholder="Note: Email they sign up with will be here by defualt"
               type="text"
               id="Email"
+              autoCapitalize='none'
               value={preferredEmail}
               onChange={(text) => {
                 setPreferredEmail(text.target.value);
@@ -143,6 +146,7 @@ const SocialsScreen = (props) => {
               placeholder="Enter Link a of Your Choice"
               type="text"
               id="Link"
+              autoCapitalize='none'
               value={wildcardLink}
               onChange={(text) => {
                 setWildcardLink(text.target.value);

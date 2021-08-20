@@ -106,8 +106,9 @@ const SignUpScreen = (props) => {
             <p className="signUpTextInputHeader">Email</p>
             <input
               className="signUpTextInput"
-              type="text"
+              type="Email"
               id="Email"
+              autoCapitalize='off'
               value={email}
               onChange={(text) => {
                 setEmail(text.target.value);
