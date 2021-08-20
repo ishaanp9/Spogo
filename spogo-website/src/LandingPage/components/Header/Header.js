@@ -12,14 +12,13 @@ function Header() {
   const [click, setClick] = useState(false);
   const handleClick = () => setClick(!click);
 
-  
   useEffect(() => {
     WebFont.load({
       google: {
-        families: ['Montserrat', 'Open_Sans']
-      }
+        families: ['Montserrat', 'Open_Sans'],
+      },
     });
-   }, []);
+  }, []);
 
   return (
     <MixpanelConsumer>
@@ -93,6 +92,20 @@ function Header() {
                   FAQ
                 </Link>
               </li>
+              <Link to="/auth" className="loginLinkButton">
+                <li className="loginHeaderButton">
+                  <button
+                    onClick={() =>
+                      mixpanel.track('Header Tabs Pressed', {
+                        'Tab Pressed': 'Login',
+                      })
+                    }
+                    type="text"
+                  >
+                    Login
+                  </button>
+                </li>
+              </Link>
               <Link to="/" className="waitlistLinkBtn">
                 <li className="headerButton">
                   <button
