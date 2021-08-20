@@ -1,0 +1,453 @@
+  .invalidLoginAlert {
+    background-color: #FFD2DA;
+    margin-top: 4%;
+    margin-bottom: -4%;
+    padding: 15px 20px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: left;
+  }
+  
+  @media screen and (max-width: 600px) {
+    .joinWaitlistScreenContainer {
+      display: flex;
+      height: 100vh;
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
+  
+    .joinWaitlistContainer {
+      margin-top: 10%;
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+    }
+  
+    .signInDesign1 {
+      display: none;
+    }
+  
+    .signInDesign2 {
+      display: none;
+    }
+  
+    .waitlistFormContainer {
+      /* border: 1px solid transparent;
+      border-radius: 10px; */
+      width: 100%;
+      height: 100%;
+      /* box-shadow: 0 4px 8px 0 rgba(66, 65, 65, 0.203),
+        0 6px 20px 0 rgba(161, 155, 155, 0.59); */
+      transition: 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+      padding: 4% 8%;
+      display: flex;
+      flex-direction: column;
+    }
+  
+    .waitlistTextInput {
+      height: 50px;
+      width: 100%;
+      padding: 16px;
+      border: 1px solid black;
+      border-radius: 5px;
+      color: #000;
+      font-size: 14px;
+      font-weight: 400;
+      outline: none;
+      transition: 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+      margin-bottom: 20px;
+    }
+  
+    .waitlistTextInput:focus {
+      border-width: 2px;
+      border-color: #3eb489;
+      color: black;
+    }
+  
+    .joinWaitlistButton {
+      background-color: #3eb489;
+      height: 50px;
+      border-radius: 12px;
+      border: none;
+      font-weight: bold;
+      font-size: 16px;
+      width: 100%;
+      font-family: "Montserrat", sans-serif;
+    }
+  
+    .joinWaitlistButton:hover {
+      cursor: pointer;
+      background-color: #22d694;
+      color: #000;
+      transition: 0.5s ease-in-out;
+    }
+  
+    .waitlistFormHeader {
+      font-family: "Montserrat", sans-serif;
+      font-weight: bold;
+      font-size: 30px;
+      margin-bottom: 2%;
+      color: #3eb489;
+    }
+  
+    .waitlistHeadlineHeader {
+      font-family: "Open Sans", sans-serif;
+      font-size: 16px;
+    }
+
+    .waitlistTextInputHeader {
+      margin-bottom: 5px;
+      font-size: 12px;
+      font-family: "Open Sans", sans-serif;
+    }
+  
+    .waitlistHeadlineHeaderLastWord {
+      font-weight: bold;
+      color: #3eb489;
+    }
+  
+    .signInHaveAccountText {
+      font-size: 12px;
+      margin-top: 5%;
+      text-align: center;
+    }
+  
+    .signInHaveAccountTextSpan {
+      font-weight: 500;
+      text-decoration: underline;
+      color: #3eb489;
+      cursor: pointer;
+    }
+  
+    .signInImageContainer {
+      display: none;
+    }
+  
+    .signInImage {
+      display: none;
+    }
+  
+    .signInForgotPassword {
+      font-size: 12px;
+      font-family: "Open Sans", sans-serif;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: -15px;
+      margin-bottom: 20px;
+    }
+
+    .googleImageSignIn {
+      object-fit: contain;
+      height: 20px;
+    }
+  
+    .googleTextSignIn {
+      font-size: 14px;
+      margin-left: 20px;
+      margin-bottom: 1px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+    }
+  }
+  
+  @media screen and (max-width: 1200px) and (min-width: 600px) {
+    .joinWaitlistScreenContainer {
+      display: flex;
+      height: 100vh;
+      align-items: flex-start;
+      width: 100%;
+    }
+  
+    .joinWaitlistContainer {
+      display: flex;
+      width: 100%;
+      justify-content: center;
+      margin-bottom: 2%;
+      /* border: solid; */
+      /* justify-content: center; */
+    }
+  
+    .signInDesign1 {
+      display: none;
+    }
+  
+    .signInDesign2 {
+      display: none;
+    }
+  
+    .waitlistFormContainer {
+      border: 1px solid transparent;
+      border-radius: 10px;
+      width: 400px;
+      height: auto;
+      box-shadow: 0 4px 8px 0 rgba(66, 65, 65, 0.203),
+        0 6px 20px 0 rgba(161, 155, 155, 0.59);
+      transition: 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+      padding: 4% 3%;
+      margin-top: 70px;
+      display: flex;
+      flex-direction: column;
+      z-index: 1;
+    }
+  
+    .waitlistTextInput {
+      height: 50px;
+      width: 100%;
+      padding: 16px;
+      border: 1px solid black;
+      border-radius: 5px;
+      color: #000;
+      font-size: 14px;
+      font-weight: 400;
+      outline: none;
+      transition: 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+      margin-bottom: 20px;
+    }
+  
+    .waitlistTextInput:focus {
+      border-width: 2px;
+      border-color: #3eb489;
+      color: black;
+    }
+  
+    .joinWaitlistButton {
+      background-color: #3eb489;
+      height: 50px;
+      border-radius: 12px;
+      border: none;
+      font-weight: bold;
+      font-size: 16px;
+      width: 100%;
+      font-family: "Montserrat", sans-serif;
+    }
+  
+    .joinWaitlistButton:hover {
+      cursor: pointer;
+      background-color: #22d694;
+      color: #000;
+      transition: 0.5s ease-in-out;
+    }
+  
+    .waitlistFormHeader {
+      font-family: "Montserrat", sans-serif;
+      font-weight: bold;
+      font-size: 30px;
+      margin-bottom: 2%;
+      color: #3eb489;
+    }
+  
+    .waitlistHeadlineHeader {
+      font-family: "Open Sans", sans-serif;
+      font-size: 16px;
+    }
+
+    .waitlistTextInputHeader {
+      margin-bottom: 5px;
+      font-size: 12px;
+      font-family: "Open Sans", sans-serif;
+    }
+  
+    .waitlistHeadlineHeaderLastWord {
+      font-weight: bold;
+      color: #3eb489;
+    }
+  
+    .signInHaveAccountText {
+      font-size: 12px;
+      margin-top: 5%;
+      text-align: center;
+    }
+  
+    .signInHaveAccountTextSpan {
+      font-weight: 500;
+      text-decoration: underline;
+      color: #3eb489;
+      cursor: pointer;
+    }
+  
+    .signInImageContainer {
+      display: none;
+      /* width: 50%;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center; */
+    }
+  
+    .signInImage {
+      display: none;
+      /* object-fit: contain;
+      height: 600px;
+      margin-left: 10%; */
+      /* margin-top: 10%; */
+    }
+  
+    .signInForgotPassword {
+      font-size: 12px;
+      font-family: "Open Sans", sans-serif;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: -15px;
+      margin-bottom: 20px;
+    }
+  
+    .googleImageSignIn {
+      object-fit: contain;
+      height: 20px;
+    }
+  
+    .googleTextSignIn {
+      font-size: 14px;
+      margin-left: 20px;
+      margin-bottom: 1px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+    }
+  }
+  
+  @media screen and (min-width: 1200px) {
+    .joinWaitlistScreenContainer {
+      display: flex;
+      height: 100vh;
+      align-items: flex-start;
+    }
+  
+    .joinWaitlistContainer {
+      display: flex;
+      width: 100%;
+      justify-content: center;
+      margin-bottom: 2%;
+    }
+  
+    .waitlistFormContainer {
+      border: 1px solid transparent;
+      border-radius: 10px;
+      width: 500px;
+      height: auto;
+      box-shadow: 0 4px 8px 0 rgba(66, 65, 65, 0.203),
+        0 6px 20px 0 rgba(161, 155, 155, 0.59);
+      transition: 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+      /* margin-left: 5%; */
+      /* margin-top: 7%; */
+      margin-top: 70px;
+      margin-right: 5%;
+      padding: 4% 2.5%;
+      display: flex;
+      flex-direction: column;
+      z-index: 1;
+    }
+  
+    .waitlistTextInput {
+      height: 50px;
+      width: 100%;
+      padding: 16px;
+      border: 1px solid black;
+      border-radius: 5px;
+      color: #000;
+      font-size: 14px;
+      font-weight: 400;
+      outline: none;
+      transition: 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+      margin-bottom: 20px;
+    }
+  
+    .waitlistTextInput:focus {
+      border-width: 2px;
+      border-color: #3eb489;
+      color: black;
+    }
+  
+    .joinWaitlistButton {
+      background-color: #3eb489;
+      height: 50px;
+      border-radius: 12px;
+      border: none;
+      font-weight: bold;
+      font-size: 16px;
+      width: 100%;
+      font-family: "Montserrat", sans-serif;
+    }
+  
+    .joinWaitlistButton:hover {
+      cursor: pointer;
+      background-color: #22d694;
+      color: #000;
+      transition: 0.5s ease-in-out;
+    }
+  
+    .waitlistFormHeader {
+      font-family: "Montserrat", sans-serif;
+      font-weight: bold;
+      font-size: 30px;
+      margin-bottom: 2%;
+      color: #3eb489;
+    }
+  
+    .waitlistHeadlineHeader {
+      font-family: "Open Sans", sans-serif;
+      font-size: 16px;
+    }
+    
+    .waitlistTextInputHeader {
+      margin-bottom: 5px;
+      font-size: 12px;
+      font-family: "Open Sans", sans-serif;
+    }
+  
+    .waitlistHeadlineHeaderLastWord {
+      font-weight: bold;
+      color: #3eb489;
+    }
+  
+    .signInHaveAccountText {
+      font-size: 12px;
+      margin-top: 5%;
+      text-align: center;
+    }
+  
+    .signInHaveAccountTextSpan {
+      font-weight: 500;
+      text-decoration: underline;
+      color: #3eb489;
+      cursor: pointer;
+    }
+  
+    .signInImageContainer {
+      display: flex;
+      width: 50%;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+  
+    .signInImage {
+      object-fit: contain;
+      height: 600px;
+      margin-left: 10%;
+      /* margin-top: 10%; */
+    }
+  
+    .signInForgotPassword {
+      font-size: 12px;
+      font-family: "Open Sans", sans-serif;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: -15px;
+      margin-bottom: 20px;
+    }
+  
+    .googleImageSignIn {
+      object-fit: contain;
+      height: 20px;
+    }
+  
+    .googleTextSignIn {
+      font-size: 14px;
+      margin-left: 20px;
+      margin-bottom: 1px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+    }
+  }
+  

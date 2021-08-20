@@ -7,7 +7,7 @@ function ErrorScreen() {
     <div className='bodyContainer'>
       <div className="errorContainer">
         <p>Uh Oh, Someting went wrong!</p>
-        <Link className='errorLinkButton' to={'/home'}>
+        <Link className='errorLinkButton' to={'/'}>
           <button className="errorButton">Go Home</button>
         </Link>
       </div>

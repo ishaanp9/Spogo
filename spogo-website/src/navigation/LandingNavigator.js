@@ -10,7 +10,7 @@ import LandingPageAbout from '../LandingPage/screens/LandingPageAbout/LandingPag
 import LandingPageBlog from '../LandingPage/screens/LandingPageBlog/LandingPageBlog';
 import LandingPageFAQ from '../LandingPage/screens/LandingPageFAQ/LandingPageFAQ';
 import BlogArticleScreen from '../LandingPage/screens/BlogArticleScreen/BlogArticleScreen';
-import SignInScreen from '../SignUpLoginFlow/screens/SignInScreen/SignInScreen';
+import JoinWaitlistScreen from '../LandingPage/screens/JoinWaitlistScreen/JoinWaitlistScreen';
 
 
 const LandingNavigator = (props) => {
@@ -18,11 +18,12 @@ const LandingNavigator = (props) => {
   return (
     <Router>
       <Route exact path="/">
-        <Redirect to="/home" />
-      </Route>
-      <Route path={'/home'}>
         <LandingPage />
+        {/* <Redirect to="/home" /> */}
       </Route>
+      {/* <Route path={'/home'}>
+        <LandingPage />
+      </Route> */}
       <Route path={'/about'}>
         <LandingPageAbout />
       </Route>
@@ -35,8 +36,8 @@ const LandingNavigator = (props) => {
       <Route path={'/blog/article'}>
         <BlogArticleScreen/>
       </Route>
-      <Route path ={'/auth'}>
-        <SignInScreen/>
+      <Route path={"/waitlist"}>
+        <JoinWaitlistScreen />
       </Route>
     </Router>
   );

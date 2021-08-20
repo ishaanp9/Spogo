@@ -85,7 +85,7 @@ const LandingPage = () => {
             </h1>
             <p>Find Out More.</p>
             <div style={{flexDirection: 'row', display: 'flex', width: '100%'}}>
-              <Link className="waitlistButton">
+              <div className="waitlistButton">
                 <button
                   type="button"
                   onClick={
@@ -96,7 +96,7 @@ const LandingPage = () => {
                 >
                   Start building your Profile
                 </button>
-              </Link>
+              </div>
               <div className="waitlistButton">
                 <button type="button">Thank You!</button>
               </div>
