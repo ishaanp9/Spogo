@@ -23,22 +23,21 @@ const SignUpScreen = (props) => {
   const [signUpFailed, setSignUpFailed] = useState(false);
   const [signUpEmailTaken, setSignUpEmailTaken] = useState(false);
 
-  const { register } = useContext(AuthContext);
+  const { register, googleAuth } = useContext(AuthContext);
 
   useEffect(() => {
     WebFont.load({
       google: {
-        families: ['Montserrat', 'Open Sans', 'Public Sans'],
+        families: ["Montserrat", "Open Sans", "Public Sans"],
       },
     });
-    
   }, []);
 
-  let validator = require('email-validator');
+  let validator = require("email-validator");
 
   const validateSignup = () => {
     let validSubmission = true;
-    if (name != '') {
+    if (name != "") {
     } else {
       setInvalidName(true);
       validSubmission = false;
@@ -81,7 +80,9 @@ const SignUpScreen = (props) => {
         )}
         {signUpEmailTaken && (
           <div className="signUpFailedAlert">
-            <p>This email address is already in use. Please use another email</p>
+            <p>
+              This email address is already in use. Please use another email
+            </p>
           </div>
         )}
         <form>
@@ -108,7 +109,7 @@ const SignUpScreen = (props) => {
               className="signUpTextInput"
               type="Email"
               id="Email"
-              autoCapitalize='off'
+              autoCapitalize="off"
               value={email}
               onChange={(text) => {
                 setEmail(text.target.value);
@@ -152,7 +153,7 @@ const SignUpScreen = (props) => {
             <p style={{ fontSize: 14, marginTop: 20 }}>or</p>
             <hr style={{ marginTop: 20, width: "45%" }} />
           </div>
-          <div className="googleSignUpContainer">
+          <div className="googleSignUpContainer" onClick={() => googleAuth()}>
             <img className="googleImageSignUp" src={Google} />
             <p className="googleTextSignUp">Sign Up with Google</p>
           </div>
@@ -164,10 +165,7 @@ const SignUpScreen = (props) => {
           </p>
         </form>
       </div>
-      {/* <div className="signUpImageContainer">
-        <img className="signUpImage" src={SignUpImage} />
-      </div> */}
-      </div>
+    </div>
   );
 };
 
