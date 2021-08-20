@@ -67,7 +67,7 @@ const Footer = () => {
                 </div>
                 <div className="footerColumnContainer">
                   <h2>Pages</h2>
-                  <Link to={'/home'} className="bottomLinksText">
+                  <Link to={'/'} className="bottomLinksText">
                     <p>Home</p>
                   </Link>
                   <Link to={'/about'} className="bottomLinksText">

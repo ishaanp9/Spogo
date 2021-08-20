@@ -31,7 +31,7 @@ function Header() {
                   'Tab Pressed': 'Home',
                 })
               }
-              to="/home"
+              to="/"
               className="headerSpogoLogo"
             >
               <img src={logo} alt="Spogo Logo" />
@@ -92,21 +92,22 @@ function Header() {
                   FAQ
                 </Link>
               </li>
-              <Link to="/auth" className="loginLinkButton">
+              {/* <Link to="/auth" className="loginLinkButton"> */}
                 <li className="loginHeaderButton">
                   <button
-                    onClick={() =>
+                    onClick={() => {
+                      window.location.assign('/auth')
                       mixpanel.track('Header Tabs Pressed', {
                         'Tab Pressed': 'Login',
                       })
-                    }
+                    }}
                     type="text"
                   >
                     Login
                   </button>
                 </li>
-              </Link>
-              <Link to="/" className="waitlistLinkBtn">
+              {/* </Link> */}
+              <Link to="/waitlist" className="waitlistLinkBtn">
                 <li className="headerButton">
                   <button
                     onClick={() =>
