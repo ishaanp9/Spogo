@@ -1,17 +1,16 @@
 @media screen and (max-width: 600px) {
-  .Container {
+  .viewableItemContainer {
     width: 100%;
     display: flex;
     flex-direction: row;
     align-self: center;
     align-items: center;
     overflow-x: hidden;
-    padding-top: 20px;
+    /* padding-top: 20px; */
     overflow-y: hidden;
   }
 
-  .itemIconContainer {
-    padding-bottom: 20px;
+  .viewableItemIconContainer {
     display: flex;
     margin-right: 5%;
     flex-direction: column;
@@ -24,50 +23,48 @@
     text-decoration: none;
   }
 
-  .TextContainer {
+  .viewableItemTextContainer {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-self: center;
     justify-content: flex-start;
-    /* border-bottom: solid;
-    border-bottom-color: lightgrey; */
-    /* padding: 2% 0%; */
-    /* border-bottom-width: 2px; */
+    margin-top: 20px;
   }
 
-  .TextContainer > h1 {
+  .viewableItemTextContainer > h1 {
     font-size: 16px;
     font-weight: 500;
     color: black;
   }
 
-  .TextContainer > h2 {
+  .viewableItemTextContainer > h2 {
     font-size: 14px;
     font-weight: 500;
     color: grey;
     margin-top: 2px;
   }
 
-  .TextContainer > h3 {
+  .viewableItemTextContainer > h3 {
     font-size: 12px;
     font-weight: 400;
     color: grey;
     margin-top: 2px;
   }
 
-  .TextContainer > h4 {
+  .viewableItemTextContainer > h4 {
     display: none;
   }
 
-  .Divider {
+  .viewableItemDivider {
     margin-top: 20px;
+    width: 100%;
     /* margin-left: 10%; */
   }
 }
 
 @media screen and (max-width: 1200px) and (min-width: 600px) {
-  .Container {
+  .viewableItemContainer {
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -81,9 +78,7 @@
     border-color: lightgrey; */
   }
 
-  .itemIconContainer {
-    /* border: solid; */
-    /* width: 0%; */
+  .viewableItemIconContainer {
     padding-bottom: 20px;
     display: flex;
     margin-right: 3%;
@@ -97,52 +92,50 @@
     text-decoration: none;
   }
 
-  .TextContainer {
+  .viewableItemTextContainer {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-self: center;
     justify-content: flex-start;
-    /* border-bottom: solid;
-    border-bottom-color: lightgrey; */
-    /* padding: 2% 0%; */
-    /* border-bottom-width: 2px; */
   }
 
-  .TextContainer > h1 {
+  .viewableItemTextContainer > h1 {
     font-size: 16px;
     font-weight: 500;
     color: black;
   }
 
-  .TextContainer > h2 {
+  .viewableItemTextContainer > h2 {
     font-size: 14px;
     font-weight: 500;
     color: grey;
     margin-top: 2px;
   }
 
-  .TextContainer > h3 {
+  .viewableItemTextContainer > h3 {
     font-size: 12px;
     font-weight: 400;
     color: grey;
     margin-top: 2px;
   }
 
-  .TextContainer > h4 {
+  .viewableItemTextContainer > h4 {
     font-size: 14px;
     font-weight: 400;
     color: black;
     margin-top: 10px;
   }
-  .Divider {
+
+  .viewableItemDivider {
     margin-top: 20px;
+    width: 100%;
     /* margin-left: 10%; */
   }
 }
 
 @media screen and (min-width: 1200px) {
-  .Container {
+  .viewableItemContainer {
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -153,7 +146,7 @@
     overflow-y: hidden;
   }
 
-  .itemIconContainer {
+  .viewableItemIconContainer {
     padding-bottom: 20px;
     display: flex;
     margin-right: 3%;
@@ -167,7 +160,7 @@
     text-decoration: none;
   }
 
-  .TextContainer {
+  .viewableItemTextContainer {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -179,35 +172,36 @@
     /* border-bottom-width: 2px; */
   }
 
-  .TextContainer > h1 {
+  .viewableItemTextContainer > h1 {
     font-size: 16px;
     font-weight: 500;
     color: black;
   }
 
-  .TextContainer > h2 {
+  .viewableItemTextContainer > h2 {
     font-size: 14px;
     font-weight: 500;
     color: grey;
     margin-top: 2px;
   }
 
-  .TextContainer > h3 {
+  .viewableItemTextContainer > h3 {
     font-size: 12px;
     font-weight: 400;
     color: grey;
     margin-top: 2px;
   }
 
-  .TextContainer > h4 {
+  .viewableItemTextContainer > h4 {
     font-size: 14px;
     font-weight: 400;
     color: black;
     margin-top: 10px;
   }
 
-  .Divider {
+  .viewableItemDivider {
     margin-top: 20px;
+    width: 100%;
     /* margin-left: 10%; */
   }
 }

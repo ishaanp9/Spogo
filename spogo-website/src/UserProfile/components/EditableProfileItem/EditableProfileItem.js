@@ -534,13 +534,13 @@ const EditableProfileItem = (props) => {
         <>
           {window.innerWidth < 600 ? (
             <div className="editableItemContainer">
-              <div className="itemIconContainer">
+              <div className="editableItemIconContainer">
                 <ItemIcon iconType={icon} />
               </div>
               <div className="itemTextButtonsDividerContainer">
                 <div className="itemTextButtonsContainer">
                   <div
-                    className="TextContainer"
+                    className="editableItemTextContainer"
                     onClick={() => handleItemClick(icon)}
                   >
                     <h1>{title}</h1>
@@ -572,19 +572,19 @@ const EditableProfileItem = (props) => {
           ) : (
             // </Link>
             <div
-              className="Container"
+              className="editableItemContainer"
               onClick={() =>
                 mixpanel.track("Specific Item Type Pressed", {
                   Item: iconToHeaderName,
                 })
               }
             >
-              <div className="itemIconContainer">
+              <div className="editableItemIconContainer">
                 <ItemIcon iconType={icon} />
               </div>
               <div className="itemTextButtonsDividerContainer">
                 <div className="itemTextButtonsContainer">
-                  <div className="TextContainer">
+                  <div className="editableItemTextContainer">
                     <h1>{title}</h1>
                     {team != undefined && team != null && team != "" && (
                       <h2>{team}</h2>

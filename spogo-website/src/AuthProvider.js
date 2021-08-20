@@ -20,14 +20,17 @@ export const AuthProvider = ({ children }) => {
   const onAuthStateChanged = async (user) => {
     setUser(user);
     if (user) {
-      if (userAuthenticationType === 'Signup') {
-        addUserInfoDictToDB(user)
+      if (userAuthenticationType === "Signup") {
+        addUserInfoDictToDB(user);
+      }
+      if (userAuthenticationType === "Google") {
+        getUserInfoFromDB(user);
       }
     }
   };
 
   const addUserInfoDictToDB = (user) => {
-    console.log('Tried to add')
+    console.log("Tried to add");
     firebase
       .firestore()
       .collection("Users")
@@ -42,13 +45,38 @@ export const AuthProvider = ({ children }) => {
       });
   };
 
+  const getUserInfoFromDB = (user) => {
+    let tempUserDictHolder;
+    firebase
+      .firestore()
+      .collection("Users")
+      .doc(user.uid)
+      .collection("User Info")
+      .doc("Profile Data")
+      .get()
+      .then((doc) => {
+        if (doc.exists) {
+          tempUserDictHolder = doc.data();
+          if (tempUserDictHolder["sign-up-finished"] === true) {
+            history.push("/create");
+          }
+        } else {
+          addUserInfoDictToDB(user);
+          history.push("/auth/sign-up/location-sport-position");
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
   return (
     <AuthContext.Provider
       value={{
         user,
         setUser,
         login: async (email, password, loginFailedFunction) => {
-          userAuthenticationType = 'Login'
+          userAuthenticationType = "Login";
           try {
             await firebase
               .auth()
@@ -57,15 +85,14 @@ export const AuthProvider = ({ children }) => {
                 history.push("/create");
               });
             console.log("Successfully Logged In");
-          
           } catch (e) {
             console.log(e);
             loginFailedFunction();
           }
         },
         register: async (email, password, name, signUpFailedFunction) => {
-          userAuthenticationType = 'Signup'
-          console.log(userAuthenticationType)
+          userAuthenticationType = "Signup";
+          console.log(userAuthenticationType);
           try {
             await firebase
               .auth()
@@ -78,12 +105,29 @@ export const AuthProvider = ({ children }) => {
               });
           } catch (e) {
             console.log(e.message);
-            if (e.message === "The email address is already in use by another account.") {
-              signUpFailedFunction(1)
+            if (
+              e.message ===
+              "The email address is already in use by another account."
+            ) {
+              signUpFailedFunction(1);
             } else {
-              signUpFailedFunction(0)
+              signUpFailedFunction(0);
             }
           }
+        },
+        googleAuth: async () => {
+          userAuthenticationType = "Google";
+          const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
+          firebase
+            .auth()
+            .signInWithPopup(googleAuthProvider)
+            .then((result) => {
+              addUserInfo("name", result.user.displayName);
+              addUserInfo("email", result.user.email);
+            })
+            .catch((e) => {
+              console.log(e);
+            });
         },
         logout: async () => {
           try {

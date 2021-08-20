@@ -11,7 +11,7 @@ import {
   getMeasurableArray,
 } from '../../../ProfileData';
 import WebFont from 'webfontloader';
-
+import {ViewableAccomplishmentDescriptionModal, ViewableExperienceDescriptionModal} from '../../screens/DescriptionScreen/DescriptionScreen';
 
 const Item = (props) => {
   let icon = props.iconName;
@@ -105,11 +105,6 @@ const Item = (props) => {
                 ...See More
               </span>
             </p>
-            {/* <button
-              className='seeMoreLessButton'
-              onClick={() => setShowMore(true)}>
-              See More
-            </button> */}
           </div>
         );
       }
@@ -140,45 +135,43 @@ const Item = (props) => {
                 ...See More
               </span>
             </p>
-            {/* <button
-              className='seeMoreLessButton'
-              onClick={() => setShowMore(true)}>
-              See More
-            </button> */}
           </div>
         );
       }
     }
   };
 
+  const [experienceDescriptionModalOpen, setExperienceDescriptionModalOpen] =
+    useState(false);
+  const [
+    experienceDescriptionModalRefresh,
+    setExperienceDescriptionModalRefresh,
+  ] = useState(false);
+
+  const [accomplishmentDescriptionModalOpen, setAccomplishmentDescriptionModalOpen] = useState(false);
+  const [accomplishmentDescriptionModalRefresh, setAccomplishmentDescriptionModalRefresh] = useState(false);
+
+  const handleItemClick = (iconType) => {
+    console.log(iconType)
+    if (iconType === 'crown') {
+      setExperienceDescriptionModalRefresh(!experienceDescriptionModalRefresh);
+      setExperienceDescriptionModalOpen(true);
+    } else if (iconType === 'trophy') {
+      setAccomplishmentDescriptionModalOpen(true);
+      setAccomplishmentDescriptionModalRefresh(!accomplishmentDescriptionModalRefresh);
+    }
+  }
+
   return (
     <MixpanelConsumer>
       {(mixpanel) => (
         <>
           {window.innerWidth < 600 ? (
-            <Link
-              onClick={() =>
-                mixpanel.track('Specific Item Type Pressed', {
-                  Item: iconToHeaderName,
-                })
-              }
-              to={
-                icon != 'rocket-launch'
-                  ? {
-                      pathname: `/descriptions/${UID}`,
-                      state: {
-                        icon: icon,
-                      },
-                    }
-                  : `/me/${UID}`
-              }
-              className="Link"
-            >
-              <div className="Container">
-                <div className="itemIconContainer">
+              <div className="viewableItemContainer">
+                <div className="viewableItemIconContainer">
                   <ItemIcon iconType={icon} />
                 </div>
-                <div className="TextContainer">
+                <div className="viewableItemTextContainer" onClick={() => handleItemClick(icon)}>
                   <h1>{title}</h1>
                   {team != undefined && team != null && team != '' && (
                     <h2>{team}</h2>
@@ -187,26 +180,25 @@ const Item = (props) => {
                   <h4>{description}</h4>
                   {(idNum === 0 && specificItemArray.length === 1) ||
                   idNum === specificItemArray.length - 1 ? (
-                    <hr size="1" color="white" className="Divider" />
+                    <hr size="1" color="white" className="viewableItemDivider" />
                   ) : (
-                    <hr size="1" color="lightgrey" className="Divider" />
+                    <hr size="1" color="lightgrey" className="viewableItemDivider" />
                   )}
                 </div>
               </div>
-            </Link>
           ) : (
             <div
-              className="Container"
+              className="viewableItemContainer"
               onClick={() =>
                 mixpanel.track('Specific Item Type Pressed', {
                   Item: iconToHeaderName,
                 })
               }
             >
-              <div className="itemIconContainer">
+              <div className="viewableItemIconContainer">
                 <ItemIcon iconType={icon} />
               </div>
-              <div className="TextContainer">
+              <div className="viewableItemTextContainer">
                 <h1>{title}</h1>
                 {team != undefined && team != null && team != '' && (
                   <h2>{team}</h2>
@@ -217,13 +209,15 @@ const Item = (props) => {
                 ) : null}
                 {(idNum === 0 && specificItemArray.length === 1) ||
                 idNum === specificItemArray.length - 1 ? (
-                  <hr size="1" color="white" className="Divider" />
+                  <hr size="1" color="white" className="viewableItemDivider" />
                 ) :  (
-                  <hr size="1" color="lightgrey" className="Divider" />
+                  <hr size="1" color="lightgrey" className="viewableItemDivider" />
                 )}
               </div>
             </div>
           )}
+          <ViewableExperienceDescriptionModal modalOpen={experienceDescriptionModalOpen} refresh={experienceDescriptionModalRefresh}/>
+          <ViewableAccomplishmentDescriptionModal modalOpen={accomplishmentDescriptionModalOpen} refresh={accomplishmentDescriptionModalRefresh}/>
         </>
       )}
     </MixpanelConsumer>

@@ -17,6 +17,7 @@ import {
 import firebase from "../../../firebase";
 import { UserDataContext } from "../../../App";
 import { Line } from "rc-progress";
+import Modal from "react-modal";
 
 const VideoList = (props) => {
   const { getUserUID } = useContext(UserDataContext);
@@ -137,12 +138,12 @@ const VideoList = (props) => {
 
   return (
     <div className="videoListContainer">
-      {uploading && (
-        <div className="uploadProgressModalContainer">
+      <Modal isOpen={uploading} className="uploadProgressModalContainer" overlayClassName="uploadProgressModalOverlay">
+        <div className="uploadProgressModalContent">
           <p>Upload Progress</p>
           <Line percent={transferred} strokeWidth="4" strokeColor="black" />
         </div>
-      )} 
+      </Modal>
       <input
         type="file"
         accept="image/*, video/*"
