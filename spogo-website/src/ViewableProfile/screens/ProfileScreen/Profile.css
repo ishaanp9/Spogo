@@ -7,6 +7,10 @@
     height: 100vh;
   }
 
+  .profileScrollBarContainer {
+    display: none;
+  }
+
   .profileHeader {
     border-bottom-left-radius: 50px;
     border-bottom-right-radius: 50px;
@@ -263,14 +267,14 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
   }
 
   .errorMessageContainer {
     display: flex;
     width: 100%;
     justify-content: space-between;
-    margin-bottom: 2%;
+    margin-top: 15%;
     /* justify-content: center; */
   }
 
@@ -282,13 +286,10 @@
     border-radius: 10px;
     width: 100%;
     height: auto;
-    box-shadow: 0 4px 8px 0 rgba(66, 65, 65, 0.203),
-      0 6px 20px 0 rgba(161, 155, 155, 0.59);
-    transition: 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
     /* margin-left: 5%; */
     /* margin-top: 7%; */
     margin: 0% 2%;
-    padding: 4% 3%;
+    padding: 4% 4%;
     display: flex;
     flex-direction: column;
     z-index: 1;
@@ -316,10 +317,6 @@
 
   .errorImageContainer {
     display: none;
-    width: 50%;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
   }
 
   .errorImage {
@@ -353,6 +350,10 @@
     overflow-x: hidden;
     background-color: whitesmoke;
     height: 100vh;
+  }
+
+  .profileScrollBarContainer {
+    display: none;
   }
 
   .profileHeader {
@@ -609,7 +610,7 @@
 
   .errorMessageContainer {
     display: flex;
-    width: 100%;
+    width: 70%;
     justify-content: space-between;
     margin-bottom: 2%;
     /* justify-content: center; */
@@ -655,10 +656,6 @@
 
   .errorImageContainer {
     display: none;
-    width: 50%;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
   }
 
   .errorImage {

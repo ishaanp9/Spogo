@@ -277,7 +277,8 @@ const CreateProfile = (props) => {
     setUserDataCollected();
     setRefreshKey((prev) => prev + 1);
     setUsername(getStoredUsername());
-    if (getUserInfo("sign-up-finished") === false) {
+    console.log(getUserInfo("sign-up-finished"))
+    if (getUserInfo("sign-up-finished") === false || getUserInfo("sign-up-finished") === null) {
       history.push("/auth/sign-up/location-sport-position");
     }
     if (userUID === "noUser") {
@@ -904,11 +905,6 @@ const CreateProfile = (props) => {
                   ...See More
                 </span>
               </p>
-              {/* <button
-                className='seeMoreLessButton'
-                onClick={() => setShowMore(true)}>
-                See More
-              </button> */}
             </div>
           );
         }
@@ -942,11 +938,6 @@ const CreateProfile = (props) => {
                   ...See More
                 </span>
               </p>
-              {/* <button
-                className='seeMoreLessButton'
-                onClick={() => setShowMore(true)}>
-                See More
-              </button> */}
             </div>
           );
         }
@@ -1016,7 +1007,7 @@ const CreateProfile = (props) => {
             />
             <button
               type="button"
-              onClick={profileImageUploadClick}
+              onClick={() => profileImageUploadClick()}
               style={{
                 outline: 'none',
                 border: 'none',
@@ -1559,6 +1550,7 @@ const CreateProfile = (props) => {
         {/* Profile Edit Modal */}
         {/* Bio Modal */}
         <Modal
+          appElement={document.getElementById("root") || undefined}
           isOpen={bioModalOpen}
           onRequestClose={() => setBioModalOpen(false)}
           onAfterOpen={() => setBioHolder(bio)}

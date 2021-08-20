@@ -574,13 +574,7 @@ const Profile = (props) => {
                     );
                   }}
                 >
-                  {/* <Link
-                to={{ pathname: wildcard }}
-                target="_blank"
-                style={{ textDecoration: "none", color: "black" }}
-              > */}
                   Yup
-                  {/* </Link> */}
                 </button>
               </div>
             </div>

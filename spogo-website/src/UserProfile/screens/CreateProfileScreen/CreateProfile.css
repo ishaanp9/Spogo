@@ -18,7 +18,7 @@
 }
 
 .createScreenInvalidText {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   color: red;
   font-size: 12px;
   margin-top: 5px;
@@ -135,7 +135,7 @@
   }
 
   .createScreenBioContainer > h1 {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-size: 16px;
     font-weight: bold;
     margin: 20px 0px;
@@ -159,7 +159,7 @@
   }
 
   .createScreenProfileItemListHeader {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-size: 16px;
     font-weight: bold;
     margin: 20px 0px;
@@ -200,7 +200,7 @@
     color: #3eb489;
     font-size: 15px;
     font-weight: 500;
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
   }
 
   .seeMoreSeeLessItemButton:hover {
@@ -229,93 +229,6 @@
   }
 
   .spogoLogo > img:hover {
-    cursor: pointer;
-  }
-
-  .userNotFoundErrorContainer {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .errorMessageContainer {
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    margin-bottom: 2%;
-    /* justify-content: center; */
-  }
-
-  .errorMessageTextContainer {
-    border: 1px solid transparent;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 10px;
-    width: 40%;
-    height: auto;
-    box-shadow: 0 4px 8px 0 rgba(66, 65, 65, 0.203),
-      0 6px 20px 0 rgba(161, 155, 155, 0.59);
-    transition: 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
-    /* margin-left: 5%; */
-    /* margin-top: 7%; */
-    margin-left: 5%;
-    padding: 4% 3%;
-    display: flex;
-    flex-direction: column;
-    z-index: 1;
-  }
-
-  .errorHeaderText {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: bold;
-    font-size: 30px;
-    margin-bottom: 2%;
-    color: #3eb489;
-  }
-
-  .errorHeadlineText {
-    font-family: 'Open Sans', sans-serif;
-    font-size: 16px;
-  }
-
-  .returnHomeText {
-    font-weight: 500;
-    text-decoration: underline;
-    color: #3eb489;
-    cursor: pointer;
-  }
-
-  .errorImageContainer {
-    display: flex;
-    width: 50%;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .errorImage {
-    object-fit: contain;
-    height: 600px;
-    margin-left: 10%;
-    /* margin-top: 10%; */
-  }
-
-  .userNotFoundSpogoLogo {
-    display: flex;
-    width: 100%;
-  }
-
-  .userNotFoundSpogoLogo > img {
-    display: block;
-    object-fit: contain;
-    margin: 0px auto;
-    width: 50%;
-  }
-
-  .userNotFoundSpogoLogo > img:hover {
     cursor: pointer;
   }
 
@@ -414,7 +327,7 @@
   }
 
   .modalHeaderContainer > p {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-weight: bold;
     font-size: large;
   }
@@ -423,13 +336,13 @@
     font-size: 14px;
     margin-top: 10px;
     margin-bottom: 5px;
-    font-family: 'Open Sans', sans-serif;
+    font-family: "Open Sans", sans-serif;
   }
 
   .modalTextInputItems {
     width: 100%;
     padding: 8px;
-    font-family: 'Open Sans', sans-serif;
+    font-family: "Open Sans", sans-serif;
     outline: none;
   }
 
@@ -493,7 +406,7 @@
     border: none;
     font-weight: bold;
     font-size: 16px;
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     margin-top: 20px;
   }
 
@@ -506,7 +419,7 @@
 
   .presentTimeText {
     font-size: 11px;
-    font-family: 'Open Sans', sans-serif;
+    font-family: "Open Sans", sans-serif;
     font-weight: 500;
     margin-top: 2px;
     margin-left: 1px;
@@ -565,7 +478,7 @@
     padding-bottom: 2px;
     padding-left: 5px;
     padding-right: 5px;
-    font-family: 'Open Sans', sans-serif;
+    font-family: "Open Sans", sans-serif;
     outline: none;
     font-size: 20px;
     font-weight: 600;
@@ -573,7 +486,7 @@
   }
 
   .copyUrlSpogoText {
-    font-family: 'Open Sans', sans-serif;
+    font-family: "Open Sans", sans-serif;
     font-size: 20px;
     font-weight: 600;
     padding-bottom: 5px;
@@ -609,9 +522,9 @@
   }
 
   .settingsModal {
-    background-color: white;
+    /* background-color: white; */
     position: absolute;
-    top: 10%;
+    top: 50px;
     right: 2%;
     padding: 2% 2%;
     border-radius: 10px;
@@ -620,9 +533,11 @@
 
   .settingsItems {
     cursor: pointer;
-    font-family: 'Open Sans', sans-serif;
+    font-family: "Open Sans", sans-serif;
     width: 100%;
-    color: #3eb489;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
   }
 
   .settingsItemAddModalOverlay {
@@ -657,7 +572,7 @@
   }
 
   .linkCopiedMessage > p {
-    font-family: 'Open Sans', sans-serif;
+    font-family: "Open Sans", sans-serif;
     font-family: 14px;
   }
 }
@@ -774,7 +689,7 @@
   }
 
   .createScreenBioContainer > h1 {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-size: 16px;
     font-weight: bold;
     margin: 20px 0px;
@@ -798,7 +713,7 @@
   }
 
   .createScreenProfileItemListHeader {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-size: 16px;
     font-weight: bold;
     margin: 20px 0px;
@@ -839,7 +754,7 @@
     color: #3eb489;
     font-size: 15px;
     font-weight: 500;
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
   }
 
   .seeMoreSeeLessItemButton:hover {
@@ -868,91 +783,6 @@
   }
 
   .spogoLogo > img:hover {
-    cursor: pointer;
-  }
-
-  .userNotFoundErrorContainer {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .errorMessageContainer {
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    margin-bottom: 2%;
-    /* justify-content: center; */
-  }
-
-  .errorMessageTextContainer {
-    border: 1px solid transparent;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 10px;
-    width: 40%;
-    height: auto;
-    box-shadow: 0 4px 8px 0 rgba(66, 65, 65, 0.203),
-      0 6px 20px 0 rgba(161, 155, 155, 0.59);
-    transition: 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
-    margin-left: 5%;
-    padding: 4% 3%;
-    display: flex;
-    flex-direction: column;
-    z-index: 1;
-  }
-
-  .errorHeaderText {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: bold;
-    font-size: 30px;
-    margin-bottom: 2%;
-    color: #3eb489;
-  }
-
-  .errorHeadlineText {
-    font-family: 'Open Sans', sans-serif;
-    font-size: 16px;
-  }
-
-  .returnHomeText {
-    font-weight: 500;
-    text-decoration: underline;
-    color: #3eb489;
-    cursor: pointer;
-  }
-
-  .errorImageContainer {
-    display: flex;
-    width: 50%;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .errorImage {
-    object-fit: contain;
-    height: 600px;
-    margin-left: 10%;
-    /* margin-top: 10%; */
-  }
-
-  .userNotFoundSpogoLogo {
-    display: flex;
-    width: 100%;
-  }
-
-  .userNotFoundSpogoLogo > img {
-    display: block;
-    object-fit: contain;
-    margin: 0px auto;
-    width: 50%;
-  }
-
-  .userNotFoundSpogoLogo > img:hover {
     cursor: pointer;
   }
 
@@ -1049,7 +879,7 @@
   }
 
   .modalHeaderContainer > p {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-weight: bold;
     font-size: large;
   }
@@ -1058,13 +888,13 @@
     font-size: 14px;
     margin-top: 2%;
     margin-bottom: 5px;
-    font-family: 'Open Sans', sans-serif;
+    font-family: "Open Sans", sans-serif;
   }
 
   .modalTextInputItems {
     width: 100%;
     padding: 8px;
-    font-family: 'Open Sans', sans-serif;
+    font-family: "Open Sans", sans-serif;
     outline: none;
   }
 
@@ -1128,7 +958,7 @@
     border: none;
     font-weight: bold;
     font-size: 16px;
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     margin-top: 2%;
   }
 
@@ -1141,7 +971,7 @@
 
   .presentTimeText {
     font-size: 11px;
-    font-family: 'Open Sans', sans-serif;
+    font-family: "Open Sans", sans-serif;
     font-weight: 500;
     margin-top: 2px;
     margin-left: 1px;
@@ -1197,7 +1027,7 @@
     padding-bottom: 2px;
     padding-left: 5px;
     padding-right: 5px;
-    font-family: 'Open Sans', sans-serif;
+    font-family: "Open Sans", sans-serif;
     outline: none;
     font-size: 20px;
     font-weight: 600;
@@ -1205,7 +1035,7 @@
   }
 
   .copyUrlSpogoText {
-    font-family: 'Open Sans', sans-serif;
+    font-family: "Open Sans", sans-serif;
     font-size: 20px;
     font-weight: 600;
     padding-bottom: 5px;
@@ -1240,20 +1070,20 @@
   }
 
   .settingsModal {
-    background-color: white;
     position: absolute;
-    top: 10%;
+    top: 90px;
     right: 2%;
-    padding: 2% 2%;
+    padding: 0% 2%;
     border-radius: 10px;
     outline: none;
   }
 
   .settingsItems {
     cursor: pointer;
-    font-family: 'Open Sans', sans-serif;
+    font-family: "Open Sans", sans-serif;
     width: 100%;
     color: #3eb489;
+    font-weight: bold;
   }
 
   .settingsItemAddModalOverlay {
@@ -1288,7 +1118,7 @@
   }
 
   .linkCopiedMessage > p {
-    font-family: 'Open Sans', sans-serif;
+    font-family: "Open Sans", sans-serif;
     font-family: 14px;
   }
 }
@@ -1457,7 +1287,7 @@
   }
 
   .createScreenBioContainer > h1 {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-size: 16px;
     font-weight: bold;
     margin: 20px 0px;
@@ -1481,7 +1311,7 @@
   }
 
   .createScreenProfileItemListHeader {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-size: 16px;
     font-weight: bold;
     margin: 20px 0px;
@@ -1521,7 +1351,7 @@
     color: #3eb489;
     font-size: 15px;
     font-weight: 500;
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
   }
 
   .seeMoreSeeLessItemButton:hover {
@@ -1559,85 +1389,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-  }
-
-  .errorMessageContainer {
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    margin-bottom: 2%;
-    /* justify-content: center; */
-  }
-
-  .errorMessageTextContainer {
-    border: 1px solid transparent;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 10px;
-    width: 40%;
-    height: auto;
-    box-shadow: 0 4px 8px 0 rgba(66, 65, 65, 0.203),
-      0 6px 20px 0 rgba(161, 155, 155, 0.59);
-    transition: 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
-    /* margin-left: 5%; */
-    /* margin-top: 7%; */
-    margin-left: 5%;
-    padding: 4% 3%;
-    display: flex;
-    flex-direction: column;
-    z-index: 1;
-  }
-
-  .errorHeaderText {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: bold;
-    font-size: 30px;
-    margin-bottom: 2%;
-    color: #3eb489;
-  }
-
-  .errorHeadlineText {
-    font-family: 'Open Sans', sans-serif;
-    font-size: 16px;
-  }
-
-  .returnHomeText {
-    font-weight: 500;
-    text-decoration: underline;
-    color: #3eb489;
-    cursor: pointer;
-  }
-
-  .errorImageContainer {
-    display: flex;
-    width: 50%;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .errorImage {
-    object-fit: contain;
-    height: 600px;
-    margin-left: 10%;
-    /* margin-top: 10%; */
-  }
-
-  .userNotFoundSpogoLogo {
-    display: flex;
-    width: 100%;
-  }
-
-  .userNotFoundSpogoLogo > img {
-    display: block;
-    object-fit: contain;
-    margin: 0px auto;
-    width: 50%;
-  }
-
-  .userNotFoundSpogoLogo > img:hover {
-    cursor: pointer;
   }
 
   .bioModal {
@@ -1735,7 +1486,7 @@
   }
 
   .modalHeaderContainer > p {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-weight: bold;
     font-size: large;
   }
@@ -1744,13 +1495,13 @@
     font-size: 14px;
     margin-top: 2%;
     margin-bottom: 5px;
-    font-family: 'Open Sans', sans-serif;
+    font-family: "Open Sans", sans-serif;
   }
 
   .modalTextInputItems {
     width: 100%;
     padding: 8px;
-    font-family: 'Open Sans', sans-serif;
+    font-family: "Open Sans", sans-serif;
     outline: none;
   }
 
@@ -1814,7 +1565,7 @@
     border: none;
     font-weight: bold;
     font-size: 16px;
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     margin-top: 2%;
   }
 
@@ -1827,7 +1578,7 @@
 
   .presentTimeText {
     font-size: 11px;
-    font-family: 'Open Sans', sans-serif;
+    font-family: "Open Sans", sans-serif;
     font-weight: 500;
     margin-top: 2px;
     margin-left: 1px;
@@ -1885,7 +1636,7 @@
     padding-bottom: 2px;
     padding-left: 5px;
     padding-right: 5px;
-    font-family: 'Open Sans', sans-serif;
+    font-family: "Open Sans", sans-serif;
     outline: none;
     font-size: 20px;
     font-weight: 600;
@@ -1893,7 +1644,7 @@
   }
 
   .copyUrlSpogoText {
-    font-family: 'Open Sans', sans-serif;
+    font-family: "Open Sans", sans-serif;
     font-size: 20px;
     font-weight: 600;
     padding-bottom: 5px;
@@ -1928,20 +1679,20 @@
   }
 
   .settingsModal {
-    background-color: white;
     position: absolute;
-    top: 10%;
+    top: 70px;
     right: 20%;
-    padding: 2% 2%;
+    /* padding: 2% 0%; */
     border-radius: 10px;
     outline: none;
   }
 
   .settingsItems {
     cursor: pointer;
-    font-family: 'Open Sans', sans-serif;
+    font-family: "Open Sans", sans-serif;
     width: 100%;
     color: #3eb489;
+    font-weight: bold;
   }
 
   .settingsItemAddModalOverlay {
@@ -1976,7 +1727,7 @@
   }
 
   .linkCopiedMessage > p {
-    font-family: 'Open Sans', sans-serif;
+    font-family: "Open Sans", sans-serif;
     font-family: 14px;
   }
 }

@@ -15,7 +15,6 @@ import PlacesAutocomplete, {
   getLatLng,
 } from "react-places-autocomplete";
 import firebase from "../../../firebase";
-import { MdAirlineSeatLegroomNormal } from "react-icons/md";
 import { UserDataContext } from "../../../App";
 
 const SportPosition = (props) => {
@@ -48,7 +47,9 @@ const SportPosition = (props) => {
       getUserInfo('name') === null ||
       getUserInfo('name') === undefined ||
       getUserInfo('email') === null ||
-      getUserInfo('email') === undefined
+      getUserInfo('email') === undefined ||
+      getUserInfo('sign-up-finished') === null || 
+      getUserInfo('sign-up-finished') === undefined
     ) {
       await getUserInfoDictFromDB();
       setUserName(getUserInfo("name"));
@@ -77,6 +78,11 @@ const SportPosition = (props) => {
       .catch((error) => {
         console.log('Error getting user info document:', error);
       });
+    if (getUserInfo('sign-up-finished') === true) {
+      history.push('/create')
+    } else {
+      addUserInfo('sign-up-finished', false)
+    }
   };
 
   const [positionIcon, setPositionIcon] = useState('BsPlus');

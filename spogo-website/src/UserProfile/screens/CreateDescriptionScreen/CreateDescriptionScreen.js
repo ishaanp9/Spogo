@@ -207,7 +207,7 @@ export const AccomplishmentDescriptionModal = (props) => {
                       <h1>{item.title}</h1>
                       <h2>{item.duration}</h2>
                       {item.description && (
-                        <h3>{descriptionSeeMoreSeeLess(item.description)}</h3>
+                        <h5 className="accomplishmentDescription">{descriptionSeeMoreSeeLess(item.description)}</h5>
                       )}
 
                       <hr

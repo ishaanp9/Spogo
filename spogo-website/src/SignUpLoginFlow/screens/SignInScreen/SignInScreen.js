@@ -16,7 +16,7 @@ const SignInScreen = () => {
     console.log(userUID);
     history.push('/create');
   }
-  const { login } = useContext(AuthContext);
+  const { login, googleAuth } = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [invalidEmail, setInvalidEmail] = useState(false);
@@ -122,11 +122,9 @@ const SignInScreen = () => {
               <hr style={{ marginTop: 20, width: '45%' }} />
             </div>
             <div
-              // onClick={() => {
-              //   const googleAuthProvider =
-              //     new firebase.auth.GoogleAuthProvider();
-              //   firebase.auth().signInWithPopup(googleAuthProvider);
-              // }}
+              onClick={() => {
+                googleAuth()
+              }}
               className="googleSignInContainer"
             >
               <img className="googleImageSignIn" src={Google} />
