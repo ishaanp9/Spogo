@@ -1,4 +1,4 @@
-# Spogo-Website
+# Spogo
 
 Co-founded Spogo, a platform to connect college athletes to monetizable opportunities, taking advantage of the new NIL law change. We developed a shareable link-in-bio profile, where athletes could add their experiences, accomplishments, highlights, personal information, and much more. Our code stack used React.js and Google's Firebase suite of tools such as authentication, file storage, and their noSQL database Firestore. Additionally, we used React Native to create the Spogo App. We had over 30+ people on our waitlist.
 
